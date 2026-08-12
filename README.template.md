@@ -73,22 +73,25 @@ sudo systemctl edit --full daed.service
 
 New file will be placed in `/etc/systemd/system/daed.service`, instead of in `/lib/systemd/system/daed.service`, and new file will not be overwritten when package is updated.
 
-## Let v2rayA use v2ray as its core
+## How to set ACL to allow non-root user to read letsencrypt certs
 
-Defaultly v2rayA uses xray as its core. To let v2rayA use v2ray as its core, edit the v2raya service file:
+We use the `nobody` user to run the v2ray, xray, juicity and juicity-rs services, and the `nobody` user does not have permission to read the certs in `/etc/letsencrypt/live`, so you need to set ACL to allow non-root user to read letsencrypt certs.
 
-```sh
-sudo systemctl edit --full v2raya.service
-```
-then add environment variable `V2RAYA_V2RAY_PATH` in the `[Service]` section:
-
-```ini
-[Service]
-Environment="V2RAYA_V2RAY_PATH=/usr/bin/v2ray"
-```
-
-Don't remove other existing lines and make sure you have v2ray installed in your system, then  restart v2rayA:
+### Install `acl` package
 
 ```sh
-sudo systemctl restart v2raya.service
+sudo apt install acl
+```
+
+### Set ACL to allow user `nobody` to read letsencrypt certs
+
+```sh
+sudo setfacl -R -m u:nobody:r /etc/letsencrypt/{live,archive}
+sudo setfacl -m u:nobody:rX /etc/letsencrypt
+```
+
+### Set hook to certbot to automatically set ACL when certs are renewed
+
+```sh
+sudo certbot renew --deploy-hook "setfacl -R -m u:nobody:rX /etc/letsencrypt/{live,archive}"
 ```
