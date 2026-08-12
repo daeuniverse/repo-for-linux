@@ -13,6 +13,8 @@ description: |
   Xray, Penetrates Everything. Also the best v2ray-core. Where the magic happens. An open platform for various uses.
 homepage: "https://github.com/XTLS/Xray-core"
 license: "MPL-2.0"
+scripts:
+  postinstall: ./scripts/letsencrypt-acl.postinstall.sh
 contents:
   - src: ./xray_REAL_ARCH_vREAL_VERSION
     dst: /usr/bin/xray

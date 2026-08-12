@@ -23,6 +23,14 @@ jobs:
             bash -c "$script"
           done
 
+      # v2raya binaries are packed with UPX (maximum compression) separately,
+      # while other software packages remain uncompressed.
+      - name: Compress v2raya binaries with UPX
+        shell: bash
+        run: |
+          sudo apt-get install -y upx-ucl
+          upx --best ./v2raya_*_v*
+
       - name: Install nfpm and jq
         shell: bash
         run: |
@@ -34,7 +42,7 @@ jobs:
         run: |
           eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
           mkdir -p archive
-          for apps in v2ray v2raya xray juicity dae daed; do
+          for apps in v2ray v2raya xray juicity juicity-rs dae daed; do
             VERSION="$(cat "${apps}"_version.txt)"
             for arch in amd64 arm64 i386 riscv64; do
               cat nfpm/$apps.yaml | sed "s/REAL_VERSION/$VERSION/g" | sed "s/REAL_ARCH/${arch}/g" > /tmp/${apps}_${arch}.yaml

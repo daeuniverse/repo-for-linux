@@ -1,6 +1,6 @@
 # A Debian APT repo
 
-This repo contains dae, v2rayA, v2ray, xray and juicity programs.
+This repo contains dae, v2rayA, v2ray, xray, juicity and juicity-rs programs.
 
 ## Usage
 

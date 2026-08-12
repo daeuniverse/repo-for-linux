@@ -14,6 +14,7 @@ packages=(
   dae
   daed
   juicity
+  juicity-rs
   v2ray
   v2raya
   xray
@@ -24,6 +25,7 @@ software_names=(
   dae
   daed
   Juicity
+  Juicity-rs
   v2ray
   v2rayA
   Xray

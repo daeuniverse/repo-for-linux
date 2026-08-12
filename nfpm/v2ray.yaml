@@ -13,6 +13,8 @@ description: |
   A platform for building proxies to bypass network restrictions. 
 homepage: "https://github.com/v2fly/v2ray-core"
 license: "MIT"
+scripts:
+  postinstall: ./scripts/letsencrypt-acl.postinstall.sh
 contents:
   - src: ./v2ray_REAL_ARCH_vREAL_VERSION
     dst: /usr/bin/v2ray

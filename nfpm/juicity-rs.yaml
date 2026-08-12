@@ -1,4 +1,4 @@
-name: "juicity"
+name: "juicity-rs"
 arch: "REAL_ARCH"
 platform: "linux"
 version: "REAL_VERSION"
@@ -8,16 +8,16 @@ provides:
   - juicity-server
   - juicity-client
 conflicts:
-  - juicity-rs
+  - juicity
 replaces:
-  - juicity-rs
+  - juicity
 depends:
   - v2ray-rules-dat
 maintainer: "dae@daeuniverse"
 description: |
-  Juicity is a quic-based proxy protocol implementation. 
+  Juicity-RS is a quic-based proxy protocol implementation rewritten in Rust.
 vendor: "Juicity"
-homepage: "https://github.com/juicity/juicity"
+homepage: "https://github.com/juicity/juicity-rs"
 license: "AGPL-3.0-only"
 scripts:
   postinstall: ./scripts/letsencrypt-acl.postinstall.sh
@@ -31,11 +31,11 @@ contents:
     type: symlink
   - src: /usr/share/v2ray-rules-dat/geosite.dat
     dst: /usr/share/juicity/geosite.dat
-    type: symlink 
+    type: symlink
   - src: ./example/ray.json
     dst: /etc/juicity/blank.json
     type: config
-  - src: ./service/juicity-server.service
+  - src: ./service/juicity-rs-server.service
     dst: /lib/systemd/system/juicity-server.service
-  - src: ./service/juicity-client.service
+  - src: ./service/juicity-rs-client.service
     dst: /lib/systemd/system/juicity-client.service
