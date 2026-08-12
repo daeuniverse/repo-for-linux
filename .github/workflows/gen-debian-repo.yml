@@ -20,7 +20,7 @@ jobs:
         shell: bash
         run: |
           for script in $(ls downloader/*.sh); do
-            bash -c "$script"
+            bash -c "$(cat "$script")"
           done
 
       # v2raya binaries are packed with UPX (maximum compression) separately,
