@@ -29,7 +29,10 @@ jobs:
         shell: bash
         run: |
           sudo apt-get install -y upx-ucl
-          upx --best ./v2raya_*_v*
+          for file in ./v2raya_{amd64,arm64,i386,riscv64}_v* ./v2raya_core_{amd64,arm64,i386,riscv64}_v*; do
+            echo "Compressing $file ..."
+            upx --best "$file"
+          done
 
       - name: Install nfpm and jq
         shell: bash
