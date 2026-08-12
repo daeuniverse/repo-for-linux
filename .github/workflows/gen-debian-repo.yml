@@ -25,15 +25,15 @@ jobs:
 
       # # v2raya binaries are packed with UPX (maximum compression) separately,
       # # while other software packages remain uncompressed.
-      # - name: Compress v2raya binaries with UPX
-      #   shell: bash
-      #   run: |
-      #     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-      #     brew install upx
-      #     for file in ./v2raya_{amd64,arm64,i386,riscv64}_v* ./v2raya_core_{amd64,arm64,i386,riscv64}_v*; do
-      #       echo "Compressing $file ..."
-      #       upx --best "$file"
-      #     done
+      - name: Compress v2raya binaries with UPX
+        shell: bash
+        run: |
+          eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+          brew install upx
+          for file in ./v2raya_{amd64,arm64,i386,riscv64}_v* ./v2raya_core_{amd64,arm64,i386,riscv64}_v*; do
+            echo "Compressing $file ..."
+            upx --best --lzma "$file"
+          done
 
       - name: Install nfpm and jq
         shell: bash
