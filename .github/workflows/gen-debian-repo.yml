@@ -28,7 +28,8 @@ jobs:
       - name: Compress v2raya binaries with UPX
         shell: bash
         run: |
-          sudo apt-get install -y upx-ucl
+          eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+          brew install upx
           for file in ./v2raya_{amd64,arm64,i386,riscv64}_v* ./v2raya_core_{amd64,arm64,i386,riscv64}_v*; do
             echo "Compressing $file ..."
             upx --best "$file"
