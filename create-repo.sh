@@ -62,7 +62,7 @@ for arch in ${rpm_architecture}; do
     target_file_path="repo/rpm/${arch}/$(basename "$apps" ${rpm_filename_arch}.rpm)${rpm_arch}.rpm"
     cp "$apps" "$target_file_path"
   done
-  for apps in $(ls ./archive/*all.rpm); do
+  for apps in ./archive/*all.rpm; do
     cp "$apps" "repo/rpm/${arch}/"
   done
   rpm --addsign "repo/rpm/${arch}/*.rpm"
