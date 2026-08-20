@@ -69,7 +69,7 @@ for arch in ${rpm_architecture}; do
   for rpm_file in repo/rpm/${arch}/*.rpm; do
     rpm --addsign "$rpm_file"
   done
-  createrepo_c --database --update "repo/rpm/${arch}/*.rpm"
+  createrepo_c --database --update "repo/rpm/${arch}"
   [ -d "repo/rpm/${arch}/repodata" ] || mkdir -p "repo/rpm/${arch}/repodata"
   gpg --detach-sign --armor "repo/rpm/${arch}/repodata/repomd.xml"
 done
