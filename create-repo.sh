@@ -28,7 +28,7 @@ Description: ${description}
 SignWith: THE_REAL_GPG_PUBLIC_KEY_ID
 EOL
 
-for deb_file in ./archive/*.deb; do
+for deb_file in ./archive/deb/*.deb; do
     reprepro -b repo/apt includedeb ${codename} "$deb_file"
 done
 
@@ -37,10 +37,30 @@ done
 cp public-key.asc repo/rpm/public-key.asc
 echo "%_gpg_name Markson Hon" > ~/.rpmmacros
 echo "%gpg_path ~/.gnupg" >> ~/.rpmmacros
+# Define the RPM architecture mapping
 for arch in ${rpm_architecture}; do
   mkdir -p "repo/rpm/${arch}"
-  for apps in $(ls ./archive/*.rpm); do
-    cp "$apps" "repo/rpm/${arch}/"
+  case ${arch} in
+    x86_64)
+      rpm_arch="x86_64"
+      rpm_filename_arch="amd64"
+      ;;
+    aarch64)
+      rpm_arch="aarch64"
+      rpm_filename_arch="arm64"
+      ;;
+    i386)
+      rpm_arch="i386"
+      rpm_filename_arch="i386"
+      ;;
+    riscv64)
+      rpm_arch="riscv64"
+      rpm_filename_arch="riscv64"
+      ;;
+  esac
+  for apps in ./archive/rpm/*${rpm_filename_arch}.rpm; do
+    target_file_path="repo/rpm/${arch}/$(basename "$apps" ${rpm_filename_arch}.rpm)${rpm_arch}.rpm"
+    cp "$apps" "$target_file_path"
   done
   for apps in $(ls ./archive/*all.rpm); do
     cp "$apps" "repo/rpm/${arch}/"

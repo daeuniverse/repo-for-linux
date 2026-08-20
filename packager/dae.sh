@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 [ -d archive ] || mkdir -p archive
+[ -d archive/deb ] || mkdir -p archive/deb
+[ -d archive/rpm ] || mkdir -p archive/rpm
 REAL_VERSION=$(cat dae_version.txt)
 for debian_arch in amd64 arm64 i386 riscv64; do
     cat nfpm/dae.yaml | sed "s/REAL_VERSION/$REAL_VERSION/g" | sed "s/REAL_ARCH/${debian_arch}/g" | tee /tmp/dae_${REAL_VERSION}_${debian_arch}_.yaml
-    nfpm package -p deb --config /tmp/dae_${REAL_VERSION}_${debian_arch}_.yaml --target ./archive/dae_${REAL_VERSION}_${debian_arch}.deb
-    nfpm package -p rpm --config /tmp/dae_${REAL_VERSION}_${debian_arch}_.yaml --target ./archive/dae_${REAL_VERSION}_${debian_arch}.rpm
+    nfpm package -p deb --config /tmp/dae_${REAL_VERSION}_${debian_arch}_.yaml --target ./archive/deb/dae_${REAL_VERSION}_${debian_arch}.deb
+    nfpm package -p rpm --config /tmp/dae_${REAL_VERSION}_${debian_arch}_.yaml --target ./archive/rpm/dae_${REAL_VERSION}_${debian_arch}.rpm
 done
