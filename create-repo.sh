@@ -34,7 +34,6 @@ done
 
 # RPM Packages
 [ -d repo/rpm ] || mkdir -p repo/rpm
-cp public-key.asc repo/rpm/public-key.asc
 echo "%_gpg_name Markson Hon" > ~/.rpmmacros
 echo "%gpg_path ~/.gnupg" >> ~/.rpmmacros
 # Define the RPM architecture mapping
@@ -73,3 +72,8 @@ for arch in ${rpm_architecture}; do
   [ -d "repo/rpm/${arch}/repodata" ] || mkdir -p "repo/rpm/${arch}/repodata"
   gpg --detach-sign --armor "repo/rpm/${arch}/repodata/repomd.xml"
 done
+
+# Source Config File
+cp ./daeuniverse.list ./repo/
+cp ./daeuniverse.repo ./repo/
+cp ./daeuniverse.source ./repo/

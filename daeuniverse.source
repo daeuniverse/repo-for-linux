@@ -1,0 +1,5 @@
+Types: deb
+URIs: https://daeuniverse.pages.dev/apt
+Suites: goose
+Components: honk
+Signed-By: /usr/share/keyrings/daeuniverse-archive-goose.gpg

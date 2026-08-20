@@ -88,6 +88,7 @@ jobs:
           cat create-repo.sh | sed "s/THE_REAL_GPG_PUBLIC_KEY_ID/${{ steps.import_gpg.outputs.keyid }}/g" > /tmp/create-repo-temp.sh
           bash -c "$(cat /tmp/create-repo-temp.sh)"
           cp public-key.asc repo/public-key.asc
+          cat public-key.asc | gpg --dearmor -o repo/daeuniverse-archive-goose.gpg
           npm i markdown-to-html-cli -g
           markdown-to-html --output ./repo/ README.md
 
@@ -104,4 +105,15 @@ jobs:
           export CLOUDFLARE_API_TOKEN=${{ secrets.CLOUDFLARE_API_KEY }}
           wrangler pages deploy ./repo \
             --project-name=daeuniverse \
-            --branch=preview
+            --branch=main
+
+      - name: Clean Old Cloudflare Pages Deployments
+        uses: Th3S4mur41/cleanup-cloudflare-deployments@main
+        with:
+          cloudflare-api-token: ${{ secrets.CLOUDFLARE_API_KEY }}
+          cloudflare-account-id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          cloudflare-project-name: daeuniverse
+          cleanup-types: all
+          preview-keep: 5
+          production-keep: 2
+          dry-run: 'true'

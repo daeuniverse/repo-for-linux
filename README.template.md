@@ -4,57 +4,121 @@ This repo contains dae, v2rayA, v2ray, xray, juicity and juicity-rs programs.
 
 ## Usage
 
-### 1. Add the repository
+<div class="dae-tabs">
 
-Sometimes you need to install `curl` and `gpg` at first:
+<input type="radio" name="daeuniverse-tabs" id="daeuniverse-tab-debian" checked>
+<label for="daeuniverse-tab-debian">Debian</label>
 
-```sh
-sudo apt update
-sudo apt install curl gpg
-```
+<input type="radio" name="daeuniverse-tabs" id="daeuniverse-tab-rpm">
+<label for="daeuniverse-tab-rpm">RPM</label>
 
-#### For APT version 3.0 or higher
+<div class="dae-panel" id="daeuniverse-panel-debian">
 
-Add the repository to your sources config:
-
-```sh
-cat <<- EOL | sudo tee /etc/apt/sources.list.d/daeuniverse.sources
-Types: deb
-URIs: https://daeuniverse.pages.dev
-Suites: goose
-Components: honk
-Signed-By: /usr/share/keyrings/daeuniverse-archive-goose.gpg
-EOL
-```
-
-#### For APT version lower than 3.0
-
-Add the repository to your sources list:
-
-```sh
-cat <<- EOL | sudo tee /etc/apt/sources.list.d/daeuniverse.list
-deb [signed-by=/usr/share/keyrings/daeuniverse-archive-goose.gpg] https://daeuniverse.pages.dev goose honk 
-EOL
-```
-
-### 2. Import the GPG key
-
-```sh
-curl -fsSL https://daeuniverse.pages.dev/public-key.asc | sudo gpg --dearmor -o /usr/share/keyrings/daeuniverse-archive-goose.gpg
-```
-
-### 3. Install packages
-
-Update the package list:
+**1. Install `curl`**
 
 ```sh
 sudo apt update
+sudo apt install curl
 ```
-Install the desired package, for example, v2rayA:
+
+**2. Add the repository**
+
+The source config file is downloaded directly from the repository.
+
+For APT version 3.0 or higher:
 
 ```sh
+sudo curl -fsSL -o /etc/apt/sources.list.d/daeuniverse.source https://daeuniverse.pages.dev/daeuniverse.source
+```
+
+For APT version lower than 3.0:
+
+```sh
+sudo curl -fsSL -o /etc/apt/sources.list.d/daeuniverse.list https://daeuniverse.pages.dev/daeuniverse.list
+```
+
+**3. Import the GPG key**
+
+```sh
+sudo curl -fsSL -o /usr/share/keyrings/daeuniverse-archive-goose.gpg https://daeuniverse.pages.dev/daeuniverse-archive-goose.gpg
+```
+
+**4. Install packages**
+
+```sh
+sudo apt update
 sudo apt install v2raya
 ```
+
+</div>
+
+<div class="dae-panel" id="daeuniverse-panel-rpm">
+
+**1. Add the repository**
+
+The repository config file is downloaded directly from the repository, the GPG key is imported automatically.
+
+For Fedora, RHEL and other DNF-based distributions:
+
+```sh
+sudo curl -fsSL -o /etc/yum.repos.d/daeuniverse.repo https://daeuniverse.pages.dev/daeuniverse.repo
+```
+
+For openSUSE:
+
+```sh
+sudo curl -fsSL -o /etc/zypp/repos.d/daeuniverse.repo https://daeuniverse.pages.dev/daeuniverse.repo
+```
+
+**2. Install packages**
+
+```sh
+sudo dnf install v2raya
+```
+
+or on openSUSE:
+
+```sh
+sudo zypper install v2raya
+```
+
+</div>
+
+</div>
+
+<style>
+.dae-tabs { margin: 1rem 0; }
+.dae-tabs > input { display: none; }
+.dae-tabs > label {
+  display: inline-block;
+  padding: 0.5rem 1.25rem;
+  margin: 0 0.25rem -1px 0;
+  border: 1px solid #d0d7de;
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+  background: #f6f8fa;
+  color: #24292f;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  top: 1px;
+}
+.dae-tabs > input:checked + label {
+  background: #ffffff;
+  border-bottom: 1px solid #ffffff;
+}
+.dae-tabs > .dae-panel {
+  display: none;
+  border: 1px solid #d0d7de;
+  border-radius: 0 6px 6px 6px;
+  padding: 1rem;
+  background: #ffffff;
+}
+.dae-tabs > input#daeuniverse-tab-debian:checked ~ #daeuniverse-panel-debian,
+.dae-tabs > input#daeuniverse-tab-rpm:checked ~ #daeuniverse-panel-rpm {
+  display: block;
+}
+</style>
 
 ## Available packages
 
@@ -77,7 +141,7 @@ New file will be placed in `/etc/systemd/system/daed.service`, instead of in `/l
 
 We use the `nobody` user to run the v2ray, xray, juicity and juicity-rs services, and the `nobody` user does not have permission to read the certs in `/etc/letsencrypt/live`, so you need to set ACL to allow non-root user to read letsencrypt certs.
 
-### Install `acl` package
+### Install `acl` package (use Debian/Ubuntu as an example)
 
 ```sh
 sudo apt install acl
