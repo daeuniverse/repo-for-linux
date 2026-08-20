@@ -76,4 +76,4 @@ done
 # Source Config File
 cp ./daeuniverse.list ./repo/
 cp ./daeuniverse.repo ./repo/
-cp ./daeuniverse.source ./repo/
+cp ./daeuniverse.sources ./repo/
