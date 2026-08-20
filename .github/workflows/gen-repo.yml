@@ -3,7 +3,7 @@ name: Generate Debian Repo
 on:
   workflow_dispatch:
   schedule:
-    - cron: "20 */12 * * *"
+    - cron: "0 */20 * * *"
 
 permissions:
   contents: write
@@ -44,18 +44,9 @@ jobs:
       - name: Generate debian packages
         run: |
           eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-          mkdir -p archive
-          for apps in v2ray v2raya xray juicity juicity-rs dae daed; do
-            VERSION="$(cat "${apps}"_version.txt)"
-            for arch in amd64 arm64 i386 riscv64; do
-              cat nfpm/$apps.yaml | sed "s/REAL_VERSION/$VERSION/g" | sed "s/REAL_ARCH/${arch}/g" > /tmp/${apps}_${arch}.yaml
-              nfpm package --config /tmp/${apps}_${arch}.yaml --target ./archive/${apps}_${VERSION}_${arch}.deb
-            done
+          for script in $(ls packager/*.sh); do
+            bash -c "$(cat "$script")"
           done
-          DAT_VERSION="$(cat ./v2ray-rules-dat_version.txt)"
-          cat ./nfpm/v2ray-rules-dat.yaml | sed "s/REAL_VERSION/$DAT_VERSION/g" > /tmp/v2ray-rules-dat.yaml
-          nfpm package --config /tmp/v2ray-rules-dat.yaml --target ./archive/v2ray-rules-dat_${DAT_VERSION}_all.deb
-
       - name: Update package table
         run: |
           bash ./update-package-table.sh
@@ -79,8 +70,10 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y reprepro gnupg
+          sudo apt install -y createrepo-c rpm
 
       - name: Import GPG key
+        id: import_gpg
         uses: crazy-max/ghaction-import-gpg@v7
         with:
           gpg_private_key: ${{ secrets.PRIVATE_KEY }}
@@ -88,11 +81,11 @@ jobs:
 
       - name: Export public key
         run: |
-          gpg --output public-key.asc --armor --export C27FABADF6B07760
+          gpg --output public-key.asc --armor --export  ${{ steps.import_gpg.outputs.fingerprint }}
 
-      - name: Create Debian Repo
+      - name: Create Linux Repo
         run: |
-          bash -c "$(cat create-debian-repo.sh)"
+          bash -c "$(cat create-repo.sh)"
           cp public-key.asc repo/public-key.asc
           npm i markdown-to-html-cli -g
           markdown-to-html --output ./repo/ README.md
@@ -110,4 +103,4 @@ jobs:
           export CLOUDFLARE_API_TOKEN=${{ secrets.CLOUDFLARE_API_KEY }}
           wrangler pages deploy ./repo \
             --project-name=daeuniverse \
-            --branch=main
+            --branch=preview
