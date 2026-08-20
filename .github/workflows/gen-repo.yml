@@ -1,4 +1,4 @@
-name: Generate Debian Repo
+name: Generate Linux Repo
 
 on:
   workflow_dispatch:
@@ -41,7 +41,7 @@ jobs:
           eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
           brew install jq nfpm
 
-      - name: Generate debian packages
+      - name: Generate packages
         run: |
           eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
           for script in $(ls packager/*.sh); do
