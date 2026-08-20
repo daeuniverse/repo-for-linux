@@ -59,14 +59,17 @@ for arch in ${rpm_architecture}; do
       ;;
   esac
   for apps in ./archive/rpm/*${rpm_filename_arch}.rpm; do
-    target_file_path="repo/rpm/${arch}/$(basename "$apps" ${rpm_filename_arch}.rpm).${rpm_arch}.rpm"
+    target_file_path="repo/rpm/${arch}/$(basename "$apps" _${rpm_filename_arch}.rpm).${rpm_arch}.rpm"
     cp "$apps" "$target_file_path"
   done
   for apps in ./archive/rpm/*all.rpm; do
-    target_file_path="repo/rpm/${arch}/$(basename "$apps" all.rpm).noarch.rpm"
+    target_file_path="repo/rpm/${arch}/$(basename "$apps" _all.rpm).noarch.rpm"
     cp "$apps" "$target_file_path"
   done
-  rpm --addsign "repo/rpm/${arch}/*.rpm"
+  for rpm_file in repo/rpm/${arch}/*.rpm; do
+    rpm --addsign "$rpm_file"
+  done
   createrepo_c --database --update "repo/rpm/${arch}/*.rpm"
+  [ -d "repo/rpm/${arch}/repodata" ] || mkdir -p "repo/rpm/${arch}/repodata"
   gpg --detach-sign --armor "repo/rpm/${arch}/repodata/repomd.xml"
 done
