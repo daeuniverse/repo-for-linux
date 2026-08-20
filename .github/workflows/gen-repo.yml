@@ -113,6 +113,7 @@ jobs:
           cloudflare-api-token: ${{ secrets.CLOUDFLARE_API_KEY }}
           cloudflare-account-id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           cloudflare-project-name: daeuniverse
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           cleanup-types: all
           preview-keep: 5
           production-keep: 2
