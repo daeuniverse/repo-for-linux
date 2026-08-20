@@ -117,4 +117,4 @@ jobs:
           cleanup-types: all
           preview-keep: 5
           production-keep: 2
-          dry-run: 'true'
+          dry-run: 'false'
