@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -ex
 
 export origin="DAE Universe"
 export label="goose"
@@ -59,11 +59,12 @@ for arch in ${rpm_architecture}; do
       ;;
   esac
   for apps in ./archive/rpm/*${rpm_filename_arch}.rpm; do
-    target_file_path="repo/rpm/${arch}/$(basename "$apps" ${rpm_filename_arch}.rpm)${rpm_arch}.rpm"
+    target_file_path="repo/rpm/${arch}/$(basename "$apps" ${rpm_filename_arch}.rpm).${rpm_arch}.rpm"
     cp "$apps" "$target_file_path"
   done
-  for apps in ./archive/*all.rpm; do
-    cp "$apps" "repo/rpm/${arch}/"
+  for apps in ./archive/rpm/*all.rpm; do
+    target_file_path="repo/rpm/${arch}/$(basename "$apps" all.rpm).noarch.rpm"
+    cp "$apps" "$target_file_path"
   done
   rpm --addsign "repo/rpm/${arch}/*.rpm"
   createrepo_c --database --update "repo/rpm/${arch}/*.rpm"
