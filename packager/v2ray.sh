@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 REAL_VERSION=$(cat v2ray_version.txt)
 for debian_arch in amd64 arm64 i386 riscv64; do
-    cat nfpm/v2ray.yaml | sed "s/REAL_VERSION/$REAL_VERSION/g" | sed "s/REAL_ARCH/${debian_arch}/g" | tee /tmp/v2ray_${REAL_VERSION}_${debian_arch}_debian.yaml
-    nfpm package -p deb --config /tmp/v2ray_${REAL_VERSION}_${debian_arch}_debian.yaml --target ./archive/v2ray_${REAL_VERSION}_${debian_arch}.deb
-    nfpm package -p rpm --config /tmp/v2ray_${REAL_VERSION}_${debian_arch}_rpm.yaml --target ./archive/v2ray_${REAL_VERSION}_${debian_arch}.rpm
+    cat nfpm/v2ray.yaml | sed "s/REAL_VERSION/$REAL_VERSION/g" | sed "s/REAL_ARCH/${debian_arch}/g" | tee /tmp/v2ray_${REAL_VERSION}_${debian_arch}_.yaml
+    nfpm package -p deb --config /tmp/v2ray_${REAL_VERSION}_${debian_arch}_.yaml --target ./archive/v2ray_${REAL_VERSION}_${debian_arch}.deb
+    nfpm package -p rpm --config /tmp/v2ray_${REAL_VERSION}_${debian_arch}_.yaml --target ./archive/v2ray_${REAL_VERSION}_${debian_arch}.rpm
 done
