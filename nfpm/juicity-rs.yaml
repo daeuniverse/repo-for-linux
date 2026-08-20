@@ -21,6 +21,7 @@ homepage: "https://github.com/juicity/juicity-rs"
 license: "AGPL-3.0-only"
 scripts:
   postinstall: ./scripts/letsencrypt-acl.postinstall.sh
+  postremove: ./scripts/reload-systemd.postinstall.sh
 contents:
   - src: ./juicity-server_REAL_ARCH_vREAL_VERSION
     dst: /usr/bin/juicity-server

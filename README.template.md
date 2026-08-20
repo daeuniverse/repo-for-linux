@@ -1,18 +1,15 @@
-# A Debian APT repo
+# The Linux Repository of Dae Universe
 
 This repo contains dae, v2rayA, v2ray, xray, juicity and juicity-rs programs.
 
 ## Usage
 
-<div class="dae-tabs">
+<table>
+<tr>
+<td valign="top">
 
-<input type="radio" name="daeuniverse-tabs" id="daeuniverse-tab-debian" checked>
-<label for="daeuniverse-tab-debian">Debian</label>
-
-<input type="radio" name="daeuniverse-tabs" id="daeuniverse-tab-rpm">
-<label for="daeuniverse-tab-rpm">RPM</label>
-
-<div class="dae-panel" id="daeuniverse-panel-debian">
+<details open>
+<summary><strong>Debian</strong></summary>
 
 **1. Install `curl`**
 
@@ -50,9 +47,13 @@ sudo apt update
 sudo apt install v2raya
 ```
 
-</div>
+</details>
 
-<div class="dae-panel" id="daeuniverse-panel-rpm">
+</td>
+<td valign="top">
+
+<details>
+<summary><strong>RPM</strong></summary>
 
 **1. Add the repository**
 
@@ -82,43 +83,11 @@ or on openSUSE:
 sudo zypper install v2raya
 ```
 
-</div>
+</details>
 
-</div>
-
-<style>
-.dae-tabs { margin: 1rem 0; }
-.dae-tabs > input { display: none; }
-.dae-tabs > label {
-  display: inline-block;
-  padding: 0.5rem 1.25rem;
-  margin: 0 0.25rem -1px 0;
-  border: 1px solid #d0d7de;
-  border-bottom: none;
-  border-radius: 6px 6px 0 0;
-  background: #f6f8fa;
-  color: #24292f;
-  font-weight: 600;
-  cursor: pointer;
-  position: relative;
-  top: 1px;
-}
-.dae-tabs > input:checked + label {
-  background: #ffffff;
-  border-bottom: 1px solid #ffffff;
-}
-.dae-tabs > .dae-panel {
-  display: none;
-  border: 1px solid #d0d7de;
-  border-radius: 0 6px 6px 6px;
-  padding: 1rem;
-  background: #ffffff;
-}
-.dae-tabs > input#daeuniverse-tab-debian:checked ~ #daeuniverse-panel-debian,
-.dae-tabs > input#daeuniverse-tab-rpm:checked ~ #daeuniverse-panel-rpm {
-  display: block;
-}
-</style>
+</td>
+</tr>
+</table>
 
 ## Available packages
 

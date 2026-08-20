@@ -14,6 +14,9 @@ description: |
 vendor: "v2rayA"
 homepage: "https://github.com/v2rayA/v2rayA"
 license: "AGPL-3.0-only + MPL 2.0"
+scripts:
+  postinstall: ./scripts/reload-systemd.postinstall.sh
+  postremove: ./scripts/reload-systemd.postinstall.sh
 contents:
   - src: ./v2raya_REAL_ARCH_vREAL_VERSION
     dst: /usr/bin/v2raya

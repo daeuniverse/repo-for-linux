@@ -15,6 +15,7 @@ homepage: "https://github.com/v2fly/v2ray-core"
 license: "MIT"
 scripts:
   postinstall: ./scripts/letsencrypt-acl.postinstall.sh
+  postremove: ./scripts/reload-systemd.postinstall.sh
 contents:
   - src: ./v2ray_REAL_ARCH_vREAL_VERSION
     dst: /usr/bin/v2ray
