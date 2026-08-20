@@ -25,7 +25,7 @@ The source config file is downloaded directly from the repository.
 For APT version 3.0 or higher:
 
 ```sh
-sudo curl -fsSL -o /etc/apt/sources.list.d/daeuniverse.source https://daeuniverse.pages.dev/daeuniverse.source
+sudo curl -fsSL -o /etc/apt/sources.list.d/daeuniverse.sources https://daeuniverse.pages.dev/daeuniverse.sources
 ```
 
 For APT version lower than 3.0:
