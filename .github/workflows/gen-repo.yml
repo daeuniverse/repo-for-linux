@@ -81,11 +81,12 @@ jobs:
 
       - name: Export public key
         run: |
-          gpg --output public-key.asc --armor --export  ${{ steps.import_gpg.outputs.fingerprint }}
+          gpg --output public-key.asc --armor --export ${{ steps.import_gpg.outputs.keyid }}
 
       - name: Create Linux Repo
         run: |
-          bash -c "$(cat create-repo.sh)"
+          cat create-repo.sh | sed "s/THE_REAL_GPG_PUBLIC_KEY_ID/${{ steps.import_gpg.outputs.keyid }}/g" > /tmp/create-repo-temp.sh
+          bash -c "$(cat /tmp/create-repo-temp.sh)"
           cp public-key.asc repo/public-key.asc
           npm i markdown-to-html-cli -g
           markdown-to-html --output ./repo/ README.md
