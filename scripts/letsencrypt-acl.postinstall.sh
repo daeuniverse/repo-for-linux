@@ -14,8 +14,10 @@ systemctl daemon-reload 2>/dev/null || true
 
 case "${1:-configure}" in
     configure|abort-upgrade|abort-remove|abort-deconfigure)
-printf "Service 'nobody' must be able to read TLS certificates managed by certbot under /etc/letsencrypt.\n"
-printf "Visit https://daeuniverse.pages.dev/ for instructions on how to grant access with POSIX ACLs.\n"
+printf "This service runs with user account 'nobody', so 'nobody' user must be\n"
+printf "able to read TLS certificates, for a example, certbot's /etc/letsencrypt \n"
+printf "should be readable for the user 'nobody', for instructions on how to grant \n"
+printf "access with POSIX ACLs, visit https://daeuniverse.pages.dev/.\n"
         ;;
 esac
 

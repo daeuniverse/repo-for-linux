@@ -4,12 +4,8 @@ This repo contains dae, v2rayA, v2ray, xray, juicity and juicity-rs programs.
 
 ## Usage
 
-<table>
-<tr>
-<td valign="top">
-
 <details open>
-<summary><strong>Debian</strong></summary>
+<summary><strong>Debian and other APT-based distributions</strong></summary>
 
 **1. Install `curl`**
 
@@ -49,11 +45,8 @@ sudo apt install v2raya
 
 </details>
 
-</td>
-<td valign="top">
-
 <details>
-<summary><strong>RPM</strong></summary>
+<summary><strong>RPM-based distributions</strong></summary>
 
 **1. Add the repository**
 
@@ -84,10 +77,6 @@ sudo zypper install v2raya
 ```
 
 </details>
-
-</td>
-</tr>
-</table>
 
 ## Available packages
 
