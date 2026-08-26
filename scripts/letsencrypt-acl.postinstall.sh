@@ -11,13 +11,12 @@
 ## Reload Services
 systemctl daemon-reload 2>/dev/null || true
 ## notice
-
+echo_green() {
+  printf '\033[32m%s\033[0m\n' "$*"
+}
 case "${1:-configure}" in
     configure|abort-upgrade|abort-remove|abort-deconfigure)
-printf "This service runs with user account 'nobody', so 'nobody' user must be\n"
-printf "able to read TLS certificates, for a example, certbot's /etc/letsencrypt \n"
-printf "should be readable for the user 'nobody', for instructions on how to grant \n"
-printf "access with POSIX ACLs, visit https://daeuniverse.pages.dev/.\n"
+echo_green "Service 'nobody' must be able to read TLS certificates managed by certbot under /etc/letsencrypt (or other directories by other ACME clients), visit https://daeuniverse.pages.dev/ for how to grant access with POSIX ACLs."
         ;;
 esac
 
