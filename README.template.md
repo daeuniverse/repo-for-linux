@@ -4,7 +4,7 @@ This repo contains dae, v2rayA, v2ray, xray, juicity and juicity-rs programs.
 
 ## Usage
 
-<details open>
+<details>
 <summary><strong>Debian and other APT-based distributions</strong></summary>
 
 **1. Install `curl`**
@@ -108,7 +108,7 @@ sudo apt install acl
 ### Set ACL to allow user `nobody` to read letsencrypt certs
 
 ```sh
-sudo setfacl -R -m u:nobody:r /etc/letsencrypt/{live,archive}
+sudo setfacl -R -m u:nobody:rX /etc/letsencrypt/{live,archive}
 sudo setfacl -m u:nobody:rX /etc/letsencrypt
 ```
 
