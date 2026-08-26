@@ -16,7 +16,7 @@ echo_green() {
 }
 case "${1:-configure}" in
     configure|abort-upgrade|abort-remove|abort-deconfigure)
-echo_green "Service 'nobody' must be able to read TLS certificates managed by certbot under /etc/letsencrypt (or other directories by other ACME clients), visit https://daeuniverse.pages.dev/ for how to grant access with POSIX ACLs."
+echo_green "The service user account 'nobody' must be able to read TLS certificates managed by certbot under /etc/letsencrypt (or other directories by other ACME clients), visit https://daeuniverse.pages.dev/ for how to grant access with POSIX ACLs."
         ;;
 esac
 
