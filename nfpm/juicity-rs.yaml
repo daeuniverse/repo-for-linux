@@ -9,8 +9,6 @@ provides:
   - juicity-client
 conflicts:
   - juicity
-depends:
-  - v2ray-rules-dat
 maintainer: "dae@daeuniverse"
 description: |
   Juicity-RS is a quic-based proxy protocol implementation rewritten in Rust.

@@ -9,8 +9,6 @@ provides:
   - juicity-client
 conflicts:
   - juicity-rs
-depends:
-  - v2ray-rules-dat
 maintainer: "dae@daeuniverse"
 description: |
   Juicity is a quic-based proxy protocol implementation. 
