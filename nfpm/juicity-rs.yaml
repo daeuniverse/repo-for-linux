@@ -9,8 +9,6 @@ provides:
   - juicity-client
 conflicts:
   - juicity
-replaces:
-  - juicity
 depends:
   - v2ray-rules-dat
 maintainer: "dae@daeuniverse"
