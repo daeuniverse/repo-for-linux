@@ -164,7 +164,7 @@ domain(ext:"yourdatfile.dat:yourtag")->direct
 dip(ext:"yourdatfile.dat:yourtag")->direct
 ```
 
-### 防火墙标记
+### fwmark
 
 ```shell
 ### Set fwmark
@@ -205,12 +205,45 @@ mac('aa:bb:cc:dd:ee:ff') && domain(geosite:docker, suffix:quay.io, geosite:githu
 mac('aa:bb:cc:dd:ee:ff') -> direct
 ```
 
-域名条件依赖域名信息，只有设备的 DNS 请求经过 dae 才能获得这些信息。如果设备使用加密 DNS（DoH/DoT），白名单原本会在没有提示的情况下失效，设备的所有流量都会落到回退规则。dae 会识别这种规则组合：单主机 `mac`/`sip` 选择器、正向 `domain` 条件，以及位于其后、仅含该选择器的 `direct`/`block` 回退规则。
+内核匹配 `domain` 条件时，用连接的目标 IP 查询 `domain_routing_map`。键不含来源 IP 或 MAC。值是所有经 dae 转发、且解析到该 IP 的 DNS 应答的域名位图按位或的结果，在这些 DNS 缓存条目存活期间一直有效。因此，只要另一个 dae 客户端或 dae 主机曾通过 dae 解析过目标 IP，使用加密 DNS（DoH/DoT）的设备仍能命中白名单。如果没有任何经 dae 转发的应答覆盖该目标 IP，连接就不带域名信息，会落到回退规则。
 
-dae 会在回退规则前自动插入一条仅在内核空间生效的 sniff-punt 规则：将缺少域名信息的连接送到用户空间，嗅探 TLS SNI、HTTP host 或 QUIC，再用嗅探到的域名重新匹配同一组规则。该设备未命中白名单的流量仍会落到回退规则，并经用户空间转发。使用此功能需要启用嗅探（`sniffing_timeout > 0`、`dial_mode != ip`）；可通过 `auto_sniff_punt: false` 关闭。
+dae 会识别同时满足以下条件的规则组合：
+
+- 使用单主机 `mac`/`sip` 选择器。
+- 包含正向 `domain` 条件。
+- 后面有一条仅含该选择器的 `direct`/`block` 回退规则。
+
+dae 会在回退规则前自动插入一条仅在内核空间生效的 sniff-punt 规则。该规则将缺少域名信息的连接送到用户空间，嗅探 TLS SNI、HTTP host 或 QUIC，再用嗅探到的域名重新匹配同一组规则。
+
+这种恢复是有条件的，因为 dae 只嗅探一部分送到用户空间的连接。dae 从不嗅探目标端口为 20、21、22、25、53、119、123、161、3306、5432、6379、9200、27017 和 11211 的 TCP 连接，这份列表是硬编码的。TCP 连接的前几个字节不是 TLS 握手或 HTTP 请求时，dae 也会跳过嗅探。相同的目标、进程名、MAC 和 DSCP 已连续 3 次嗅探失败时，dae 同样跳过，并对该组合暂停嗅探 10 分钟。
+
+dae 只在来源端口或目标端口为 443 或 8443 且数据包是 QUIC Initial 时才嗅探 UDP。对被跳过的连接和嗅探不到域名的连接，dae 会不带域名重新路由。白名单规则因此无法命中，连接会落到回退规则。
+
+该设备未命中白名单的流量仍会落到回退规则，并经用户空间转发。
+
+使用此功能需要启用嗅探（`sniffing_timeout > 0`、`dial_mode != ip`）。可通过 `auto_sniff_punt: false` 关闭此功能。
+
+## 参数名与取反规则
+
+以下接受无名参数值的函数会拒绝不支持的参数名：`pname`、`port`/`dport`、`sport`、`dscp`、`ip`/`dip`、`sip`、`ipversion`、`l4proto`、`mac`、`qtype`，以及响应路由中的 `upstream`。
+
+语法允许在所有函数调用中使用 `key: value`。这些函数的解析器以前会忽略未知参数名，因此 `port(bogus_param: 443)` 会在没有提示的情况下生成与 `port(443)` 相同的 match set。`pname(bogus_param: 1)` 则会匹配名为 `1` 的进程。
+
+现在，这类规则会报错 `unsupported parameter key "bogus_param"`，并指出接受的写法。函数原本支持的值前缀 `geoip:`、`geosite:` 和 `ext:` 不受影响，例如 `dip(geoip:cn)` 和 `dip(ext:"file.dat:tag")`。不带参数名的 `pname(NetworkManager)` 和 `port(443)` 也不受影响。
+
+如果配置在上述函数中使用了误写的参数名，dae 将无法启动，直到移除该参数名。升级前请检查路由部分。
+
+优化器不再合并出站相同、且仅含一个函数的取反规则。规则按顺序匹配，因此以下两条独立规则会将未命中 `a` **或**未命中 `b` 的流量发送到 `my_group`：
+
+```shell
+!domain(geosite:a) -> my_group
+!domain(geosite:b) -> my_group
+```
+
+合并后的 `!domain(geosite:a, geosite:b)` 对整个集合取反，仅匹配**同时未命中** `a` 和 `b` 的流量，范围更窄。dae 现在保留原来的两条规则，因此依赖旧合并行为的配置会匹配比以前更多的流量。
 
 </div>
 
 ---
 
-来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/configuration/routing.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。
+来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/configuration/routing.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。

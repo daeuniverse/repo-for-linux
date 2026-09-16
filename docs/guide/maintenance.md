@@ -2,7 +2,7 @@
 
 ## Customize a systemd service
 
-To edit a systemd service file, run the following command. The example edits the `daed` service:
+Edit the systemd service file with `systemctl edit --full`. This example edits `daed.service`:
 
 ::: code-group
 
@@ -16,13 +16,13 @@ systemctl edit --full daed.service
 
 :::
 
-The new file is placed in `/etc/systemd/system/daed.service` rather than `/lib/systemd/system/daed.service`, and it is not overwritten when the package is updated.
+The edited file is saved as `/etc/systemd/system/daed.service`, not `/lib/systemd/system/daed.service`. Package updates do not overwrite it.
 
 ## Let a non-root user read Let's Encrypt certificates
 
-We use the `nobody` user to run the v2ray, xray, juicity and juicity-rs services, and the `nobody` user does not have permission to read the certs in `/etc/letsencrypt/live`, so you need to set ACL to allow non-root user to read letsencrypt certs.
+The v2ray, xray, juicity and juicity-rs services run as `nobody`. This user cannot read certificates in `/etc/letsencrypt/live` by default. Set access control lists (ACLs) to grant read access.
 
-### Install `acl` package (use Debian/Ubuntu as an example)
+### 1. Install `acl` on Debian or Ubuntu
 
 ::: code-group
 
@@ -36,7 +36,7 @@ apt install acl
 
 :::
 
-### Set ACL to allow user `nobody` to read letsencrypt certs
+### 2. Grant `nobody` access to the certificates
 
 ::: code-group
 
@@ -52,7 +52,7 @@ setfacl -m u:nobody:rX /etc/letsencrypt
 
 :::
 
-### Set hook to certbot to automatically set ACL when certs are renewed
+### 3. Set a Certbot deploy hook to restore ACLs after renewal
 
 ::: code-group
 

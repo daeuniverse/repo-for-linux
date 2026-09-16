@@ -1,10 +1,8 @@
 # Debian / Ubuntu
 
-Install daed from the Dae Universe repository.
+Install daed from the Dae Universe repository on Debian, Ubuntu and other APT-based distributions.
 
-For Debian, Ubuntu and other APT-based distributions.
-
-The commands below assume sudo is configured for your account.
+Use the sudo tab if sudo is configured for your account. Use the root tab when already in a root shell.
 
 ## 1. Install `curl`
 

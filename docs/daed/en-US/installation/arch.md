@@ -1,10 +1,16 @@
 # Arch Linux / Manjaro <Badge type="info" text="Community maintained" />
 
-daed is not in the official repositories. Install it from the [AUR](https://aur.archlinux.org/packages/daed) or from [archlinuxcn](https://github.com/archlinuxcn/repo). Both are maintained by the community and are unrelated to the APT/RPM repository this site describes.
+daed is not in the official repositories. Install it from the [AUR](https://aur.archlinux.org/packages/daed) or [archlinuxcn](https://github.com/archlinuxcn/repo).
+
+Both sources are community-maintained and independent of the APT/RPM repository described on this site.
 
 ## AUR
 
-`daed` builds from source, `daed-avx2-bin` is a binary package built for x86-64-v3 / AVX2 and needs no compilation, and `daed-git` follows the main branch.
+| Package | Build |
+| --- | --- |
+| `daed` | Builds from source |
+| `daed-avx2-bin` | Prebuilt for x86-64-v3 / AVX2; no compilation needed |
+| `daed-git` | Follows the main branch |
 
 ::: code-group
 

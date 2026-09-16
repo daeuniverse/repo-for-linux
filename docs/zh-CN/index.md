@@ -39,7 +39,7 @@ features:
     link: /zh-CN/honk
     linkText: "了解 honk"
   - title: "kdae"
-    details: "走在 dae 主线前面的分支，重构架构并优化性能。"
+    details: "在 dae 主线之外重构架构并优化性能的分支。"
     link: /zh-CN/kdae
     linkText: "了解 kdae"
   - title: "DaedNext"

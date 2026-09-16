@@ -4,15 +4,14 @@ title: "Reload and suspend"
 
 <div v-pre lang="en-US">
 
-# Reload and suspend
+# Reload and Suspend
 
-dae supports reloading configuration and temporarily suspending traffic processing.
+dae can reload its configuration or suspend temporarily without restarting.
 
 ## Reload
 
-Generally, dae won't interrupt connections when reloading configuration. And reloading is much faster than restarting. Reloading will also manually update all subscriptions simultaneously.
-
-Usage:
+Reloading is much faster than restarting and generally preserves existing
+connections. It also updates all subscriptions at once:
 
 ::: code-group
 
@@ -44,7 +43,7 @@ dae suspend
 
 ## Resume
 
-If you want to recover, use reload:
+To resume, reload:
 
 ::: code-group
 
@@ -62,4 +61,4 @@ dae reload
 
 ---
 
-Source: [dae upstream](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/user-guide/reload-and-suspend.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).
+Source: [dae upstream](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/user-guide/reload-and-suspend.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).

@@ -1,4 +1,5 @@
-The configuration file is downloaded from the repository and carries the GPG key address. DNF asks to import the key the first time it is used.
+The repository configuration file includes the GPG key address.
+DNF asks to import the key the first time it is used.
 
 ::: code-group
 

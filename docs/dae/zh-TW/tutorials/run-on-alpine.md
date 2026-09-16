@@ -4,18 +4,19 @@ title: "Alpine Linux"
 
 <div v-pre lang="zh-TW">
 
-# Alpine Linux
+# 在 Alpine Linux 上執行
 
-以下命令使用 OpenRC。已設定 sudo 的一般使用者選擇 sudo 標籤；已進入 root shell 時選擇 root 標籤。
-**注意：**
+本教學適用於 Alpine Linux 3.20 及更新版本。核心要求如下：
 
-1. Alpine Linux 3.18 或更新版本原生提供完整 eBPF 支援；較舊版本的 Alpine Linux 需要自行建置核心。
-2. 自 3.20 版本起，因 Alpine Linux 的跨 CPU 架構相容性，Alpine Linux 已正式停用 dae 所需的部分功能，因此預設只能使用 `linux-virt` 執行 dae。若要使用 `linux-lts` 或 `linux-edge`，應自行建置核心。
-3. 本教學適用於 Alpine Linux 3.20 及更新版本。
+| Alpine Linux 版本 | eBPF 支援與核心要求 |
+| --- | --- |
+| 早於 3.18 | 需要自行建置核心 |
+| 3.18 及更新版本 | 預設完整支援 eBPF，但 3.20 起有下述限制 |
+| 3.20 及更新版本 | 為相容不同 CPU 架構，停用了 dae 所需的部分功能；預設僅 `linux-virt` 可執行 dae，使用 `linux-lts` 或 `linux-edge` 時需自行建置核心 |
 
 ## 啟用 Community 儲存庫
 
-執行 `setup-apkrepos` 命令，接著會看到如下選單：
+執行 `setup-apkrepos` 後，會顯示以下選單：
 
 ::: code-group
 
@@ -38,7 +39,7 @@ setup-apkrepos
  (skip) Skip setting up apk repositories
 ```
 
-接著輸入 `c` 以啟用 Community 儲存庫。
+輸入 `c` 以啟用 Community 儲存庫。
 
 ## 啟用 CGroups
 
@@ -72,7 +73,7 @@ vi /etc/init.d/sysfs
 
 :::
 
-在 `mount_misc` 區段加入下列內容：
+在 `mount_misc` 部分新增以下內容：
 
 ```sh
         # Setup Kernel Support for bpf file system
@@ -85,11 +86,7 @@ vi /etc/init.d/sysfs
         fi
 ```
 
-請留意，指令碼 `/etc/init.d/sysfs` 的格式必須正確，否則 `sysfs` 服務會失敗。
-
-## 使啟動設定生效
-
-完成 cgroups 與 sysfs 設定後重新啟動系統，使開機掛載生效，再啟動 dae。
+確保 `/etc/init.d/sysfs` 的指令碼格式正確，否則 `sysfs` 服務會失敗。
 
 ::: code-group
 
@@ -105,9 +102,9 @@ reboot
 
 ## 安裝 dae
 
-安裝程式：<https://github.com/daeuniverse/dae-installer/>
+安裝程式：<https://github.com/daeuniverse/dae-installer>。
 
-此安裝程式提供 dae 的 OpenRC 服務指令碼。安裝後，應將設定檔加入 `/usr/local/etc/dae/config.dae`，然後將其權限設為 600 或 640：
+該安裝程式提供 dae 的 OpenRC 服務指令碼。安裝後，在 `/usr/local/etc/dae/config.dae` 新增設定檔，再將其權限設為 600 或 640：
 
 ::: code-group
 
@@ -121,10 +118,18 @@ chmod 640 /usr/local/etc/dae/config.dae
 
 :::
 
-完成[最小設定](/zh-TW/dae/start/minimal-configuration)後，請參閱[服務管理](/zh-TW/dae/start/service-management)，啟動 dae、設定開機啟動、重載或重新啟動服務。
+設定檔準備好後，啟動 dae 服務：
+
+參見[立即啟動](/zh-TW/dae/start/service-management#立即啟動)。
+
+## 開機啟動 dae
+
+使用 `rc-update` 啟用 dae 服務：
+
+參見[開機啟動](/zh-TW/dae/start/service-management#開機啟動)。
 
 </div>
 
 ---
 
-來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/tutorials/run-on-alpine.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。
+來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/tutorials/run-on-alpine.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。

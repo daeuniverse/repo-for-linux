@@ -1,6 +1,8 @@
 # daed：服务管理
 
-以下适用于 Dae Universe DEB/RPM 软件源提供的 daed，配置目录为 `/etc/daed/`。服务文件声明与 `dae.service` 冲突，请选择其中一个服务。该服务未定义 reload 动作，不应使用 `systemctl reload daed`。
+本页适用于 Dae Universe DEB/RPM 软件源提供的 daed，配置目录为 `/etc/daed/`。
+
+服务文件声明与 `dae.service` 冲突，请选择其中一个服务。该服务未定义 `reload` 动作，不应使用 `systemctl reload daed`。
 
 Gentoo 在默认启用 `webui` USE 标志时也提供此 systemd 服务。
 

@@ -6,13 +6,11 @@ title: "重载与暂停"
 
 # 重载与暂停
 
-dae 支持重载配置和临时暂停流量处理。
+dae 可在不重启的情况下重载配置或临时暂停。
 
 ## 重载
 
-一般情况下，dae 在重载配置的过程中不会中断现有连接。重载的速度也比重启快得多。重载还会同时手动更新全部的订阅。
-
-用法：
+dae 重载配置时通常不会中断现有连接，且比重启快得多。执行重载还会同时更新全部订阅。
 
 ::: code-group
 
@@ -26,9 +24,9 @@ dae reload
 
 :::
 
-## 挂起
+## 暂停
 
-临时暂停 dae：
+暂停 dae：
 
 ::: code-group
 
@@ -44,7 +42,7 @@ dae suspend
 
 ## 恢复
 
-如果想恢复，请使用重载：
+使用重载命令恢复：
 
 ::: code-group
 
@@ -62,4 +60,4 @@ dae reload
 
 ---
 
-来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/user-guide/reload-and-suspend.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。
+来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/user-guide/reload-and-suspend.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。

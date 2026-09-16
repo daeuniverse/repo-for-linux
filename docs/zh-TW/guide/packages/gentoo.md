@@ -1,6 +1,8 @@
 # Gentoo / Calculate <Badge type="info" text="社群維護" />
 
-套件來源不提供 Gentoo 套件。Gentoo 與 Calculate 使用者透過 [gentoo-zh overlay](https://github.com/gentoo-zh/overlay) 安裝，套件由 Gentoo 社群維護，使用 Portage 管理，版本與[套件列表](/zh-TW/guide/packages)中的套件來源版本各自獨立。
+Dae Universe 套件來源不提供 Gentoo 套件。Gentoo 與 Calculate 使用者可透過 [gentoo-zh overlay](https://github.com/gentoo-zh/overlay) 安裝。
+
+套件由 Gentoo 社群維護，使用 Portage 管理。其版本與[套件列表](/zh-TW/guide/packages)中的版本各自獨立。
 
 ::: info 執行身分與架構
 測試關鍵字範例適用於 amd64 系統。
@@ -14,7 +16,9 @@
 
 ## 2. 接受測試關鍵字
 
-overlay 中的這些套件只有測試關鍵字，安裝前需要在 `package.accept_keywords` 中寫入所選軟體的設定。如果 `/etc/portage/package.accept_keywords` 是目錄，可寫入其中的單獨檔案；如果它是檔案，則直接在該檔案中新增。
+overlay 中的這些套件只有測試關鍵字，安裝前需要在 `package.accept_keywords` 中寫入所選軟體的設定。
+
+如果 `/etc/portage/package.accept_keywords` 是目錄，可寫入其中的單獨檔案；如果它是檔案，則直接在該檔案中新增。
 
 ::: code-group
 
@@ -70,12 +74,15 @@ sudo emerge --ask dev-libs/v2ray-rules-dat-bin::gentoo-zh
 
 已進入 root shell 時去掉指令中的 `sudo`。
 
-## 4. 套件差異
+## 套件差異
 
-- `net-proxy/juicity` 預設只建置伺服端；需要用戶端時啟用 `client` USE 旗標。
-- `dev-libs/v2ray-rules-dat-bin` 安裝預先建置的規則資料檔案，`geosite` 與 `geoip` USE 旗標預設啟用。
-- overlay 沒有 Juicity-rs 的 ebuild。
-- dae 與 daed 的安裝步驟見 [dae](/zh-TW/dae/installation/gentoo) 與 [daed](/zh-TW/daed/installation/gentoo)。
+| 套件 | 差異 |
+| --- | --- |
+| `net-proxy/juicity` | 預設只建置伺服端；需要用戶端時，啟用 `client` USE 旗標 |
+| `dev-libs/v2ray-rules-dat-bin` | 安裝預先建置的規則資料檔案；`geosite` 與 `geoip` USE 旗標預設啟用 |
+| Juicity-rs | overlay 未提供 ebuild |
+
+dae 與 daed 的安裝步驟見 [dae](/zh-TW/dae/installation/gentoo) 與 [daed](/zh-TW/daed/installation/gentoo)。
 
 ### 選用：鏡像與二進位套件
 

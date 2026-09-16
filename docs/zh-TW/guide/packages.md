@@ -1,6 +1,6 @@
 # 其他可用套件
 
-本站以 dae 文件為主。套件來源亦提供 daed、v2rayA 等套件，下表列出套件來源的完整套件列表。
+本站以 dae 文件為主。套件來源也提供 daed、v2rayA 等套件，完整清單如下。
 
 版本號來自套件來源的建置結果；單獨建置文件時，從 [status 分支](https://github.com/daeuniverse/repo-for-linux/tree/status)補充版本資料。
 

@@ -1,10 +1,16 @@
 # Arch Linux / Manjaro <Badge type="info" text="社区维护" />
 
-官方仓库没有 daed，可从 [AUR](https://aur.archlinux.org/packages/daed) 或 [archlinuxcn](https://github.com/archlinuxcn/repo) 安装。两处的软件包均由社区维护，与本站的 APT/RPM 软件源无关。
+官方仓库没有 daed，可从 [AUR](https://aur.archlinux.org/packages/daed) 或 [archlinuxcn](https://github.com/archlinuxcn/repo) 安装。
+
+两处的软件包均由社区维护，与本站的 APT/RPM 软件源无关。
 
 ## AUR
 
-`daed` 从源代码构建；`daed-avx2-bin` 是针对 x86-64-v3 / AVX2 优化的二进制包，无需编译；`daed-git` 跟随主分支。
+| 软件包 | 构建方式 |
+| --- | --- |
+| `daed` | 从源代码构建 |
+| `daed-avx2-bin` | 针对 x86-64-v3 / AVX2 优化的二进制包，无需编译 |
+| `daed-git` | 跟随主分支 |
 
 ::: code-group
 

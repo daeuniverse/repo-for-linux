@@ -1,14 +1,15 @@
 <div v-pre lang="zh-TW">
 
 <!-- quick-start-pppoe:start -->
-# PPPoE 介面
+## PPPoE 介面
 
-若要代理 PPPoE 介面，請將 wan/lan_interface 設為 pppd 產生的介面（即 ppp0 / pppoe-wan），而非實體介面。
-若僅將 PPPoE 介面用於 WAN，只需將 wan_interface 設為 "auto"。
+代理 PPPoE 介面時，請將 `wan_interface` 或 `lan_interface` 設為 pppd 生成的介面（`ppp0` / `pppoe-wan`），而非實體介面。
+
+如果 PPPoE 介面僅用於 WAN，將 `wan_interface` 設為 `auto` 即可。
 <!-- quick-start-pppoe:end -->
 
 </div>
 
 ---
 
-來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/README.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。
+來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/README.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。

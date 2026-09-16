@@ -6,11 +6,13 @@ title: "DNS"
 
 # DNS
 
-dae will intercept all UDP traffic to port 53 and sniff DNS. Here gives some examples and templates for DNS configuration.
+dae intercepts all UDP and TCP traffic to port 53 that it routes or that leaves the host, and sniffs DNS. Only a rule that resolves to `must_direct` keeps port 53 traffic away from dae; `direct` alone still hands it to the DNS module. Two cases never reach the DNS module: a UDP query from a LAN client to a socket on the dae host itself, such as a local dnsmasq on port 53, is delivered to that socket before routing; and queries over the loopback interface never pass a dae hook. A TCP query from a LAN client to that local socket still goes through routing.
 
-## Schema
+dae does not reassemble IP fragments: it processes only the first fragment of a datagram and passes later fragments through unchanged, so a fragmented UDP DNS message cannot be intercepted correctly. When the resolver that answers LAN clients sends its own upstream queries through a `must_direct` rule, dae never sees those answers and learns no domain for the returned IPs, so `domain()` rules do not match the clients' traffic.
 
-DoH3
+## URI schemes
+
+### DoH3
 
 ```
 h3://<host>:<port>/<path>
@@ -20,7 +22,7 @@ default port: 443
 default path: /dns-query
 ```
 
-DoH
+### DoH
 
 ```
 https://<host>:<port>/<path>
@@ -29,7 +31,7 @@ default port: 443
 default path: /dns-query
 ```
 
-DoT
+### DoT
 
 ```
 tls://<host>:<port>
@@ -37,7 +39,7 @@ tls://<host>:<port>
 default port: 853
 ```
 
-DoQ
+### DoQ
 
 ```
 quic://<host>:<port>
@@ -45,15 +47,15 @@ quic://<host>:<port>
 default port: 853
 ```
 
-UDP
-  
+### UDP
+
 ```
 udp://<host>:<port>
 
 default port: 53
 ```
 
-TCP
+### TCP
 
 ```
 tcp://<host>:<port>
@@ -61,7 +63,7 @@ tcp://<host>:<port>
 default port: 53
 ```
 
-TCP and UDP
+### TCP and UDP
 
 ```
 tcp+udp://<host>:<port>
@@ -69,25 +71,34 @@ tcp+udp://<host>:<port>
 default port: 53
 ```
 
-A truncated answer (`TC=1`, RFC 1035 §4.2.1) is retried over TCP, as RFC 7766
-§5 requires: an `udp://` upstream retries that query over TCP, while a
-`tcp+udp://` upstream always did. The built-in `asis` destination is not
-retried — the answer the destination sent is passed to the client as it
-arrived, so the client decides whether to retry, exactly as it would without
-dae in the path. Every other scheme keeps its declared transport.
+For queries that dae forwards on behalf of clients, dae retries a truncated
+answer (`TC=1`, RFC 1035 §4.2.1) over TCP, as RFC 7766 §5 requires. For a
+`udp://` upstream, dae retries only after a truncated answer; for a
+`tcp+udp://` upstream, dae retries after any UDP failure. For dae's own lookups
+that a `sub()`, `node()` or `subnode()` rule sends to a `udp://` upstream, dae
+does not retry: a truncated answer fails the lookup with
+`internal dns response truncated`. For those lookups, dae retries over TCP only
+with a `tcp+udp://` upstream. When large answers are expected, name a
+`tcp+udp://` or `tcp://` upstream in those rules.
+
+The built-in `asis` destination keeps the address and port the client used,
+not the client's transport: dae always queries that server over UDP, even when
+the client asked over TCP. `asis` does not retry over TCP. When that server
+answers with `TC=1`, dae discards the server's response and replies with a
+message built from the client's query: same ID and question, `NOERROR`, `RA=1`,
+`TC=1`, empty Answer section. The client then decides whether to retry over
+TCP. Every other scheme keeps its declared transport.
 
 ## Examples
 
-::: details Complete reference example
-
 ```shell
 dns {
-    # For example, if ipversion_prefer is 4 and the domain name has both type A and type AAAA records, the dae will only
-    # respond to type A queries and response empty answer to type AAAA queries.
+    # For example, if ipversion_prefer is 4 and dae already knows the domain has type A records, dae returns an empty
+    # answer to type AAAA queries; otherwise dae returns the AAAA answer unchanged.
     ipversion_prefer: 4
 
-    # Give a fixed ttl for domains. Zero means that dae will request to upstream every time and not cache DNS results
-    # for these domains.
+    # Give a fixed ttl for domains. Zero makes the cached answer expire immediately; with optimistic_cache (default true)
+    # dae may still serve it as a stale answer while refreshing.
     fixed_domain_ttl {
         ddns.example.org: 10
         test.example.org: 3600
@@ -127,7 +138,7 @@ dns {
         # Match rules from top to bottom.
         request {
             # Built-in outbounds in 'request': asis, reject.
-            # asis queries the server the request was addressed to, as the request arrived.
+            # asis queries the server the request was addressed to, always over UDP.
             # Do not point other LAN devices at dae:53 (loop risk).
             # You can also use user-defined upstreams.
 
@@ -183,15 +194,41 @@ dns {
 }
 ```
 
-:::
+`ipversion_prefer` never makes dae send its own query for the preferred family.
+With `ipversion_prefer: 4`, dae replaces an `AAAA` answer with an empty
+`NOERROR` reply only when it already knows the name has `A` records. dae knows
+this when an unexpired cached `A` answer exists, or when an `A` answer with
+records arrives while the `AAAA` answer waits up to 50 ms (the RFC 8305
+resolution delay). Otherwise dae returns the `AAAA` answer unchanged.
+`ipversion_prefer: 6` works the same way with the families swapped.
+
+A `fixed_domain_ttl` of `0` does not disable caching. dae still stores the
+answer, with its cache deadline set to the time it was received, so the entry
+is expired on the next lookup. `optimistic_cache` defaults to `true`, so dae
+answers later queries from that stale entry within `optimistic_cache_ttl`
+(default `60` seconds; `0` means no limit) while one background refresh queries
+upstream. Record TTLs in those answers are bounded by
+`optimistic_stale_reply_ttl` (default `30`). Set `optimistic_cache: false` to
+send every query for that domain to upstream synchronously.
 
 ## Bootstrap resolver (`global`)
 
-`global.bootstrap_resolver` covers only the lookups that must succeed before
-dae's own DNS routing exists: resolving DNS upstream hostnames and
-`dial_mode: real-domain` probes. Left unset, dae falls back to `119.29.29.29:53`
-and then `223.5.5.5:53`; setting the option replaces those defaults entirely and
-is used alone. A host outside mainland China usually wants a closer resolver:
+dae queries `global.bootstrap_resolver` directly, never through a proxy, for
+three kinds of lookups. The first is the hostname of any `dns.upstream` entry
+that is not an IP literal. The second is the background probe that
+`dial_mode: domain` (the default) runs for a sniffed domain that has no `A` or
+`AAAA` record in dae's DNS cache. `domain+` and `domain++` skip that probe, and
+`ip` never dials by domain. `dial_mode` accepts only `ip`, `domain`, `domain+`
+and `domain++`. The third applies when `dns.routing.request` contains any rule,
+which enables dae's internal DNS router. When no `sub()`, `node()` or
+`subnode()` rule assigns the subscription URL host or a node's server hostname
+to an upstream, or when the assigned upstream returns no address, dae resolves
+that hostname through the bootstrap resolver. These lookups bypass the `qname`
+and `qtype` rules and happen while DNS routing is running, not only at startup.
+
+If the option is unset, dae falls back to `119.29.29.29:53` and then
+`223.5.5.5:53`. Setting it replaces both defaults; dae uses only the configured
+resolver. For a host outside mainland China, a closer resolver is usually preferable:
 
 ```shell
 global {
@@ -200,8 +237,6 @@ global {
 ```
 
 ## Templates
-
-Choose a template for the required DNS behavior.
 
 ::: code-group
 
@@ -259,4 +294,4 @@ dns {
 
 ---
 
-Source: [dae upstream](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/configuration/dns.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).
+Source: [dae upstream](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/configuration/dns.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).

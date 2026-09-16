@@ -4,7 +4,7 @@ title: "重构验证计划"
 
 <div v-pre lang="zh-CN">
 
-# 重构验证计划
+# dae 重构验证计划
 
 本文档用于把“重构路线”落到可执行的验证清单上，避免后续改动只停留在架构讨论层面。
 
@@ -31,22 +31,22 @@ title: "重构验证计划"
 
 新增测试：
 
-- [config/function_union_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/config/function_union_test.go)
+- [config/function_union_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/config/function_union_test.go)
   - `TestFunctionOrStringToFunction`
   - `TestFunctionListOrStringToFunctionList`
   - `TestPatchMustOutboundFallback`
-- [component/dns/fallback_contract_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/component/dns/fallback_contract_test.go)
+- [component/dns/fallback_contract_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/component/dns/fallback_contract_test.go)
   - `TestRequestMatcherBuilderRejectsInvalidFallbackType`
   - `TestResponseMatcherBuilderRejectsInvalidFallbackType`
-- [component/outbound/dialer_selection_policy_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/component/outbound/dialer_selection_policy_test.go)
+- [component/outbound/dialer_selection_policy_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/component/outbound/dialer_selection_policy_test.go)
   - `TestNewDialerSelectionPolicyFromGroupParamRejectsInvalidPolicyType`
-- [control/routing_matcher_builder_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/routing_matcher_builder_test.go)
+- [control/routing_matcher_builder_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/routing_matcher_builder_test.go)
   - `TestRoutingMatcherBuilderRejectsInvalidFallbackType`
 
 现有辅助测试：
 
-- [config/marshal_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/config/marshal_test.go)
-- [pkg/config_parser/config_parser_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/pkg/config_parser/config_parser_test.go)
+- [config/marshal_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/config/marshal_test.go)
+- [pkg/config_parser/config_parser_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/pkg/config_parser/config_parser_test.go)
 
 建议命令：
 
@@ -69,12 +69,12 @@ go test ./config/... ./pkg/config_parser/... ./component/dns/... ./component/out
 
 现有关键测试：
 
-- [control/dns_controller_reload_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/dns_controller_reload_test.go)
+- [control/dns_controller_reload_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/dns_controller_reload_test.go)
   - `TestDnsController_RuntimeWorkersSurviveContextCancel`
-- [control/dns_forwarder_cache_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/dns_forwarder_cache_test.go)
-- [control/dns_singleflight_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/dns_singleflight_test.go)
-- [control/dns_control_cache_cleanup_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/dns_control_cache_cleanup_test.go)
-- [control/dns_cache_scope_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/dns_cache_scope_test.go)
+- [control/dns_forwarder_cache_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/dns_forwarder_cache_test.go)
+- [control/dns_singleflight_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/dns_singleflight_test.go)
+- [control/dns_control_cache_cleanup_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/dns_control_cache_cleanup_test.go)
+- [control/dns_cache_scope_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/dns_cache_scope_test.go)
 
 建议命令：
 
@@ -96,13 +96,13 @@ go test ./control/... -run 'DnsController|dns.*reload|dns.*forwarder|dns.*single
 
 现有关键测试：
 
-- [control/control_plane_drain_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/control_plane_drain_test.go)
+- [control/control_plane_drain_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/control_plane_drain_test.go)
   - `TestReuseDNSControllerFromUpdatesRuntime`
   - `TestReuseDNSListenerFromTransfersOwnership`
   - `TestReuseDNSListenerFromRejectsProtocolMismatch`
-- [control/control_plane_janitor_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/control_plane_janitor_test.go)
-- [control/control_plane_shutdown_udp_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/control_plane_shutdown_udp_test.go)
-- [control/control_plane_drain_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/control_plane_drain_test.go)
+- [control/control_plane_janitor_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/control_plane_janitor_test.go)
+- [control/control_plane_shutdown_udp_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/control_plane_shutdown_udp_test.go)
+- [control/control_plane_drain_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/control_plane_drain_test.go)
 
 建议命令：
 
@@ -124,9 +124,9 @@ go test ./control/... ./cmd/... -run 'ReuseDNS|Drain|Janitor|Shutdown|Retirement
 
 现有关键测试：
 
-- [cmd/run_shutdown_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/cmd/run_shutdown_test.go)
-- [cmd/reload_progress_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/cmd/reload_progress_test.go)
-- [control/control_plane_drain_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/control_plane_drain_test.go)
+- [cmd/run_shutdown_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/cmd/run_shutdown_test.go)
+- [cmd/reload_progress_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/cmd/reload_progress_test.go)
+- [control/control_plane_drain_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/control_plane_drain_test.go)
 
 建议命令：
 
@@ -148,10 +148,10 @@ go test ./cmd/... ./control/... -run 'Reload|Progress|Shutdown|Handoff'
 
 现有关键测试：
 
-- [component/routing/optimizer_contract_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/component/routing/optimizer_contract_test.go)
-- [component/dns/request_rule_split_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/component/dns/request_rule_split_test.go)
-- [component/daedns/router_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/component/daedns/router_test.go)
-- [control/routing_matcher_builder_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/routing_matcher_builder_test.go)
+- [component/routing/optimizer_contract_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/component/routing/optimizer_contract_test.go)
+- [component/dns/request_rule_split_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/component/dns/request_rule_split_test.go)
+- [component/daedns/router_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/component/daedns/router_test.go)
+- [control/routing_matcher_builder_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/routing_matcher_builder_test.go)
 
 建议命令：
 
@@ -173,10 +173,10 @@ go test ./component/routing/... ./component/dns/... ./component/daedns/... ./con
 
 现有关键测试：
 
-- [component/outbound/dialer/recovery_bugs_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/component/outbound/dialer/recovery_bugs_test.go)
-- [component/outbound/dialer_group_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/component/outbound/dialer_group_test.go)
-- [control/dial_family_fallback_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/dial_family_fallback_test.go)
-- [control/udp_dial_guard_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/udp_dial_guard_test.go)
+- [component/outbound/dialer/recovery_bugs_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/component/outbound/dialer/recovery_bugs_test.go)
+- [component/outbound/dialer_group_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/component/outbound/dialer_group_test.go)
+- [control/dial_family_fallback_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/dial_family_fallback_test.go)
+- [control/udp_dial_guard_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/udp_dial_guard_test.go)
 
 建议命令：
 
@@ -223,16 +223,16 @@ go test ./component/outbound/... ./component/outbound/dialer/... ./control/... -
 本次继续完成：
 
 - 删除 `DnsController` 的 legacy runtime 字段与 fallback 读取路径，统一以 `runtimeState` 作为单一真相来源
-- 新增 [control/dns_runtime_test_helpers_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/dns_runtime_test_helpers_test.go) 作为测试期 runtime 构造辅助，避免测试继续依赖被移除的 legacy 字段
+- 新增 [control/dns_runtime_test_helpers_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/dns_runtime_test_helpers_test.go) 作为测试期 runtime 构造辅助，避免测试继续依赖被移除的 legacy 字段
 - 将 DNS 相关测试迁移到 `runtimeState` 构造方式，并通过 `go test ./control/...` 验证行为未回归
 
 ## 当前已落地的第三步
 
 本次继续完成：
 
-- 在 [control/dns_control.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/dns_control.go) 中抽出 `dnsControllerStore`，把 `dnsCache`、`dnsForwarderCache`、janitor/evictor 状态、BPF update worker 状态以及 preference wait registry 统一收口为长期状态所有者
-- 调整 [control/dns_preference_wait_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/dns_preference_wait_test.go)、[control/dns_lru_e2e_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/dns_lru_e2e_test.go)、[control/dns_control_cache_cleanup_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/dns_control_cache_cleanup_test.go)、[control/control_plane_drain_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/control_plane_drain_test.go) 和 [control/control_plane_real_domain_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/control_plane_real_domain_test.go) 等测试，使其显式初始化 `dnsControllerStore`，固定长期状态归属迁移后的构造方式
-- 新增 [control/dns_runtime_test_helpers_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/dns_runtime_test_helpers_test.go) 中的 `newTestDnsControllerStore`，为后续继续拆分 DNS 长期状态和 generation runtime 提供统一测试入口
+- 在 [control/dns_control.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/dns_control.go) 中抽出 `dnsControllerStore`，把 `dnsCache`、`dnsForwarderCache`、janitor/evictor 状态、BPF update worker 状态以及 preference wait registry 统一收口为长期状态所有者
+- 调整 [control/dns_preference_wait_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/dns_preference_wait_test.go)、[control/dns_lru_e2e_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/dns_lru_e2e_test.go)、[control/dns_control_cache_cleanup_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/dns_control_cache_cleanup_test.go)、[control/control_plane_drain_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/control_plane_drain_test.go) 和 [control/control_plane_real_domain_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/control_plane_real_domain_test.go) 等测试，使其显式初始化 `dnsControllerStore`，固定长期状态归属迁移后的构造方式
+- 新增 [control/dns_runtime_test_helpers_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/dns_runtime_test_helpers_test.go) 中的 `newTestDnsControllerStore`，为后续继续拆分 DNS 长期状态和 generation runtime 提供统一测试入口
 - 通过以下命令验证这一步仅改变状态归属，不改变行为：
 
 ```bash
@@ -244,14 +244,14 @@ go test ./component/dns/... ./component/outbound/... ./config/... ./pkg/config_p
 
 本次继续完成：
 
-- 在 [control/dns_control.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/dns_control.go) 中把 `DnsController` 对 `dnsControllerStore` 的持有从值语义切换为共享指针语义，并新增 `sharedStoreFacade()`，让后续 reload 可以创建新的 controller facade，同时继续复用长期 DNS state
-- 在 [control/control_plane.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/control_plane.go) 中将 `ReuseDNSControllerFrom` 改为“刷新旧 facade runtime，再创建共享 store 的新 facade 并交给新 generation”，不再继续把同一个 `DnsController` 对象在新旧 generation 间直接转移
-- 在 [control/control_plane_drain_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/control_plane_drain_test.go) 中固定新的 handoff 契约：
+- 在 [control/dns_control.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/dns_control.go) 中把 `DnsController` 对 `dnsControllerStore` 的持有从值语义切换为共享指针语义，并新增 `sharedStoreFacade()`，让后续 reload 可以创建新的 controller facade，同时继续复用长期 DNS state
+- 在 [control/control_plane.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/control_plane.go) 中将 `ReuseDNSControllerFrom` 改为“刷新旧 facade runtime，再创建共享 store 的新 facade 并交给新 generation”，不再继续把同一个 `DnsController` 对象在新旧 generation 间直接转移
+- 在 [control/control_plane_drain_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/control_plane_drain_test.go) 中固定新的 handoff 契约：
   - 新旧 generation 共享 active DNS controller facade
   - 新 facade 与旧 facade 不是同一个对象
   - 两者共享同一个 `dnsControllerStore`
   - 旧 facade 的 runtime 也会先更新到新 generation，避免 reload 交接窗口内的旧引用继续持有旧 runtime
-- 调整 [control/dns_runtime_test_helpers_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/dns_runtime_test_helpers_test.go) 的默认测试 store 为最小化形态，避免测试默认构造误引入未启动的 evictor queue，保持原有同步 callback 语义
+- 调整 [control/dns_runtime_test_helpers_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/dns_runtime_test_helpers_test.go) 的默认测试 store 为最小化形态，避免测试默认构造误引入未启动的 evictor queue，保持原有同步 callback 语义
 - 通过以下命令验证 facade 分离后行为未回归：
 
 ```bash
@@ -270,7 +270,7 @@ go test -race ./control/... ./component/dns/... ./component/outbound/... ./confi
 
 本次继续完成：
 
-- 在 [control/dns_control.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/dns_control.go) 中把 `DnsController` 的 generation-local 行为配置刷新纳入 `UpdateRuntime` / `ReuseForReload`：
+- 在 [control/dns_control.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/dns_control.go) 中把 `DnsController` 的 generation-local 行为配置刷新纳入 `UpdateRuntime` / `ReuseForReload`：
   - `qtypePrefer`
   - `optimisticCacheEnabled`
   - `optimisticCacheTtl`
@@ -278,9 +278,9 @@ go test -race ./control/... ./component/dns/... ./component/outbound/... ./confi
 - 将上述行为配置改为原子读写，修复 reload 更新与 janitor / lookup 并发访问时的 data race，避免“runtime 指针已切换，但行为配置仍沿用旧 generation 值”的隐性不一致
 - 让 `UpdateRuntime` 和 `ReuseForReload` 对非法 `IpVersionPrefer` 显式返回 `error`，而不是静默接受无效运行时配置
 - 为此补充并更新以下测试：
-  - [control/dns_controller_reload_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/dns_controller_reload_test.go)：新增 reload 后行为配置同步刷新的契约测试，以及非法 `IpVersionPrefer` 的失败契约测试
-  - [control/dns_cache_race_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/dns_cache_race_test.go)：把 `singleflight` 并发场景收敛成确定性 barrier，固定 `-race` 下的单飞契约，避免测试本身因时序过松而误报
-  - [control/dns_preference_wait_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/dns_preference_wait_test.go)、[control/dns_lru_e2e_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/dns_lru_e2e_test.go)、[control/dns_control_cache_cleanup_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/dns_control_cache_cleanup_test.go)：更新为原子字段访问方式，保证测试构造与运行时实现一致
+  - [control/dns_controller_reload_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/dns_controller_reload_test.go)：新增 reload 后行为配置同步刷新的契约测试，以及非法 `IpVersionPrefer` 的失败契约测试
+  - [control/dns_cache_race_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/dns_cache_race_test.go)：把 `singleflight` 并发场景收敛成确定性 barrier，固定 `-race` 下的单飞契约，避免测试本身因时序过松而误报
+  - [control/dns_preference_wait_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/dns_preference_wait_test.go)、[control/dns_lru_e2e_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/dns_lru_e2e_test.go)、[control/dns_control_cache_cleanup_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/dns_control_cache_cleanup_test.go)：更新为原子字段访问方式，保证测试构造与运行时实现一致
 
 本轮最终验证：
 
@@ -299,7 +299,7 @@ go test -race ./control/... ./component/dns/... ./component/outbound/... ./confi
 
 本次继续完成：
 
-- 新增 [control/dns_runtime.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/dns_runtime.go)，把原先散落在 `ControlPlane` 根对象上的 DNS orchestration 状态正式收拢为 `controlPlaneDNSRuntime`：
+- 新增 [control/dns_runtime.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/dns_runtime.go)，把原先散落在 `ControlPlane` 根对象上的 DNS orchestration 状态正式收拢为 `controlPlaneDNSRuntime`：
   - `dnsController`
   - `dnsRouting`
   - `dnsFixedDomainTtl`
@@ -307,7 +307,7 @@ go test -race ./control/... ./component/dns/... ./component/outbound/... ./confi
   - prepared start/reuse hook
   - upstream ready/available channel 与 once
   - deferred DNS listener start 状态
-- 在 [control/control_plane.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/control_plane.go) 中把以下 DNS 生命周期方法改为委托到 runtime：
+- 在 [control/control_plane.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/control_plane.go) 中把以下 DNS 生命周期方法改为委托到 runtime：
   - `CloneDnsCache`
   - `ActiveDnsController`
   - `DetachDnsController`
@@ -325,7 +325,7 @@ go test -race ./control/... ./component/dns/... ./component/outbound/... ./confi
 
 本次同步调整的测试：
 
-- [control/control_plane_drain_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/control_plane_drain_test.go)：更新为显式构造 `controlPlaneDNSRuntime`，固定 DNS listener/controller handoff 与 prepared start/reuse hook 的新 owner 边界
+- [control/control_plane_drain_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/control_plane_drain_test.go)：更新为显式构造 `controlPlaneDNSRuntime`，固定 DNS listener/controller handoff 与 prepared start/reuse hook 的新 owner 边界
 
 本轮验证：
 
@@ -344,16 +344,16 @@ go test -race ./control/... ./component/dns/... ./component/outbound/... ./confi
 
 本次继续完成：
 
-- 新增 [config/decode.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/config/decode.go)，把 `Config.New()` 根部的 section 分发从“反射遍历整个 `Config` 结构体”改成显式 decoder registry：
+- 新增 [config/decode.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/config/decode.go)，把 `Config.New()` 根部的 section 分发从“反射遍历整个 `Config` 结构体”改成显式 decoder registry：
   - `global`
   - `subscription`
   - `node`
   - `group`
   - `routing`
   - `dns`
-- 在 [config/config.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/config/config.go) 中把根部必选 section 校验和 parse 顺序显式化，让后续逐节替换反射 parser 时，不再需要先动 `Config.New()` 的主控制流
+- 在 [config/config.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/config/config.go) 中把根部必选 section 校验和 parse 顺序显式化，让后续逐节替换反射 parser 时，不再需要先动 `Config.New()` 的主控制流
 - 保留现有 section 级 `SectionParser` / `ParamParser` 行为，因此这一步只是在根入口收紧边界，不改 DSL 语义
-- 新增 [config/decode_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/config/decode_test.go)，固定显式 section decoder 分发路径和 unknown section 错误边界
+- 新增 [config/decode_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/config/decode_test.go)，固定显式 section decoder 分发路径和 unknown section 错误边界
 
 本轮验证：
 
@@ -372,18 +372,18 @@ go test -race ./control/... ./component/dns/... ./component/outbound/... ./confi
 
 本次继续完成：
 
-- 新增 [control/generation_state.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/generation_state.go)，把 `ControlPlane` 中明显属于 generation 生命周期的状态收口为 `controlPlaneGenerationState`：
+- 新增 [control/generation_state.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/generation_state.go)，把 `ControlPlane` 中明显属于 generation 生命周期的状态收口为 `controlPlaneGenerationState`：
   - `outbounds`
   - `referencedOutbounds`
   - `dialMode`
   - `routingMatcher`
   - `bootstrapResolvers`
-- 新增 [control/datapath_janitor.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/datapath_janitor.go)，把 datapath janitor 的 owner 状态收口为 `controlPlaneDatapathJanitor`：
+- 新增 [control/datapath_janitor.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/datapath_janitor.go)，把 datapath janitor 的 owner 状态收口为 `controlPlaneDatapathJanitor`：
   - stop/done/once/started 状态
   - cleanup mutex
   - janitor scratch buffers
-- 在 [control/control_plane.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/control_plane.go) 中将上述状态改为内部对象持有，并让 `releaseRetainedState()`、scratch 获取与初始化路径统一委托到新 owner
-- 更新 [control/control_plane_drain_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/control_plane_drain_test.go)、[control/control_plane_janitor_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/control_plane_janitor_test.go)、[control/control_plane_real_domain_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/control_plane_real_domain_test.go)、[control/dscp_routing_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/dscp_routing_test.go)、[control/mac_routing_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/mac_routing_test.go)、[control/metadata_routing_chain_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/metadata_routing_chain_test.go)、[control/dial_family_fallback_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/dial_family_fallback_test.go)、[control/udp_reuse_simulation_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/udp_reuse_simulation_test.go) 的构造方式，使测试显式体现新的 owner 边界
+- 在 [control/control_plane.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/control_plane.go) 中将上述状态改为内部对象持有，并让 `releaseRetainedState()`、scratch 获取与初始化路径统一委托到新 owner
+- 更新 [control/control_plane_drain_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/control_plane_drain_test.go)、[control/control_plane_janitor_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/control_plane_janitor_test.go)、[control/control_plane_real_domain_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/control_plane_real_domain_test.go)、[control/dscp_routing_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/dscp_routing_test.go)、[control/mac_routing_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/mac_routing_test.go)、[control/metadata_routing_chain_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/metadata_routing_chain_test.go)、[control/dial_family_fallback_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/dial_family_fallback_test.go)、[control/udp_reuse_simulation_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/udp_reuse_simulation_test.go) 的构造方式，使测试显式体现新的 owner 边界
 
 本轮验证：
 
@@ -395,16 +395,16 @@ go test -race ./control/... ./component/dns/... ./component/outbound/... ./confi
 
 结论：
 
-- `ControlPlane` 已进一步从“所有 generation / datapath 状态都直接堆在根对象上”的形态，推进到“根对象组合 generation state、dns runtime、datapath janitor” 的形态。
+- `ControlPlane` 已进一步从“所有 generation / datapath 状态都直接堆在根对象上”的形态，推进到“根对象组合 generation state、dns runtime、datapath janitor”的形态。
 - 这一步仍然是所有权与生命周期边界重排，没有引入新的 datapath 清理语义；普通回归和 `-race` 回归均通过。
 
 ## 当前已落地的第九步
 
 本次继续完成：
 
-- 新增 [cmd/reload_manager.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/cmd/reload_manager.go)，把 `cmd/run.go` 中原先散落的 reload 排队、staged handoff、retirement、progress/pprof 刷新逻辑收口为 `reloadManager`
-- 新增 [cmd/runner.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/cmd/runner.go)，让入口层从“一个超大 `Run` 函数”转为 `Runner + ReloadManager` 的组合；[cmd/run.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/cmd/run.go) 现在只负责组装 `Runner` 并委托执行
-- 更新 [cmd/run_shutdown_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/cmd/run_shutdown_test.go) 的 reload manager 契约测试，固定：
+- 新增 [cmd/reload_manager.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/cmd/reload_manager.go)，把 `cmd/run.go` 中原先散落的 reload 排队、staged handoff、retirement、progress/pprof 刷新逻辑收口为 `reloadManager`
+- 新增 [cmd/runner.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/cmd/runner.go)，让入口层从“一个超大 `Run` 函数”转为 `Runner + ReloadManager` 的组合；[cmd/run.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/cmd/run.go) 现在只负责组装 `Runner` 并委托执行
+- 更新 [cmd/run_shutdown_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/cmd/run_shutdown_test.go) 的 reload manager 契约测试，固定：
   - shutdown handoff 会优先消费 pending staged handoff
   - queued reload request 只保留最新请求时间戳
 
@@ -425,17 +425,17 @@ go test -race ./cmd/... ./control/... ./component/dns/... ./component/outbound/.
 
 本次继续完成：
 
-- 新增 [component/routing/ir.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/component/routing/ir.go) 和 [component/routing/normalize.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/component/routing/normalize.go)，引入共享的 `routing.NormalizedProgram`
-- 新增 [component/dns/routing_program.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/component/dns/routing_program.go)，把 DNS request routing 的“优化 + internal selector split” 收口为 `NormalizedRequestRoutingProgram`
+- 新增 [component/routing/ir.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/component/routing/ir.go) 和 [component/routing/normalize.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/component/routing/normalize.go)，引入共享的 `routing.NormalizedProgram`
+- 新增 [component/dns/routing_program.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/component/dns/routing_program.go)，把 DNS request routing 的“优化 + internal selector split”收口为 `NormalizedRequestRoutingProgram`
 - 在以下 builder 中新增 `FromProgram` 入口，使 backend 从共享 program 降低，而不是各自直接解释 parser 规则：
-  - [component/dns/request_routing.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/component/dns/request_routing.go)
-  - [component/dns/response_routing.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/component/dns/response_routing.go)
-  - [control/routing_matcher_builder.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/routing_matcher_builder.go)
+  - [component/dns/request_routing.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/component/dns/request_routing.go)
+  - [component/dns/response_routing.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/component/dns/response_routing.go)
+  - [control/routing_matcher_builder.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/routing_matcher_builder.go)
 - 将以下调用点迁移到 program 入口：
-  - [component/dns/dns.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/component/dns/dns.go)
-  - [component/daedns/router.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/component/daedns/router.go)
-  - [control/control_plane.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/control_plane.go)
-- 新增 [component/routing/normalize_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/component/routing/normalize_test.go) 和 [component/dns/routing_program_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/component/dns/routing_program_test.go)，固定：
+  - [component/dns/dns.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/component/dns/dns.go)
+  - [component/daedns/router.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/component/daedns/router.go)
+  - [control/control_plane.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/control_plane.go)
+- 新增 [component/routing/normalize_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/component/routing/normalize_test.go) 和 [component/dns/routing_program_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/component/dns/routing_program_test.go)，固定：
   - program 构造会 clone 原始规则，不反向污染输入
   - request routing program 会稳定拆分 DNS / sub / node / subnode 规则
 
@@ -455,12 +455,12 @@ go test ./...
 
 本次继续完成：
 
-- 新增 [component/outbound/dialer/health_domain.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/component/outbound/dialer/health_domain.go)，引入显式 `HealthDomain` / `HealthKey` API，并在以下路径开始替代散落的硬编码 index：
-  - [component/outbound/dialer/connectivity_check.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/component/outbound/dialer/connectivity_check.go)：`NetworkType.Index()` 现在通过 `HealthKey` 归一化映射
-  - [component/outbound/dialer_group.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/component/outbound/dialer_group.go)：标准 selection network types 与 alive set 构建改为基于 `StandardHealthKeys()`
-- 新增 [component/outbound/dialer/recovery_state.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/component/outbound/dialer/recovery_state.go)，把 recovery/backoff/timer/punishment 状态机提为 `dialerRecoveryManager`
-- 在 [component/outbound/dialer/dialer.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/component/outbound/dialer/dialer.go) 中保留 `Dialer` 作为 facade，健康快照、restore、recovery trigger/cancel/backoff/stability 相关方法统一委托到 recovery manager
-- 新增 [component/outbound/dialer/health_domain_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/component/outbound/dialer/health_domain_test.go)，固定：
+- 新增 [component/outbound/dialer/health_domain.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/component/outbound/dialer/health_domain.go)，引入显式 `HealthDomain` / `HealthKey` API，并在以下路径开始替代散落的硬编码 index：
+  - [component/outbound/dialer/connectivity_check.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/component/outbound/dialer/connectivity_check.go)：`NetworkType.Index()` 现在通过 `HealthKey` 归一化映射
+  - [component/outbound/dialer_group.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/component/outbound/dialer_group.go)：标准 selection network types 与 alive set 构建改为基于 `StandardHealthKeys()`
+- 新增 [component/outbound/dialer/recovery_state.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/component/outbound/dialer/recovery_state.go)，把 recovery/backoff/timer/punishment 状态机提为 `dialerRecoveryManager`
+- 在 [component/outbound/dialer/dialer.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/component/outbound/dialer/dialer.go) 中保留 `Dialer` 作为 facade，健康快照、restore、recovery trigger/cancel/backoff/stability 相关方法统一委托到 recovery manager
+- 新增 [component/outbound/dialer/health_domain_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/component/outbound/dialer/health_domain_test.go)，固定：
   - TCP DNS 语义仍然映射到共享 TCP 健康域
   - canonical health keys 仍覆盖现有 6 个标准 collection
 
@@ -480,13 +480,13 @@ go test ./...
 
 本次根据未提交修改审阅结果补充修复：
 
-- 恢复 [config/config.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/config/config.go) 中 `FunctionOrStringToFunction` 与 `FunctionListOrStringToFunctionList` 的历史导出签名，避免破坏外部 API；新增 `ParseFunctionOrString` 与 `ParseFunctionListOrString` 供内部 error-return 调用链使用。
-- 为 [cmd/reload_manager.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/cmd/reload_manager.go) 中跨 goroutine 读写的 reload 状态加锁，包括 `reloadingErr`、pending staged handoff、pending retirement channel 与 reload 时间戳，并让 [cmd/run.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/cmd/run.go) 统一走 `finishReloadSuccess()` 清理成功路径。
-- 在 [control/dns_control.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/dns_control.go) 与 [control/dns_runtime.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/control/dns_runtime.go) 补充 DNS reload ownership model 注释，明确“独立 facade + 共享 store + handoff bridge”关系。
-- 调整 [component/dns/routing_program.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/component/dns/routing_program.go)，`NormalizedRequestRoutingProgram` 构造不再先创建再丢弃中间 program，而是一次优化后拆分 DNS / sub / node / subnode 规则。
+- 恢复 [config/config.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/config/config.go) 中 `FunctionOrStringToFunction` 与 `FunctionListOrStringToFunctionList` 的历史导出签名，避免破坏外部 API；新增 `ParseFunctionOrString` 与 `ParseFunctionListOrString` 供内部 error-return 调用链使用。
+- 为 [cmd/reload_manager.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/cmd/reload_manager.go) 中跨 goroutine 读写的 reload 状态加锁，包括 `reloadingErr`、pending staged handoff、pending retirement channel 与 reload 时间戳，并让 [cmd/run.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/cmd/run.go) 统一走 `finishReloadSuccess()` 清理成功路径。
+- 在 [control/dns_control.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/dns_control.go) 与 [control/dns_runtime.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/control/dns_runtime.go) 补充 DNS reload ownership model 注释，明确“独立 facade + 共享 store + handoff bridge”关系。
+- 调整 [component/dns/routing_program.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/component/dns/routing_program.go)，`NormalizedRequestRoutingProgram` 构造不再先创建再丢弃中间 program，而是一次优化后拆分 DNS / sub / node / subnode 规则。
 - 将 DNS controller 业务路径的 store 检查从静默创建空 store 改为显式断言，避免测试或手工构造 controller 时掩盖初始化错误；reload 兼容桥仍会显式初始化缺失 store。
-- 补充 [component/routing/normalize_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/component/routing/normalize_test.go) 的 `Lower` 边界测试，覆盖空规则、nil parser、fallback 错误传播。
-- 删除 [component/outbound/dialer/dialer.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/component/outbound/dialer/dialer.go) 中与 `triggerRecoveryDetection` 完全等价的 `triggerRecoveryDetectionInternal` 死代码。
+- 补充 [component/routing/normalize_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/component/routing/normalize_test.go) 的 `Lower` 边界测试，覆盖空规则、nil parser、fallback 错误传播。
+- 删除 [component/outbound/dialer/dialer.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/component/outbound/dialer/dialer.go) 中与 `triggerRecoveryDetection` 完全等价的 `triggerRecoveryDetectionInternal` 死代码。
 
 本轮验证：
 
@@ -506,10 +506,10 @@ make ebpf
 
 本次根据新增审阅点继续修复：
 
-- 为 [cmd/reload_manager.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/cmd/reload_manager.go) 的 `startControlPlaneRetirement` 补充单元测试，覆盖 retirement channel 发布、退休协程完成以及旧 generation cancel 调用。
-- 将 DNS 配置比较从 `reflect.DeepEqual` 改为稳定 fingerprint 比较，避免在 [cmd/reload_manager.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/cmd/reload_manager.go) 的 staged DNS reuse 判断中依赖反射深比较。
-- 调整 [component/dns/routing_program.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/component/dns/routing_program.go)，仅在无 optimizer 时执行 `DeepCloneRules`；有 optimizer 时直接使用 `ApplyRulesOptimizers` 内部 clone 结果，避免重复深拷贝。
-- 在 [component/outbound/dialer/health_domain.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/component/outbound/dialer/health_domain.go) 新增 `HealthKeyFromCollectionIndex`，并让 [component/outbound/dialer/dialer.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/component/outbound/dialer/dialer.go) 的 collection index 反查不再遍历 6 个标准 key。
+- 为 [cmd/reload_manager.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/cmd/reload_manager.go) 的 `startControlPlaneRetirement` 补充单元测试，覆盖 retirement channel 发布、退休协程完成以及旧 generation cancel 调用。
+- 将 DNS 配置比较从 `reflect.DeepEqual` 改为稳定 fingerprint 比较，避免在 [cmd/reload_manager.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/cmd/reload_manager.go) 的 staged DNS reuse 判断中依赖反射深比较。
+- 调整 [component/dns/routing_program.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/component/dns/routing_program.go)，仅在无 optimizer 时执行 `DeepCloneRules`；有 optimizer 时直接使用 `ApplyRulesOptimizers` 内部 clone 结果，避免重复深拷贝。
+- 在 [component/outbound/dialer/health_domain.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/component/outbound/dialer/health_domain.go) 新增 `HealthKeyFromCollectionIndex`，并让 [component/outbound/dialer/dialer.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/component/outbound/dialer/dialer.go) 的 collection index 反查不再遍历 6 个标准 key。
 
 本轮验证：
 
@@ -528,8 +528,8 @@ go test -race ./...
 
 本次根据新增审阅点继续修复：
 
-- 在 [cmd/reload_manager.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/cmd/reload_manager.go) 的 `dnsConfigFingerprint` 上补充维护注释，明确该函数必须与 `config.Dns` 顶层字段保持同步。
-- 在 [cmd/run_shutdown_test.go](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/cmd/run_shutdown_test.go) 新增 `TestDNSConfigFingerprintCoversAllDnsFields`，通过反射校验 `config.Dns` 顶层字段覆盖率。后续新增 DNS 配置字段但未更新 fingerprint 时，测试会失败。
+- 在 [cmd/reload_manager.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/cmd/reload_manager.go) 的 `dnsConfigFingerprint` 上补充维护注释，明确该函数必须与 `config.Dns` 顶层字段保持同步。
+- 在 [cmd/run_shutdown_test.go](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/cmd/run_shutdown_test.go) 新增 `TestDNSConfigFingerprintCoversAllDnsFields`，通过反射校验 `config.Dns` 顶层字段覆盖率。后续新增 DNS 配置字段但未更新 fingerprint 时，测试会失败。
 
 本轮验证：
 
@@ -547,4 +547,4 @@ go test -race ./...
 
 ---
 
-来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/zh/development/refactor-validation-plan.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。
+来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/zh/development/refactor-validation-plan.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。

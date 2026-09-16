@@ -1,9 +1,16 @@
 <div v-pre lang="en-US">
 
 <!-- quick-start-minimal-configuration:start -->
-# Minimal Configuration
+## Minimal Configuration
 
-Before using this example, set the network interfaces and subscription links. The `geoip` and `geosite` rules require their data files; see [Runtime dependencies](/dae/user-guide/build-by-yourself#runtime-dependencies).
+The smallest configuration that starts dae is:
+
+```shell
+global{}
+routing{}
+```
+
+This configuration leaves dae idle. For a small working configuration, use:
 
 ```shell
 global {
@@ -63,8 +70,8 @@ routing {
 }
 ```
 
-If you do not care about extreme speed but care more about privacy and DNS
-leakage, replace the `dns` part above with:
+If privacy and preventing DNS leaks matter more than maximum speed,
+replace the `dns` section above with:
 
 ```shell
 dns {
@@ -81,18 +88,7 @@ dns {
 }
 ```
 
-::: details Minimal bootable configuration
-
-This minimal bootable configuration leaves dae in a no-load state.
-
-```shell
-global{}
-routing{}
-```
-
-:::
-
-See more at [example.dae](https://github.com/daeuniverse/dae/blob/main/example.dae).
+For more options, see [example.dae](https://github.com/daeuniverse/dae/blob/main/example.dae).
 
 If you use PVE, refer to [#37](https://github.com/daeuniverse/dae/discussions/37).
 <!-- quick-start-minimal-configuration:end -->
@@ -101,4 +97,4 @@ If you use PVE, refer to [#37](https://github.com/daeuniverse/dae/discussions/37
 
 ---
 
-Source: [dae upstream](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/README.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).
+Source: [dae upstream](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/README.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).

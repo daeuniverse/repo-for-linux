@@ -1,6 +1,8 @@
 # Arch Linux / Manjaro <Badge type="info" text="社群維護" />
 
-套件來源不提供 Arch 套件。這些軟體來自 Arch 官方套件庫、[AUR](https://aur.archlinux.org) 與 [archlinuxcn](https://github.com/archlinuxcn/repo)，由各自的維護者打包，版本與[套件列表](/zh-TW/guide/packages)中的套件來源版本各自獨立。
+Dae Universe 套件來源不提供 Arch 套件。下列軟體來自 Arch 官方套件庫、[AUR](https://aur.archlinux.org) 與 [archlinuxcn](https://github.com/archlinuxcn/repo)。
+
+各來源的套件由各自的維護者打包，其版本與[套件列表](/zh-TW/guide/packages)中的版本各自獨立。
 
 | 軟體 | 來源 | 套件 |
 | --- | --- | --- |
@@ -12,9 +14,9 @@
 | daed | AUR、archlinuxcn | `daed`、`daed-avx2-bin`、`daed-git` |
 | v2ray-rules-dat | AUR、archlinuxcn | `v2ray-rules-dat` |
 
-以下指令統一使用 sudo，已進入 root shell 時去掉 `sudo`。
+官方套件庫與 archlinuxcn 的安裝命令使用 sudo；已進入 root shell 時，請移除命令中的 `sudo`。AUR 命令使用 yay 或 paru。
 
-## 1. 從官方套件庫安裝
+## 從官方套件庫安裝
 
 `dae` 與 `v2ray` 位於官方 `extra` 套件庫，不需 AUR 助手。
 
@@ -30,7 +32,7 @@ sudo pacman -S v2ray
 
 :::
 
-## 2. 從 AUR 安裝
+## 從 AUR 安裝
 
 其餘軟體由 AUR 助手建置。
 
@@ -94,7 +96,7 @@ paru -S v2ray-rules-dat
 
 :::
 
-## 3. 從 archlinuxcn 安裝
+## 從 archlinuxcn 安裝
 
 已啟用 archlinuxcn 時，這些套件直接從套件來源安裝，不需建置。archlinuxcn 沒有 juicity，也沒有穩定版 `dae`，該版本位於官方 `extra` 套件庫。
 

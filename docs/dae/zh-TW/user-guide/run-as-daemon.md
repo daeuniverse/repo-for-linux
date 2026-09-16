@@ -1,18 +1,18 @@
 ---
-title: "以服務執行"
+title: "作為服務執行"
 ---
 
 <div v-pre lang="zh-TW">
 
-# 以服務執行
+# 作為常駐程式執行
 
-本指南適用於使用 [systemd](https://wiki.debian.org/systemd) 的系統，說明如何啟動 dae 服務並設定開機自動啟動。
+在使用 [systemd](https://wiki.debian.org/systemd) 管理服務的發行版上，dae 可以作為常駐程式執行，並設定為開機自動啟動。
 
-## 必要條件
+## 前提條件
 
-### 選用的 Geo 資料檔案
+### 可選的 Geo 資料檔案
 
-為了更方便地進行流量分流，dae 仰賴下列資料來源：[geoip.dat](https://github.com/v2fly/geoip/releases/latest) 和 [geosite.dat](https://github.com/v2fly/domain-list-community/releases/latest)。
+為便於流量分流，dae 使用 [geoip.dat](https://github.com/v2fly/geoip/releases/latest) 和 [geosite.dat](https://github.com/v2fly/domain-list-community/releases/latest) 資料。
 
 ::: code-group
 
@@ -36,7 +36,7 @@ popd
 
 ### 設定檔
 
-> **注意**：建議將設定檔儲存在 `/etc/dae` 下
+> **注意**：建議將設定檔儲存在 `/etc/dae` 下。
 
 下載範例設定檔：
 
@@ -56,15 +56,13 @@ chmod 600 /etc/dae/config.dae
 
 :::
 
-啟動服務前，編輯 `/etc/dae/config.dae`，設定網路介面、訂閱或節點。請參閱[最小設定](/zh-TW/dae/start/minimal-configuration)。
+## 下載預編譯二進位檔案
 
-## 下載預先編譯的二進位檔
+釋出版本位於 <https://github.com/daeuniverse/dae/releases>。
 
-發行版本位於 <https://github.com/daeuniverse/dae/releases>
+> **注意**：如需體驗新功能，可使用夜間（最新）建置。新變更通常透過 PR 提出，GitHub Actions 建置工作流程會提供跨平臺可執行二進位檔案。新功能有時存在缺陷，使用者需自行承擔風險。測試最新建置有助於分析功能穩定性並修復潛在問題。
 
-> **注意**：如果你想體驗新功能，可以使用夜間（最新）建置。大多數時候，新提出的變更會包含在 `PRs` 中，並會在建置（GitHub Action Workflow Build）中匯出為跨平台可執行二進位檔。請注意，新引入的功能有時存在錯誤，風險由你自行承擔。不過，我們仍強烈鼓勵你查看最新建置，因為這可能有助於我們進一步分析功能穩定性並相應地解決潛在錯誤。
-
-夜間建置位於 <https://github.com/daeuniverse/dae/actions/workflows/build-nightly.yml>
+夜間建置位於 <https://github.com/daeuniverse/dae/actions/workflows/build-nightly.yml>。
 
 ::: code-group
 
@@ -80,8 +78,6 @@ install -Dm755 dae /usr/bin/
 
 :::
 
-### 檢查執行檔
-
 ```shell
 # helper
 dae --help
@@ -89,7 +85,7 @@ dae --help
 dae version
 ```
 
-## 設定
+## 安裝服務
 
 ::: code-group
 
@@ -104,8 +100,6 @@ curl -L -o /etc/systemd/system/dae.service https://github.com/daeuniverse/dae/ra
 ```
 
 :::
-
-### 啟動並啟用服務
 
 ::: code-group
 
@@ -123,11 +117,15 @@ systemctl status dae
 
 :::
 
-## 記憶體與透明大頁
+## 記憶體與 THP
 
-`GOMEMLIMIT` 依行程的 cgroup 上限推算，而非取自 unit 設定：只有 `memory.max` 會參與計算，推算出的軟性限制為該上限的 90%。隨附的 unit 已不再設定 `MemoryHigh`，因為執行階段無法將其視為上限。明確設定的 `GOMEMLIMIT` 環境變數一律優先。
+`GOMEMLIMIT` 根據行程的 cgroup 上限計算，而不是根據服務單元的設定計算。計算時僅使用 `memory.max`，軟限制為該上限的 90%。顯式設定的 `GOMEMLIMIT` 環境變數始終優先。
 
-若主機將透明大頁設為 `always`，即使 Go 堆積中仍在使用的記憶體未增加，核心也可能使 dae 的常駐記憶體用量增加。`disable_thp: true` 會透過 `prctl(PR_SET_THP_DISABLE)` 讓該行程停用透明大頁；預設值 `false` 則不改變核心的策略：
+隨附的服務單元已不再設定 `MemoryHigh`，因為執行期無法將其識別為記憶體上限。
+
+如果主機將 THP（transparent huge pages）設為 `always`，即使 Go 堆中的存活物件佔用沒有增加，核心也可能使 dae 的駐留記憶體增大。
+
+dae 在每次啟動、重新載入和復原時，都會以當前的 `disable_thp` 值為自身行程呼叫 `prctl(PR_SET_THP_DISABLE)`。`true` 傳入 1，為該行程停用 THP。預設值 `false` 傳入 0，清除該行程已有的 THP 停用狀態（包括從父行程繼承的），因此 dae 遵循系統級的 THP 設定。兩個值都不會修改 `/sys/kernel/mm/transparent_hugepage`：
 
 ```shell
 global {
@@ -149,10 +147,8 @@ journalctl -xefu dae
 
 :::
 
-完成[最小設定](/zh-TW/dae/start/minimal-configuration)後，請參閱[服務管理](/zh-TW/dae/start/service-management)，啟動 dae、設定開機啟動、重載或重新啟動服務。
-
 </div>
 
 ---
 
-來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/user-guide/run-as-daemon.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。
+來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/user-guide/run-as-daemon.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。

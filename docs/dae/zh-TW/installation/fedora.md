@@ -1,14 +1,15 @@
-# Fedora / RHEL
+### Fedora / RHEL
 
-適用於 Fedora 與 RHEL。
+#### Dae Universe RPM 套件庫
 
-以下指令要求目前使用者已設定 sudo。
+Fedora 和 RHEL 可使用 <https://daeuniverse.pages.dev> 提供的 Dae Universe 套件庫。
+以下命令假定已為當前帳戶設定 sudo。
 
-## 1. 新增套件來源
+##### 1. 新增 DNF 套件庫
 
 <!--@include: @/.vitepress/snippets/repositories/zh-TW/fedora-1.md-->
 
-## 2. 安裝 dae
+##### 2. 安裝 dae
 
 ::: code-group
 
@@ -22,12 +23,18 @@ dnf install dae
 
 :::
 
-:::: details 其他安裝方式：Fedora Copr
+套件包含 systemd 服務和範例檔案 `/etc/dae/example.dae`。
+將設定儲存為 `/etc/dae/config.dae`。
+完成[最小設定](/zh-TW/dae/start/minimal-configuration#最小設定)後，參見[服務管理](/zh-TW/dae/start/service-management#服務管理)。
 
 <div v-pre lang="zh-TW">
 
 <!-- installation-4:start -->
-僅適用於 Fedora，可替代上方的 Dae Universe 軟體源。[`zhullyb/v2rayA`](https://copr.fedorainfracloud.org/coprs/zhullyb/v2rayA/package/dae) 是 Copr 專案名稱，安裝的套件仍是 `dae`。
+#### Fedora Copr
+
+dae 已釋出於 [Fedora Copr](https://copr.fedorainfracloud.org/coprs/zhullyb/v2rayA/package/dae)。
+此方式僅適用於 Fedora，可替代 Dae Universe 套件庫。
+`zhullyb/v2rayA` 是 Copr 專案名，安裝的套件為 `dae`。
 
 ::: code-group
 
@@ -46,13 +53,6 @@ dnf install dae
 
 </div>
 
-::::
-
-套件包含 systemd 服務。設定範例位於 `/etc/dae/example.dae`，實際設定檔應儲存為 `/etc/dae/config.dae`。
-
-完成[最小設定](/zh-TW/dae/start/minimal-configuration)後，請參閱[服務管理](/zh-TW/dae/start/service-management)，啟動 dae、設定開機啟動、重載或重新啟動服務。
-
-
 ---
 
-來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/README.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。
+來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/README.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。

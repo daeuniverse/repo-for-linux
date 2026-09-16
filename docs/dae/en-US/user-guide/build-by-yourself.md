@@ -4,20 +4,18 @@ title: "Build from source"
 
 <div v-pre lang="en-US">
 
-# Build from source
+# Build Guide
 
 ## Build
 
-### Make Dependencies
+### Build Dependencies
 
-```text
+```shell
 clang >= 10
 llvm >= 10 (optional)
-golang >= 1.26.0
+golang >= 1.26
 make
 ```
-
-Toolchain requirements depend on the source revision. This snapshot uses Go 1.26.0; consult its [go.mod](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/go.mod) and [build workflow](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/.github/workflows/seed-build.yml).
 
 ### Compilation
 
@@ -26,8 +24,6 @@ git clone https://github.com/daeuniverse/dae.git
 cd dae
 git submodule update --init
 ```
-
-Choose one build method:
 
 ::: code-group
 
@@ -55,19 +51,20 @@ make CGO_ENABLED=0 GOARCH=mips
 
 :::
 
-### Trace support per architecture
+### Trace Support per Architecture
 
-`make` builds the optional `dae trace` eBPF program when the toolchain can
-generate it and records the result in `.build_tags` (`trace`, or empty when the
-build ran without it). **`arm`, `mips`, `mips64`, `mips64le`, `mipsle` and `s390x` do not
-get `dae trace`** (`TRACE_UNSUPPORTED_GOARCH` in the Makefile): for those the build
-prints a `WARNING`, produces a binary without the `trace` build tag and
-continues. For every other `GOARCH` a failed trace generation is an error, so a
-binary cannot lose `dae trace` silently.
+`make` builds the optional `dae trace` eBPF program when the toolchain supports
+it. The result is recorded in `.build_tags`: `trace` when built, or an empty
+file otherwise.
 
-The list is a measured claim, not an assumption, and it is re-verified by
-`./scripts/check-trace-arch-matrix.sh` in the BPF Test workflow. Reproduce it
-per architecture with:
+`arm`, `mips`, `mips64`, `mips64le`, `mipsle`, and `s390x` builds do not include
+`dae trace`; see `TRACE_UNSUPPORTED_GOARCH` in the Makefile. For these
+architectures, the build prints a `WARNING`, omits the `trace` build tag, and
+continues. For every other `GOARCH`, trace generation failure is an error, so
+a binary cannot silently lose `dae trace`.
+
+The BPF Test workflow verifies this list with
+`./scripts/check-trace-arch-matrix.sh`. Reproduce the failures per architecture with:
 
 ```shell
 git submodule update --init
@@ -75,19 +72,19 @@ GOARCH=mips BPF_CLANG=clang go generate ./trace/trace.go    # fails: no compiler
 GOARCH=mips64 BPF_CLANG=clang go generate ./trace/trace.go  # fails: unsupported target
 ```
 
-Do not remove an architecture from the list because
-`github.com/cilium/ebpf`'s `gen.FindTarget()` accepts it: target lookup and
-compilation are different steps, and `mips` passes the former while failing the
-latter (its `bpf_tracing.h` selects the mips `pt_regs` layout while the vendored
-`vmlinux.h` from the `dae_bpf_headers` submodule falls back to x86).
+Do not remove an architecture from the list just because
+`github.com/cilium/ebpf`'s `gen.FindTarget()` accepts it. Target lookup and
+compilation are separate steps: `mips` passes lookup but fails compilation.
+Its `bpf_tracing.h` selects the mips `pt_regs` layout, while the vendored
+`vmlinux.h` from the `dae_bpf_headers` submodule falls back to x86.
 
-`dae trace` itself needs a kernel >= 5.15; the rest of dae needs >= 5.17.
+`dae trace` requires kernel version 5.15 or later; the rest of dae requires 5.17 or later.
 
 ## Run
 
 ### Runtime Dependencies
 
-For traffic splitting, dae relies on the following data sources, [geoip.dat](https://github.com/v2fly/geoip/releases/latest) and [geosite.dat](https://github.com/v2fly/domain-list-community/releases/latest).
+For traffic splitting, dae relies on [geoip.dat](https://github.com/v2fly/geoip/releases/latest) and [geosite.dat](https://github.com/v2fly/domain-list-community/releases/latest).
 
 ::: code-group
 
@@ -111,7 +108,7 @@ popd
 
 ### Run
 
-Download the example config file:
+Download the example configuration:
 
 ```shell
 curl -L -o example.dae https://github.com/daeuniverse/dae/raw/main/example.dae
@@ -119,7 +116,7 @@ curl -L -o example.dae https://github.com/daeuniverse/dae/raw/main/example.dae
 
 See [example.dae](https://github.com/daeuniverse/dae/blob/main/example.dae).
 
-After fine tuning, run dae:
+After editing the configuration, run dae:
 
 ::: code-group
 
@@ -133,10 +130,10 @@ sudo ./dae run -c example.dae
 
 :::
 
-> **Note**: Alternatively, you may run dae as a daemon (systemd) service. Check out more details [HERE](/dae/user-guide/run-as-daemon).
+Alternatively, [run dae as a systemd service](/dae/user-guide/run-as-daemon).
 
 </div>
 
 ---
 
-Source: [dae upstream](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/user-guide/build-by-yourself.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).
+Source: [dae upstream](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/user-guide/build-by-yourself.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).

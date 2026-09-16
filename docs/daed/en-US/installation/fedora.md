@@ -1,10 +1,8 @@
 # Fedora / RHEL
 
-Install daed from the Dae Universe repository.
+Install daed from the Dae Universe repository on Fedora or RHEL.
 
-For Fedora and RHEL.
-
-The commands below assume sudo is configured for your account.
+Use the sudo tab if sudo is configured for your account. Use the root tab when already in a root shell.
 
 ## 1. Add the repository
 

@@ -4,16 +4,20 @@ title: "核心參數"
 
 <div v-pre lang="zh-TW">
 
-# 核心參數
+# 設定核心參數
 
 > **注意**
 > 如果 `global.auto_config_kernel_parameter` 為 `true`，將自動設定參數。
 
-如果你將 dae 設定為路由器或其他中介裝置，並將其繫結至 LAN 介面，則需要調整一些 Linux 核心參數，才能讓所有功能正常運作。預設情況下，最新的 Linux 發行版停用了 IP 轉送。當需要架設 Linux 路由器、閘道、VPN 伺服器，或只是一般撥號伺服器時，需要啟用轉送。此外，為了維持閘道位置並保持正確的下游路由表，應停用 `send-redirects`。請執行下列操作來調整 Linux 核心參數：
+將 dae 所在裝置作為路由器或其他中間裝置，並繫結 LAN 介面時，需要調整 Linux 核心參數。
 
-對於每個要代理的 LAN 介面：
+無論該選項是否開啟，dae 每次啟動都會修改以下主機參數：`net.ipv4.conf.all.rp_filter = 0`、`net.ipv4.conf.all.arp_filter = 0`，以及 `dae0` 上的 `rp_filter = 0`、`arp_filter = 0`、`accept_local = 1`、`disable_ipv6 = 0`、`forwarding = 1`。原因是從它的 `daens` 網路名稱空間注入的回覆會經 `dae0` veth 以遠端源位址重新進入主機。它還會在自己的 `daens` 名稱空間內（而非主機上）盡力啟用 `net.ipv4.tcp_early_demux` 和 `net.ipv4.ip_early_demux`。
 
-請將 `docker0` 修改為你的 LAN 介面。
+較新的 Linux 發行版預設停用 IP 轉送。搭建 Linux 路由器、閘道、VPN 伺服器或普通撥入伺服器時，需要啟用轉送。還應停用 `send_redirects`，以保持裝置的閘道角色及正確的下游路由表。
+
+## 1. 設定 LAN 介面
+
+對每個需要代理的 LAN 介面執行以下操作，將 `docker0` 替換為介面名稱：
 
 ::: code-group
 
@@ -41,7 +45,9 @@ sysctl --system
 
 :::
 
-亦建議啟用 IPv4 和 IPv6 轉送，以避免異常情況：
+## 2. 啟用全域轉送
+
+啟用全域 IPv4 和 IPv6 轉送，以避免異常情況：
 
 ::: code-group
 
@@ -63,9 +69,9 @@ sysctl --system
 
 :::
 
-對於接受 RA 的 WAN 介面：
+## 3. 設定 WAN 介面
 
-請將 `eth0` 修改為你的 WAN 介面。
+對於接受路由器通告（RA）的 WAN 介面，將 `eth0` 替換為介面名稱：
 
 ::: code-group
 
@@ -93,10 +99,10 @@ fi
 
 :::
 
-如果 `accept_ra` 為 1，請將其設定為 2，因為 `net.ipv6.conf.all.forwarding = 1` 會抑制它。更多資訊請參閱 <https://sysctl-explorer.net/net/ipv6/accept_ra/>。
+`net.ipv6.conf.all.forwarding = 1` 會抑制 `accept_ra = 1` 時的 RA 接收，因此需要將 `accept_ra` 從 `1` 改為 `2`。參閱 <https://sysctl-explorer.net/net/ipv6/accept_ra/>。
 
 </div>
 
 ---
 
-來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/user-guide/kernel-parameters.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。
+來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/user-guide/kernel-parameters.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。

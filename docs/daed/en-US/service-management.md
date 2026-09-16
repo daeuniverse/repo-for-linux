@@ -1,6 +1,8 @@
 # daed: service management
 
-The following applies to daed from the Dae Universe DEB/RPM repository. Its configuration directory is `/etc/daed/`. The unit declares a conflict with `dae.service`; choose one service. It has no reload action, so do not use `systemctl reload daed`.
+daed from the Dae Universe DEB/RPM repository uses `/etc/daed/` as its configuration directory.
+
+The systemd unit conflicts with `dae.service`; choose one service. It has no reload action, so do not use `systemctl reload daed`.
 
 Gentoo with the default `webui` USE flag also provides this systemd service.
 
@@ -64,7 +66,7 @@ systemctl restart daed
 
 Restart interrupts existing connections.
 
-## OpenRC（Gentoo）
+## OpenRC (Gentoo)
 
 Use these commands after completing the OpenRC prerequisites in the [Gentoo installation guide](./installation/gentoo). The init script defines no reload action.
 

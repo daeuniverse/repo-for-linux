@@ -1,6 +1,6 @@
 {
   "repository": "https://github.com/daeuniverse/dae",
-  "revision": "1ec85feddc721088ecdda73015bd78f652926b39",
+  "revision": "ed92f27457d952b60339e63772e64eaef91698f6",
   "license": "AGPL-3.0-only",
   "entries": [
     {
@@ -10,13 +10,18 @@
       "title": "Quick start",
       "source": "docs/en/README.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "894942967b463088e69dfce78d63ca67a5e4306d526c47f0912ec1e2816622bb",
+      "sourceSha256": "9f172f1dc6c39e96f8006a46ceda1210ae94f000baa092f2ac07654cd6815049",
       "fallback": false,
       "sourceCodeSha256": [
         "ef7119500f7264ee01b81c818bed3bfe2ecc0b60dff94fe08a17cabcd16d86e4",
         "1893ef9df7b4b79e714160527ae93a91780df2f093020983cf8411832d4f8d02",
         "ac888a974192d1f59dad73c6f36d42400be1506b4c4750763588052e4603b1f8",
-        "3f8f8041f5b53313a372ec90e3dd46be4227b3219dac4f3887766d86fe570781",
+        "bdaf82dbd6504bfbba7fb3f4a8b532ac6eb577e580952296b16b51ebf839f777",
+        "06c1f724ad2151b2d67b875b24a74cd18cdcc62039cfabe247a31432bb485a3b",
+        "1d67c39ffaf86238b987d9c9777107449cefb21868ce4314c2031d71ef965e3d",
+        "e2942f9616bf87f1e0177862d774746e2098479870e2a2f210b4e8782afe8d47",
+        "69f2211cc73c90002d0c743f248c30030f1d36ffdea58ed68fd1dfdc291fc2c1",
+        "37982724fa7fde7dea6cbe605cc31d61d70a9c7e06b1df5181ca04d66291fdba",
         "4e3ae38f707bcb31d1c42219336fe04b5f2e0f8b49cd63e1e7380fbef05f6412",
         "cac3533957fbb9837a6b44ab4c4eebaa38683558a82c5d48dcc884664f152560",
         "edb3e1462acad57fb365fa91c619893443cfe7f983069207691c2be29eb51df2",
@@ -24,23 +29,34 @@
         "117141b77375ddd910d954fb82b5f3cb4b8e69a3e92357476e2de7311b3eb005",
         "f59849fb8eefbea7d22ef8dcd725da8be8548590f792506f1a631771bba5827c",
         "1a84a4bb7dbef4b07475c44d9dff719fd0fc6161c10611613fc14f3ebbcfcfa5",
+        "0133aad665391d67ba7ac2c1b151e3b79029a33dfc8d49296451c78f96a5bd45",
+        "7ed5dccb74fc42ae4916009dce046167d83b1122748fb1453ebbc5b5813cba97",
         "dccf2b51a5c34362868c4368afa3fbfe308af7117532e220f2b37fe2a90cc028",
-        "3cdcfd566c8e2b402d3f52d64135a1a3f77595221d75f33734743ce87e320602",
+        "14d4c8e503ff63e8cdda0059a834b073d945f039fff86ba5c28730c55cc7df13",
+        "c580fdedf3a3395d83c47d945e2beb5b78b249dcbc32bdd5023b00b0aa5591b5",
+        "a406ee75bdac1120c03689c8bdb7347591a4377d9bbcc166723c042149db2296",
+        "28eebfe4c3ba8e8ff72c8c2944f3e360e0f16577c75abbadf14d668e26688243",
+        "64c3d41e4696242b5d727f0615a6fb5a648d1eb531a35e729c3cad011475e9af",
+        "ae6b51547ab8fcfe7e8c76061c9e8407328b5b7f8fb5d4b4fa86bd9225a67df1",
+        "bc3a36d326007c12d5fdaa59ef941d77f074a7ba38753689a58b99c790c8f6f1",
+        "6d77e72a1b29dc18667b6f3fe8a5a41b73500722d6c56f9cd3f06836b3e5de6a",
+        "448ff79c779e4ee544cfda3c8662d9d045a1f074a3a6927225601f7d7d324ce4",
+        "f052833db8a897cc4b30a4eccb72d4815808561509f13a23f3881c8f766a1cfe",
         "f8f7c40924ae70ceb90a5c2b902aa1b3c5a3205813edb638d14ee31b551205a9",
         "e6edeccfd4e61492e5b4e83e479dad7eeb470ae5a7049e03e5c4976bf6655ca7",
         "4db8fae5aa614ac763dd5ee29095a6a37dfc3061820a80a9bd6c913f4f4f076d"
       ],
-      "sourceHeadingCount": 30,
+      "sourceHeadingCount": 53,
       "contentParts": [
         {
           "path": "dae/en-US/installation/arch.md",
           "marker": "installation-0",
-          "sha256": "9ed860b4dbb708d8bf91bbe73a64933424ab76b16331cb0f42e83875244d5d1a"
+          "sha256": "d8b17f9989d7bf88c92afb9a8782eb6e42af333a50085ca64894c79a5546c770"
         },
         {
           "path": "dae/en-US/installation/docker.md",
           "marker": "installation-1",
-          "sha256": "5135ab262e6a9f897ce592498f3594546d8f0fa5f5f64dcd5f73d58c0526c881",
+          "sha256": "e28d2931ef4f672804bc3cd2298d5e1e5a5d4a8793331bac7d78b1e088b25caf",
           "codeReplacements": [
             {
               "originalSha256": "3cdcfd566c8e2b402d3f52d64135a1a3f77595221d75f33734743ce87e320602",
@@ -55,27 +71,27 @@
         {
           "path": "dae/en-US/installation/manual-installation.md",
           "marker": "installation-2",
-          "sha256": "f141d3ad5c5821350351aa75d96540d1daf05d2187df8cedb61d3437bc02277d"
+          "sha256": "60257b0aa0bd68b27082027bf3c620e1dc386ce992e680d442f2eb0062d9eba5"
         },
         {
           "path": "dae/en-US/installation/fedora.md",
           "marker": "installation-4",
-          "sha256": "df6c7998aec3cf4da69bae2c14c22e1245e58122051c935a577c5137edeb278c"
+          "sha256": "b195544d7731c40bcc3ce2ea5e89f7e8ffb8bc0f58f0c94350feb6b18811f7ed"
         },
         {
           "path": "dae/en-US/installation/index.md",
           "marker": "installation-5",
-          "sha256": "9368e63582f96ec3f83091e7ef50125ea610c199b127565de795d8ec6f9b9edc"
+          "sha256": "ca79449c78b422e2bb3a6c0705ad1c42403c2a70d38e9c4ac8c9326d59bd0933"
         },
         {
           "path": "dae/en-US/installation/index.md",
           "marker": "installation-6",
-          "sha256": "7bd43d29dbce2815d5a83dc890c588946476d47f2bc13b3beba15491b80cf179"
+          "sha256": "fefb2234673afc36baa71d2b1173863e141029a6f3dd53f8c085fab8bebe0d4d"
         },
         {
           "path": "dae/en-US/start/requirements.md",
           "marker": "quick-start-requirements",
-          "sha256": "e647c06304eeca8d0b9f50a324790c779dce433019e1ce2aa09a3208b1b80b58",
+          "sha256": "6e1287cb7801200dae3bd8175a242b30a993feeb90f25be3f3bae9b5c4c5588f",
           "additionalCodeSha256": [
             "d59c3c91aa8c19ff0fd08dacba6679638e32d426b66681fedfebc2ed864fa1a6"
           ],
@@ -93,17 +109,17 @@
         {
           "path": "dae/en-US/start/minimal-configuration.md",
           "marker": "quick-start-minimal-configuration",
-          "sha256": "4aea3fda949bf7006c6e6d44284dd435f0d431d099b1c222ae62d8f994f69ccc"
+          "sha256": "bc74c22a9abf1d1fea9ab83c159f688b5564bda3d3e7b73a1087c784ca087efc"
         },
         {
           "path": "dae/en-US/start/pppoe.md",
           "marker": "quick-start-pppoe",
-          "sha256": "0ae44baafd8bf9a933f38d40122ccb64e2474e65449a660270919e544cff7e88"
+          "sha256": "a3d669c59acc57abfdb551bb87361926dc58fd8efc19bff4689f18af12c59160"
         },
         {
           "path": "dae/en-US/start/service-management.md",
           "marker": "shared-service-actions",
-          "sha256": "e8e2b8dde68a0c83dbab3c0f540d50f07b741003b3b8edb0078b07a8a034454f",
+          "sha256": "f5e2ce2e6f84f0cbb7e726184652b038b29cb81431dd14ba37b7412e277c19a0",
           "codeReplacements": [
             {
               "originalSha256": "f59849fb8eefbea7d22ef8dcd725da8be8548590f792506f1a631771bba5827c",
@@ -143,6 +159,112 @@
             "1a84a4bb7dbef4b07475c44d9dff719fd0fc6161c10611613fc14f3ebbcfcfa5"
           ],
           "reason": "Covered by the complete Gentoo installation guide."
+        },
+        {
+          "replacement": "dae/en-US/installation/debian.md",
+          "originalCodeSha256": [
+            "06c1f724ad2151b2d67b875b24a74cd18cdcc62039cfabe247a31432bb485a3b",
+            "1d67c39ffaf86238b987d9c9777107449cefb21868ce4314c2031d71ef965e3d",
+            "e2942f9616bf87f1e0177862d774746e2098479870e2a2f210b4e8782afe8d47",
+            "69f2211cc73c90002d0c743f248c30030f1d36ffdea58ed68fd1dfdc291fc2c1",
+            "37982724fa7fde7dea6cbe605cc31d61d70a9c7e06b1df5181ca04d66291fdba"
+          ],
+          "sha256": [
+            "005d1ea2482b1e049083f5ff6c078b1eb443066d5b9eb715b0d4f37aeff28eb3",
+            "1f987d89387f1a6fed6874ea06a51476004b108494622d5cf6cfdd8cbb859dd4",
+            "3157e948c0419bc3a4ef0715d1fb07e569de9a428fb370e14837a1b84ae2d4b8",
+            "5050a6a1b699985e757b629423470eb12926ea0fd95d810afd23f0e0c73398aa",
+            "5174615e9c72e23bd7f07a21f5256043004dc75c10a632bb60a5a3d907fd4bf5",
+            "6e88235d991ed09617556a43f5fc73c13df9e84bef879d00ebc7c108d44c9d3c",
+            "70de1dd5f1548f62fb26a66cbca75d7107c89acc71bf58b17ac548e8add38f4e",
+            "7a4894ea099cc5bbfa63d8fe0a91fd34391e9e6839b5c6e2c272e1c270f8cea6",
+            "95ad378583312e4fe63858e71731955e51b1f99a73525d54b6482bd1a637efdc",
+            "be689435e6e6448f003532d0d437f15b054c75e6451cc699731a12d0c8a10246"
+          ],
+          "reason": "Covered by the debian installation page; commands identical apart from sudo and root tabs."
+        },
+        {
+          "replacement": "dae/en-US/installation/fedora.md",
+          "originalCodeSha256": [
+            "0133aad665391d67ba7ac2c1b151e3b79029a33dfc8d49296451c78f96a5bd45",
+            "7ed5dccb74fc42ae4916009dce046167d83b1122748fb1453ebbc5b5813cba97"
+          ],
+          "sha256": [
+            "02e36df4c860146cec659c998fb28b70a577f5a255b3d2ef80def440dd11c39d",
+            "32a7be21949f9b92d00c0bd3b000ab4239752c5a0b20e69c5fd4e498561dc0b7",
+            "ea6fb6895bedf0877fc2cf5b1dd1ef3275eb0a429568c61bd0087f2da3ba6e36",
+            "f86afc3179210918d40602dffcac3401ce9bae597ce3b6df0698f009ba5a7048"
+          ],
+          "reason": "Covered by the fedora installation page; commands identical apart from sudo and root tabs."
+        },
+        {
+          "replacement": "dae/en-US/installation/opensuse.md",
+          "originalCodeSha256": [
+            "14d4c8e503ff63e8cdda0059a834b073d945f039fff86ba5c28730c55cc7df13",
+            "c580fdedf3a3395d83c47d945e2beb5b78b249dcbc32bdd5023b00b0aa5591b5"
+          ],
+          "sha256": [
+            "4ba6eff2c37f01bdf8279141469728030454ec56a0538ac43f224fa96190b2e0",
+            "531463ab4d54979280ed2d2d3f9c533e7f3c1ba299fdeb27f7c7a89c958e48d5",
+            "b9c059f5f98e5ce589196b9b93331aa1b8852ca6ec4fa3af71a2ba181bad6543",
+            "ebc1318ca27cba13b60bc213d01230b3a36e05819ab01487d95cf94db9ca0a76"
+          ],
+          "reason": "Covered by the opensuse installation page; commands identical apart from sudo and root tabs."
+        },
+        {
+          "replacement": "dae/en-US/installation/nix.md",
+          "originalCodeSha256": [
+            "a406ee75bdac1120c03689c8bdb7347591a4377d9bbcc166723c042149db2296",
+            "28eebfe4c3ba8e8ff72c8c2944f3e360e0f16577c75abbadf14d668e26688243",
+            "64c3d41e4696242b5d727f0615a6fb5a648d1eb531a35e729c3cad011475e9af",
+            "ae6b51547ab8fcfe7e8c76061c9e8407328b5b7f8fb5d4b4fa86bd9225a67df1",
+            "bc3a36d326007c12d5fdaa59ef941d77f074a7ba38753689a58b99c790c8f6f1",
+            "6d77e72a1b29dc18667b6f3fe8a5a41b73500722d6c56f9cd3f06836b3e5de6a",
+            "448ff79c779e4ee544cfda3c8662d9d045a1f074a3a6927225601f7d7d324ce4"
+          ],
+          "sha256": [
+            "202243e9ee428e360acbc8ef9b05b5b839e91fa912588da8414fdf0006f0e2bc",
+            "28eebfe4c3ba8e8ff72c8c2944f3e360e0f16577c75abbadf14d668e26688243",
+            "448ff79c779e4ee544cfda3c8662d9d045a1f074a3a6927225601f7d7d324ce4",
+            "470a6cfcede16163a0006f7c7fdd63b9c22f89b12a39459198b330cc4daf275f",
+            "64c3d41e4696242b5d727f0615a6fb5a648d1eb531a35e729c3cad011475e9af",
+            "6d77e72a1b29dc18667b6f3fe8a5a41b73500722d6c56f9cd3f06836b3e5de6a",
+            "a406ee75bdac1120c03689c8bdb7347591a4377d9bbcc166723c042149db2296",
+            "bc3a36d326007c12d5fdaa59ef941d77f074a7ba38753689a58b99c790c8f6f1"
+          ],
+          "reason": "Covered by the nix installation page; commands identical apart from sudo and root tabs."
+        }
+      ],
+      "codeReplacements": [
+        {
+          "originalSha256": "f052833db8a897cc4b30a4eccb72d4815808561509f13a23f3881c8f766a1cfe",
+          "sha256": [
+            "3c21a04389ea9285e91e6df5320f30ec5044f0c3afcbf3c37f5481e69901c9e6",
+            "9df4f4ecb25081b3c61fba3fc936cc8f183c49217ab1661f4868988210d48bb6"
+          ],
+          "reason": "Split the clone and the compose step; sudo and root tabs."
+        },
+        {
+          "originalSha256": "ac888a974192d1f59dad73c6f36d42400be1506b4c4750763588052e4603b1f8",
+          "sha256": [
+            "b05e6d6043c57d7c36083382300b9258fc0c296a6dad6015812261c4e3f4a852"
+          ],
+          "reason": "Same kernel configuration check written one pattern per line."
+        },
+        {
+          "originalSha256": "bdaf82dbd6504bfbba7fb3f4a8b532ac6eb577e580952296b16b51ebf839f777",
+          "sha256": [
+            "2dbc20fc984941cb0901a7308a7bc9f5aa47c794733fbe28b8cabcd3f6a9a8cb"
+          ],
+          "reason": "Same kernel configuration check written one pattern per line."
+        },
+        {
+          "originalSha256": "f59849fb8eefbea7d22ef8dcd725da8be8548590f792506f1a631771bba5827c",
+          "sha256": [
+            "0db59616a5fc6ffa37fb436c47de68b3c954cbf1dc760d5323af1901dc7c5a29",
+            "55b73f3a7d6b58f1e538f0fa9d2609c0eab3489a8bae76542ea90b564210f048"
+          ],
+          "reason": "Start and enable are separate steps in the shared service guide."
         }
       ]
     },
@@ -153,7 +275,7 @@
       "title": "DNS",
       "source": "docs/en/configuration/dns.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "a463bf9c19dbe1e73efd3473a44dc0e6e1b30db5c5624904856e5d5d3fcf4d26",
+      "sourceSha256": "b355044f1b08fc1f38eebf0f7f3175c0755f34e76812008c20e3e43141ac5136",
       "fallback": false,
       "sourceCodeSha256": [
         "4388f7c58486b9dd0dc5333354861141830d735c8ab675e4a531da8891bc7fc6",
@@ -163,12 +285,12 @@
         "82d0c430cdd0ebcfc81f4e25ea15bea59041a15e37398d23567cb7d41fcdc7d5",
         "2261d3645cef9e640f94b8020ac019f1f7577cdcd9d22f98f2b7c7ef1963c68c",
         "e13397201c7c4ff5f2f06e16dbeb6edfa18500f7f300aae591c2e2c675535af6",
-        "ee401a815fa4273e809e57dd9abf555e78372a1b67700a8774751a6fdb1e155d",
+        "6cdfe526ab8568596d589d12865084d20655f433ff3af3b4b9c54a3d70651c6d",
         "02b07d586ff7455903c96bb1ec1004d5c113d698a301e7f05bf4522beeabb225",
         "c0c2c1f62e2b1b1195f32766cf0edb5eaee68aa920c95a1d759fd393c2a57fde",
         "9a64c1827dc2f48f478ebadf72c36d07ea153deb42d759b8b6eac9ebf4feb635"
       ],
-      "sourceHeadingCount": 7,
+      "sourceHeadingCount": 14,
       "codeReplacements": [
         {
           "originalSha256": "c0c2c1f62e2b1b1195f32766cf0edb5eaee68aa920c95a1d759fd393c2a57fde",
@@ -193,7 +315,7 @@
       "title": "External DNS",
       "source": "docs/en/configuration/external-dns.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "e68b8f0c0d54f96cb6452714ba2f11e36f821acd2bff28a4e4b87fffa3a195e5",
+      "sourceSha256": "69c14f9046a99d9e32e7cf2eb1bd7f4831cfaca803a5740de297083c54ef2a99",
       "fallback": false,
       "sourceCodeSha256": [
         "9e08f79b14dc5f44d94526d71bca829abda9b33c5a9ee5f0b442ae6023092823",
@@ -216,14 +338,14 @@
       "title": "Gaming-oriented routing",
       "source": "docs/en/configuration/gaming-oriented-routing.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "34d6c7736eeb3284258ebaa6b28c8abf8db20fff044fbe55e574008d52b16cf0",
+      "sourceSha256": "e1265a3884069283624f6a25c84610721b2457dfba201c95bbdb9e045e808044",
       "fallback": false,
       "sourceCodeSha256": [
         "9c22e26ad0ab6869433dd045c520742ceeba6f7e77ac1dff0e60d7f3cf2fd908",
         "3fd5527cfe03b971e2422bc3f96737a1e2ea63a0eef9cf6122b992dc10d6e055",
         "4e23a38cbfe8ec841440cafc3ccb3a662faec1b341e751dabd45269396a42f4e"
       ],
-      "sourceHeadingCount": 0
+      "sourceHeadingCount": 4
     },
     {
       "locale": "en-US",
@@ -232,41 +354,33 @@
       "title": "Routing",
       "source": "docs/en/configuration/routing.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "c37a8f1b581c64e7e3d5f274e8e14b7cf307de6d7d01a111ac97fe7585c3502b",
+      "sourceSha256": "e0d55a69c23b1ef2651d2a0f849d53767e66e9843f7d5746db9135f39d9d8005",
       "fallback": false,
       "sourceCodeSha256": [
-        "9ea3b8a63a868e89c56b54ba803f94208ac52d1b4013079c0dd798241338b7a0",
-        "0e4446bbb2d99d583428d2a5c0efc725ea241eb6f553a18aea18ca20f2a11324"
+        "c2fb742030963aa00bdfa151eb6d001302636cb2e8769de1a3307e8a7edc4c03",
+        "4503f3aa0d56a0fd2ba4afb1e9c71f8f3f4a4e124af1dff025aa948a55e93814",
+        "9df650f45b0ab812165de69d492368bc25ab59397a61e7d8fce29aed825f707a",
+        "37340473726632d7687d4bb4961c0f253712d8997390c76095a3c9a0f9f71aca",
+        "9abcdcafc57dd2d1f1ddeeae5dc703d559c577dfcc57467a61f0be67c0af7658",
+        "2930e37ac784e471700b8e6975d7f79b8feb90fd398b9807d01784a3a39c3e6d",
+        "5d073aaa104806f8d759e55aef4a90be473f52ea0d311240a11501b6b0ab9955",
+        "d91dafd1aeb49f468d0342bada96bad7da5b8ede1669e491979f5c6c0132da9d",
+        "8e7042a44cf9ce60d2f6e74ad807b9ad064eca1eec99a7eeee659374d4d5fcd4",
+        "ef4fdfa7a2baaa151bfd46b33caa638c66b2d7c51af73b80ffbe7b8aa76aaab5",
+        "e4e830168062f9dc13f074a78b006e1365ebd1be4663ec37b21121cd062a818a",
+        "79b422138c425cbfe7c86bb7bc87d27d7eb06fe1c63b08e80e331642bce5acd1",
+        "fb782f2e1eb0b99e9d8da667394e906b5c6aadc77d5d9a3a02698229284db928",
+        "ca0a6520c69dbf5f2998e58088a6b55bb84c2b040567073fb9c368585147ad46",
+        "ba08b87e3a526961243bbc879a26816bda6c4e81fddca796506b4b22c7be471f",
+        "38bbda32ef1357f32fda204eb58254747d47cf473ad8dfeff27d2d31e6ba077b",
+        "dd56e6d303a446149930f51d0bb4930178acf3238d8f56b75bd909bc49b90dd0",
+        "e8c82a4da10c1725e8fa0410e0e71c1657b508cee80977a12b0d05b77951cfc9",
+        "b6b2b60d7f5531f71b386010ba35f6db4baaf68577708ff3bcad0bf5be32b641",
+        "85c8411f4746f58436bc6ee18cbc1a555b3931ee24e6c251c178d24b21a074c2",
+        "0e4446bbb2d99d583428d2a5c0efc725ea241eb6f553a18aea18ca20f2a11324",
+        "a46c2700eace32a2d2e22433b3f52d4e2915f5128a6031b70b456fc2997c84f6"
       ],
-      "sourceHeadingCount": 45,
-      "codeReplacements": [
-        {
-          "originalSha256": "9ea3b8a63a868e89c56b54ba803f94208ac52d1b4013079c0dd798241338b7a0",
-          "sha256": [
-            "c2fb742030963aa00bdfa151eb6d001302636cb2e8769de1a3307e8a7edc4c03",
-            "4503f3aa0d56a0fd2ba4afb1e9c71f8f3f4a4e124af1dff025aa948a55e93814",
-            "9df650f45b0ab812165de69d492368bc25ab59397a61e7d8fce29aed825f707a",
-            "37340473726632d7687d4bb4961c0f253712d8997390c76095a3c9a0f9f71aca",
-            "9abcdcafc57dd2d1f1ddeeae5dc703d559c577dfcc57467a61f0be67c0af7658",
-            "2930e37ac784e471700b8e6975d7f79b8feb90fd398b9807d01784a3a39c3e6d",
-            "5d073aaa104806f8d759e55aef4a90be473f52ea0d311240a11501b6b0ab9955",
-            "d91dafd1aeb49f468d0342bada96bad7da5b8ede1669e491979f5c6c0132da9d",
-            "8e7042a44cf9ce60d2f6e74ad807b9ad064eca1eec99a7eeee659374d4d5fcd4",
-            "ef4fdfa7a2baaa151bfd46b33caa638c66b2d7c51af73b80ffbe7b8aa76aaab5",
-            "e4e830168062f9dc13f074a78b006e1365ebd1be4663ec37b21121cd062a818a",
-            "79b422138c425cbfe7c86bb7bc87d27d7eb06fe1c63b08e80e331642bce5acd1",
-            "fb782f2e1eb0b99e9d8da667394e906b5c6aadc77d5d9a3a02698229284db928",
-            "ca0a6520c69dbf5f2998e58088a6b55bb84c2b040567073fb9c368585147ad46",
-            "ba08b87e3a526961243bbc879a26816bda6c4e81fddca796506b4b22c7be471f",
-            "38bbda32ef1357f32fda204eb58254747d47cf473ad8dfeff27d2d31e6ba077b",
-            "dd56e6d303a446149930f51d0bb4930178acf3238d8f56b75bd909bc49b90dd0",
-            "e8c82a4da10c1725e8fa0410e0e71c1657b508cee80977a12b0d05b77951cfc9",
-            "b6b2b60d7f5531f71b386010ba35f6db4baaf68577708ff3bcad0bf5be32b641",
-            "85c8411f4746f58436bc6ee18cbc1a555b3931ee24e6c251c178d24b21a074c2"
-          ],
-          "reason": "Split the existing reference at its source comment headings; preserve every rule and comment."
-        }
-      ]
+      "sourceHeadingCount": 66
     },
     {
       "locale": "en-US",
@@ -275,7 +389,7 @@
       "title": "Split configuration files",
       "source": "docs/en/configuration/separate-config.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "e681cc3158f4d547ba7bd3b03eab807e1a8d419e34314b0d76f21ede5a0547ce",
+      "sourceSha256": "029e03a8bfab8716438f9a7f996c76007b80f77caad28507d11ac3632f010f35",
       "fallback": false,
       "sourceCodeSha256": [
         "b7907210caca622078bed5c63b884867b4858cb611bd1627b30f635e0b114ac4",
@@ -332,7 +446,7 @@
       "title": "Commit messages",
       "source": "docs/en/development/commit-msg-guide.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "988c9b74cc311bef3d273d472f2c7da27041227e21c8b2ac47c934f56b21e513",
+      "sourceSha256": "8082967f18f26fc0cde756d19872e647a2c38dedef487a81ae99316ab09dec0a",
       "fallback": false,
       "sourceCodeSha256": [
         "a91a66533505deee4fd8b7d3a95cf6936a3fa30707f2a0ab4ca494fc481122bd",
@@ -395,7 +509,7 @@
       "title": "How dae works",
       "source": "docs/en/how-it-works.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "f0e4e60fbdfaf5715e983e8259df1f59888ed61fa3cb3faec50b758e7fcef226",
+      "sourceSha256": "f1fb5e3ca0b22181d86ce9c43190d55533c5f842c6986598c29380b0f6879fa0",
       "fallback": false,
       "sourceCodeSha256": [],
       "sourceHeadingCount": 5
@@ -407,7 +521,7 @@
       "title": "Proxy protocols",
       "source": "docs/en/proxy-protocols.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "1f24ed8382dd80fa316427c3ca48459b5882c2894cfe4d24624dd508f71e4a49",
+      "sourceSha256": "2b59587f6af65c9dd00c62a9fc951dad59f35992e1ab35cacc516c1329ec5ccd",
       "fallback": false,
       "sourceCodeSha256": [
         "d1294d6478e2883a161db43b99f38b59034c63ed1e2fa38dea0901a15a86bc77",
@@ -416,7 +530,7 @@
         "2d6c175c8ce05bd0925de4a58d73f22f9eaf3abcbb9c7f4d5d007a5c8ac893b2",
         "5d3afdc0a642f12574eedd679f5fe9ecf9ed9e91f84a53d489b97e9a5120dc42"
       ],
-      "sourceHeadingCount": 4
+      "sourceHeadingCount": 9
     },
     {
       "locale": "en-US",
@@ -425,7 +539,7 @@
       "title": "Troubleshooting",
       "source": "docs/en/troubleshooting.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "c2bfa88d7833834dfa03448cef0aceea31906f4759d0342349aeb543f80511d3",
+      "sourceSha256": "849e3fb39d20cd9c79d52851967738afbaf40aa7cd83dac2ff878da75e892f85",
       "fallback": false,
       "sourceCodeSha256": [
         "fd6f001650af1cb2a66b53fc589335deb7fb7a509689d9682a73c892f0eca33d",
@@ -443,7 +557,7 @@
       "title": "OPNsense",
       "source": "docs/en/tutorials/dae-with-opnsense.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "28cf04a221ac7794c493f96a19cd1986bc04f2898010709ebf4084e877856c0d",
+      "sourceSha256": "2e5d3da291da38e8b2217bf5a1b562e358b4d7a430dcc18a242cff686d8bc261",
       "fallback": false,
       "sourceCodeSha256": [
         "bbed03136e29b6091dd0a39c26c80f7041ce82b4325b05c0b12de6521348ebab",
@@ -458,7 +572,7 @@
       "title": "Alpine Linux",
       "source": "docs/en/tutorials/run-on-alpine.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "c42577eb29503c226e18692054d70d15428b704bc9badbf139e81b8788ea8c88",
+      "sourceSha256": "0cefbbcb6f9624f428bd18eabee7aeb2069d77ed97949beb25bc43cf8ea7f5d0",
       "fallback": false,
       "sourceCodeSha256": [
         "8db29ba75767cf7c110565d66ca76011969121b567184934fc77a7fb78fe7b62",
@@ -522,7 +636,7 @@
         {
           "path": "dae/en-US/start/service-management.md",
           "marker": "shared-service-actions",
-          "sha256": "e8e2b8dde68a0c83dbab3c0f540d50f07b741003b3b8edb0078b07a8a034454f",
+          "sha256": "f5e2ce2e6f84f0cbb7e726184652b038b29cb81431dd14ba37b7412e277c19a0",
           "additionalCodeSha256": [
             "ffbcd35d8d142d7a0a73e9ff632a012ccdeb3c69d364f2d4dcf1e7b7294eda60",
             "e5605e93c76e8795b4242ea7581a032aae84e70157e3b8cdcb151f1e2eb12c2f",
@@ -551,12 +665,12 @@
       "title": "CentOS 7",
       "source": "docs/en/tutorials/run-on-centos7.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "e330c57c33a3f978cd37d922319a634fe12d5a21ad4027040c4874509f08f30b",
+      "sourceSha256": "305bf841d594aaf1f18f104d3fa774e4f15905a4d0401b30e19779dbabb0a98f",
       "fallback": false,
       "sourceCodeSha256": [
-        "2261090ccf2698f759d42deec9588a964bddb73acd0c7b9bb3b50499d27042d8",
-        "2a8d66272e4f512ffebe154c165052f4c3d65ff23aa09d66c7ada6571ad438a9",
-        "646451d17443d504564c83bef54841991469cf87b2bb560d57babbc2fe830732",
+        "21827a2afe5f299596c0c47dcb532246351a5438949501b121da6b50bfa70064",
+        "877693151f6dab83917af33fa458c779a782615bd2eb8b0965e57e51887e8c9a",
+        "8c8c22f5e1640c0ad1d58784aecc989431c8d67289c83a319e27e835b177b942",
         "1ae858ce79ca53f6afce2098298df523b0238d9492f8738541b0394f02600d50",
         "442c74d5fcd8f3e8c2133cbcc26208fd71d68f3d9b194cd3585a8984426f85d6",
         "8c4d7df9aefd524bf0d08ee421e736b75539ada36d481eb6e55b38840b986da7",
@@ -571,44 +685,30 @@
       "title": "macOS / Lima",
       "source": "docs/en/tutorials/run-on-macos.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "4de17a1352ce94f4e8358961b9dfc2295475a1e3d3b0e3946f9014b795bf56e9",
+      "sourceSha256": "f4cd6dfbd8305ae487a88f3b93a4e2d837fe5fe77c60658fa345f03472d8804f",
       "fallback": false,
       "sourceCodeSha256": [
         "4ae5c18ceb693cbd1c5e09b58850d4962d66d96ce1aa0a8cad14e9e4665873d6",
         "ed909decb008fca62d8ae06efc870815264240411a1c37ce8ed56094a51c0404",
         "81629fc5a9b18e632972706ca75492a4eda8adc509c40d1bd477b2400d16dc30",
         "8d368714a988d82c537128a9303b1140aa65d52de0431b881de0e7a319f16a0f",
-        "4cea15db5d38ecfa93af3348c730ba631b5ddc4683cdfd275b196411485e4722",
+        "00b87a54918133265334b9ebe8906cd619cf572064a861a8feac7e441eff63b0",
         "97c32d95e21326a8175b232b2affdb8693a3168ef8328ab045352ef1d4946012",
         "fefde67de33923b80cd4b732f9e6f40ac981e9145ae8362a3783e8584b5e68e7",
         "f75c8f38cfd081c3ecf54c15d6c7871373e45428229f1ccd612cb3e15920120e",
         "f0e27fb44e21adbb92b231b916a2e65e67d2af141095e4ab738734935d3f3e45",
-        "6dcda0132a8403082411245a0bb203364b5c641ec8cf41ed1de92269b061eae3",
+        "fa35529c5b949f07fbdfbf06aae0bdaf4756864be72666d7cbe982acd4551e6d",
         "3aea354fee18f0e4c15ce230d8a7674a4a1c4afe5abbba1a3ff089b9d9db88e8",
-        "8ce1aec19d37987d7c8a6678f94bd9e5e8d34c4d6347791ed3ce251e2325f6c8",
+        "4ad5c2892a72a492a0240a30393a3cb449b33a2558e8a8c148b6a99a9134be73",
         "b37d77c0586944e40927b39a35d8764ba40fae4941ee2c77e0b549e1c14852c4"
       ],
-      "sourceHeadingCount": 29,
+      "sourceHeadingCount": 38,
       "codeReplacements": [
         {
           "originalSha256": "fefde67de33923b80cd4b732f9e6f40ac981e9145ae8362a3783e8584b5e68e7",
           "sha256": [
             "3b7567feaff4de2916cb70d4edb8a4e5cf309b8efcdf04ab67d7d51d662e4bf1",
             "06a13dac4e1a50917b1e139dfa8cb7c978a053cfe2bc9c5d063c41d91d0ecda7"
-          ],
-          "reason": "Correct quoted-heredoc XML and subnet-mask syntax; distinguish host and guest shell steps."
-        },
-        {
-          "originalSha256": "6dcda0132a8403082411245a0bb203364b5c641ec8cf41ed1de92269b061eae3",
-          "sha256": [
-            "fa35529c5b949f07fbdfbf06aae0bdaf4756864be72666d7cbe982acd4551e6d"
-          ],
-          "reason": "Correct quoted-heredoc XML and subnet-mask syntax; distinguish host and guest shell steps."
-        },
-        {
-          "originalSha256": "8ce1aec19d37987d7c8a6678f94bd9e5e8d34c4d6347791ed3ce251e2325f6c8",
-          "sha256": [
-            "4ad5c2892a72a492a0240a30393a3cb449b33a2558e8a8c148b6a99a9134be73"
           ],
           "reason": "Correct quoted-heredoc XML and subnet-mask syntax; distinguish host and guest shell steps."
         }
@@ -621,11 +721,11 @@
       "title": "Build from source",
       "source": "docs/en/user-guide/build-by-yourself.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "65ed1f6bd2d97409c0be084264c7a7d037bf94d44a379c5eb61477876f83046b",
+      "sourceSha256": "c5d34099b100d1ada3ff048915b93c4aefcb1ebd6208e3783a6d9ab2e039ab17",
       "fallback": false,
       "sourceCodeSha256": [
         "f90cd44e2c6236eaeefef8cccfd73ab5cb32ab879bca1350a4e3dbb29d5dbffb",
-        "8af544575d6dcc3848dc81c4b8b0bea84fcc0d1164694793ccf2901dd2d3df71",
+        "bdfd72614679ac69a2f0490884203fdc3d96fc591ccd6902003878891c3816f3",
         "257b2595bd1604abcba942d1455108811f06b14ec23833dfdb295a1d69dfa78e",
         "f79a4907eddbde76921f079c110541c1bea72e75862ce07f6f2bb9450f416edd",
         "e43402384acb7d2b3a526c13e42b5650b884fa1dde4b76e491fcb590462347b0",
@@ -633,24 +733,6 @@
       ],
       "sourceHeadingCount": 13,
       "codeReplacements": [
-        {
-          "originalSha256": "f90cd44e2c6236eaeefef8cccfd73ab5cb32ab879bca1350a4e3dbb29d5dbffb",
-          "sha256": [
-            "28f010162451ef630f670f996fec21e6209ae60f2c8c6bcb83b75b731f3f0fd1"
-          ],
-          "reason": "Dependency requirements are reference text, not shell commands. Match go.mod Go 1.26.0 and the CLANG variable read by the pinned Makefile."
-        },
-        {
-          "originalSha256": "8af544575d6dcc3848dc81c4b8b0bea84fcc0d1164694793ccf2901dd2d3df71",
-          "sha256": [
-            "4032eb1906ac7c9199ab384e9e9aee1b2fad2362a54a93588c45940d73af8e0d",
-            "79a67eb6a375b6baf62a042b721fe4a9ae8c51ccc960ccd32c2a61dfca86d091",
-            "b7f2dff66396fe21122860b5df91dd7e3bdd11f1dd3fa5e0320bd38dfcb90000",
-            "aeb05bbd5b218cac2e2747a06ee06fdb5942b17c411f4a12ee372f516dc8b2de",
-            "43907024e73e7510278bfffd18ad2556d9fd3f664b71ebcefa3881b8fd23dd96"
-          ],
-          "reason": "Separate shared checkout steps and activate the source build alternatives in named tabs. Match go.mod Go 1.26.0 and the CLANG variable read by the pinned Makefile."
-        },
         {
           "originalSha256": "f79a4907eddbde76921f079c110541c1bea72e75862ce07f6f2bb9450f416edd",
           "sha256": [
@@ -666,6 +748,17 @@
             "d8b8c9c95a66e0b1805cc03a6363f65e0deca2f7da2031aa0fdabbcc368ce885"
           ],
           "reason": "Show explicit sudo and root runtime commands."
+        },
+        {
+          "originalSha256": "bdfd72614679ac69a2f0490884203fdc3d96fc591ccd6902003878891c3816f3",
+          "sha256": [
+            "4032eb1906ac7c9199ab384e9e9aee1b2fad2362a54a93588c45940d73af8e0d",
+            "79a67eb6a375b6baf62a042b721fe4a9ae8c51ccc960ccd32c2a61dfca86d091",
+            "b7f2dff66396fe21122860b5df91dd7e3bdd11f1dd3fa5e0320bd38dfcb90000",
+            "aeb05bbd5b218cac2e2747a06ee06fdb5942b17c411f4a12ee372f516dc8b2de",
+            "43907024e73e7510278bfffd18ad2556d9fd3f664b71ebcefa3881b8fd23dd96"
+          ],
+          "reason": "Separate shared checkout steps and activate the source build alternatives in named tabs."
         }
       ]
     },
@@ -676,14 +769,14 @@
       "title": "Kernel parameters",
       "source": "docs/en/user-guide/kernel-parameters.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "75868187378ab8e7d8577a7c4b463987055c79aaaae87282f9fbc14094118970",
+      "sourceSha256": "73a7f32e94bf8a84d74a2fd365409129a04ba8e36b3d1dcb544d5ee7db9d4e2d",
       "fallback": false,
       "sourceCodeSha256": [
         "62e5924c418b25e062840874722ca12986d281dbbea6c57beb0b880aced934d8",
-        "efd485bdd263cb46b71639eafd0090f1d726ea05835c5b5e2c61ec32e95ce4ce",
+        "b347ce0b60091c9b2e06b326df0224c45f506d27c70ed80c772204e0cea464ef",
         "cc21e75349d8be823b41e206bcb2d79e26d7528c195df6eab06d6b8c99601a4a"
       ],
-      "sourceHeadingCount": 1,
+      "sourceHeadingCount": 4,
       "codeReplacements": [
         {
           "originalSha256": "62e5924c418b25e062840874722ca12986d281dbbea6c57beb0b880aced934d8",
@@ -694,20 +787,20 @@
           "reason": "Add privilege variants; write both forwarding values together to prevent tee from overwriting the first value."
         },
         {
-          "originalSha256": "efd485bdd263cb46b71639eafd0090f1d726ea05835c5b5e2c61ec32e95ce4ce",
-          "sha256": [
-            "172284d51b1213aa07e8b2b6b0fa07fd70c12f016b429db3836dc3ab31b8e42b",
-            "f25368ea1ce94e2dbd7f91c085b251570dbb6269209121e4245e02f237fa519f"
-          ],
-          "reason": "Add privilege variants; write both forwarding values together to prevent tee from overwriting the first value."
-        },
-        {
           "originalSha256": "cc21e75349d8be823b41e206bcb2d79e26d7528c195df6eab06d6b8c99601a4a",
           "sha256": [
             "c1d22842a4545d22eec0f0766431e1d6e2c7e85b931324354c60347d7204a191",
             "466c33c8896d129a3ef42a0cc4cae644962cfa004ed7506f7b20e0cd61f91dea"
           ],
           "reason": "Add privilege variants; write both forwarding values together to prevent tee from overwriting the first value."
+        },
+        {
+          "originalSha256": "b347ce0b60091c9b2e06b326df0224c45f506d27c70ed80c772204e0cea464ef",
+          "sha256": [
+            "172284d51b1213aa07e8b2b6b0fa07fd70c12f016b429db3836dc3ab31b8e42b",
+            "f25368ea1ce94e2dbd7f91c085b251570dbb6269209121e4245e02f237fa519f"
+          ],
+          "reason": "Heredoc form with sudo and root tabs; writes the same two lines."
         }
       ]
     },
@@ -718,12 +811,12 @@
       "title": "Upgrade the kernel",
       "source": "docs/en/user-guide/kernel-upgrade.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "2a149ffbb148b4ab4640d2768e41bda8750a236759f0c92e4a96c8e628392d38",
+      "sourceSha256": "e5e1eac4ec81da22e279ffb8ae09c3e232feb092b5389b42cb2e162c9702b132",
       "fallback": false,
       "sourceCodeSha256": [
         "2b2338b0a0d47244ab48d08ccf72734cfa35b5f859ae1df9a9480904fd61c1ba",
         "ed86528af87ce34810cc91604ddf70d9ed126666aa45568da746808e376b2e67",
-        "61ae62869a0af1af9fb028c37ecf12121cb5316e3c9b82c51b65bb04043134d8",
+        "f0d5d1dd919f9e9e32442c6a02428b2d6765f1a953b4cd62ccbc03748e271192",
         "ed86528af87ce34810cc91604ddf70d9ed126666aa45568da746808e376b2e67",
         "7b7532d07b054309d8fd71d5df8485b9905101c397014521da8b0cb984785eb6",
         "39eb48e89339686885b14fb09ba03490c5c379728b47871276805e456f96cb61",
@@ -746,14 +839,6 @@
             "c2cee3d88c80e6c8b639b7607f82a9f3e510b57cfb660a6ce53c069506b4f83c",
             "2b25c95cedbe394261c7d4d218ab5ad39bd79d007db6f7e815244eee3130d1d5",
             "d59c3c91aa8c19ff0fd08dacba6679638e32d426b66681fedfebc2ed864fa1a6"
-          ],
-          "reason": "Correct the sources.list file path, refresh indexes after adding the source, show privilege variants, and separate post-reboot verification."
-        },
-        {
-          "originalSha256": "61ae62869a0af1af9fb028c37ecf12121cb5316e3c9b82c51b65bb04043134d8",
-          "sha256": [
-            "88e88cf3e084d798466ad8804d4781ca794532edae922173f55e71b1b9fe73c6",
-            "905864cd519b38a2afa3105902b8af362a0aa44cb1827d35b0a3072ed54ed39f"
           ],
           "reason": "Correct the sources.list file path, refresh indexes after adding the source, show privilege variants, and separate post-reboot verification."
         },
@@ -781,6 +866,14 @@
             "d7e859608ffe6816504dd0ced099ccf59a778b8df7fcbf522ede2d33f654b508"
           ],
           "reason": "Correct the sources.list file path, refresh indexes after adding the source, show privilege variants, and separate post-reboot verification."
+        },
+        {
+          "originalSha256": "f0d5d1dd919f9e9e32442c6a02428b2d6765f1a953b4cd62ccbc03748e271192",
+          "sha256": [
+            "638e12efe9b029126570f877d7d31579409704a1d5045271bf86cc74d5112551",
+            "923c3d8759642697c9846a21fbe4e2faac42d1a457d795a5e58ee986dff2c2ca"
+          ],
+          "reason": "Site presentation: sudo and root tabs; the command text is unchanged."
         }
       ]
     },
@@ -791,7 +884,7 @@
       "title": "Reload and suspend",
       "source": "docs/en/user-guide/reload-and-suspend.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "926e3804fe1462aad99e01a01cb3e1603cde2c19e012d16486578d9eaf37ca3a",
+      "sourceSha256": "49618ceb30fb87edea001ac942f08a7b2de9d22b4ee6e9819459e9abc7591010",
       "fallback": false,
       "sourceCodeSha256": [
         "190cea9384d4eaaf1321679491681c1dbe22d947634db8093d95c410d4ba8f8f",
@@ -825,7 +918,7 @@
       "title": "Run as a service",
       "source": "docs/en/user-guide/run-as-daemon.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "9b0881d20983a9b440937f967873b371357f998cbb24dedc6c01bcb85b4edfb5",
+      "sourceSha256": "ab80b74b26431b90fbf504c9a3131293d618b35191832c6a5bfcbadd35bfbb5a",
       "fallback": false,
       "sourceCodeSha256": [
         "f79a4907eddbde76921f079c110541c1bea72e75862ce07f6f2bb9450f416edd",
@@ -890,13 +983,18 @@
       "title": "快速开始",
       "source": "docs/en/README.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "894942967b463088e69dfce78d63ca67a5e4306d526c47f0912ec1e2816622bb",
+      "sourceSha256": "9f172f1dc6c39e96f8006a46ceda1210ae94f000baa092f2ac07654cd6815049",
       "fallback": false,
       "sourceCodeSha256": [
         "ef7119500f7264ee01b81c818bed3bfe2ecc0b60dff94fe08a17cabcd16d86e4",
         "1893ef9df7b4b79e714160527ae93a91780df2f093020983cf8411832d4f8d02",
         "ac888a974192d1f59dad73c6f36d42400be1506b4c4750763588052e4603b1f8",
-        "3f8f8041f5b53313a372ec90e3dd46be4227b3219dac4f3887766d86fe570781",
+        "bdaf82dbd6504bfbba7fb3f4a8b532ac6eb577e580952296b16b51ebf839f777",
+        "06c1f724ad2151b2d67b875b24a74cd18cdcc62039cfabe247a31432bb485a3b",
+        "1d67c39ffaf86238b987d9c9777107449cefb21868ce4314c2031d71ef965e3d",
+        "e2942f9616bf87f1e0177862d774746e2098479870e2a2f210b4e8782afe8d47",
+        "69f2211cc73c90002d0c743f248c30030f1d36ffdea58ed68fd1dfdc291fc2c1",
+        "37982724fa7fde7dea6cbe605cc31d61d70a9c7e06b1df5181ca04d66291fdba",
         "4e3ae38f707bcb31d1c42219336fe04b5f2e0f8b49cd63e1e7380fbef05f6412",
         "cac3533957fbb9837a6b44ab4c4eebaa38683558a82c5d48dcc884664f152560",
         "edb3e1462acad57fb365fa91c619893443cfe7f983069207691c2be29eb51df2",
@@ -904,23 +1002,34 @@
         "117141b77375ddd910d954fb82b5f3cb4b8e69a3e92357476e2de7311b3eb005",
         "f59849fb8eefbea7d22ef8dcd725da8be8548590f792506f1a631771bba5827c",
         "1a84a4bb7dbef4b07475c44d9dff719fd0fc6161c10611613fc14f3ebbcfcfa5",
+        "0133aad665391d67ba7ac2c1b151e3b79029a33dfc8d49296451c78f96a5bd45",
+        "7ed5dccb74fc42ae4916009dce046167d83b1122748fb1453ebbc5b5813cba97",
         "dccf2b51a5c34362868c4368afa3fbfe308af7117532e220f2b37fe2a90cc028",
-        "3cdcfd566c8e2b402d3f52d64135a1a3f77595221d75f33734743ce87e320602",
+        "14d4c8e503ff63e8cdda0059a834b073d945f039fff86ba5c28730c55cc7df13",
+        "c580fdedf3a3395d83c47d945e2beb5b78b249dcbc32bdd5023b00b0aa5591b5",
+        "a406ee75bdac1120c03689c8bdb7347591a4377d9bbcc166723c042149db2296",
+        "28eebfe4c3ba8e8ff72c8c2944f3e360e0f16577c75abbadf14d668e26688243",
+        "64c3d41e4696242b5d727f0615a6fb5a648d1eb531a35e729c3cad011475e9af",
+        "ae6b51547ab8fcfe7e8c76061c9e8407328b5b7f8fb5d4b4fa86bd9225a67df1",
+        "bc3a36d326007c12d5fdaa59ef941d77f074a7ba38753689a58b99c790c8f6f1",
+        "6d77e72a1b29dc18667b6f3fe8a5a41b73500722d6c56f9cd3f06836b3e5de6a",
+        "448ff79c779e4ee544cfda3c8662d9d045a1f074a3a6927225601f7d7d324ce4",
+        "f052833db8a897cc4b30a4eccb72d4815808561509f13a23f3881c8f766a1cfe",
         "f8f7c40924ae70ceb90a5c2b902aa1b3c5a3205813edb638d14ee31b551205a9",
         "e6edeccfd4e61492e5b4e83e479dad7eeb470ae5a7049e03e5c4976bf6655ca7",
         "4db8fae5aa614ac763dd5ee29095a6a37dfc3061820a80a9bd6c913f4f4f076d"
       ],
-      "sourceHeadingCount": 30,
+      "sourceHeadingCount": 53,
       "contentParts": [
         {
           "path": "dae/zh-CN/installation/arch.md",
           "marker": "installation-0",
-          "sha256": "e174dfe2323cb0a3a443aabbf5480cbcc3f694746b4be10cf589862aab2a7ef4"
+          "sha256": "9c649352918bedcd5421c2948ce72ab70c6e585d8569f62c8c55d7a24cf2e475"
         },
         {
           "path": "dae/zh-CN/installation/docker.md",
           "marker": "installation-1",
-          "sha256": "528b92c8f2ac24a1cd5e5cfa02cd4277f18faed2982f0ce23866b5bff51c0fc2",
+          "sha256": "e1269d32904d358f934ae6767b796b17264b54c249383622b4f20292c7a9ee91",
           "codeReplacements": [
             {
               "originalSha256": "3cdcfd566c8e2b402d3f52d64135a1a3f77595221d75f33734743ce87e320602",
@@ -935,27 +1044,27 @@
         {
           "path": "dae/zh-CN/installation/manual-installation.md",
           "marker": "installation-2",
-          "sha256": "83eff42867b6e6253b559cc474ff60291e8d7048746f59a4940bf8482cec591b"
+          "sha256": "3c9b96441f9b6a68eca06bc753d0fb6934b5e6eb3ee32db386f1490570c0aee0"
         },
         {
           "path": "dae/zh-CN/installation/fedora.md",
           "marker": "installation-4",
-          "sha256": "5b779bb81fef1a1996adc84d5d0c180474e7e51b9a2c3ac5a654e8015d6a6213"
+          "sha256": "884db72e1d2d9dcdf1deb0a562d34b3843a9b33f2f93f35575effd47531b9483"
         },
         {
           "path": "dae/zh-CN/installation/index.md",
           "marker": "installation-5",
-          "sha256": "58cc26be3d4b8a30bf7e85d219b17dce0f2bb9a9382b4ef9b1517462bc7080d5"
+          "sha256": "4e9cfe46db03bb4fa4600e2ca21300d7aa229851fd3be8340778e26f410f7edc"
         },
         {
           "path": "dae/zh-CN/installation/index.md",
           "marker": "installation-6",
-          "sha256": "9648d572490c613fe1ddc618a9f2a27e78ad6772ba5b36216035db8c213706b2"
+          "sha256": "3859943f84fc3cc5b7eab19152508c6ee532d3dab00bb42d2976f7f029467ddc"
         },
         {
           "path": "dae/zh-CN/start/requirements.md",
           "marker": "quick-start-requirements",
-          "sha256": "e56b123913c4d823ca5f63e2509974a73892db8b6c1f5dbc30b6474604ba6339",
+          "sha256": "300933f4108134fc857cf07ddcfad0d3c833440b69e55964bdb50f9201b4f648",
           "additionalCodeSha256": [
             "d59c3c91aa8c19ff0fd08dacba6679638e32d426b66681fedfebc2ed864fa1a6"
           ],
@@ -973,17 +1082,17 @@
         {
           "path": "dae/zh-CN/start/minimal-configuration.md",
           "marker": "quick-start-minimal-configuration",
-          "sha256": "903d913167813a06632039db7c289a0d81959b469a99224c25a71d5f63ec6553"
+          "sha256": "228709ec0e92fe9abd3e988f4e6dc91acde6958e1e131da833380cd50efc24e4"
         },
         {
           "path": "dae/zh-CN/start/pppoe.md",
           "marker": "quick-start-pppoe",
-          "sha256": "0d544bf7af015c91bc8f56a52dd8a5c40203db579b90d1f2c7e1e407531e73f3"
+          "sha256": "01507d459833a760402909d5ddd241633ff8a084239a992ab5c1f7ff23c450bf"
         },
         {
           "path": "dae/zh-CN/start/service-management.md",
           "marker": "shared-service-actions",
-          "sha256": "5d59362a1716709f429db73bf34138c533cd52832b1ccb2085b4660dfa16c9d8",
+          "sha256": "5d7f5df6f1d567a50257adedf5819b3225279d4be1f48ef903bea28e4e1a74d6",
           "codeReplacements": [
             {
               "originalSha256": "f59849fb8eefbea7d22ef8dcd725da8be8548590f792506f1a631771bba5827c",
@@ -1023,6 +1132,112 @@
             "1a84a4bb7dbef4b07475c44d9dff719fd0fc6161c10611613fc14f3ebbcfcfa5"
           ],
           "reason": "Covered by the complete Gentoo installation guide."
+        },
+        {
+          "replacement": "dae/zh-CN/installation/debian.md",
+          "originalCodeSha256": [
+            "06c1f724ad2151b2d67b875b24a74cd18cdcc62039cfabe247a31432bb485a3b",
+            "1d67c39ffaf86238b987d9c9777107449cefb21868ce4314c2031d71ef965e3d",
+            "e2942f9616bf87f1e0177862d774746e2098479870e2a2f210b4e8782afe8d47",
+            "69f2211cc73c90002d0c743f248c30030f1d36ffdea58ed68fd1dfdc291fc2c1",
+            "37982724fa7fde7dea6cbe605cc31d61d70a9c7e06b1df5181ca04d66291fdba"
+          ],
+          "sha256": [
+            "005d1ea2482b1e049083f5ff6c078b1eb443066d5b9eb715b0d4f37aeff28eb3",
+            "1f987d89387f1a6fed6874ea06a51476004b108494622d5cf6cfdd8cbb859dd4",
+            "3157e948c0419bc3a4ef0715d1fb07e569de9a428fb370e14837a1b84ae2d4b8",
+            "5050a6a1b699985e757b629423470eb12926ea0fd95d810afd23f0e0c73398aa",
+            "5174615e9c72e23bd7f07a21f5256043004dc75c10a632bb60a5a3d907fd4bf5",
+            "6e88235d991ed09617556a43f5fc73c13df9e84bef879d00ebc7c108d44c9d3c",
+            "70de1dd5f1548f62fb26a66cbca75d7107c89acc71bf58b17ac548e8add38f4e",
+            "7a4894ea099cc5bbfa63d8fe0a91fd34391e9e6839b5c6e2c272e1c270f8cea6",
+            "95ad378583312e4fe63858e71731955e51b1f99a73525d54b6482bd1a637efdc",
+            "be689435e6e6448f003532d0d437f15b054c75e6451cc699731a12d0c8a10246"
+          ],
+          "reason": "Covered by the debian installation page; commands identical apart from sudo and root tabs."
+        },
+        {
+          "replacement": "dae/zh-CN/installation/fedora.md",
+          "originalCodeSha256": [
+            "0133aad665391d67ba7ac2c1b151e3b79029a33dfc8d49296451c78f96a5bd45",
+            "7ed5dccb74fc42ae4916009dce046167d83b1122748fb1453ebbc5b5813cba97"
+          ],
+          "sha256": [
+            "02e36df4c860146cec659c998fb28b70a577f5a255b3d2ef80def440dd11c39d",
+            "32a7be21949f9b92d00c0bd3b000ab4239752c5a0b20e69c5fd4e498561dc0b7",
+            "ea6fb6895bedf0877fc2cf5b1dd1ef3275eb0a429568c61bd0087f2da3ba6e36",
+            "f86afc3179210918d40602dffcac3401ce9bae597ce3b6df0698f009ba5a7048"
+          ],
+          "reason": "Covered by the fedora installation page; commands identical apart from sudo and root tabs."
+        },
+        {
+          "replacement": "dae/zh-CN/installation/opensuse.md",
+          "originalCodeSha256": [
+            "14d4c8e503ff63e8cdda0059a834b073d945f039fff86ba5c28730c55cc7df13",
+            "c580fdedf3a3395d83c47d945e2beb5b78b249dcbc32bdd5023b00b0aa5591b5"
+          ],
+          "sha256": [
+            "4ba6eff2c37f01bdf8279141469728030454ec56a0538ac43f224fa96190b2e0",
+            "531463ab4d54979280ed2d2d3f9c533e7f3c1ba299fdeb27f7c7a89c958e48d5",
+            "b9c059f5f98e5ce589196b9b93331aa1b8852ca6ec4fa3af71a2ba181bad6543",
+            "ebc1318ca27cba13b60bc213d01230b3a36e05819ab01487d95cf94db9ca0a76"
+          ],
+          "reason": "Covered by the opensuse installation page; commands identical apart from sudo and root tabs."
+        },
+        {
+          "replacement": "dae/zh-CN/installation/nix.md",
+          "originalCodeSha256": [
+            "a406ee75bdac1120c03689c8bdb7347591a4377d9bbcc166723c042149db2296",
+            "28eebfe4c3ba8e8ff72c8c2944f3e360e0f16577c75abbadf14d668e26688243",
+            "64c3d41e4696242b5d727f0615a6fb5a648d1eb531a35e729c3cad011475e9af",
+            "ae6b51547ab8fcfe7e8c76061c9e8407328b5b7f8fb5d4b4fa86bd9225a67df1",
+            "bc3a36d326007c12d5fdaa59ef941d77f074a7ba38753689a58b99c790c8f6f1",
+            "6d77e72a1b29dc18667b6f3fe8a5a41b73500722d6c56f9cd3f06836b3e5de6a",
+            "448ff79c779e4ee544cfda3c8662d9d045a1f074a3a6927225601f7d7d324ce4"
+          ],
+          "sha256": [
+            "202243e9ee428e360acbc8ef9b05b5b839e91fa912588da8414fdf0006f0e2bc",
+            "28eebfe4c3ba8e8ff72c8c2944f3e360e0f16577c75abbadf14d668e26688243",
+            "448ff79c779e4ee544cfda3c8662d9d045a1f074a3a6927225601f7d7d324ce4",
+            "470a6cfcede16163a0006f7c7fdd63b9c22f89b12a39459198b330cc4daf275f",
+            "64c3d41e4696242b5d727f0615a6fb5a648d1eb531a35e729c3cad011475e9af",
+            "6d77e72a1b29dc18667b6f3fe8a5a41b73500722d6c56f9cd3f06836b3e5de6a",
+            "a406ee75bdac1120c03689c8bdb7347591a4377d9bbcc166723c042149db2296",
+            "bc3a36d326007c12d5fdaa59ef941d77f074a7ba38753689a58b99c790c8f6f1"
+          ],
+          "reason": "Covered by the nix installation page; commands identical apart from sudo and root tabs."
+        }
+      ],
+      "codeReplacements": [
+        {
+          "originalSha256": "f052833db8a897cc4b30a4eccb72d4815808561509f13a23f3881c8f766a1cfe",
+          "sha256": [
+            "3c21a04389ea9285e91e6df5320f30ec5044f0c3afcbf3c37f5481e69901c9e6",
+            "9df4f4ecb25081b3c61fba3fc936cc8f183c49217ab1661f4868988210d48bb6"
+          ],
+          "reason": "Split the clone and the compose step; sudo and root tabs."
+        },
+        {
+          "originalSha256": "ac888a974192d1f59dad73c6f36d42400be1506b4c4750763588052e4603b1f8",
+          "sha256": [
+            "b05e6d6043c57d7c36083382300b9258fc0c296a6dad6015812261c4e3f4a852"
+          ],
+          "reason": "Same kernel configuration check written one pattern per line."
+        },
+        {
+          "originalSha256": "bdaf82dbd6504bfbba7fb3f4a8b532ac6eb577e580952296b16b51ebf839f777",
+          "sha256": [
+            "2dbc20fc984941cb0901a7308a7bc9f5aa47c794733fbe28b8cabcd3f6a9a8cb"
+          ],
+          "reason": "Same kernel configuration check written one pattern per line."
+        },
+        {
+          "originalSha256": "f59849fb8eefbea7d22ef8dcd725da8be8548590f792506f1a631771bba5827c",
+          "sha256": [
+            "0db59616a5fc6ffa37fb436c47de68b3c954cbf1dc760d5323af1901dc7c5a29",
+            "55b73f3a7d6b58f1e538f0fa9d2609c0eab3489a8bae76542ea90b564210f048"
+          ],
+          "reason": "Start and enable are separate steps in the shared service guide."
         }
       ]
     },
@@ -1033,7 +1248,7 @@
       "title": "DNS",
       "source": "docs/en/configuration/dns.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "a463bf9c19dbe1e73efd3473a44dc0e6e1b30db5c5624904856e5d5d3fcf4d26",
+      "sourceSha256": "b355044f1b08fc1f38eebf0f7f3175c0755f34e76812008c20e3e43141ac5136",
       "fallback": false,
       "sourceCodeSha256": [
         "4388f7c58486b9dd0dc5333354861141830d735c8ab675e4a531da8891bc7fc6",
@@ -1043,12 +1258,12 @@
         "82d0c430cdd0ebcfc81f4e25ea15bea59041a15e37398d23567cb7d41fcdc7d5",
         "2261d3645cef9e640f94b8020ac019f1f7577cdcd9d22f98f2b7c7ef1963c68c",
         "e13397201c7c4ff5f2f06e16dbeb6edfa18500f7f300aae591c2e2c675535af6",
-        "ee401a815fa4273e809e57dd9abf555e78372a1b67700a8774751a6fdb1e155d",
+        "6cdfe526ab8568596d589d12865084d20655f433ff3af3b4b9c54a3d70651c6d",
         "02b07d586ff7455903c96bb1ec1004d5c113d698a301e7f05bf4522beeabb225",
         "c0c2c1f62e2b1b1195f32766cf0edb5eaee68aa920c95a1d759fd393c2a57fde",
         "9a64c1827dc2f48f478ebadf72c36d07ea153deb42d759b8b6eac9ebf4feb635"
       ],
-      "sourceHeadingCount": 7,
+      "sourceHeadingCount": 14,
       "codeReplacements": [
         {
           "originalSha256": "c0c2c1f62e2b1b1195f32766cf0edb5eaee68aa920c95a1d759fd393c2a57fde",
@@ -1073,7 +1288,7 @@
       "title": "外部 DNS",
       "source": "docs/en/configuration/external-dns.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "e68b8f0c0d54f96cb6452714ba2f11e36f821acd2bff28a4e4b87fffa3a195e5",
+      "sourceSha256": "69c14f9046a99d9e32e7cf2eb1bd7f4831cfaca803a5740de297083c54ef2a99",
       "fallback": false,
       "sourceCodeSha256": [
         "9e08f79b14dc5f44d94526d71bca829abda9b33c5a9ee5f0b442ae6023092823",
@@ -1096,14 +1311,14 @@
       "title": "游戏路由",
       "source": "docs/en/configuration/gaming-oriented-routing.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "34d6c7736eeb3284258ebaa6b28c8abf8db20fff044fbe55e574008d52b16cf0",
+      "sourceSha256": "e1265a3884069283624f6a25c84610721b2457dfba201c95bbdb9e045e808044",
       "fallback": false,
       "sourceCodeSha256": [
         "9c22e26ad0ab6869433dd045c520742ceeba6f7e77ac1dff0e60d7f3cf2fd908",
         "3fd5527cfe03b971e2422bc3f96737a1e2ea63a0eef9cf6122b992dc10d6e055",
         "4e23a38cbfe8ec841440cafc3ccb3a662faec1b341e751dabd45269396a42f4e"
       ],
-      "sourceHeadingCount": 0
+      "sourceHeadingCount": 4
     },
     {
       "locale": "zh-CN",
@@ -1112,41 +1327,33 @@
       "title": "路由规则",
       "source": "docs/en/configuration/routing.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "c37a8f1b581c64e7e3d5f274e8e14b7cf307de6d7d01a111ac97fe7585c3502b",
+      "sourceSha256": "e0d55a69c23b1ef2651d2a0f849d53767e66e9843f7d5746db9135f39d9d8005",
       "fallback": false,
       "sourceCodeSha256": [
-        "9ea3b8a63a868e89c56b54ba803f94208ac52d1b4013079c0dd798241338b7a0",
-        "0e4446bbb2d99d583428d2a5c0efc725ea241eb6f553a18aea18ca20f2a11324"
+        "c2fb742030963aa00bdfa151eb6d001302636cb2e8769de1a3307e8a7edc4c03",
+        "4503f3aa0d56a0fd2ba4afb1e9c71f8f3f4a4e124af1dff025aa948a55e93814",
+        "9df650f45b0ab812165de69d492368bc25ab59397a61e7d8fce29aed825f707a",
+        "37340473726632d7687d4bb4961c0f253712d8997390c76095a3c9a0f9f71aca",
+        "9abcdcafc57dd2d1f1ddeeae5dc703d559c577dfcc57467a61f0be67c0af7658",
+        "2930e37ac784e471700b8e6975d7f79b8feb90fd398b9807d01784a3a39c3e6d",
+        "5d073aaa104806f8d759e55aef4a90be473f52ea0d311240a11501b6b0ab9955",
+        "d91dafd1aeb49f468d0342bada96bad7da5b8ede1669e491979f5c6c0132da9d",
+        "8e7042a44cf9ce60d2f6e74ad807b9ad064eca1eec99a7eeee659374d4d5fcd4",
+        "ef4fdfa7a2baaa151bfd46b33caa638c66b2d7c51af73b80ffbe7b8aa76aaab5",
+        "e4e830168062f9dc13f074a78b006e1365ebd1be4663ec37b21121cd062a818a",
+        "79b422138c425cbfe7c86bb7bc87d27d7eb06fe1c63b08e80e331642bce5acd1",
+        "fb782f2e1eb0b99e9d8da667394e906b5c6aadc77d5d9a3a02698229284db928",
+        "ca0a6520c69dbf5f2998e58088a6b55bb84c2b040567073fb9c368585147ad46",
+        "ba08b87e3a526961243bbc879a26816bda6c4e81fddca796506b4b22c7be471f",
+        "38bbda32ef1357f32fda204eb58254747d47cf473ad8dfeff27d2d31e6ba077b",
+        "dd56e6d303a446149930f51d0bb4930178acf3238d8f56b75bd909bc49b90dd0",
+        "e8c82a4da10c1725e8fa0410e0e71c1657b508cee80977a12b0d05b77951cfc9",
+        "b6b2b60d7f5531f71b386010ba35f6db4baaf68577708ff3bcad0bf5be32b641",
+        "85c8411f4746f58436bc6ee18cbc1a555b3931ee24e6c251c178d24b21a074c2",
+        "0e4446bbb2d99d583428d2a5c0efc725ea241eb6f553a18aea18ca20f2a11324",
+        "a46c2700eace32a2d2e22433b3f52d4e2915f5128a6031b70b456fc2997c84f6"
       ],
-      "sourceHeadingCount": 45,
-      "codeReplacements": [
-        {
-          "originalSha256": "9ea3b8a63a868e89c56b54ba803f94208ac52d1b4013079c0dd798241338b7a0",
-          "sha256": [
-            "c2fb742030963aa00bdfa151eb6d001302636cb2e8769de1a3307e8a7edc4c03",
-            "4503f3aa0d56a0fd2ba4afb1e9c71f8f3f4a4e124af1dff025aa948a55e93814",
-            "9df650f45b0ab812165de69d492368bc25ab59397a61e7d8fce29aed825f707a",
-            "37340473726632d7687d4bb4961c0f253712d8997390c76095a3c9a0f9f71aca",
-            "9abcdcafc57dd2d1f1ddeeae5dc703d559c577dfcc57467a61f0be67c0af7658",
-            "2930e37ac784e471700b8e6975d7f79b8feb90fd398b9807d01784a3a39c3e6d",
-            "5d073aaa104806f8d759e55aef4a90be473f52ea0d311240a11501b6b0ab9955",
-            "d91dafd1aeb49f468d0342bada96bad7da5b8ede1669e491979f5c6c0132da9d",
-            "8e7042a44cf9ce60d2f6e74ad807b9ad064eca1eec99a7eeee659374d4d5fcd4",
-            "ef4fdfa7a2baaa151bfd46b33caa638c66b2d7c51af73b80ffbe7b8aa76aaab5",
-            "e4e830168062f9dc13f074a78b006e1365ebd1be4663ec37b21121cd062a818a",
-            "79b422138c425cbfe7c86bb7bc87d27d7eb06fe1c63b08e80e331642bce5acd1",
-            "fb782f2e1eb0b99e9d8da667394e906b5c6aadc77d5d9a3a02698229284db928",
-            "ca0a6520c69dbf5f2998e58088a6b55bb84c2b040567073fb9c368585147ad46",
-            "ba08b87e3a526961243bbc879a26816bda6c4e81fddca796506b4b22c7be471f",
-            "38bbda32ef1357f32fda204eb58254747d47cf473ad8dfeff27d2d31e6ba077b",
-            "dd56e6d303a446149930f51d0bb4930178acf3238d8f56b75bd909bc49b90dd0",
-            "e8c82a4da10c1725e8fa0410e0e71c1657b508cee80977a12b0d05b77951cfc9",
-            "b6b2b60d7f5531f71b386010ba35f6db4baaf68577708ff3bcad0bf5be32b641",
-            "85c8411f4746f58436bc6ee18cbc1a555b3931ee24e6c251c178d24b21a074c2"
-          ],
-          "reason": "Split the existing reference at its source comment headings; preserve every rule and comment."
-        }
-      ]
+      "sourceHeadingCount": 66
     },
     {
       "locale": "zh-CN",
@@ -1155,7 +1362,7 @@
       "title": "拆分配置文件",
       "source": "docs/en/configuration/separate-config.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "e681cc3158f4d547ba7bd3b03eab807e1a8d419e34314b0d76f21ede5a0547ce",
+      "sourceSha256": "029e03a8bfab8716438f9a7f996c76007b80f77caad28507d11ac3632f010f35",
       "fallback": false,
       "sourceCodeSha256": [
         "b7907210caca622078bed5c63b884867b4858cb611bd1627b30f635e0b114ac4",
@@ -1212,7 +1419,7 @@
       "title": "提交信息规范",
       "source": "docs/en/development/commit-msg-guide.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "988c9b74cc311bef3d273d472f2c7da27041227e21c8b2ac47c934f56b21e513",
+      "sourceSha256": "8082967f18f26fc0cde756d19872e647a2c38dedef487a81ae99316ab09dec0a",
       "fallback": false,
       "sourceCodeSha256": [
         "a91a66533505deee4fd8b7d3a95cf6936a3fa30707f2a0ab4ca494fc481122bd",
@@ -1275,7 +1482,7 @@
       "title": "工作原理",
       "source": "docs/en/how-it-works.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "f0e4e60fbdfaf5715e983e8259df1f59888ed61fa3cb3faec50b758e7fcef226",
+      "sourceSha256": "f1fb5e3ca0b22181d86ce9c43190d55533c5f842c6986598c29380b0f6879fa0",
       "fallback": false,
       "sourceCodeSha256": [],
       "sourceHeadingCount": 5
@@ -1287,7 +1494,7 @@
       "title": "代理协议",
       "source": "docs/en/proxy-protocols.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "1f24ed8382dd80fa316427c3ca48459b5882c2894cfe4d24624dd508f71e4a49",
+      "sourceSha256": "2b59587f6af65c9dd00c62a9fc951dad59f35992e1ab35cacc516c1329ec5ccd",
       "fallback": false,
       "sourceCodeSha256": [
         "d1294d6478e2883a161db43b99f38b59034c63ed1e2fa38dea0901a15a86bc77",
@@ -1296,7 +1503,7 @@
         "2d6c175c8ce05bd0925de4a58d73f22f9eaf3abcbb9c7f4d5d007a5c8ac893b2",
         "5d3afdc0a642f12574eedd679f5fe9ecf9ed9e91f84a53d489b97e9a5120dc42"
       ],
-      "sourceHeadingCount": 4
+      "sourceHeadingCount": 9
     },
     {
       "locale": "zh-CN",
@@ -1305,7 +1512,7 @@
       "title": "故障排查",
       "source": "docs/en/troubleshooting.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "c2bfa88d7833834dfa03448cef0aceea31906f4759d0342349aeb543f80511d3",
+      "sourceSha256": "849e3fb39d20cd9c79d52851967738afbaf40aa7cd83dac2ff878da75e892f85",
       "fallback": false,
       "sourceCodeSha256": [
         "fd6f001650af1cb2a66b53fc589335deb7fb7a509689d9682a73c892f0eca33d",
@@ -1323,7 +1530,7 @@
       "title": "OPNsense",
       "source": "docs/en/tutorials/dae-with-opnsense.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "28cf04a221ac7794c493f96a19cd1986bc04f2898010709ebf4084e877856c0d",
+      "sourceSha256": "2e5d3da291da38e8b2217bf5a1b562e358b4d7a430dcc18a242cff686d8bc261",
       "fallback": false,
       "sourceCodeSha256": [
         "bbed03136e29b6091dd0a39c26c80f7041ce82b4325b05c0b12de6521348ebab",
@@ -1338,7 +1545,7 @@
       "title": "Alpine Linux",
       "source": "docs/en/tutorials/run-on-alpine.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "c42577eb29503c226e18692054d70d15428b704bc9badbf139e81b8788ea8c88",
+      "sourceSha256": "0cefbbcb6f9624f428bd18eabee7aeb2069d77ed97949beb25bc43cf8ea7f5d0",
       "fallback": false,
       "sourceCodeSha256": [
         "8db29ba75767cf7c110565d66ca76011969121b567184934fc77a7fb78fe7b62",
@@ -1402,7 +1609,7 @@
         {
           "path": "dae/zh-CN/start/service-management.md",
           "marker": "shared-service-actions",
-          "sha256": "5d59362a1716709f429db73bf34138c533cd52832b1ccb2085b4660dfa16c9d8",
+          "sha256": "5d7f5df6f1d567a50257adedf5819b3225279d4be1f48ef903bea28e4e1a74d6",
           "additionalCodeSha256": [
             "ffbcd35d8d142d7a0a73e9ff632a012ccdeb3c69d364f2d4dcf1e7b7294eda60",
             "e5605e93c76e8795b4242ea7581a032aae84e70157e3b8cdcb151f1e2eb12c2f",
@@ -1431,12 +1638,12 @@
       "title": "CentOS 7",
       "source": "docs/en/tutorials/run-on-centos7.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "e330c57c33a3f978cd37d922319a634fe12d5a21ad4027040c4874509f08f30b",
+      "sourceSha256": "305bf841d594aaf1f18f104d3fa774e4f15905a4d0401b30e19779dbabb0a98f",
       "fallback": false,
       "sourceCodeSha256": [
-        "2261090ccf2698f759d42deec9588a964bddb73acd0c7b9bb3b50499d27042d8",
-        "2a8d66272e4f512ffebe154c165052f4c3d65ff23aa09d66c7ada6571ad438a9",
-        "646451d17443d504564c83bef54841991469cf87b2bb560d57babbc2fe830732",
+        "21827a2afe5f299596c0c47dcb532246351a5438949501b121da6b50bfa70064",
+        "877693151f6dab83917af33fa458c779a782615bd2eb8b0965e57e51887e8c9a",
+        "8c8c22f5e1640c0ad1d58784aecc989431c8d67289c83a319e27e835b177b942",
         "1ae858ce79ca53f6afce2098298df523b0238d9492f8738541b0394f02600d50",
         "442c74d5fcd8f3e8c2133cbcc26208fd71d68f3d9b194cd3585a8984426f85d6",
         "8c4d7df9aefd524bf0d08ee421e736b75539ada36d481eb6e55b38840b986da7",
@@ -1451,44 +1658,30 @@
       "title": "macOS / Lima",
       "source": "docs/en/tutorials/run-on-macos.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "4de17a1352ce94f4e8358961b9dfc2295475a1e3d3b0e3946f9014b795bf56e9",
+      "sourceSha256": "f4cd6dfbd8305ae487a88f3b93a4e2d837fe5fe77c60658fa345f03472d8804f",
       "fallback": false,
       "sourceCodeSha256": [
         "4ae5c18ceb693cbd1c5e09b58850d4962d66d96ce1aa0a8cad14e9e4665873d6",
         "ed909decb008fca62d8ae06efc870815264240411a1c37ce8ed56094a51c0404",
         "81629fc5a9b18e632972706ca75492a4eda8adc509c40d1bd477b2400d16dc30",
         "8d368714a988d82c537128a9303b1140aa65d52de0431b881de0e7a319f16a0f",
-        "4cea15db5d38ecfa93af3348c730ba631b5ddc4683cdfd275b196411485e4722",
+        "00b87a54918133265334b9ebe8906cd619cf572064a861a8feac7e441eff63b0",
         "97c32d95e21326a8175b232b2affdb8693a3168ef8328ab045352ef1d4946012",
         "fefde67de33923b80cd4b732f9e6f40ac981e9145ae8362a3783e8584b5e68e7",
         "f75c8f38cfd081c3ecf54c15d6c7871373e45428229f1ccd612cb3e15920120e",
         "f0e27fb44e21adbb92b231b916a2e65e67d2af141095e4ab738734935d3f3e45",
-        "6dcda0132a8403082411245a0bb203364b5c641ec8cf41ed1de92269b061eae3",
+        "fa35529c5b949f07fbdfbf06aae0bdaf4756864be72666d7cbe982acd4551e6d",
         "3aea354fee18f0e4c15ce230d8a7674a4a1c4afe5abbba1a3ff089b9d9db88e8",
-        "8ce1aec19d37987d7c8a6678f94bd9e5e8d34c4d6347791ed3ce251e2325f6c8",
+        "4ad5c2892a72a492a0240a30393a3cb449b33a2558e8a8c148b6a99a9134be73",
         "b37d77c0586944e40927b39a35d8764ba40fae4941ee2c77e0b549e1c14852c4"
       ],
-      "sourceHeadingCount": 29,
+      "sourceHeadingCount": 38,
       "codeReplacements": [
         {
           "originalSha256": "fefde67de33923b80cd4b732f9e6f40ac981e9145ae8362a3783e8584b5e68e7",
           "sha256": [
             "3b7567feaff4de2916cb70d4edb8a4e5cf309b8efcdf04ab67d7d51d662e4bf1",
             "06a13dac4e1a50917b1e139dfa8cb7c978a053cfe2bc9c5d063c41d91d0ecda7"
-          ],
-          "reason": "Correct quoted-heredoc XML and subnet-mask syntax; distinguish host and guest shell steps."
-        },
-        {
-          "originalSha256": "6dcda0132a8403082411245a0bb203364b5c641ec8cf41ed1de92269b061eae3",
-          "sha256": [
-            "fa35529c5b949f07fbdfbf06aae0bdaf4756864be72666d7cbe982acd4551e6d"
-          ],
-          "reason": "Correct quoted-heredoc XML and subnet-mask syntax; distinguish host and guest shell steps."
-        },
-        {
-          "originalSha256": "8ce1aec19d37987d7c8a6678f94bd9e5e8d34c4d6347791ed3ce251e2325f6c8",
-          "sha256": [
-            "4ad5c2892a72a492a0240a30393a3cb449b33a2558e8a8c148b6a99a9134be73"
           ],
           "reason": "Correct quoted-heredoc XML and subnet-mask syntax; distinguish host and guest shell steps."
         }
@@ -1501,11 +1694,11 @@
       "title": "从源代码构建",
       "source": "docs/en/user-guide/build-by-yourself.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "65ed1f6bd2d97409c0be084264c7a7d037bf94d44a379c5eb61477876f83046b",
+      "sourceSha256": "c5d34099b100d1ada3ff048915b93c4aefcb1ebd6208e3783a6d9ab2e039ab17",
       "fallback": false,
       "sourceCodeSha256": [
         "f90cd44e2c6236eaeefef8cccfd73ab5cb32ab879bca1350a4e3dbb29d5dbffb",
-        "8af544575d6dcc3848dc81c4b8b0bea84fcc0d1164694793ccf2901dd2d3df71",
+        "bdfd72614679ac69a2f0490884203fdc3d96fc591ccd6902003878891c3816f3",
         "257b2595bd1604abcba942d1455108811f06b14ec23833dfdb295a1d69dfa78e",
         "f79a4907eddbde76921f079c110541c1bea72e75862ce07f6f2bb9450f416edd",
         "e43402384acb7d2b3a526c13e42b5650b884fa1dde4b76e491fcb590462347b0",
@@ -1513,24 +1706,6 @@
       ],
       "sourceHeadingCount": 13,
       "codeReplacements": [
-        {
-          "originalSha256": "f90cd44e2c6236eaeefef8cccfd73ab5cb32ab879bca1350a4e3dbb29d5dbffb",
-          "sha256": [
-            "28f010162451ef630f670f996fec21e6209ae60f2c8c6bcb83b75b731f3f0fd1"
-          ],
-          "reason": "Dependency requirements are reference text, not shell commands. Match go.mod Go 1.26.0 and the CLANG variable read by the pinned Makefile."
-        },
-        {
-          "originalSha256": "8af544575d6dcc3848dc81c4b8b0bea84fcc0d1164694793ccf2901dd2d3df71",
-          "sha256": [
-            "4032eb1906ac7c9199ab384e9e9aee1b2fad2362a54a93588c45940d73af8e0d",
-            "c1f97bed7e1710d3ce634441ae781c345f1068d402786dfdde9b61da4f27da43",
-            "241a1a76500cddffec27028f686a1cdfc6bb858ee59be44d745b17d879575828",
-            "aeb05bbd5b218cac2e2747a06ee06fdb5942b17c411f4a12ee372f516dc8b2de",
-            "43907024e73e7510278bfffd18ad2556d9fd3f664b71ebcefa3881b8fd23dd96"
-          ],
-          "reason": "Separate shared checkout steps and activate the source build alternatives in named tabs. Match go.mod Go 1.26.0 and the CLANG variable read by the pinned Makefile."
-        },
         {
           "originalSha256": "f79a4907eddbde76921f079c110541c1bea72e75862ce07f6f2bb9450f416edd",
           "sha256": [
@@ -1546,6 +1721,17 @@
             "d8b8c9c95a66e0b1805cc03a6363f65e0deca2f7da2031aa0fdabbcc368ce885"
           ],
           "reason": "Show explicit sudo and root runtime commands."
+        },
+        {
+          "originalSha256": "bdfd72614679ac69a2f0490884203fdc3d96fc591ccd6902003878891c3816f3",
+          "sha256": [
+            "4032eb1906ac7c9199ab384e9e9aee1b2fad2362a54a93588c45940d73af8e0d",
+            "c1f97bed7e1710d3ce634441ae781c345f1068d402786dfdde9b61da4f27da43",
+            "241a1a76500cddffec27028f686a1cdfc6bb858ee59be44d745b17d879575828",
+            "aeb05bbd5b218cac2e2747a06ee06fdb5942b17c411f4a12ee372f516dc8b2de",
+            "43907024e73e7510278bfffd18ad2556d9fd3f664b71ebcefa3881b8fd23dd96"
+          ],
+          "reason": "Separate shared checkout steps and activate the source build alternatives in named tabs."
         }
       ]
     },
@@ -1556,14 +1742,14 @@
       "title": "内核参数",
       "source": "docs/en/user-guide/kernel-parameters.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "75868187378ab8e7d8577a7c4b463987055c79aaaae87282f9fbc14094118970",
+      "sourceSha256": "73a7f32e94bf8a84d74a2fd365409129a04ba8e36b3d1dcb544d5ee7db9d4e2d",
       "fallback": false,
       "sourceCodeSha256": [
         "62e5924c418b25e062840874722ca12986d281dbbea6c57beb0b880aced934d8",
-        "efd485bdd263cb46b71639eafd0090f1d726ea05835c5b5e2c61ec32e95ce4ce",
+        "b347ce0b60091c9b2e06b326df0224c45f506d27c70ed80c772204e0cea464ef",
         "cc21e75349d8be823b41e206bcb2d79e26d7528c195df6eab06d6b8c99601a4a"
       ],
-      "sourceHeadingCount": 1,
+      "sourceHeadingCount": 4,
       "codeReplacements": [
         {
           "originalSha256": "62e5924c418b25e062840874722ca12986d281dbbea6c57beb0b880aced934d8",
@@ -1574,20 +1760,20 @@
           "reason": "Add privilege variants; write both forwarding values together to prevent tee from overwriting the first value."
         },
         {
-          "originalSha256": "efd485bdd263cb46b71639eafd0090f1d726ea05835c5b5e2c61ec32e95ce4ce",
-          "sha256": [
-            "172284d51b1213aa07e8b2b6b0fa07fd70c12f016b429db3836dc3ab31b8e42b",
-            "f25368ea1ce94e2dbd7f91c085b251570dbb6269209121e4245e02f237fa519f"
-          ],
-          "reason": "Add privilege variants; write both forwarding values together to prevent tee from overwriting the first value."
-        },
-        {
           "originalSha256": "cc21e75349d8be823b41e206bcb2d79e26d7528c195df6eab06d6b8c99601a4a",
           "sha256": [
             "c1d22842a4545d22eec0f0766431e1d6e2c7e85b931324354c60347d7204a191",
             "466c33c8896d129a3ef42a0cc4cae644962cfa004ed7506f7b20e0cd61f91dea"
           ],
           "reason": "Add privilege variants; write both forwarding values together to prevent tee from overwriting the first value."
+        },
+        {
+          "originalSha256": "b347ce0b60091c9b2e06b326df0224c45f506d27c70ed80c772204e0cea464ef",
+          "sha256": [
+            "172284d51b1213aa07e8b2b6b0fa07fd70c12f016b429db3836dc3ab31b8e42b",
+            "f25368ea1ce94e2dbd7f91c085b251570dbb6269209121e4245e02f237fa519f"
+          ],
+          "reason": "Heredoc form with sudo and root tabs; writes the same two lines."
         }
       ]
     },
@@ -1598,12 +1784,12 @@
       "title": "升级内核",
       "source": "docs/en/user-guide/kernel-upgrade.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "2a149ffbb148b4ab4640d2768e41bda8750a236759f0c92e4a96c8e628392d38",
+      "sourceSha256": "e5e1eac4ec81da22e279ffb8ae09c3e232feb092b5389b42cb2e162c9702b132",
       "fallback": false,
       "sourceCodeSha256": [
         "2b2338b0a0d47244ab48d08ccf72734cfa35b5f859ae1df9a9480904fd61c1ba",
         "ed86528af87ce34810cc91604ddf70d9ed126666aa45568da746808e376b2e67",
-        "61ae62869a0af1af9fb028c37ecf12121cb5316e3c9b82c51b65bb04043134d8",
+        "f0d5d1dd919f9e9e32442c6a02428b2d6765f1a953b4cd62ccbc03748e271192",
         "ed86528af87ce34810cc91604ddf70d9ed126666aa45568da746808e376b2e67",
         "7b7532d07b054309d8fd71d5df8485b9905101c397014521da8b0cb984785eb6",
         "39eb48e89339686885b14fb09ba03490c5c379728b47871276805e456f96cb61",
@@ -1626,14 +1812,6 @@
             "c2cee3d88c80e6c8b639b7607f82a9f3e510b57cfb660a6ce53c069506b4f83c",
             "2b25c95cedbe394261c7d4d218ab5ad39bd79d007db6f7e815244eee3130d1d5",
             "d59c3c91aa8c19ff0fd08dacba6679638e32d426b66681fedfebc2ed864fa1a6"
-          ],
-          "reason": "Correct the sources.list file path, refresh indexes after adding the source, show privilege variants, and separate post-reboot verification."
-        },
-        {
-          "originalSha256": "61ae62869a0af1af9fb028c37ecf12121cb5316e3c9b82c51b65bb04043134d8",
-          "sha256": [
-            "88e88cf3e084d798466ad8804d4781ca794532edae922173f55e71b1b9fe73c6",
-            "905864cd519b38a2afa3105902b8af362a0aa44cb1827d35b0a3072ed54ed39f"
           ],
           "reason": "Correct the sources.list file path, refresh indexes after adding the source, show privilege variants, and separate post-reboot verification."
         },
@@ -1661,6 +1839,14 @@
             "d7e859608ffe6816504dd0ced099ccf59a778b8df7fcbf522ede2d33f654b508"
           ],
           "reason": "Correct the sources.list file path, refresh indexes after adding the source, show privilege variants, and separate post-reboot verification."
+        },
+        {
+          "originalSha256": "f0d5d1dd919f9e9e32442c6a02428b2d6765f1a953b4cd62ccbc03748e271192",
+          "sha256": [
+            "638e12efe9b029126570f877d7d31579409704a1d5045271bf86cc74d5112551",
+            "923c3d8759642697c9846a21fbe4e2faac42d1a457d795a5e58ee986dff2c2ca"
+          ],
+          "reason": "Site presentation: sudo and root tabs; the command text is unchanged."
         }
       ]
     },
@@ -1671,7 +1857,7 @@
       "title": "重载与暂停",
       "source": "docs/en/user-guide/reload-and-suspend.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "926e3804fe1462aad99e01a01cb3e1603cde2c19e012d16486578d9eaf37ca3a",
+      "sourceSha256": "49618ceb30fb87edea001ac942f08a7b2de9d22b4ee6e9819459e9abc7591010",
       "fallback": false,
       "sourceCodeSha256": [
         "190cea9384d4eaaf1321679491681c1dbe22d947634db8093d95c410d4ba8f8f",
@@ -1705,7 +1891,7 @@
       "title": "作为服务运行",
       "source": "docs/en/user-guide/run-as-daemon.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "9b0881d20983a9b440937f967873b371357f998cbb24dedc6c01bcb85b4edfb5",
+      "sourceSha256": "ab80b74b26431b90fbf504c9a3131293d618b35191832c6a5bfcbadd35bfbb5a",
       "fallback": false,
       "sourceCodeSha256": [
         "f79a4907eddbde76921f079c110541c1bea72e75862ce07f6f2bb9450f416edd",
@@ -1770,13 +1956,18 @@
       "title": "快速開始",
       "source": "docs/en/README.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "894942967b463088e69dfce78d63ca67a5e4306d526c47f0912ec1e2816622bb",
+      "sourceSha256": "9f172f1dc6c39e96f8006a46ceda1210ae94f000baa092f2ac07654cd6815049",
       "fallback": false,
       "sourceCodeSha256": [
         "ef7119500f7264ee01b81c818bed3bfe2ecc0b60dff94fe08a17cabcd16d86e4",
         "1893ef9df7b4b79e714160527ae93a91780df2f093020983cf8411832d4f8d02",
         "ac888a974192d1f59dad73c6f36d42400be1506b4c4750763588052e4603b1f8",
-        "3f8f8041f5b53313a372ec90e3dd46be4227b3219dac4f3887766d86fe570781",
+        "bdaf82dbd6504bfbba7fb3f4a8b532ac6eb577e580952296b16b51ebf839f777",
+        "06c1f724ad2151b2d67b875b24a74cd18cdcc62039cfabe247a31432bb485a3b",
+        "1d67c39ffaf86238b987d9c9777107449cefb21868ce4314c2031d71ef965e3d",
+        "e2942f9616bf87f1e0177862d774746e2098479870e2a2f210b4e8782afe8d47",
+        "69f2211cc73c90002d0c743f248c30030f1d36ffdea58ed68fd1dfdc291fc2c1",
+        "37982724fa7fde7dea6cbe605cc31d61d70a9c7e06b1df5181ca04d66291fdba",
         "4e3ae38f707bcb31d1c42219336fe04b5f2e0f8b49cd63e1e7380fbef05f6412",
         "cac3533957fbb9837a6b44ab4c4eebaa38683558a82c5d48dcc884664f152560",
         "edb3e1462acad57fb365fa91c619893443cfe7f983069207691c2be29eb51df2",
@@ -1784,23 +1975,34 @@
         "117141b77375ddd910d954fb82b5f3cb4b8e69a3e92357476e2de7311b3eb005",
         "f59849fb8eefbea7d22ef8dcd725da8be8548590f792506f1a631771bba5827c",
         "1a84a4bb7dbef4b07475c44d9dff719fd0fc6161c10611613fc14f3ebbcfcfa5",
+        "0133aad665391d67ba7ac2c1b151e3b79029a33dfc8d49296451c78f96a5bd45",
+        "7ed5dccb74fc42ae4916009dce046167d83b1122748fb1453ebbc5b5813cba97",
         "dccf2b51a5c34362868c4368afa3fbfe308af7117532e220f2b37fe2a90cc028",
-        "3cdcfd566c8e2b402d3f52d64135a1a3f77595221d75f33734743ce87e320602",
+        "14d4c8e503ff63e8cdda0059a834b073d945f039fff86ba5c28730c55cc7df13",
+        "c580fdedf3a3395d83c47d945e2beb5b78b249dcbc32bdd5023b00b0aa5591b5",
+        "a406ee75bdac1120c03689c8bdb7347591a4377d9bbcc166723c042149db2296",
+        "28eebfe4c3ba8e8ff72c8c2944f3e360e0f16577c75abbadf14d668e26688243",
+        "64c3d41e4696242b5d727f0615a6fb5a648d1eb531a35e729c3cad011475e9af",
+        "ae6b51547ab8fcfe7e8c76061c9e8407328b5b7f8fb5d4b4fa86bd9225a67df1",
+        "bc3a36d326007c12d5fdaa59ef941d77f074a7ba38753689a58b99c790c8f6f1",
+        "6d77e72a1b29dc18667b6f3fe8a5a41b73500722d6c56f9cd3f06836b3e5de6a",
+        "448ff79c779e4ee544cfda3c8662d9d045a1f074a3a6927225601f7d7d324ce4",
+        "f052833db8a897cc4b30a4eccb72d4815808561509f13a23f3881c8f766a1cfe",
         "f8f7c40924ae70ceb90a5c2b902aa1b3c5a3205813edb638d14ee31b551205a9",
         "e6edeccfd4e61492e5b4e83e479dad7eeb470ae5a7049e03e5c4976bf6655ca7",
         "4db8fae5aa614ac763dd5ee29095a6a37dfc3061820a80a9bd6c913f4f4f076d"
       ],
-      "sourceHeadingCount": 30,
+      "sourceHeadingCount": 53,
       "contentParts": [
         {
           "path": "dae/zh-TW/installation/arch.md",
           "marker": "installation-0",
-          "sha256": "3203f8ac1d05dcbf2fc976059f01c65b40854270a5a9d493750d5e74e338350a"
+          "sha256": "25cb48be3b9693b93ec6cc1825ec3f6911e6f8a6527e36c6ad915e556a7ff957"
         },
         {
           "path": "dae/zh-TW/installation/docker.md",
           "marker": "installation-1",
-          "sha256": "4eb777b8b066e3d2d1644f3e9046b74d359703bf4cf937660f5b2a916ce636dc",
+          "sha256": "2f8bd6160ad80b15047eaa8b653912b79f7a8f8173150ffbe988fd12e6974cf5",
           "codeReplacements": [
             {
               "originalSha256": "3cdcfd566c8e2b402d3f52d64135a1a3f77595221d75f33734743ce87e320602",
@@ -1815,27 +2017,27 @@
         {
           "path": "dae/zh-TW/installation/manual-installation.md",
           "marker": "installation-2",
-          "sha256": "2f59ba6279befdd6d67e67b675603f185d3edc448e4b24eb7ea269655c5ca328"
+          "sha256": "2ee507fa5ddcb347fbadae631d731dca40520c1651a7a626f2a912304ee1dd09"
         },
         {
           "path": "dae/zh-TW/installation/fedora.md",
           "marker": "installation-4",
-          "sha256": "c72f84b0df8cb5b55650502fc836ec53d963a9ffb49e0fe6f24b5bd41691b8c9"
+          "sha256": "27b7a2f8f58f4fb907ea882c167e73a3933376ed9ec2bafe8e6e5ad381920b00"
         },
         {
           "path": "dae/zh-TW/installation/index.md",
           "marker": "installation-5",
-          "sha256": "b7e62c848e83bdaeec3615df92a5212a85224f2de818f5ad14df0c5bb148f302"
+          "sha256": "34c0164788a7754a8ee32fd3580fe7b2cea42b9c5b56f3b59d796e8d284e6b07"
         },
         {
           "path": "dae/zh-TW/installation/index.md",
           "marker": "installation-6",
-          "sha256": "e23b5ea14c395e5eec8b55ab263bae909b4f4ef125fd54bc0d87c666e9cd9485"
+          "sha256": "4389efc336e416973759ed034fe7abcd62ab5f83c7acef5a3c34f0e4c8ef017f"
         },
         {
           "path": "dae/zh-TW/start/requirements.md",
           "marker": "quick-start-requirements",
-          "sha256": "6af030ee6e51ff9704fffa320e37e84c4875a36ab18f4adca75d3b33eda24f25",
+          "sha256": "62df3166ed4b665422c1a89959a0f402fcbbeb549b0ccca76fe527389d95ad5a",
           "additionalCodeSha256": [
             "d59c3c91aa8c19ff0fd08dacba6679638e32d426b66681fedfebc2ed864fa1a6"
           ],
@@ -1853,17 +2055,17 @@
         {
           "path": "dae/zh-TW/start/minimal-configuration.md",
           "marker": "quick-start-minimal-configuration",
-          "sha256": "ebad792e758dc2c67a6be8763358b4298d06cf6845c7966c930c6bd83777a512"
+          "sha256": "4dc67d9eb3d7469f23531bb853ec8f470a32a349925df500ffb1c44ff3753c86"
         },
         {
           "path": "dae/zh-TW/start/pppoe.md",
           "marker": "quick-start-pppoe",
-          "sha256": "dfbf91a6bf866e53ee55fa67a7f7287674abe4ecd08bc0a0ed158d1d32f613ed"
+          "sha256": "f9f24da96bf0de62dd2242f8632edf88d1353b1be56ae59f8a0c8ab1b66b098f"
         },
         {
           "path": "dae/zh-TW/start/service-management.md",
           "marker": "shared-service-actions",
-          "sha256": "7f867658b7539d7f161b3d90142de47d904f86c0565a19b2a5e2165c497803ef",
+          "sha256": "d329d9c2539bf065c1addc8c2699de3c4c99fee8731a7f54316d146e497e59e6",
           "codeReplacements": [
             {
               "originalSha256": "f59849fb8eefbea7d22ef8dcd725da8be8548590f792506f1a631771bba5827c",
@@ -1903,6 +2105,112 @@
             "1a84a4bb7dbef4b07475c44d9dff719fd0fc6161c10611613fc14f3ebbcfcfa5"
           ],
           "reason": "Covered by the complete Gentoo installation guide."
+        },
+        {
+          "replacement": "dae/zh-TW/installation/debian.md",
+          "originalCodeSha256": [
+            "06c1f724ad2151b2d67b875b24a74cd18cdcc62039cfabe247a31432bb485a3b",
+            "1d67c39ffaf86238b987d9c9777107449cefb21868ce4314c2031d71ef965e3d",
+            "e2942f9616bf87f1e0177862d774746e2098479870e2a2f210b4e8782afe8d47",
+            "69f2211cc73c90002d0c743f248c30030f1d36ffdea58ed68fd1dfdc291fc2c1",
+            "37982724fa7fde7dea6cbe605cc31d61d70a9c7e06b1df5181ca04d66291fdba"
+          ],
+          "sha256": [
+            "005d1ea2482b1e049083f5ff6c078b1eb443066d5b9eb715b0d4f37aeff28eb3",
+            "1f987d89387f1a6fed6874ea06a51476004b108494622d5cf6cfdd8cbb859dd4",
+            "3157e948c0419bc3a4ef0715d1fb07e569de9a428fb370e14837a1b84ae2d4b8",
+            "5050a6a1b699985e757b629423470eb12926ea0fd95d810afd23f0e0c73398aa",
+            "5174615e9c72e23bd7f07a21f5256043004dc75c10a632bb60a5a3d907fd4bf5",
+            "6e88235d991ed09617556a43f5fc73c13df9e84bef879d00ebc7c108d44c9d3c",
+            "70de1dd5f1548f62fb26a66cbca75d7107c89acc71bf58b17ac548e8add38f4e",
+            "7a4894ea099cc5bbfa63d8fe0a91fd34391e9e6839b5c6e2c272e1c270f8cea6",
+            "95ad378583312e4fe63858e71731955e51b1f99a73525d54b6482bd1a637efdc",
+            "be689435e6e6448f003532d0d437f15b054c75e6451cc699731a12d0c8a10246"
+          ],
+          "reason": "Covered by the debian installation page; commands identical apart from sudo and root tabs."
+        },
+        {
+          "replacement": "dae/zh-TW/installation/fedora.md",
+          "originalCodeSha256": [
+            "0133aad665391d67ba7ac2c1b151e3b79029a33dfc8d49296451c78f96a5bd45",
+            "7ed5dccb74fc42ae4916009dce046167d83b1122748fb1453ebbc5b5813cba97"
+          ],
+          "sha256": [
+            "02e36df4c860146cec659c998fb28b70a577f5a255b3d2ef80def440dd11c39d",
+            "32a7be21949f9b92d00c0bd3b000ab4239752c5a0b20e69c5fd4e498561dc0b7",
+            "ea6fb6895bedf0877fc2cf5b1dd1ef3275eb0a429568c61bd0087f2da3ba6e36",
+            "f86afc3179210918d40602dffcac3401ce9bae597ce3b6df0698f009ba5a7048"
+          ],
+          "reason": "Covered by the fedora installation page; commands identical apart from sudo and root tabs."
+        },
+        {
+          "replacement": "dae/zh-TW/installation/opensuse.md",
+          "originalCodeSha256": [
+            "14d4c8e503ff63e8cdda0059a834b073d945f039fff86ba5c28730c55cc7df13",
+            "c580fdedf3a3395d83c47d945e2beb5b78b249dcbc32bdd5023b00b0aa5591b5"
+          ],
+          "sha256": [
+            "4ba6eff2c37f01bdf8279141469728030454ec56a0538ac43f224fa96190b2e0",
+            "531463ab4d54979280ed2d2d3f9c533e7f3c1ba299fdeb27f7c7a89c958e48d5",
+            "b9c059f5f98e5ce589196b9b93331aa1b8852ca6ec4fa3af71a2ba181bad6543",
+            "ebc1318ca27cba13b60bc213d01230b3a36e05819ab01487d95cf94db9ca0a76"
+          ],
+          "reason": "Covered by the opensuse installation page; commands identical apart from sudo and root tabs."
+        },
+        {
+          "replacement": "dae/zh-TW/installation/nix.md",
+          "originalCodeSha256": [
+            "a406ee75bdac1120c03689c8bdb7347591a4377d9bbcc166723c042149db2296",
+            "28eebfe4c3ba8e8ff72c8c2944f3e360e0f16577c75abbadf14d668e26688243",
+            "64c3d41e4696242b5d727f0615a6fb5a648d1eb531a35e729c3cad011475e9af",
+            "ae6b51547ab8fcfe7e8c76061c9e8407328b5b7f8fb5d4b4fa86bd9225a67df1",
+            "bc3a36d326007c12d5fdaa59ef941d77f074a7ba38753689a58b99c790c8f6f1",
+            "6d77e72a1b29dc18667b6f3fe8a5a41b73500722d6c56f9cd3f06836b3e5de6a",
+            "448ff79c779e4ee544cfda3c8662d9d045a1f074a3a6927225601f7d7d324ce4"
+          ],
+          "sha256": [
+            "202243e9ee428e360acbc8ef9b05b5b839e91fa912588da8414fdf0006f0e2bc",
+            "28eebfe4c3ba8e8ff72c8c2944f3e360e0f16577c75abbadf14d668e26688243",
+            "448ff79c779e4ee544cfda3c8662d9d045a1f074a3a6927225601f7d7d324ce4",
+            "470a6cfcede16163a0006f7c7fdd63b9c22f89b12a39459198b330cc4daf275f",
+            "64c3d41e4696242b5d727f0615a6fb5a648d1eb531a35e729c3cad011475e9af",
+            "6d77e72a1b29dc18667b6f3fe8a5a41b73500722d6c56f9cd3f06836b3e5de6a",
+            "a406ee75bdac1120c03689c8bdb7347591a4377d9bbcc166723c042149db2296",
+            "bc3a36d326007c12d5fdaa59ef941d77f074a7ba38753689a58b99c790c8f6f1"
+          ],
+          "reason": "Covered by the nix installation page; commands identical apart from sudo and root tabs."
+        }
+      ],
+      "codeReplacements": [
+        {
+          "originalSha256": "f052833db8a897cc4b30a4eccb72d4815808561509f13a23f3881c8f766a1cfe",
+          "sha256": [
+            "3c21a04389ea9285e91e6df5320f30ec5044f0c3afcbf3c37f5481e69901c9e6",
+            "9df4f4ecb25081b3c61fba3fc936cc8f183c49217ab1661f4868988210d48bb6"
+          ],
+          "reason": "Split the clone and the compose step; sudo and root tabs."
+        },
+        {
+          "originalSha256": "ac888a974192d1f59dad73c6f36d42400be1506b4c4750763588052e4603b1f8",
+          "sha256": [
+            "b05e6d6043c57d7c36083382300b9258fc0c296a6dad6015812261c4e3f4a852"
+          ],
+          "reason": "Same kernel configuration check written one pattern per line."
+        },
+        {
+          "originalSha256": "bdaf82dbd6504bfbba7fb3f4a8b532ac6eb577e580952296b16b51ebf839f777",
+          "sha256": [
+            "2dbc20fc984941cb0901a7308a7bc9f5aa47c794733fbe28b8cabcd3f6a9a8cb"
+          ],
+          "reason": "Same kernel configuration check written one pattern per line."
+        },
+        {
+          "originalSha256": "f59849fb8eefbea7d22ef8dcd725da8be8548590f792506f1a631771bba5827c",
+          "sha256": [
+            "0db59616a5fc6ffa37fb436c47de68b3c954cbf1dc760d5323af1901dc7c5a29",
+            "55b73f3a7d6b58f1e538f0fa9d2609c0eab3489a8bae76542ea90b564210f048"
+          ],
+          "reason": "Start and enable are separate steps in the shared service guide."
         }
       ]
     },
@@ -1913,7 +2221,7 @@
       "title": "DNS",
       "source": "docs/en/configuration/dns.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "a463bf9c19dbe1e73efd3473a44dc0e6e1b30db5c5624904856e5d5d3fcf4d26",
+      "sourceSha256": "b355044f1b08fc1f38eebf0f7f3175c0755f34e76812008c20e3e43141ac5136",
       "fallback": false,
       "sourceCodeSha256": [
         "4388f7c58486b9dd0dc5333354861141830d735c8ab675e4a531da8891bc7fc6",
@@ -1923,24 +2231,24 @@
         "82d0c430cdd0ebcfc81f4e25ea15bea59041a15e37398d23567cb7d41fcdc7d5",
         "2261d3645cef9e640f94b8020ac019f1f7577cdcd9d22f98f2b7c7ef1963c68c",
         "e13397201c7c4ff5f2f06e16dbeb6edfa18500f7f300aae591c2e2c675535af6",
-        "ee401a815fa4273e809e57dd9abf555e78372a1b67700a8774751a6fdb1e155d",
+        "6cdfe526ab8568596d589d12865084d20655f433ff3af3b4b9c54a3d70651c6d",
         "02b07d586ff7455903c96bb1ec1004d5c113d698a301e7f05bf4522beeabb225",
         "c0c2c1f62e2b1b1195f32766cf0edb5eaee68aa920c95a1d759fd393c2a57fde",
         "9a64c1827dc2f48f478ebadf72c36d07ea153deb42d759b8b6eac9ebf4feb635"
       ],
-      "sourceHeadingCount": 7,
+      "sourceHeadingCount": 14,
       "codeReplacements": [
         {
           "originalSha256": "c0c2c1f62e2b1b1195f32766cf0edb5eaee68aa920c95a1d759fd393c2a57fde",
           "sha256": [
-            "23866fbce0d53bb7db11c3f1a691ac5e3970881e5ff8a6f69b6c38e5d1d0434b"
+            "d01e65b6a16af6650d20273852e2ed52c8b1abc7009f35cedf07cd0f1249c044"
           ],
           "reason": "Name existing DNS templates by their original routing behavior."
         },
         {
           "originalSha256": "9a64c1827dc2f48f478ebadf72c36d07ea153deb42d759b8b6eac9ebf4feb635",
           "sha256": [
-            "528eb80452dcf16f0bc0f282bfefd1c903e0cbb3ad7bc19d0016b3c9319f8fae"
+            "dfed56df007d6556a775909924f632e22450fe76060c40889bcecf7526d3e9c9"
           ],
           "reason": "Name existing DNS templates by their original routing behavior."
         }
@@ -1953,7 +2261,7 @@
       "title": "外部 DNS",
       "source": "docs/en/configuration/external-dns.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "e68b8f0c0d54f96cb6452714ba2f11e36f821acd2bff28a4e4b87fffa3a195e5",
+      "sourceSha256": "69c14f9046a99d9e32e7cf2eb1bd7f4831cfaca803a5740de297083c54ef2a99",
       "fallback": false,
       "sourceCodeSha256": [
         "9e08f79b14dc5f44d94526d71bca829abda9b33c5a9ee5f0b442ae6023092823",
@@ -1976,14 +2284,14 @@
       "title": "遊戲路由",
       "source": "docs/en/configuration/gaming-oriented-routing.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "34d6c7736eeb3284258ebaa6b28c8abf8db20fff044fbe55e574008d52b16cf0",
+      "sourceSha256": "e1265a3884069283624f6a25c84610721b2457dfba201c95bbdb9e045e808044",
       "fallback": false,
       "sourceCodeSha256": [
         "9c22e26ad0ab6869433dd045c520742ceeba6f7e77ac1dff0e60d7f3cf2fd908",
         "3fd5527cfe03b971e2422bc3f96737a1e2ea63a0eef9cf6122b992dc10d6e055",
         "4e23a38cbfe8ec841440cafc3ccb3a662faec1b341e751dabd45269396a42f4e"
       ],
-      "sourceHeadingCount": 0
+      "sourceHeadingCount": 4
     },
     {
       "locale": "zh-TW",
@@ -1992,41 +2300,33 @@
       "title": "路由規則",
       "source": "docs/en/configuration/routing.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "c37a8f1b581c64e7e3d5f274e8e14b7cf307de6d7d01a111ac97fe7585c3502b",
+      "sourceSha256": "e0d55a69c23b1ef2651d2a0f849d53767e66e9843f7d5746db9135f39d9d8005",
       "fallback": false,
       "sourceCodeSha256": [
-        "9ea3b8a63a868e89c56b54ba803f94208ac52d1b4013079c0dd798241338b7a0",
-        "0e4446bbb2d99d583428d2a5c0efc725ea241eb6f553a18aea18ca20f2a11324"
+        "c2fb742030963aa00bdfa151eb6d001302636cb2e8769de1a3307e8a7edc4c03",
+        "4503f3aa0d56a0fd2ba4afb1e9c71f8f3f4a4e124af1dff025aa948a55e93814",
+        "9df650f45b0ab812165de69d492368bc25ab59397a61e7d8fce29aed825f707a",
+        "37340473726632d7687d4bb4961c0f253712d8997390c76095a3c9a0f9f71aca",
+        "9abcdcafc57dd2d1f1ddeeae5dc703d559c577dfcc57467a61f0be67c0af7658",
+        "2930e37ac784e471700b8e6975d7f79b8feb90fd398b9807d01784a3a39c3e6d",
+        "5d073aaa104806f8d759e55aef4a90be473f52ea0d311240a11501b6b0ab9955",
+        "d91dafd1aeb49f468d0342bada96bad7da5b8ede1669e491979f5c6c0132da9d",
+        "8e7042a44cf9ce60d2f6e74ad807b9ad064eca1eec99a7eeee659374d4d5fcd4",
+        "ef4fdfa7a2baaa151bfd46b33caa638c66b2d7c51af73b80ffbe7b8aa76aaab5",
+        "e4e830168062f9dc13f074a78b006e1365ebd1be4663ec37b21121cd062a818a",
+        "79b422138c425cbfe7c86bb7bc87d27d7eb06fe1c63b08e80e331642bce5acd1",
+        "fb782f2e1eb0b99e9d8da667394e906b5c6aadc77d5d9a3a02698229284db928",
+        "ca0a6520c69dbf5f2998e58088a6b55bb84c2b040567073fb9c368585147ad46",
+        "ba08b87e3a526961243bbc879a26816bda6c4e81fddca796506b4b22c7be471f",
+        "38bbda32ef1357f32fda204eb58254747d47cf473ad8dfeff27d2d31e6ba077b",
+        "dd56e6d303a446149930f51d0bb4930178acf3238d8f56b75bd909bc49b90dd0",
+        "e8c82a4da10c1725e8fa0410e0e71c1657b508cee80977a12b0d05b77951cfc9",
+        "b6b2b60d7f5531f71b386010ba35f6db4baaf68577708ff3bcad0bf5be32b641",
+        "85c8411f4746f58436bc6ee18cbc1a555b3931ee24e6c251c178d24b21a074c2",
+        "0e4446bbb2d99d583428d2a5c0efc725ea241eb6f553a18aea18ca20f2a11324",
+        "a46c2700eace32a2d2e22433b3f52d4e2915f5128a6031b70b456fc2997c84f6"
       ],
-      "sourceHeadingCount": 45,
-      "codeReplacements": [
-        {
-          "originalSha256": "9ea3b8a63a868e89c56b54ba803f94208ac52d1b4013079c0dd798241338b7a0",
-          "sha256": [
-            "c2fb742030963aa00bdfa151eb6d001302636cb2e8769de1a3307e8a7edc4c03",
-            "4503f3aa0d56a0fd2ba4afb1e9c71f8f3f4a4e124af1dff025aa948a55e93814",
-            "9df650f45b0ab812165de69d492368bc25ab59397a61e7d8fce29aed825f707a",
-            "37340473726632d7687d4bb4961c0f253712d8997390c76095a3c9a0f9f71aca",
-            "9abcdcafc57dd2d1f1ddeeae5dc703d559c577dfcc57467a61f0be67c0af7658",
-            "2930e37ac784e471700b8e6975d7f79b8feb90fd398b9807d01784a3a39c3e6d",
-            "5d073aaa104806f8d759e55aef4a90be473f52ea0d311240a11501b6b0ab9955",
-            "d91dafd1aeb49f468d0342bada96bad7da5b8ede1669e491979f5c6c0132da9d",
-            "8e7042a44cf9ce60d2f6e74ad807b9ad064eca1eec99a7eeee659374d4d5fcd4",
-            "ef4fdfa7a2baaa151bfd46b33caa638c66b2d7c51af73b80ffbe7b8aa76aaab5",
-            "e4e830168062f9dc13f074a78b006e1365ebd1be4663ec37b21121cd062a818a",
-            "79b422138c425cbfe7c86bb7bc87d27d7eb06fe1c63b08e80e331642bce5acd1",
-            "fb782f2e1eb0b99e9d8da667394e906b5c6aadc77d5d9a3a02698229284db928",
-            "ca0a6520c69dbf5f2998e58088a6b55bb84c2b040567073fb9c368585147ad46",
-            "ba08b87e3a526961243bbc879a26816bda6c4e81fddca796506b4b22c7be471f",
-            "38bbda32ef1357f32fda204eb58254747d47cf473ad8dfeff27d2d31e6ba077b",
-            "dd56e6d303a446149930f51d0bb4930178acf3238d8f56b75bd909bc49b90dd0",
-            "e8c82a4da10c1725e8fa0410e0e71c1657b508cee80977a12b0d05b77951cfc9",
-            "b6b2b60d7f5531f71b386010ba35f6db4baaf68577708ff3bcad0bf5be32b641",
-            "85c8411f4746f58436bc6ee18cbc1a555b3931ee24e6c251c178d24b21a074c2"
-          ],
-          "reason": "Split the existing reference at its source comment headings; preserve every rule and comment."
-        }
-      ]
+      "sourceHeadingCount": 66
     },
     {
       "locale": "zh-TW",
@@ -2035,7 +2335,7 @@
       "title": "拆分設定檔",
       "source": "docs/en/configuration/separate-config.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "e681cc3158f4d547ba7bd3b03eab807e1a8d419e34314b0d76f21ede5a0547ce",
+      "sourceSha256": "029e03a8bfab8716438f9a7f996c76007b80f77caad28507d11ac3632f010f35",
       "fallback": false,
       "sourceCodeSha256": [
         "b7907210caca622078bed5c63b884867b4858cb611bd1627b30f635e0b114ac4",
@@ -2092,7 +2392,7 @@
       "title": "提交訊息規範",
       "source": "docs/en/development/commit-msg-guide.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "988c9b74cc311bef3d273d472f2c7da27041227e21c8b2ac47c934f56b21e513",
+      "sourceSha256": "8082967f18f26fc0cde756d19872e647a2c38dedef487a81ae99316ab09dec0a",
       "fallback": false,
       "sourceCodeSha256": [
         "a91a66533505deee4fd8b7d3a95cf6936a3fa30707f2a0ab4ca494fc481122bd",
@@ -2155,7 +2455,7 @@
       "title": "運作原理",
       "source": "docs/en/how-it-works.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "f0e4e60fbdfaf5715e983e8259df1f59888ed61fa3cb3faec50b758e7fcef226",
+      "sourceSha256": "f1fb5e3ca0b22181d86ce9c43190d55533c5f842c6986598c29380b0f6879fa0",
       "fallback": false,
       "sourceCodeSha256": [],
       "sourceHeadingCount": 5
@@ -2167,7 +2467,7 @@
       "title": "代理協定",
       "source": "docs/en/proxy-protocols.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "1f24ed8382dd80fa316427c3ca48459b5882c2894cfe4d24624dd508f71e4a49",
+      "sourceSha256": "2b59587f6af65c9dd00c62a9fc951dad59f35992e1ab35cacc516c1329ec5ccd",
       "fallback": false,
       "sourceCodeSha256": [
         "d1294d6478e2883a161db43b99f38b59034c63ed1e2fa38dea0901a15a86bc77",
@@ -2176,7 +2476,7 @@
         "2d6c175c8ce05bd0925de4a58d73f22f9eaf3abcbb9c7f4d5d007a5c8ac893b2",
         "5d3afdc0a642f12574eedd679f5fe9ecf9ed9e91f84a53d489b97e9a5120dc42"
       ],
-      "sourceHeadingCount": 4
+      "sourceHeadingCount": 9
     },
     {
       "locale": "zh-TW",
@@ -2185,7 +2485,7 @@
       "title": "疑難排解",
       "source": "docs/en/troubleshooting.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "c2bfa88d7833834dfa03448cef0aceea31906f4759d0342349aeb543f80511d3",
+      "sourceSha256": "849e3fb39d20cd9c79d52851967738afbaf40aa7cd83dac2ff878da75e892f85",
       "fallback": false,
       "sourceCodeSha256": [
         "fd6f001650af1cb2a66b53fc589335deb7fb7a509689d9682a73c892f0eca33d",
@@ -2203,7 +2503,7 @@
       "title": "OPNsense",
       "source": "docs/en/tutorials/dae-with-opnsense.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "28cf04a221ac7794c493f96a19cd1986bc04f2898010709ebf4084e877856c0d",
+      "sourceSha256": "2e5d3da291da38e8b2217bf5a1b562e358b4d7a430dcc18a242cff686d8bc261",
       "fallback": false,
       "sourceCodeSha256": [
         "bbed03136e29b6091dd0a39c26c80f7041ce82b4325b05c0b12de6521348ebab",
@@ -2218,7 +2518,7 @@
       "title": "Alpine Linux",
       "source": "docs/en/tutorials/run-on-alpine.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "c42577eb29503c226e18692054d70d15428b704bc9badbf139e81b8788ea8c88",
+      "sourceSha256": "0cefbbcb6f9624f428bd18eabee7aeb2069d77ed97949beb25bc43cf8ea7f5d0",
       "fallback": false,
       "sourceCodeSha256": [
         "8db29ba75767cf7c110565d66ca76011969121b567184934fc77a7fb78fe7b62",
@@ -2282,7 +2582,7 @@
         {
           "path": "dae/zh-TW/start/service-management.md",
           "marker": "shared-service-actions",
-          "sha256": "7f867658b7539d7f161b3d90142de47d904f86c0565a19b2a5e2165c497803ef",
+          "sha256": "d329d9c2539bf065c1addc8c2699de3c4c99fee8731a7f54316d146e497e59e6",
           "additionalCodeSha256": [
             "ffbcd35d8d142d7a0a73e9ff632a012ccdeb3c69d364f2d4dcf1e7b7294eda60",
             "e5605e93c76e8795b4242ea7581a032aae84e70157e3b8cdcb151f1e2eb12c2f",
@@ -2311,12 +2611,12 @@
       "title": "CentOS 7",
       "source": "docs/en/tutorials/run-on-centos7.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "e330c57c33a3f978cd37d922319a634fe12d5a21ad4027040c4874509f08f30b",
+      "sourceSha256": "305bf841d594aaf1f18f104d3fa774e4f15905a4d0401b30e19779dbabb0a98f",
       "fallback": false,
       "sourceCodeSha256": [
-        "2261090ccf2698f759d42deec9588a964bddb73acd0c7b9bb3b50499d27042d8",
-        "2a8d66272e4f512ffebe154c165052f4c3d65ff23aa09d66c7ada6571ad438a9",
-        "646451d17443d504564c83bef54841991469cf87b2bb560d57babbc2fe830732",
+        "21827a2afe5f299596c0c47dcb532246351a5438949501b121da6b50bfa70064",
+        "877693151f6dab83917af33fa458c779a782615bd2eb8b0965e57e51887e8c9a",
+        "8c8c22f5e1640c0ad1d58784aecc989431c8d67289c83a319e27e835b177b942",
         "1ae858ce79ca53f6afce2098298df523b0238d9492f8738541b0394f02600d50",
         "442c74d5fcd8f3e8c2133cbcc26208fd71d68f3d9b194cd3585a8984426f85d6",
         "8c4d7df9aefd524bf0d08ee421e736b75539ada36d481eb6e55b38840b986da7",
@@ -2331,44 +2631,30 @@
       "title": "macOS / Lima",
       "source": "docs/en/tutorials/run-on-macos.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "4de17a1352ce94f4e8358961b9dfc2295475a1e3d3b0e3946f9014b795bf56e9",
+      "sourceSha256": "f4cd6dfbd8305ae487a88f3b93a4e2d837fe5fe77c60658fa345f03472d8804f",
       "fallback": false,
       "sourceCodeSha256": [
         "4ae5c18ceb693cbd1c5e09b58850d4962d66d96ce1aa0a8cad14e9e4665873d6",
         "ed909decb008fca62d8ae06efc870815264240411a1c37ce8ed56094a51c0404",
         "81629fc5a9b18e632972706ca75492a4eda8adc509c40d1bd477b2400d16dc30",
         "8d368714a988d82c537128a9303b1140aa65d52de0431b881de0e7a319f16a0f",
-        "4cea15db5d38ecfa93af3348c730ba631b5ddc4683cdfd275b196411485e4722",
+        "00b87a54918133265334b9ebe8906cd619cf572064a861a8feac7e441eff63b0",
         "97c32d95e21326a8175b232b2affdb8693a3168ef8328ab045352ef1d4946012",
         "fefde67de33923b80cd4b732f9e6f40ac981e9145ae8362a3783e8584b5e68e7",
         "f75c8f38cfd081c3ecf54c15d6c7871373e45428229f1ccd612cb3e15920120e",
         "f0e27fb44e21adbb92b231b916a2e65e67d2af141095e4ab738734935d3f3e45",
-        "6dcda0132a8403082411245a0bb203364b5c641ec8cf41ed1de92269b061eae3",
+        "fa35529c5b949f07fbdfbf06aae0bdaf4756864be72666d7cbe982acd4551e6d",
         "3aea354fee18f0e4c15ce230d8a7674a4a1c4afe5abbba1a3ff089b9d9db88e8",
-        "8ce1aec19d37987d7c8a6678f94bd9e5e8d34c4d6347791ed3ce251e2325f6c8",
+        "4ad5c2892a72a492a0240a30393a3cb449b33a2558e8a8c148b6a99a9134be73",
         "b37d77c0586944e40927b39a35d8764ba40fae4941ee2c77e0b549e1c14852c4"
       ],
-      "sourceHeadingCount": 29,
+      "sourceHeadingCount": 38,
       "codeReplacements": [
         {
           "originalSha256": "fefde67de33923b80cd4b732f9e6f40ac981e9145ae8362a3783e8584b5e68e7",
           "sha256": [
             "3b7567feaff4de2916cb70d4edb8a4e5cf309b8efcdf04ab67d7d51d662e4bf1",
             "06a13dac4e1a50917b1e139dfa8cb7c978a053cfe2bc9c5d063c41d91d0ecda7"
-          ],
-          "reason": "Correct quoted-heredoc XML and subnet-mask syntax; distinguish host and guest shell steps."
-        },
-        {
-          "originalSha256": "6dcda0132a8403082411245a0bb203364b5c641ec8cf41ed1de92269b061eae3",
-          "sha256": [
-            "fa35529c5b949f07fbdfbf06aae0bdaf4756864be72666d7cbe982acd4551e6d"
-          ],
-          "reason": "Correct quoted-heredoc XML and subnet-mask syntax; distinguish host and guest shell steps."
-        },
-        {
-          "originalSha256": "8ce1aec19d37987d7c8a6678f94bd9e5e8d34c4d6347791ed3ce251e2325f6c8",
-          "sha256": [
-            "4ad5c2892a72a492a0240a30393a3cb449b33a2558e8a8c148b6a99a9134be73"
           ],
           "reason": "Correct quoted-heredoc XML and subnet-mask syntax; distinguish host and guest shell steps."
         }
@@ -2381,11 +2667,11 @@
       "title": "從原始碼建置",
       "source": "docs/en/user-guide/build-by-yourself.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "65ed1f6bd2d97409c0be084264c7a7d037bf94d44a379c5eb61477876f83046b",
+      "sourceSha256": "c5d34099b100d1ada3ff048915b93c4aefcb1ebd6208e3783a6d9ab2e039ab17",
       "fallback": false,
       "sourceCodeSha256": [
         "f90cd44e2c6236eaeefef8cccfd73ab5cb32ab879bca1350a4e3dbb29d5dbffb",
-        "8af544575d6dcc3848dc81c4b8b0bea84fcc0d1164694793ccf2901dd2d3df71",
+        "bdfd72614679ac69a2f0490884203fdc3d96fc591ccd6902003878891c3816f3",
         "257b2595bd1604abcba942d1455108811f06b14ec23833dfdb295a1d69dfa78e",
         "f79a4907eddbde76921f079c110541c1bea72e75862ce07f6f2bb9450f416edd",
         "e43402384acb7d2b3a526c13e42b5650b884fa1dde4b76e491fcb590462347b0",
@@ -2393,24 +2679,6 @@
       ],
       "sourceHeadingCount": 13,
       "codeReplacements": [
-        {
-          "originalSha256": "f90cd44e2c6236eaeefef8cccfd73ab5cb32ab879bca1350a4e3dbb29d5dbffb",
-          "sha256": [
-            "28f010162451ef630f670f996fec21e6209ae60f2c8c6bcb83b75b731f3f0fd1"
-          ],
-          "reason": "Dependency requirements are reference text, not shell commands. Match go.mod Go 1.26.0 and the CLANG variable read by the pinned Makefile."
-        },
-        {
-          "originalSha256": "8af544575d6dcc3848dc81c4b8b0bea84fcc0d1164694793ccf2901dd2d3df71",
-          "sha256": [
-            "4032eb1906ac7c9199ab384e9e9aee1b2fad2362a54a93588c45940d73af8e0d",
-            "e04ac2efa806de7e02d72113296d90b3f5d7cdbfd01b463c33ffe7ff8c84e828",
-            "4ab0ddb93a3dc833114a6e1e0c326357360865f5b8588998a1e4f4bc9bf5046f",
-            "aeb05bbd5b218cac2e2747a06ee06fdb5942b17c411f4a12ee372f516dc8b2de",
-            "43907024e73e7510278bfffd18ad2556d9fd3f664b71ebcefa3881b8fd23dd96"
-          ],
-          "reason": "Separate shared checkout steps and activate the source build alternatives in named tabs. Match go.mod Go 1.26.0 and the CLANG variable read by the pinned Makefile."
-        },
         {
           "originalSha256": "f79a4907eddbde76921f079c110541c1bea72e75862ce07f6f2bb9450f416edd",
           "sha256": [
@@ -2426,6 +2694,17 @@
             "d8b8c9c95a66e0b1805cc03a6363f65e0deca2f7da2031aa0fdabbcc368ce885"
           ],
           "reason": "Show explicit sudo and root runtime commands."
+        },
+        {
+          "originalSha256": "bdfd72614679ac69a2f0490884203fdc3d96fc591ccd6902003878891c3816f3",
+          "sha256": [
+            "4032eb1906ac7c9199ab384e9e9aee1b2fad2362a54a93588c45940d73af8e0d",
+            "c1f97bed7e1710d3ce634441ae781c345f1068d402786dfdde9b61da4f27da43",
+            "241a1a76500cddffec27028f686a1cdfc6bb858ee59be44d745b17d879575828",
+            "aeb05bbd5b218cac2e2747a06ee06fdb5942b17c411f4a12ee372f516dc8b2de",
+            "43907024e73e7510278bfffd18ad2556d9fd3f664b71ebcefa3881b8fd23dd96"
+          ],
+          "reason": "Separate shared checkout steps and activate the source build alternatives in named tabs."
         }
       ]
     },
@@ -2436,14 +2715,14 @@
       "title": "核心參數",
       "source": "docs/en/user-guide/kernel-parameters.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "75868187378ab8e7d8577a7c4b463987055c79aaaae87282f9fbc14094118970",
+      "sourceSha256": "73a7f32e94bf8a84d74a2fd365409129a04ba8e36b3d1dcb544d5ee7db9d4e2d",
       "fallback": false,
       "sourceCodeSha256": [
         "62e5924c418b25e062840874722ca12986d281dbbea6c57beb0b880aced934d8",
-        "efd485bdd263cb46b71639eafd0090f1d726ea05835c5b5e2c61ec32e95ce4ce",
+        "b347ce0b60091c9b2e06b326df0224c45f506d27c70ed80c772204e0cea464ef",
         "cc21e75349d8be823b41e206bcb2d79e26d7528c195df6eab06d6b8c99601a4a"
       ],
-      "sourceHeadingCount": 1,
+      "sourceHeadingCount": 4,
       "codeReplacements": [
         {
           "originalSha256": "62e5924c418b25e062840874722ca12986d281dbbea6c57beb0b880aced934d8",
@@ -2454,20 +2733,20 @@
           "reason": "Add privilege variants; write both forwarding values together to prevent tee from overwriting the first value."
         },
         {
-          "originalSha256": "efd485bdd263cb46b71639eafd0090f1d726ea05835c5b5e2c61ec32e95ce4ce",
-          "sha256": [
-            "172284d51b1213aa07e8b2b6b0fa07fd70c12f016b429db3836dc3ab31b8e42b",
-            "f25368ea1ce94e2dbd7f91c085b251570dbb6269209121e4245e02f237fa519f"
-          ],
-          "reason": "Add privilege variants; write both forwarding values together to prevent tee from overwriting the first value."
-        },
-        {
           "originalSha256": "cc21e75349d8be823b41e206bcb2d79e26d7528c195df6eab06d6b8c99601a4a",
           "sha256": [
             "c1d22842a4545d22eec0f0766431e1d6e2c7e85b931324354c60347d7204a191",
             "466c33c8896d129a3ef42a0cc4cae644962cfa004ed7506f7b20e0cd61f91dea"
           ],
           "reason": "Add privilege variants; write both forwarding values together to prevent tee from overwriting the first value."
+        },
+        {
+          "originalSha256": "b347ce0b60091c9b2e06b326df0224c45f506d27c70ed80c772204e0cea464ef",
+          "sha256": [
+            "172284d51b1213aa07e8b2b6b0fa07fd70c12f016b429db3836dc3ab31b8e42b",
+            "f25368ea1ce94e2dbd7f91c085b251570dbb6269209121e4245e02f237fa519f"
+          ],
+          "reason": "Heredoc form with sudo and root tabs; writes the same two lines."
         }
       ]
     },
@@ -2478,12 +2757,12 @@
       "title": "升級核心",
       "source": "docs/en/user-guide/kernel-upgrade.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "2a149ffbb148b4ab4640d2768e41bda8750a236759f0c92e4a96c8e628392d38",
+      "sourceSha256": "e5e1eac4ec81da22e279ffb8ae09c3e232feb092b5389b42cb2e162c9702b132",
       "fallback": false,
       "sourceCodeSha256": [
         "2b2338b0a0d47244ab48d08ccf72734cfa35b5f859ae1df9a9480904fd61c1ba",
         "ed86528af87ce34810cc91604ddf70d9ed126666aa45568da746808e376b2e67",
-        "61ae62869a0af1af9fb028c37ecf12121cb5316e3c9b82c51b65bb04043134d8",
+        "f0d5d1dd919f9e9e32442c6a02428b2d6765f1a953b4cd62ccbc03748e271192",
         "ed86528af87ce34810cc91604ddf70d9ed126666aa45568da746808e376b2e67",
         "7b7532d07b054309d8fd71d5df8485b9905101c397014521da8b0cb984785eb6",
         "39eb48e89339686885b14fb09ba03490c5c379728b47871276805e456f96cb61",
@@ -2506,14 +2785,6 @@
             "c2cee3d88c80e6c8b639b7607f82a9f3e510b57cfb660a6ce53c069506b4f83c",
             "2b25c95cedbe394261c7d4d218ab5ad39bd79d007db6f7e815244eee3130d1d5",
             "d59c3c91aa8c19ff0fd08dacba6679638e32d426b66681fedfebc2ed864fa1a6"
-          ],
-          "reason": "Correct the sources.list file path, refresh indexes after adding the source, show privilege variants, and separate post-reboot verification."
-        },
-        {
-          "originalSha256": "61ae62869a0af1af9fb028c37ecf12121cb5316e3c9b82c51b65bb04043134d8",
-          "sha256": [
-            "88e88cf3e084d798466ad8804d4781ca794532edae922173f55e71b1b9fe73c6",
-            "905864cd519b38a2afa3105902b8af362a0aa44cb1827d35b0a3072ed54ed39f"
           ],
           "reason": "Correct the sources.list file path, refresh indexes after adding the source, show privilege variants, and separate post-reboot verification."
         },
@@ -2541,6 +2812,14 @@
             "d7e859608ffe6816504dd0ced099ccf59a778b8df7fcbf522ede2d33f654b508"
           ],
           "reason": "Correct the sources.list file path, refresh indexes after adding the source, show privilege variants, and separate post-reboot verification."
+        },
+        {
+          "originalSha256": "f0d5d1dd919f9e9e32442c6a02428b2d6765f1a953b4cd62ccbc03748e271192",
+          "sha256": [
+            "638e12efe9b029126570f877d7d31579409704a1d5045271bf86cc74d5112551",
+            "923c3d8759642697c9846a21fbe4e2faac42d1a457d795a5e58ee986dff2c2ca"
+          ],
+          "reason": "Site presentation: sudo and root tabs; the command text is unchanged."
         }
       ]
     },
@@ -2551,7 +2830,7 @@
       "title": "重新載入與暫停",
       "source": "docs/en/user-guide/reload-and-suspend.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "926e3804fe1462aad99e01a01cb3e1603cde2c19e012d16486578d9eaf37ca3a",
+      "sourceSha256": "49618ceb30fb87edea001ac942f08a7b2de9d22b4ee6e9819459e9abc7591010",
       "fallback": false,
       "sourceCodeSha256": [
         "190cea9384d4eaaf1321679491681c1dbe22d947634db8093d95c410d4ba8f8f",
@@ -2585,7 +2864,7 @@
       "title": "以服務執行",
       "source": "docs/en/user-guide/run-as-daemon.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "9b0881d20983a9b440937f967873b371357f998cbb24dedc6c01bcb85b4edfb5",
+      "sourceSha256": "ab80b74b26431b90fbf504c9a3131293d618b35191832c6a5bfcbadd35bfbb5a",
       "fallback": false,
       "sourceCodeSha256": [
         "f79a4907eddbde76921f079c110541c1bea72e75862ce07f6f2bb9450f416edd",

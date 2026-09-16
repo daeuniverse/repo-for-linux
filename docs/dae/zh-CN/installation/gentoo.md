@@ -2,7 +2,7 @@
 
 Gentoo 用户可通过 [gentoo-zh overlay](https://github.com/gentoo-zh/overlay/tree/master/net-proxy/dae) 安装 `net-proxy/dae`。该软件包由 Gentoo 社区维护，使用 Portage 管理。本网站的 APT/RPM 版本表对应另一个软件源。
 
-::: info 执行身份与架构
+::: info 适用架构
 测试关键字示例适用于 amd64 系统。
 :::
 
@@ -14,7 +14,7 @@ Gentoo 用户可通过 [gentoo-zh overlay](https://github.com/gentoo-zh/overlay/
 
 ## 2. 接受测试关键字
 
-使用稳定关键字的 amd64 系统需要在 `package.accept_keywords` 中添加以下配置。如果 `/etc/portage/package.accept_keywords` 是目录，可写入其中的 `/etc/portage/package.accept_keywords/dae` 文件；如果它是文件，则直接在该文件中添加。
+使用稳定关键字的 amd64 系统需要在 `package.accept_keywords` 中添加以下配置。如果 `/etc/portage/package.accept_keywords` 是目录，可写入其中的 `dae` 文件。如果它是文件，则直接在该文件中添加。
 
 ```text
 net-proxy/dae::gentoo-zh ~amd64
@@ -41,11 +41,11 @@ emerge --ask net-proxy/dae::gentoo-zh
 ### 可选：镜像与二进制包
 
 ::: details 镜像与二进制包
-Distfiles 镜像、binhost 频道和签名验证的配置方法见 [gentoo-zh overlay 文档](https://gentoozh.org/overlay/)。可用的二进制包以[软件包列表](https://distfiles.gentoozh.org/packages)为准；没有合适的二进制包时，Portage 可以从源代码编译。
+Distfiles 镜像、binhost 频道和签名验证的配置方法见 [gentoo-zh overlay 文档](https://gentoozh.org/overlay/)。可用的二进制包以[二进制包列表](https://distfiles.gentoozh.org/packages)为准。没有合适的二进制包时，Portage 可以从源代码编译。
 :::
 
 完成[最小配置](/zh-CN/dae/start/minimal-configuration)后，请参阅[服务管理](/zh-CN/dae/start/service-management)，启动 dae、设置开机启动、重载或重新启动服务。
 
 ---
 
-来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/README.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。
+来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/README.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。

@@ -4,16 +4,16 @@ title: "Split configuration files"
 
 <div v-pre lang="en-US">
 
-# Split configuration files
+# Separate Configuration Files
 
-Sometimes you want to break your configuration file into several files. It may be useful in the following cases:
+Split your configuration into several files when you want to:
 
-1. You want to switch nodes via modify the config file using tools like `sed`.
-2. You copy other's configuration file and you want to overwrite some parts of it.
+- Switch nodes by modifying a configuration file with tools such as `sed`.
+- Override parts of someone else's configuration.
 
 ## Example
 
-Directory Structure:
+Directory structure:
 
 ```sh
 # tree /etc/dae
@@ -25,15 +25,11 @@ Directory Structure:
 └── config.dae
 ```
 
-Config files:
+`include` paths follow these rules:
 
-Notes about `include` paths:
-
-- Relative paths (for example `config.d/*.dae`) are resolved relative to the directory of the *entry* config file (the file passed to `dae -c ...`), not relative to the current working directory.
-- Absolute paths (for example `/etc/dae/config.d/*.dae`) are used as-is.
-- For security reasons, dae only allows included files under the entry config directory.
-
-These four files work together. Each tab shows a different file, not an alternative configuration.
+- Relative paths, such as `config.d/*.dae`, resolve relative to the entry configuration file's directory, not the current working directory. The entry file is the file passed to `dae -c ...`.
+- Absolute paths, such as `/etc/dae/config.d/*.dae`, are used as-is.
+- For security, dae only allows included files under the entry configuration directory.
 
 ::: code-group
 
@@ -138,7 +134,7 @@ routing {
 
 :::
 
-Then run `dae` via:
+Run dae with the entry configuration file:
 
 ::: code-group
 
@@ -156,4 +152,4 @@ dae run -c /etc/dae/config.dae
 
 ---
 
-Source: [dae upstream](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/configuration/separate-config.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).
+Source: [dae upstream](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/configuration/separate-config.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).

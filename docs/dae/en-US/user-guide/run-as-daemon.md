@@ -4,15 +4,16 @@ title: "Run as a service"
 
 <div v-pre lang="en-US">
 
-# Run as a service
+# Run dae as a Daemon Service
 
-This guide applies to systems using [systemd](https://wiki.debian.org/systemd). It covers starting dae as a service and enabling it at boot.
+Run dae as a [systemd](https://wiki.debian.org/systemd) service to start it at boot.
+This requires a distribution that uses systemd as its service manager.
 
 ## Prerequisites
 
 ### Optional Geo Data Files
 
-For more convenient traffic split, dae relies on the following data sources, [geoip.dat](https://github.com/v2fly/geoip/releases/latest) and [geosite.dat](https://github.com/v2fly/domain-list-community/releases/latest).
+For traffic splitting, dae uses [geoip.dat](https://github.com/v2fly/geoip/releases/latest) and [geosite.dat](https://github.com/v2fly/domain-list-community/releases/latest).
 
 ::: code-group
 
@@ -36,9 +37,7 @@ popd
 
 ### Configuration File
 
-> **Note**: The config file is recommended to save under `/etc/dae`
-
-Download the sample config file:
+Download the sample configuration to the recommended directory, `/etc/dae`:
 
 ::: code-group
 
@@ -56,15 +55,15 @@ chmod 600 /etc/dae/config.dae
 
 :::
 
-Before starting the service, edit `/etc/dae/config.dae` to set the network interfaces and subscription or node values. See [Minimal configuration](/dae/start/minimal-configuration).
+## Download Precompiled Binaries
 
-## Download pre-compiled binaries
+[Release binaries](https://github.com/daeuniverse/dae/releases) and
+[nightly builds](https://github.com/daeuniverse/dae/actions/workflows/build-nightly.yml) are available.
 
-Releases are available in <https://github.com/daeuniverse/dae/releases>
-
-> **Note**: If you would like to get a taste of new features, there are nightly (latest) builds available. Most of the time, newly proposed changes will be included in `PRs` and will be exported as cross-platform executable binaries in builds (GitHub Action Workflow Build). Noted that newly introduced features are sometimes buggy, do it at your own risk. However, we still highly encourage you to check out our latest builds as it may help us further analyze features stability and resolve potential bugs accordingly.
-
-Nightly builds are available in <https://github.com/daeuniverse/dae/actions/workflows/build-nightly.yml>
+Nightly builds let you try new features. Proposed changes are usually submitted
+in PRs and built into cross-platform binaries by GitHub Actions. New features
+may contain bugs, so use these builds at your own risk. Testing them helps
+assess feature stability and identify bugs.
 
 ::: code-group
 
@@ -79,8 +78,6 @@ install -Dm755 dae /usr/bin/
 ```
 
 :::
-
-### Check the binary
 
 ```shell
 # helper
@@ -105,8 +102,6 @@ curl -L -o /etc/systemd/system/dae.service https://github.com/daeuniverse/dae/ra
 
 :::
 
-### Start and enable the service
-
 ::: code-group
 
 ```shell [sudo]
@@ -123,18 +118,20 @@ systemctl status dae
 
 :::
 
-## Memory and transparent huge pages
+## Memory and Transparent Huge Pages
 
-`GOMEMLIMIT` is derived from the process's cgroup ceiling, not from a unit
-setting: only `memory.max` participates (the bundled unit no longer sets
-`MemoryHigh`, which the runtime cannot observe as a bound), the derived soft
-limit is 90% of that ceiling, and an explicit `GOMEMLIMIT` environment variable
-always wins.
+`GOMEMLIMIT` defaults to 90% of the process's cgroup memory ceiling.
+Only `memory.max` determines this ceiling. The bundled unit no longer sets
+`MemoryHigh`, which the runtime cannot use as a bound.
+An explicit `GOMEMLIMIT` environment variable always takes precedence.
 
-On a host with transparent huge pages set to `always`, the kernel can inflate
-dae's resident set without the live Go heap growing. `disable_thp: true` opts
-the process out with `prctl(PR_SET_THP_DISABLE)`; the default (`false`) leaves
-the kernel's policy untouched:
+When transparent huge pages are set to `always`, the kernel can increase
+dae's resident set without growth in the live Go heap. On every start, reload
+and rollback, dae calls `prctl(PR_SET_THP_DISABLE)` for its own process with
+the current `disable_thp` value. `true` passes 1 and opts the process out.
+The default, `false`, passes 0 and clears any per-process opt-out, including
+one inherited from the parent process, so dae follows the system-wide THP
+setting. Neither value changes `/sys/kernel/mm/transparent_hugepage`:
 
 ```shell
 global {
@@ -156,10 +153,8 @@ journalctl -xefu dae
 
 :::
 
-After completing [Minimal configuration](/dae/start/minimal-configuration), see [Service management](/dae/start/service-management) to start, enable, reload or restart dae.
-
 </div>
 
 ---
 
-Source: [dae upstream](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/user-guide/run-as-daemon.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).
+Source: [dae upstream](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/user-guide/run-as-daemon.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).

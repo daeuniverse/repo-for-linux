@@ -1,13 +1,17 @@
 <div v-pre lang="zh-CN">
 
 <!-- installation-0:start -->
-# Arch Linux / Manjaro
+### Arch Linux / Manjaro
 
-可以直接从官方仓库安装 dae。
+可以直接从官方仓库安装 dae，也可从 [AUR](https://aur.archlinux.org) 或 [archlinuxcn](https://github.com/archlinuxcn/repo) 获取最新的 AVX2 优化二进制软件包或最新 Git 版本。
 
-或者，从 [AUR](https://aur.archlinux.org) 或 [archlinuxcn](https://github.com/archlinuxcn/repo) 获取最新的 AVX2 优化二进制软件包或最新 Git 版本。
+| 来源 | 软件包 |
+| --- | --- |
+| 官方仓库 | dae |
+| [AUR](https://aur.archlinux.org) | 最新的 AVX2 优化二进制软件包或最新 Git 版本 |
+| [archlinuxcn](https://github.com/archlinuxcn/repo) | 最新的 AVX2 优化二进制软件包或最新 Git 版本 |
 
-## 官方仓库
+#### 官方仓库
 
 ::: code-group
 
@@ -21,9 +25,9 @@ pacman -S dae
 
 :::
 
-## AUR
+#### AUR
 
-### 最新发行版（针对 x86-64 v3 / AVX2 优化的二进制文件）
+##### 最新发行版（针对 x86-64 v3 / AVX2 优化）
 
 ::: code-group
 
@@ -37,7 +41,7 @@ paru -S dae-avx2-bin
 
 :::
 
-### 最新 Git 版本
+##### 最新 Git 版本
 
 ::: code-group
 
@@ -51,9 +55,9 @@ paru -S dae-git
 
 :::
 
-## archlinuxcn
+#### archlinuxcn
 
-### 最新发行版（针对 x86-64 v3 / AVX2 优化的二进制文件）
+##### 最新发行版（针对 x86-64 v3 / AVX2 优化）
 
 ::: code-group
 
@@ -67,7 +71,7 @@ pacman -S dae-avx2-bin
 
 :::
 
-### 最新 Git 版本
+##### 最新 Git 版本
 
 ::: code-group
 
@@ -81,12 +85,11 @@ pacman -S dae-git
 
 :::
 
-完成[最小配置](/zh-CN/dae/start/minimal-configuration)后，请参阅[服务管理](/zh-CN/dae/start/service-management)，启动 dae、设置开机启动、重载或重新启动服务。
-
+安装后，使用 `systemctl` 管理服务：
 <!-- installation-0:end -->
 
 </div>
 
 ---
 
-来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/README.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。
+来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/README.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。

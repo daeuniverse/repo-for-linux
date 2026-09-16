@@ -4,18 +4,16 @@ title: "Alpine Linux"
 
 <div v-pre lang="en-US">
 
-# Alpine Linux
+# Run on Alpine Linux
 
-The commands below use OpenRC. Select sudo if it is configured for your account, or root when already in a root shell.
-**Note:**
+This tutorial covers Alpine Linux 3.20 and later.
 
-1. Alpine Linux 3.18 or newer verison has full eBPF support out-of-box, older version of Alpine Linux need to build kernel by yourself.
-2. From version 3.20, Alpine Linux has officially disabled some features dae needed beacuse of Alpine Linux's cross CPU architectures compatibility, so only `linux-virt` can be used to run dae defaultly. For `linux-lts` or `linux-edge`, you should build the kernel by yourself.
-3. This tutorial is for Alpine Linux 3.20 and newer.
+- Alpine Linux 3.18 and later have full eBPF support out of the box. Earlier versions require a custom kernel build.
+- Starting with Alpine Linux 3.20, some features required by dae are disabled for cross-architecture compatibility. Only `linux-virt` runs dae by default; `linux-lts` and `linux-edge` require a custom kernel build.
 
 ## Enable Community Repo
 
-Run `setup-apkrepos` command, then you'll get a menu list like this:
+Run `setup-apkrepos` to open this menu:
 
 ::: code-group
 
@@ -38,11 +36,11 @@ setup-apkrepos
  (skip) Skip setting up apk repositories
 ```
 
-Then input `c` to enable community repo.
+Enter `c` to enable the community repository.
 
 ## Enable CGroups
 
-Enable `cgroups` service:
+Enable the `cgroups` service:
 
 ::: code-group
 
@@ -56,7 +54,7 @@ rc-update add cgroups boot
 
 :::
 
-## Mount bpf
+## Mount BPF
 
 Edit `/etc/init.d/sysfs`:
 
@@ -85,11 +83,7 @@ Add the following to the `mount_misc` section:
         fi
 ```
 
-Be careful that the format of the script `/etc/init.d/sysfs` must be correct, or `sysfs` service will be failed.
-
-## Apply the boot configuration
-
-Restart after configuring cgroups and sysfs so their boot-time mounts take effect before starting dae.
+Check the syntax in `/etc/init.d/sysfs`. Errors will cause the `sysfs` service to fail.
 
 ::: code-group
 
@@ -105,9 +99,9 @@ reboot
 
 ## Install dae
 
-Installer: <https://github.com/daeuniverse/dae-installer/>
-
-This installer offered an OpenRC service script of dae, after installation, you should add a config file to `/usr/local/etc/dae/config.dae`, then set its permission to 600 or 640:
+Use [dae-installer](https://github.com/daeuniverse/dae-installer), which provides
+an OpenRC service script. After installation, create
+`/usr/local/etc/dae/config.dae` and set its permissions to 600 or 640:
 
 ::: code-group
 
@@ -121,10 +115,18 @@ chmod 640 /usr/local/etc/dae/config.dae
 
 :::
 
-After completing [Minimal configuration](/dae/start/minimal-configuration), see [Service management](/dae/start/service-management) to start, enable, reload or restart dae.
+Once the configuration is ready, start dae:
+
+See [Start now](/dae/start/service-management#start-now).
+
+## Start dae at Boot
+
+Use `rc-update` to enable the dae service:
+
+See [Enable at boot](/dae/start/service-management#enable-at-boot).
 
 </div>
 
 ---
 
-Source: [dae upstream](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/tutorials/run-on-alpine.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).
+Source: [dae upstream](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/tutorials/run-on-alpine.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).

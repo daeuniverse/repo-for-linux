@@ -22,9 +22,7 @@ systemctl edit --full daed.service
 
 v2ray、xray、juicity 和 juicity-rs 服务以 `nobody` 用户身份运行。因为该用户默认无法读取 `/etc/letsencrypt/live` 中的证书，所以需要通过 ACL 授予读取权限。
 
-### 安装 `acl` 软件包
-
-以下以 Debian、Ubuntu 为例：
+### 1. 在 Debian 或 Ubuntu 上安装 `acl` 软件包
 
 ::: code-group
 
@@ -38,7 +36,7 @@ apt install acl
 
 :::
 
-### 授予 `nobody` 证书读取权限
+### 2. 授予 `nobody` 证书读取权限
 
 ::: code-group
 
@@ -54,7 +52,7 @@ setfacl -m u:nobody:rX /etc/letsencrypt
 
 :::
 
-### 在证书续期后自动设置 ACL
+### 3. 设置 Certbot 部署钩子，在证书续期后恢复 ACL
 
 ::: code-group
 

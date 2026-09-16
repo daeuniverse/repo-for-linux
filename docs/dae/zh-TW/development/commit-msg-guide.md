@@ -4,14 +4,14 @@ title: "提交訊息規範"
 
 <div v-pre lang="zh-TW">
 
-# 提交訊息規範
+# 語義化提交訊息
 
-## 採用這些慣例的原因
+## 採用這些約定的原因
 
-- 自動產生變更日誌
-- 便於瀏覽 Git 歷史紀錄（例如忽略樣式變更）
+- 自動生成更新日誌
+- 便於瀏覽 Git 歷史（例如，忽略程式碼風格改動）
 
-瞭解對提交訊息樣式作出的小改動如何讓你成為更出色的開發者。
+瞭解如何透過小幅調整提交訊息的風格，成為更好的開發者。
 
 ## 格式
 
@@ -32,19 +32,21 @@ feat: add hat wobble
 +-------> Type: chore, docs, feat, fix, refactor, style, or test.
 ```
 
-`<type>` 的範例值：
+`<type>` 的取值範例：
 
-- `feat`：（面向使用者的新功能，而非建置指令碼的新功能）
-- `fix`：（面向使用者的錯誤修正，而非建置指令碼的修正）
-- `docs`：（文件變更）
-- `style`：（格式化、遺漏分號等；不變更正式環境程式碼）
-- `refactor`：（重構正式環境程式碼，例如重新命名變數）
-- `test`：（新增遺漏的測試、重構測試；不變更正式環境程式碼）
-- `chore`：（更新 grunt 工作等；不變更正式環境程式碼，例如升級相依套件）
-- `perf`：（效能改善變更，例如更好的並行效能）
-- `ci`：（更新 CI 設定檔和指令碼，例如 `.gitHub/workflows/*.yml`）
+| 型別 | 含義 |
+| --- | --- |
+| `feat` | 面向使用者的新功能，而非建置指令碼的新功能 |
+| `fix` | 面向使用者的 bug 修復，而非建置指令碼的修復 |
+| `docs` | 文件改動 |
+| `style` | 格式調整、補充缺失的分號等；不改動生產程式碼 |
+| `refactor` | 重構生產程式碼，例如重新命名變數 |
+| `test` | 新增缺失的測試、重構測試；不改動生產程式碼 |
+| `chore` | 更新 grunt 任務等；不改動生產程式碼，例如升級依賴 |
+| `perf` | 改善效能，例如提高並行效能 |
+| `ci` | 更新 CI 設定檔和指令碼，例如 `.gitHub/workflows/*.yml` |
 
-`<Scope>` 的範例值：
+`<Scope>` 的取值範例：
 
 - `init`
 - `runner`
@@ -53,27 +55,27 @@ feat: add hat wobble
 - `web-server`
 - `proxy`
 
-`<scope>` 可以為空（例如變更是全域性的，或難以歸屬給單一元件），此時省略括號。在較小的專案中，例如 Karma 外掛，`<scope>` 為空。
+`<scope>` 可以為空（例如，改動是全域性的，或難以歸屬於單個元件），此時省略圓括號。在 Karma 外掛等較小的專案中，`<scope>` 為空。
 
-## 訊息主旨（第一行）
+## 提交訊息主題（首行）
 
-第一行不能超過 `72` 個字元，且其後應有一個空行。類型和範圍應一律使用小寫，如下所示
+首行不得超過 `72` 個字元，其後應留一個空行。型別和範圍始終使用小寫，如下所示。
 
-## 訊息內文
+## 提交訊息正文
 
-與 `<subject>` 一樣，使用祈使現在式：「change」，而非「changed」或「changes」。訊息內文應包含變更動機，以及與先前行為的對照。
+與 `<subject>` 一樣，使用祈使語氣和現在時：用 `change`，而不是 `changed` 或 `changes`。正文應說明改動的動機，以及與此前行為的對比。
 
-## 訊息頁尾
+## 提交訊息頁尾
 
-### 參照議題
+### 引用 issue
 
-已關閉的議題應在頁尾中另列一行，並以 "Closes" 關鍵字作為前綴，如下所示：
+應在頁尾中單獨一行列出要關閉的 issue，並以 `Closes` 關鍵字開頭，如下所示：
 
 ```
 Closes #234
 ```
 
-或在有多個議題時：
+如果有多個 issue：
 
 ```
 Closes #123, #245, #992
@@ -90,4 +92,4 @@ Closes #123, #245, #992
 
 ---
 
-來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/development/commit-msg-guide.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。
+來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/development/commit-msg-guide.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。

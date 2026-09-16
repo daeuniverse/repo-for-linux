@@ -1,7 +1,7 @@
 # kdae <Badge type="warning" text="Experimental" />
 
-kdae reworks dae’s architecture and performance outside the main line, and carries changes that have not landed there yet.
+kdae is a branch with architecture and performance changes that have not yet landed in dae's main branch.
 
-It is still moving, and this site carries no installation or configuration guide. Follow the branch for its progress:
+kdae is under active development. This site has no installation or configuration guide. Follow the branch for progress:
 
 [kdae branch](https://github.com/olicesx/dae/tree/kdae)

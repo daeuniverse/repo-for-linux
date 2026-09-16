@@ -1,10 +1,16 @@
 # Arch Linux / Manjaro <Badge type="info" text="社群維護" />
 
-官方套件庫沒有 daed，可從 [AUR](https://aur.archlinux.org/packages/daed) 或 [archlinuxcn](https://github.com/archlinuxcn/repo) 安裝。兩處的套件均由社群維護，與本站的 APT/RPM 套件來源無關。
+官方套件庫沒有 daed，可從 [AUR](https://aur.archlinux.org/packages/daed) 或 [archlinuxcn](https://github.com/archlinuxcn/repo) 安裝。
+
+兩處的套件均由社群維護，與本站的 APT/RPM 套件來源無關。
 
 ## AUR
 
-`daed` 從原始碼建置；`daed-avx2-bin` 是針對 x86-64-v3 / AVX2 最佳化的二進位套件，不需編譯；`daed-git` 跟隨主分支。
+| 套件 | 建置方式與版本 |
+| --- | --- |
+| `daed` | 從原始碼建置 |
+| `daed-avx2-bin` | 針對 x86-64-v3 / AVX2 最佳化的二進位套件，不需編譯 |
+| `daed-git` | 跟隨主分支 |
 
 ::: code-group
 

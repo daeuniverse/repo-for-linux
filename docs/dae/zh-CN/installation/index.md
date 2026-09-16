@@ -36,13 +36,13 @@ CentOS 7 与 macOS 教程包含历史依赖，请先阅读对应页面的说明�
 <!-- installation-5:start -->
 ## Alpine
 
-参见 [在 Alpine 上运行](/zh-CN/dae/tutorials/run-on-alpine)。
+参见[在 Alpine 上运行](/zh-CN/dae/tutorials/run-on-alpine)。
 <!-- installation-5:end -->
 
 <!-- installation-6:start -->
 ## macOS
 
-我们提供了一种在 macOS 上运行 dae 的临时方案。参见 [在 macOS 上运行](/zh-CN/dae/tutorials/run-on-macos)。
+可通过变通方案在 macOS 上运行 dae，参见[在 macOS 上运行](/zh-CN/dae/tutorials/run-on-macos)。
 <!-- installation-6:end -->
 
 ## 安装之后
@@ -51,7 +51,7 @@ CentOS 7 与 macOS 教程包含历史依赖，请先阅读对应页面的说明�
 
 ## 其他可用软件包
 
-本站以 dae 文档为主。软件源还提供 daed、v2rayA 等软件包，下表列出软件源的完整软件包列表。
+本站以 dae 文档为主。软件源还提供 daed、v2rayA 等软件包，完整列表如下。
 
 版本号来自软件源构建结果；单独构建文档时，从 [status 分支](https://github.com/daeuniverse/repo-for-linux/tree/status)补充版本数据。
 
@@ -68,4 +68,4 @@ daed 的安装步骤见 [daed](/zh-CN/daed/)；软件源软件包的说明见[�
 
 ---
 
-来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/README.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。
+来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/README.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。

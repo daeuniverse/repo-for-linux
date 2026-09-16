@@ -1,8 +1,8 @@
 # 安裝指南
 
-依系統選擇安裝入口。安裝前請檢查[核心需求](/zh-TW/dae/start/requirements)；僅安裝套件並不等於完成代理設定。
+按系統選擇安裝入口。安裝前請檢查[核心要求](/zh-TW/dae/start/requirements)；僅安裝套件並不等於完成代理設定。
 
-## Dae Universe APT／RPM 套件來源
+## Dae Universe APT／RPM 套件庫
 
 | 系統 | 套件管理器 | 安裝入口 |
 | --- | --- | --- |
@@ -31,29 +31,29 @@ Fedora 另有 [Copr](/zh-TW/dae/installation/fedora) 安裝方式。
 - [OPNsense](/zh-TW/dae/tutorials/dae-with-opnsense)
 - [CentOS 7](/zh-TW/dae/tutorials/run-on-centos7)
 
-CentOS 7 與 macOS 教學包含歷史相依資源，請先閱讀對應頁面的說明，再使用其中的命令。
+CentOS 7 與 macOS 教學包含歷史依賴，請先閱讀對應頁面的說明，再使用其中的命令。
 
 <!-- installation-5:start -->
 ## Alpine
 
-請參閱[在 Alpine 上執行](/zh-TW/dae/tutorials/run-on-alpine)。
+參見[在 Alpine 上執行](/zh-TW/dae/tutorials/run-on-alpine)。
 <!-- installation-5:end -->
 
 <!-- installation-6:start -->
 ## macOS
 
-我們提供在 macOS 上執行 dae 的權宜方法。請參閱[在 macOS 上執行](/zh-TW/dae/tutorials/run-on-macos)。
+可透過變通方案在 macOS 上執行 dae，參見[在 macOS 上執行](/zh-TW/dae/tutorials/run-on-macos)。
 <!-- installation-6:end -->
 
 ## 安裝之後
 
-[最小設定](/zh-TW/dae/start/minimal-configuration) → [服務管理](/zh-TW/dae/start/service-management) → [疑難排解](/zh-TW/dae/troubleshooting)
+[最小設定](/zh-TW/dae/start/minimal-configuration) → [服務管理](/zh-TW/dae/start/service-management) → [故障排查](/zh-TW/dae/troubleshooting)
 
 ## 其他可用套件
 
-本站以 dae 文件為主。套件來源亦提供 daed、v2rayA 等套件，下表列出套件來源的完整套件列表。
+本站以 dae 文件為主。套件庫還提供 daed、v2rayA 等套件，完整清單如下。
 
-版本號來自套件來源的建置結果；單獨建置文件時，從 [status 分支](https://github.com/daeuniverse/repo-for-linux/tree/status)補充版本資料。
+版本號來自套件庫建置結果；單獨建置文件時，從 [status 分支](https://github.com/daeuniverse/repo-for-linux/tree/status)補充版本資料。
 
 | 軟體 | 版本 | 專案 | 授權條款 |
 | --- | --- | --- | --- |
@@ -63,9 +63,9 @@ CentOS 7 與 macOS 教學包含歷史相依資源，請先閱讀對應頁面的�
 
 <!--@include: @/.vitepress/snippets/packages/zh-TW/install.md-->
 
-daed 的安裝步驟見 [daed](/zh-TW/daed/)；套件來源套件的說明見[其他可用套件](/zh-TW/guide/packages)。
+daed 的安裝步驟見 [daed](/zh-TW/daed/)；套件庫套件的說明見[其他可用套件](/zh-TW/guide/packages)。
 
 
 ---
 
-來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/README.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。
+來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/README.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。

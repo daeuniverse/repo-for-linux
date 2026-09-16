@@ -1,6 +1,6 @@
 # daed
 
-daed 提供 dae 的 Web 管理界面，本章单独介绍 daed 的安装与服务管理。
+daed 提供 dae 的 Web 管理界面。
 
 <img src="/upstream/daed-orchestrate.png" alt="daed 面板：配置、DNS、路由、分组、节点与订阅" class="app-screenshot">
 

@@ -6,8 +6,9 @@ title: "工作原理"
 
 # 工作原理
 
+dae 通过 [eBPF](https://en.wikipedia.org/wiki/EBPF) 将程序加载到 Linux 内核的 tc（流量控制）挂载点。该程序会在流量进入 TCP/IP 网络栈前分流。
 
-dae 通过 [eBPF](https://en.wikipedia.org/wiki/EBPF) 将程序加载到 Linux 内核的 tc（流量控制）挂载点运行。该程序会在流量进入 TCP/IP 网络栈前进行分流。下图展示 tc 在 Linux 网络协议栈中的位置（图示为接收路径，发送路径方向相反），其中 netfilter 表示 iptables/nftables 所在的位置。
+下图展示 tc 在 Linux 网络协议栈中的位置。图中为接收路径，发送路径方向相反；netfilter 表示 iptables/nftables 所在的位置。
 
 <img src="/upstream/netstack-path.webp" alt="网络栈路径" class="upstream-diagram-light">
 <img src="/upstream/netstack-path-dark.png" alt="网络栈路径" class="upstream-diagram-dark">
@@ -20,30 +21,45 @@ dae 支持按域名、源 IP、目的 IP、源端口、目的端口、TCP/UDP、
 
 其中，源 IP、目的 IP、源端口、目的端口、TCP/UDP、IPv4/IPv6 和 MAC 地址可通过解析 MACv2 帧获得。
 
-**进程名**通过监控 cgroupv2 挂载点中的本地进程 socket、connect 和 sendmsg 系统调用获得。随后读取并解析进程控制块中的命令行。此方法显著快于 Clash 等通过扫描整个 procfs 获取进程信息的用户空间程序（后者甚至可能耗时数十毫秒）。
+dae 在 cgroupv2 挂载点监控本地进程的 `socket`、`connect` 和 `sendmsg` 系统调用，再读取并解析进程控制块中的命令行，从而获得**进程名**。此方法显著快于 Clash 等扫描整个 procfs 获取进程信息的用户空间程序，后者甚至可能耗时数十毫秒。
 
 **域名**通过拦截 DNS 请求，并将请求的域名与相应 IP 地址关联获得。但此方法有一些潜在问题：
 
 1. 可能导致误判。例如，在短时间内同时访问共用同一 IP 地址的国内和国外网站，或浏览器使用 DNS 缓存时。
 2. 用户的 DNS 请求必须经过 dae。可通过将 dae 设为 DNS 服务器，或在 dae 作为网关时使用公共 DNS 实现。
 
-尽管有这些挑战，与其他方法相比，这种方法已是最优方案。例如，Fake IP 方法无法按 IP 分流，并且存在严重的缓存污染问题。同样，域名嗅探只能拦截 TLS/HTTP 等流量。虽然使用 SNI 嗅探进行流量分流有效，但 eBPF 对程序复杂度的限制以及不支持循环，使我们无法在内核空间实现域名嗅探。
+尽管有这些限制，与其他方法相比，此方法仍是最优方案。Fake IP 方法无法按 IP 分流，并且存在严重的缓存污染问题。域名嗅探只能检查 TLS、HTTP 和 QUIC 等流量。
+
+SNI 嗅探可用于分流，但 eBPF 对程序复杂度的限制使域名嗅探只能留在用户空间。eBPF 程序本身用 `bpf_loop` 做规则匹配和进程名解析，因此 dae 要求内核 5.17 或更高版本。
 
 因此，如果 DNS 请求无法经过 dae，基于域名的分流将无法成功。
 
-嗅探有时间限制。dae 会等待 `sniffing_timeout`（默认 30 毫秒），尝试从客户端的首个数据包中获取域名；若未获取到，则退回按 IP 分流。同一流签名连续三次嗅探失败后，dae 会在十分钟内停止嗅探该签名（负缓存）。这样，起始数据中始终不含域名的流就不会再进行域名匹配，也不会在每次连接时重试。
+TCP 嗅探有时间限制。`sniffing_timeout`（默认 30 毫秒）和 `dial_mode: ip` 只约束 TCP 嗅探和自动插入的 sniff-punt 规则。dae 先等待最多 `sniffing_timeout`，读取客户端 TCP 载荷的前 16 字节。若没有数据到达，或数据不像 TLS 握手或 HTTP 请求，dae 按 IP 路由。
 
-当某台设备配置了域名白名单，却使用自己的加密 DNS 时，dae 会自动插入内核空间的嗅探回退规则（`auto_sniff_punt`，参见[路由规则](/zh-CN/dae/configuration/routing)）。即使该设备的 DNS 请求不经过 dae，白名单也能继续生效。
+数据像 TLS 握手或 HTTP 请求时，dae 启动嗅探器，以新的 `sniffing_timeout` 为期限继续读取 TCP 分段，直到 TLS ClientHello 完整或期限到期。因此 SNI 不必位于第一个分段。HTTP 只在已读取的字节中检查一次。若未找到域名，则退回按 IP 分流。dae 从不嗅探目的端口为 20、21、22、25、53、119、123、161、3306、5432、6379、9200、27017 和 11211 的 TCP 连接。
 
-> 为缓解 DNS 污染并提高 CDN 连接速度，dae 在用户空间使用域名嗅探。当 `dial_mode` 设置为 "domain" 或其变体且需要处理代理流量时，dae 会将嗅探到的域名而非 IP 地址发送给代理服务器。因此，代理服务器会重新解析域名，并使用最优 IP 连接。该方法解决 DNS 污染并提高 CDN 连接速度。
+UDP 嗅探忽略这两个选项。仅当 UDP 数据包的源端口或目的端口为 443 或 8443，且数据包看起来是 QUIC Initial 时，dae 才会嗅探。dae 将这类数据包保存在按连接（DCID）区分的嗅探器中，直到解析出 SNI；会话 TTL 上限为 5 秒。在 `dial_mode: ip` 下，dae 不会用嗅探到的 QUIC 域名选择连接目标。
+
+对于 TCP，同一流签名（目的地址和端口、进程名、MAC 地址和 DSCP）连续 3 次嗅探失败后，dae 会在 10 分钟内停止嗅探该签名；任何一次嗅探成功都会清除该条目。这个负向缓存让起始数据中始终不含域名的流不会在每次连接时重复尝试域名匹配。UDP 采用独立的按 DCID 策略：连续 4 次没有 SNI 就暂停嗅探 1 秒，连续 2 次解密失败就放弃该 DCID。随后 dae 会绕过失败的 DCID：没有 SNI 时 15 秒，解密失败时 30 秒，嗅探器 panic 时 1 分钟；重复失败时翻倍，上限 5 分钟。
+
+当某台设备配置了域名白名单，却使用自己的加密 DNS 时，dae 会自动插入内核空间的嗅探回退规则。即使该设备的 DNS 请求不经过 dae，白名单也能继续生效，但仅限 dae 能嗅探的连接。这类连接包括目的端口不在上述排除列表、首个分段为 TLS 或 HTTP 的 TCP 连接，以及端口 443 或 8443 上携带 QUIC Initial 的 UDP 连接。当 dae 跳过一条被送往用户空间的连接，或未找到域名时，会不带域名重新路由该连接。因此该连接会命中该设备仅按选择器匹配的回退规则，且仍经用户空间转发。参见[路由规则](/zh-CN/dae/configuration/routing)中的 `auto_sniff_punt`。
+
+> dae 在用户空间使用域名嗅探，以缓解 DNS 污染并提高 CDN 连接速度。在默认的 `dial_mode: domain` 下，只有 dae 的 DNS 缓存已有该域名的 A 或 AAAA 记录，或此前的后台探测已确认该域名可解析时，dae 才会将嗅探到的域名而非 IP 地址发送给代理服务器。首次连接未知域名时，dae 使用原始 IP 连接，并通过 `bootstrap_resolver` 启动后台探测。没有应答的域名会作为负向结果缓存 10 秒。`domain+` 和 `domain++` 跳过此检查，总是发送嗅探到的域名。代理服务器会重新解析域名，并使用最优 IP 连接。
 >
-> 此外，已使用其他分流方案且不希望将 DNS 请求路由至 dae、但仍希望某些流量按域名分流的高级用户（例如按目标域名分流 Netflix 节点与下载节点的流量，部分流量通过核心直连），可通过设置 `dial_mode: domain++` 强制使用嗅探到的域名进行分流。
+> 已使用其他分流方案的高级用户，可能不希望让 DNS 请求经过 dae，但仍需按域名分流部分流量。此时可设置 `dial_mode: domain++`，强制使用嗅探到的域名分流。例如，按目标域名将流量分配给 Netflix 节点和下载节点，并让部分流量经核心直连。
 
 dae 通过 tc 挂载点的程序重定向流量实现分流。重定向基于分流结果：将流量重定向至 dae 的 tproxy 端口，或让其绕过 dae 直接通过。
 
 ### 代理机制
 
-dae 的代理机制与其他程序相似。不过，绑定 LAN 接口时，dae 利用 eBPF 在 tc 挂载点将待代理流量的 socket buffer 直接关联到 dae tproxy 监听端口的 socket。绑定 WAN 接口时，dae 将待代理流量的 socket buffer 从网卡的出口队列转移到入口队列，同时禁用校验和，并将目的地址改为 tproxy 监听端口。
+dae 的代理机制与其他程序相似，绑定不同接口时的处理方式如下：
+
+| 绑定接口 | 处理方式 |
+| --- | --- |
+| LAN | 在绑定接口的 tc ingress 上，eBPF 只改写以太网头（目的 MAC 设为 `dae0peer`），把该流记录到 `redirect_track`，并将 `skb->cb[0]` 设为 `TPROXY_MARK`（0x8000000）。然后 eBPF 用 `bpf_redirect` 把未改动的 IP 数据包重定向到 `dae0`。若为 netkit 对，且内核已包含 CVE-2025-37959 的修复（主线 6.14.7 或更高版本），则跳过 MAC 改写，改用 `bpf_redirect_peer`。 |
+| WAN | 在绑定接口的 tc egress 上，eBPF 执行同样的改写和记录，再调用 `bpf_redirect` 重定向到 `dae0`。应答数据包经 `dae0` ingress 返回，由该处恢复原始 MAC，并以 `BPF_F_INGRESS` 重定向到该接口的入口队列。 |
+
+两条路径都保持目的地址、端口和校验和不变。dae 的 tproxy 监听器在 `daens` 网络命名空间内监听 `tproxy_port`（默认 12345）。在 `dae0peer` ingress 上，eBPF 丢弃 `skb->cb[0]` 不带 `TPROXY_MARK` 的数据包，并把 `skb->mark` 设为 0x8000000。因为有这个 mark，策略规则 `fwmark 0x8000000/0x8000000 table 2023` 会把数据包交给 `local default dev lo`。eBPF 再调用 `bpf_sk_assign`，把 UDP 数据报和 TCP SYN 关联到该监听器。已建立连接的 TCP 分段经这条本地路由到达 socket，无需再关联。
 
 从基准测试看，dae 的代理性能略高于其他代理程序，但差异不显著。
 
@@ -51,29 +67,33 @@ dae 的代理机制与其他程序相似。不过，绑定 LAN 接口时，dae �
 
 ### 直连机制
 
-传统上，流量分流会让流量经过代理程序、进入分流模块，然后决定使用代理还是建立直连。此过程要求流量经网络栈解析、处理和复制后送入代理程序，随后又经网络栈复制、处理和封装后发出。这会消耗大量资源。特别是在 BitTorrent 下载等场景中，即使设为直连，仍会消耗大量连接、端口、内存和 CPU 资源。由于代理程序处理不当，它甚至可能在游戏场景影响 NAT 类型，从而导致连接错误。
+传统分流方式先让流量进入代理程序的分流模块，再决定使用代理还是直连。流量经网络栈解析、处理和复制后送入代理程序，随后又经网络栈复制、处理和封装后发出。这会消耗大量资源。
+
+在 BitTorrent 下载等场景中，即使设为直连，仍会消耗大量连接、端口、内存和 CPU 资源。在游戏场景中，代理程序处理不当甚至可能影响 NAT 类型，导致连接错误。
 
 dae 在更早的内核阶段进行流量分流，通过第 3 层路由转发直连流量。该方法通过减少内核与用户空间之间的切换来降低开销。此时 Linux 的作用是纯交换机或路由器。
 
-> 为实现有效直连，具有特定网络拓扑的高级用户应确保：配置[内核参数](/zh-CN/dae/user-guide/kernel-parameters)并**禁用** dae 后，当将装有 dae 的设备设为网关时，其他设备仍可正常访问网络。例如，访问 223.5.5.5 应返回 "UrlPathError" 响应。在装有 dae 的设备上执行 tcpdump 时，应能看到客户端设备发出的请求数据包。
+路由到 `direct` 的 LAN 流量总是走这条内核路径，并把 `skb->mark` 设为规则的 mark。对于 dae 主机自身的流量，只有 mark 为 0 的 `direct` 才会绕过代理程序。dae 用户空间的 direct dialer 通过 `SO_MARK` 设置 mark。它负责处理 mark 非零的 `direct(mark: N)`、送往非 `must` 出站的 DNS 查询，以及嗅探后由用户空间重新路由到 `direct` 的连接。
+
+> 具有特定网络拓扑的高级用户应先配置[内核参数](/zh-CN/dae/user-guide/kernel-parameters)，再**禁用** dae。将装有 dae 的设备设为网关后，其他设备仍应能正常访问网络。例如，访问 223.5.5.5 应返回 `UrlPathError` 响应。在装有 dae 的设备上执行 tcpdump，应能看到客户端设备发出的请求数据包。
 
 因此，dae 不会对直连流量执行 SNAT。在“旁路由”设置中，这会导致非对称路由。在此场景中，客户端设备发出的流量经 dae 到达网关，而接收流量则从网关直接到达客户端设备，绕过 dae。
 
-> 此处“旁路由”是指：1）作为网关运行；2）对 TCP/UDP 执行 SNAT；3）LAN 和 WAN 接口位于同一网段。
+> 此处的旁路由须同时满足三个条件：作为网关运行、对 TCP/UDP 执行 SNAT、LAN 和 WAN 接口位于同一网段。
 >
 > 例如，笔记本电脑为 192.168.0.3，旁路由为 192.168.0.2，路由器为 192.168.0.1，则逻辑三层拓扑为：笔记本电脑 -> 旁路由 -> 路由器。在路由器侧，只能看到源 IP 为 192.168.0.2 的 TCP/UDP 流量，不会看到源 IP 为 192.168.0.3 的 TCP/UDP 流量。
 >
-> 据我们所知，我们是这个“旁路由”定义的先驱（笑）。
+> 上游作者表示，据其所知，这一定义由他们首次提出。
 
 非对称路由带来一个优势和一个潜在问题：
 
-1. 可提高性能。由于返回流量不经过 dae，直连性能与没有旁路由时一样快，路径也更短。
-2. 可能破坏有状态防火墙的状态维护并造成丢包（例如 Sophos Firewall）。不过，家庭网络通常不会出现此问题。
+- 性能优势：返回流量不经过 dae，路径更短，直连性能与没有旁路由时一样快。
+- 潜在问题：可能破坏有状态防火墙的状态维护并造成丢包，例如 Sophos Firewall。不过，家庭网络通常不会出现此问题。
 
-从基准测试角度看，dae 的直连性能相对于其他代理方案表现强劲。
+基准测试表明，dae 的直连性能优于其他代理方案。
 
 </div>
 
 ---
 
-来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/how-it-works.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。
+来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/how-it-works.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。

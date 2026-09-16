@@ -6,10 +6,10 @@ title: "拆分配置文件"
 
 # 拆分配置文件
 
-有时可能想将配置文件拆分为多个文件。以下情况可能很有用：
+以下情况适合将配置拆分为多个文件：
 
-1. 想通过 `sed` 等工具修改配置文件来切换节点。
-2. 复制他人的配置文件，并想覆盖其中的某些部分。
+- 通过 `sed` 等工具修改配置文件来切换节点。
+- 复制他人的配置文件后，覆盖其中的某些部分。
 
 ## 示例
 
@@ -25,15 +25,16 @@ title: "拆分配置文件"
 └── config.dae
 ```
 
-配置文件：
+入口配置文件是传递给 `dae -c ...` 的文件。`include` 路径按以下规则处理：
 
-关于 `include` 路径的说明：
+| 路径类型 | 示例 | 处理方式 |
+| --- | --- | --- |
+| 相对路径 | `config.d/*.dae` | 相对于入口配置文件所在目录解析，而非当前工作目录 |
+| 绝对路径 | `/etc/dae/config.d/*.dae` | 按原样使用 |
 
-- 相对路径（例如 `config.d/*.dae`）相对于*入口*配置文件（传递给 `dae -c ...` 的文件）所在目录解析，而不是相对于当前工作目录。
-- 绝对路径（例如 `/etc/dae/config.d/*.dae`）按原样使用。
-- 出于安全原因，dae 仅允许包含入口配置目录下的文件。
+出于安全原因，dae 仅允许包含入口配置目录下的文件。
 
-以下四个文件配合使用。标签用于查看不同文件，不代表任选其一。
+配置文件如下：
 
 ::: code-group
 
@@ -138,6 +139,12 @@ routing {
 
 :::
 
+
+
+
+
+
+
 然后通过以下命令运行 `dae`：
 
 ::: code-group
@@ -156,4 +163,4 @@ dae run -c /etc/dae/config.dae
 
 ---
 
-来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/configuration/separate-config.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。
+来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/configuration/separate-config.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。

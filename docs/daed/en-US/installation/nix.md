@@ -1,6 +1,6 @@
 # Nix / NixOS
 
-Import the daed module into your existing NixOS flake. Retain your Nixpkgs, system and hardware configuration; replace `HOSTNAME` with your configuration name.
+Import the daed module into your existing NixOS flake. Keep your Nixpkgs, system and hardware configuration. Replace `HOSTNAME` with your configuration name.
 
 ## 1. Import the NixOS module
 
@@ -46,7 +46,9 @@ Import the daed module into your existing NixOS flake. Retain your Nixpkgs, syst
 }
 ```
 
-The default configuration directory is `/etc/daed`; the web interface listens on `127.0.0.1:2023`, accessible from the local machine. `openFirewall.port` is the proxy port, not the web interface port. See the [module options](https://github.com/daeuniverse/flake.nix/blob/main/daed/module.nix).
+The default configuration directory is `/etc/daed`. The web interface listens on `127.0.0.1:2023` and is accessible from the local machine.
+
+`openFirewall.port` is the proxy port, not the web interface port. See the [module options](https://github.com/daeuniverse/flake.nix/blob/main/daed/module.nix).
 
 ## 3. Apply the system configuration
 

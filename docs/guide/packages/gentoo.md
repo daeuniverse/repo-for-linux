@@ -1,6 +1,8 @@
 # Gentoo / Calculate <Badge type="info" text="Community maintained" />
 
-The repository provides no Gentoo packages. Gentoo and Calculate users install from the [gentoo-zh overlay](https://github.com/gentoo-zh/overlay), where the packages are maintained by the Gentoo community and managed by Portage. Those versions are independent of the repository versions in the [package list](/guide/packages).
+The Dae Universe repository provides no Gentoo packages. Gentoo and Calculate users install from the [gentoo-zh overlay](https://github.com/gentoo-zh/overlay).
+
+The Gentoo community maintains these packages in Portage. Their versions are independent of those in the [package list](/guide/packages).
 
 ::: info User and architecture
 The keyword example applies to amd64 systems.
@@ -14,7 +16,9 @@ Use the sudo tab if sudo is configured for your account; use the root tab when a
 
 ## 2. Accept the testing keyword
 
-These overlay packages carry testing keywords only, so add an entry for the selected software to `package.accept_keywords` before installing. If `/etc/portage/package.accept_keywords` is a directory, use a separate file inside it. If it is a file, add the entry there.
+These overlay packages carry only testing keywords. Before installing, add an entry for the selected software to `package.accept_keywords`.
+
+If `/etc/portage/package.accept_keywords` is a directory, use a separate file inside it. If it is a file, add the entry there.
 
 ::: code-group
 
@@ -70,12 +74,15 @@ sudo emerge --ask dev-libs/v2ray-rules-dat-bin::gentoo-zh
 
 Drop `sudo` from the command when already in a root shell.
 
-## 4. Package differences
+## Package differences
 
-- `net-proxy/juicity` builds the server only by default; enable the `client` USE flag when a client is needed.
-- `dev-libs/v2ray-rules-dat-bin` installs prebuilt rule data files; the `geosite` and `geoip` USE flags are enabled by default.
-- The overlay carries no Juicity-rs ebuild.
-- For dae and daed, see [dae](/dae/installation/gentoo) and [daed](/daed/installation/gentoo).
+| Package | Notes |
+| --- | --- |
+| `net-proxy/juicity` | Builds only the server by default; enable the `client` USE flag if you need a client |
+| `dev-libs/v2ray-rules-dat-bin` | Installs prebuilt rule data; `geosite` and `geoip` are enabled by default |
+| Juicity-rs | No ebuild in the overlay |
+
+For dae and daed, see [dae](/dae/installation/gentoo) and [daed](/daed/installation/gentoo).
 
 ### Optional: mirrors and binary packages
 

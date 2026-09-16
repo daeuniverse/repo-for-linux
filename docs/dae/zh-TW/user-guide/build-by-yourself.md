@@ -8,16 +8,14 @@ title: "從原始碼建置"
 
 ## 建置
 
-### 建置相依套件
+### 建置依賴
 
-```text
+```shell
 clang >= 10
 llvm >= 10 (optional)
-golang >= 1.26.0
+golang >= 1.26
 make
 ```
-
-工具鏈需求取決於原始碼版本。本次收錄版本使用 Go 1.26.0，請核對對應的 [go.mod](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/go.mod) 與[建置工作流程](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/.github/workflows/seed-build.yml)。
 
 ### 編譯
 
@@ -27,17 +25,15 @@ cd dae
 git submodule update --init
 ```
 
-選擇一種建置方式：
-
 ::: code-group
 
-```shell [最少相依套件]
+```shell [最小依赖]
 ## Minimal dependency build
 make GOFLAGS="-buildvcs=false" \
   CLANG=clang
 ```
 
-```shell [一般建置]
+```shell [普通构建]
 ## Normal build
 make
 ```
@@ -55,11 +51,16 @@ make CGO_ENABLED=0 GOARCH=mips
 
 :::
 
-### 各架構的 trace 支援 {#trace-support-per-architecture}
+### 各架構的 trace 支援
 
-當工具鏈能產生選用的 `dae trace` eBPF 程式時，`make` 會建置它，並將結果記錄在 `.build_tags` 中：有建置時記錄 `trace`，未建置時則為空。**`arm`、`mips`、`mips64`、`mips64le`、`mipsle` 與 `s390x` 架構不提供 `dae trace`**（清單見 Makefile 中的 `TRACE_UNSUPPORTED_GOARCH`）。這些架構的建置會顯示 `WARNING`，繼續產生不含 `trace` 建置標籤的二進位檔。其他 `GOARCH` 若無法產生 trace 程式，則視為建置錯誤，因此二進位檔不會在沒有提示的情況下缺少 `dae trace`。
+當工具鏈能夠生成可選的 `dae trace` eBPF 程式時，`make` 會將其建置進二進位檔案。結果記錄在 `.build_tags` 中：包含該程式時為 `trace`，未包含時為空。
 
-此清單依據實測，而非假設；BPF Test 工作流程會透過 `./scripts/check-trace-arch-matrix.sh` 重新驗證。可用下列命令重現各架構的結果：
+| 目標架構 | trace 建置行為 |
+| --- | --- |
+| `arm`、`mips`、`mips64`、`mips64le`、`mipsle`、`s390x` | Makefile 的 `TRACE_UNSUPPORTED_GOARCH` 將這些架構列為不支援；建置時輸出 `WARNING`，繼續生成不帶 `trace` 建置標籤的二進位檔案 |
+| 其他 `GOARCH` | trace 生成失敗會報錯，不會在沒有提示的情況下生成缺少 `dae trace` 的二進位檔案 |
+
+該清單基於實際驗證，而非推測；BPF Test 工作流程會透過 `./scripts/check-trace-arch-matrix.sh` 重新驗證。可用以下命令按架構重現：
 
 ```shell
 git submodule update --init
@@ -67,15 +68,15 @@ GOARCH=mips BPF_CLANG=clang go generate ./trace/trace.go    # fails: no compiler
 GOARCH=mips64 BPF_CLANG=clang go generate ./trace/trace.go  # fails: unsupported target
 ```
 
-不要僅因 `github.com/cilium/ebpf` 的 `gen.FindTarget()` 接受某架構，就將該架構從清單移除。目標查找與編譯是不同步驟；`mips` 能通過前者，卻無法通過後者，因為其 `bpf_tracing.h` 選用 mips 的 `pt_regs` 配置，而隨 `dae_bpf_headers` 子模組提供的 `vmlinux.h` 則退回使用 x86。
+不要僅因 `github.com/cilium/ebpf` 的 `gen.FindTarget()` 接受某個架構，就將其從清單中移除。目標查詢與編譯是不同的步驟：`mips` 能通過前者，卻無法通過後者。原因是 `bpf_tracing.h` 選擇了 mips 的 `pt_regs` 佈局，而 `dae_bpf_headers` 子模組提供的 `vmlinux.h` 則退回到 x86。
 
-`dae trace` 本身需要核心版本 >= 5.15；dae 的其他功能需要 >= 5.17。
+`dae trace` 本身要求核心版本 >= 5.15；dae 的其餘功能要求核心版本 >= 5.17。
 
 ## 執行
 
-### 執行階段相依套件
+### 執行期依賴
 
-為了進行流量分流，dae 仰賴下列資料來源：[geoip.dat](https://github.com/v2fly/geoip/releases/latest) 和 [geosite.dat](https://github.com/v2fly/domain-list-community/releases/latest)。
+dae 使用 [geoip.dat](https://github.com/v2fly/geoip/releases/latest) 和 [geosite.dat](https://github.com/v2fly/domain-list-community/releases/latest) 資料進行流量分流。
 
 ::: code-group
 
@@ -107,7 +108,7 @@ curl -L -o example.dae https://github.com/daeuniverse/dae/raw/main/example.dae
 
 請參閱 [example.dae](https://github.com/daeuniverse/dae/blob/main/example.dae)。
 
-完成微調後，執行 dae：
+調整設定後，執行 dae：
 
 ::: code-group
 
@@ -121,10 +122,10 @@ sudo ./dae run -c example.dae
 
 :::
 
-> **注意**：或者，你可以將 dae 作為常駐程式（systemd）服務執行。請查看[常駐程式服務指南](/zh-TW/dae/user-guide/run-as-daemon)瞭解詳情。
+> **注意**：也可將 dae 作為 systemd 常駐程式執行，參見[常駐程式服務指南](/zh-TW/dae/user-guide/run-as-daemon)。
 
 </div>
 
 ---
 
-來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/user-guide/build-by-yourself.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。
+來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/user-guide/build-by-yourself.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。

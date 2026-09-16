@@ -36,13 +36,13 @@ The CentOS 7 and macOS tutorials contain historical dependencies; read their not
 <!-- installation-5:start -->
 ## Alpine
 
-See [run on alpine](/dae/tutorials/run-on-alpine).
+See [Run on Alpine](/dae/tutorials/run-on-alpine).
 <!-- installation-5:end -->
 
 <!-- installation-6:start -->
 ## macOS
 
-We provide a hacky way to run dae on your macOS. See [run on macOS](/dae/tutorials/run-on-macos).
+A workaround is available to run dae on macOS. See [Run on macOS](/dae/tutorials/run-on-macos).
 <!-- installation-6:end -->
 
 ## After installation
@@ -68,4 +68,4 @@ The daed installation steps are in the [daed chapter](/daed/); the [other availa
 
 ---
 
-Source: [dae upstream](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/README.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).
+Source: [dae upstream](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/README.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).

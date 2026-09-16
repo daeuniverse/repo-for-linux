@@ -295,9 +295,17 @@ test('every upstream topic exists in every locale and retains its original examp
         assert.ok(change.reason && Array.isArray(change.sha256) && change.sha256.length, `${entry.path}: document the replacement`)
       }
       const retainedHashes = [...entry.sourceCodeSha256]
+      let headingCount = (content.match(/^#{1,6} /gm) || []).length
       for (const duplicate of entry.deduplicatedSections || []) {
-        const replacement = await readFile(join(root, 'docs', duplicate.replacement), 'utf8')
-        assert.ok(replacement.includes('emerge --ask net-proxy/dae::gentoo-zh'))
+        const replacement = await readDocument(join(root, 'docs', duplicate.replacement))
+        headingCount += (replacement.match(/^#{1,6} /gm) || []).length
+        if (duplicate.sha256) {
+          // The page carries these examples itself (privilege tabs included); each listed hash must be present.
+          const present = fencedCodeHashes(replacement)
+          for (const hash of duplicate.sha256) assert.ok(present.includes(hash), `${duplicate.replacement}: deduplicated example missing`)
+        } else {
+          assert.ok(replacement.includes('emerge --ask net-proxy/dae::gentoo-zh'))
+        }
         for (const hash of duplicate.originalCodeSha256) {
           const index = retainedHashes.indexOf(hash)
           assert.notEqual(index, -1, 'Deduplicated example must exist in the original source')
@@ -307,7 +315,7 @@ test('every upstream topic exists in every locale and retains its original examp
       const expectedHashes = [...retainedHashes.flatMap(hash => replacements.find(change => change.originalSha256 === hash)?.sha256 || hash), ...(entry.additionalCodeSha256 || []), ...(entry.contentParts || []).flatMap(part => part.additionalCodeSha256 || [])]
       const reorganized = entry.contentParts || entry.codeReplacements || entry.additionalCodeSha256
       assert.deepEqual(reorganized ? hashes.sort() : hashes, reorganized ? expectedHashes.sort() : expectedHashes, `${entry.path}: upstream code changed`)
-      assert.ok((content.match(/^#{1,6} /gm) || []).length >= entry.sourceHeadingCount, `${entry.path}: missing sections`)
+      assert.ok(headingCount >= entry.sourceHeadingCount, `${entry.path}: missing sections`)
     }
   }
 })

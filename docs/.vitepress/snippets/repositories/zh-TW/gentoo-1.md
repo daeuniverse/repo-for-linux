@@ -15,5 +15,5 @@ emaint sync -r gentoo-zh
 :::
 
 ::: tip 已設定 overlay
-如果已經設定 gentoo-zh，只需執行同步指令。鏡像選擇與手動設定方法請見 [gentoo-zh overlay 文件](https://gentoozh.org/overlay/)。
+如果已經設定 gentoo-zh，只需執行同步命令。映像選擇和手動設定方法見 [gentoo-zh overlay 文件](https://gentoozh.org/overlay/)。
 :::

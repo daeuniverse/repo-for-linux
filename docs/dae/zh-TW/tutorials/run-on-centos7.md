@@ -6,63 +6,63 @@ title: "CentOS 7"
 
 # CentOS 7
 
-::: warning 歷史相依資源已失效
-文中的 `mount-cgroup2.service` 連結已回傳 HTTP 404，目前 `mailbox.repo` 預設亦未啟用核心套件庫。不能將這些歷史命令視為已驗證可用的升級流程。
-:::
 > [!WARNING]
-> CentOS 7 與 RHEL 6.5/7 並未原生支援 eBPF；換言之，必須自行建置並安裝核心（>= 5.17）。
+> CentOS 7 和 RHEL 6.5/7 預設不支援 eBPF，必須自行建置並安裝核心（>= 5.17）。
 
 ## 簡介
 
-CentOS 7 是資深的 Linux 發行版，雖然其生命週期不長，但應仍有一些使用者。本文件說明在 CentOS 7 或 RHEL 6.5 上執行 dae 的步驟。
+CentOS 7 是較早的 Linux 發行版，生命週期已近尾聲，但仍有使用者使用。本頁記錄在 CentOS 7 或 RHEL 6.5 上執行 dae 的步驟。
 
 ## 升級流程
 
 ### 更新核心
 
-更新支援 `BTF` 的核心
+更新到支援 `BTF` 的核心。
 
 ```bash
 curl -s https://repo.cooluc.com/mailbox.repo > /etc/yum.repos.d/mailbox.repo
 yum makecache
-yum update kernel
+yum --enablerepo=mailbox-kernel update kernel
 ```
 
 > [!NOTE]
-> 核心以 Linux 6.1 LTS 為基礎重建，以支援 `BBRv2`，並啟用 `eBPF` 支援。也可自行編譯；原始碼套件位於 <https://repo.cooluc.com/kernel/7/SRPMS/>。
+> `mailbox.repo` 把核心放在 `mailbox-kernel` 段，預設關閉，所以這條命令要帶 `--enablerepo`。該核心是重新建置的 LTS 版本，支援 BBRv2 與 eBPF。也可以自行編譯，原始碼套件位於 <https://repo.cooluc.com/kernel/7/SRPMS/>。
 
 ### 掛載 BPF
 
 ```bash
-curl -s https://repo.cooluc.com/kernel/files/sys-fs-bpf.mount > /etc/systemd/system/sys-fs-bpf.mount
+curl -fsS https://repo.cooluc.com/kernel/files/sys-fs-bpf.mount > /etc/systemd/system/sys-fs-bpf.mount
 systemctl enable sys-fs-bpf.mount
 ```
 
 ### 掛載 Control Group v2
 
+> [!NOTE]
+> 下面這個位址已不再提供 `mount-cgroup2.service`（最近一次檢查返回 HTTP 404）。`curl -f` 會讓失敗顯示出來，而不是把錯誤頁寫進單元檔案；下載失敗時請自行提供掛載 cgroup v2 的單元。
+
 ```bash
-curl -s https://repo.cooluc.com/kernel/mount-cgroup2.service > /etc/systemd/system/mount-cgroup2.service
+curl -fsS https://repo.cooluc.com/kernel/mount-cgroup2.service > /etc/systemd/system/mount-cgroup2.service
 systemctl enable mount-cgroup2.service
 ```
 
-### 重新啟動系統以使核心生效
+### 重啟系統使核心生效
 
 > [!NOTE]
-> 檢查核心版本。若版本為 `6.1.xx-1.el7.x86_64`，表示操作成功。
+> 檢查核心版本。若版本高於 5.17 且以 `-1.el7.x86_64` 結尾，表示操作成功。
 
 ```bash
 uname -r
 ```
 
-若核心版本未變更，表示核心先前已更新，必須重建 grub2 開機載入程式，讓新核心成為最高優先順序。
+若核心版本未變，表示此前已更新過核心，需要重新建置 grub2 載入程式，使新核心具有最高優先順序。
 
-將最新核心設為預設值：
+要將最新核心設為預設：
 
 ```bash
 grub2-set-default 0
 ```
 
-重建核心開機載入程式設定：
+要重新建置核心載入程式設定：
 
 ```bash
 grub2-mkconfig -o /boot/grub2/grub.cfg
@@ -70,7 +70,7 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 
 ### 執行 dae
 
-現在可下載 dae 並如常執行：
+現在可以照常下載並執行 dae。
 
 ```bash
 mkdir -p /opt/dae && cd /opt/dae
@@ -85,6 +85,4 @@ DAE_LOCATION_ASSET=$(pwd) ./dae-linux-x86_64 run -c config.dae
 
 ---
 
-來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/tutorials/run-on-centos7.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。
-
-上游範例使用 dae v0.2.2 與第三方核心套件庫。本頁保留歷史步驟，不將該版本作為目前的安裝建議。
+來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/tutorials/run-on-centos7.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。

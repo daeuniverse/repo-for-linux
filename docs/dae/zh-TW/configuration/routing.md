@@ -40,7 +40,7 @@ domain(geosite:category-ads) -> block
 domain(geosite:cn)->direct
 ```
 
-### 目的 IP
+### 目標 IP
 
 ```shell
 ### Dest IP rule
@@ -57,7 +57,7 @@ sip(192.168.0.0/24) -> my_group
 sip(192.168.50.0/24) -> direct
 ```
 
-### 目的連接埠
+### 目標連接埠
 
 ```shell
 ### Dest port rule
@@ -96,7 +96,7 @@ ipversion(6) -> ipv6_group
 mac('02:42:ac:11:00:02') -> direct
 ```
 
-### 處理程序名稱
+### 行程名稱
 
 ```shell
 ### Process Name rule (only support localhost process when binding to WAN)
@@ -126,7 +126,7 @@ dip(9.9.9.9, 223.5.5.5) -> direct
 sip(192.168.0.6, 192.168.0.10, 192.168.0.15) -> direct
 ```
 
-### AND 條件
+### 與條件
 
 ```shell
 ### 'And' rule
@@ -135,7 +135,7 @@ dip(8.8.8.8) && l4proto(tcp) && dport(1-1023, 8443) -> my_group
 dip(1.1.1.1) && sip(10.0.0.1, 172.20.0.0/16) -> direct
 ```
 
-### NOT 條件
+### 非條件
 
 ```shell
 ### 'Not' rule
@@ -164,7 +164,7 @@ domain(ext:"yourdatfile.dat:yourtag")->direct
 dip(ext:"yourdatfile.dat:yourtag")->direct
 ```
 
-### 防火牆標記
+### fwmark
 
 ```shell
 ### Set fwmark
@@ -198,19 +198,52 @@ domain(geosite:cn) -> direct
 fallback: my_group
 ```
 
-## 單一裝置的網域白名單（自動 sniff-punt）
+## 按裝置限定的網域白名單（自動 sniff-punt）
 
 ```shell
 mac('aa:bb:cc:dd:ee:ff') && domain(geosite:docker, suffix:quay.io, geosite:github) -> my_group
 mac('aa:bb:cc:dd:ee:ff') -> direct
 ```
 
-網域條件需要網域資訊，而這些資訊只有在裝置的 DNS 經過 dae 時才能取得。若裝置使用加密 DNS（DoH/DoT），白名單就會在沒有提示的情況下失效，所有流量都會落入後備規則。dae 會偵測這種規則組合：單一主機的 `mac`／`sip` 選擇器、正向 `domain` 條件，以及後方僅含該選擇器的 `direct`／`block` 後備規則。
+核心匹配 `domain` 條件時，用連線的目標 IP 查詢 `domain_routing_map`。鍵不含來源 IP 或 MAC。值是所有經 dae 轉送、且解析到該 IP 的 DNS 應答的網域點陣圖按位或的結果，在這些 DNS 快取條目存活期間一直有效。因此，只要另一個 dae 用戶端或 dae 主機曾透過 dae 解析過目標 IP，使用加密 DNS（DoH/DoT）的裝置仍能命中白名單。如果沒有任何經 dae 轉送的應答覆蓋該目標 IP，連線就不帶網域資訊，會落到退回規則。
 
-dae 會在後備規則前自動插入一條僅供核心空間使用的 sniff-punt 規則，將缺少網域資訊的連線送至使用者空間，嗅探 TLS SNI、HTTP host 或 QUIC，再使用嗅探到的網域依同一組規則重新分流。該裝置不在白名單內的流量仍會落入後備規則，並經由使用者空間轉送。此功能需要啟用嗅探（`sniffing_timeout > 0`、`dial_mode != ip`）；可設定 `auto_sniff_punt: false` 停用。
+dae 會識別同時滿足以下條件的規則組合：
+
+- 使用單主機 `mac`/`sip` 選擇器。
+- 包含正向 `domain` 條件。
+- 後面有一條僅含該選擇器的 `direct`/`block` 退回規則。
+
+dae 會在退回規則前自動插入一條僅在核心空間生效的 sniff-punt 規則。該規則將缺少網域資訊的連線送到使用者空間，嗅探 TLS SNI、HTTP host 或 QUIC，再用嗅探到的網域重新匹配同一組規則。
+
+這種恢復是有條件的，因為 dae 只嗅探一部分送到使用者空間的連線。dae 從不嗅探目標連接埠為 20、21、22、25、53、119、123、161、3306、5432、6379、9200、27017 和 11211 的 TCP 連線，這份清單是硬編碼的。TCP 連線的前幾個位元組不是 TLS 握手或 HTTP 請求時，dae 也會跳過嗅探。相同的目標、行程名稱、MAC 和 DSCP 已連續 3 次嗅探失敗時，dae 同樣跳過，並對該組合暫停嗅探 10 分鐘。
+
+dae 只在來源連接埠或目標連接埠為 443 或 8443 且封包是 QUIC Initial 時才嗅探 UDP。對被跳過的連線和嗅探不到網域的連線，dae 會不帶網域重新路由。白名單規則因此無法命中，連線會落到退回規則。
+
+該裝置未命中白名單的流量仍會落到退回規則，並經使用者空間轉送。
+
+使用此功能需要啟用嗅探（`sniffing_timeout > 0`、`dial_mode != ip`）。可透過 `auto_sniff_punt: false` 關閉此功能。
+
+## 參數名與取反規則
+
+以下接受無名參數值的函式會拒絕不支援的參數名：`pname`、`port`/`dport`、`sport`、`dscp`、`ip`/`dip`、`sip`、`ipversion`、`l4proto`、`mac`、`qtype`，以及回應路由中的 `upstream`。
+
+語法允許在所有函式呼叫中使用 `key: value`。這些函式的解析器以前會忽略未知參數名，因此 `port(bogus_param: 443)` 會在沒有提示的情況下生成與 `port(443)` 相同的 match set。`pname(bogus_param: 1)` 則會匹配名為 `1` 的行程。
+
+現在，這類規則會報錯 `unsupported parameter key "bogus_param"`，並指出接受的寫法。函式原本支援的值字首 `geoip:`、`geosite:` 和 `ext:` 不受影響，例如 `dip(geoip:cn)` 和 `dip(ext:"file.dat:tag")`。不帶參數名的 `pname(NetworkManager)` 和 `port(443)` 也不受影響。
+
+如果設定在上述函式中使用了誤寫的參數名，dae 將無法啟動，直到移除該參數名。升級前請檢查路由部分。
+
+最佳化器不再合併出站相同、且僅含一個函式的取反規則。規則按順序匹配，因此以下兩條獨立規則會將未命中 `a` **或**未命中 `b` 的流量傳送到 `my_group`：
+
+```shell
+!domain(geosite:a) -> my_group
+!domain(geosite:b) -> my_group
+```
+
+合併後的 `!domain(geosite:a, geosite:b)` 對整個集合取反，僅匹配**同時未命中** `a` 和 `b` 的流量，範圍更窄。dae 現在保留原來的兩條規則，因此依賴舊合併行為的設定會匹配比以前更多的流量。
 
 </div>
 
 ---
 
-來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/configuration/routing.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。
+來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/configuration/routing.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。

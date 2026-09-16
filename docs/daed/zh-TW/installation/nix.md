@@ -46,7 +46,9 @@
 }
 ```
 
-預設設定目錄為 `/etc/daed`，Web 介面監聽 `127.0.0.1:2023`，僅供本機存取。`openFirewall.port` 是代理連接埠，並非 Web 介面連接埠。請參閱[模組選項](https://github.com/daeuniverse/flake.nix/blob/main/daed/module.nix)。
+預設設定目錄為 `/etc/daed`，網頁介面監聽 `127.0.0.1:2023`，僅供本機存取。
+
+`openFirewall.port` 是代理連接埠，不是網頁介面連接埠。請參閱[模組選項](https://github.com/daeuniverse/flake.nix/blob/main/daed/module.nix)。
 
 ## 3. 套用系統設定
 
@@ -79,7 +81,7 @@ nixos-rebuild switch --flake .#HOSTNAME
 }
 ```
 
-## 可選：二進位快取
+## 選用：二進位快取
 
 上游 garnix 快取提供 x86_64-linux 與 aarch64-linux 建置。將以下設定合併至 NixOS 設定。
 

@@ -1,13 +1,11 @@
 <div v-pre lang="zh-CN">
 
 <!-- installation-1:start -->
-# Docker
+### Docker
 
 预构建镜像及相关文档位于 <https://hub.docker.com/r/daeuniverse/dae>。
 
-或者，可以使用 `docker compose`：
-
-启动容器前，在主机上完成 `/etc/dae/config.dae` 配置。Compose 文件会将 `/etc/dae` 挂载到容器内。参见[最小配置](/zh-CN/dae/start/minimal-configuration)。
+也可以使用 `docker compose`：
 
 ```shell
 git clone --depth=1 https://github.com/daeuniverse/dae
@@ -31,4 +29,4 @@ docker compose up -d --build
 
 ---
 
-来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/README.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。
+来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/README.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。

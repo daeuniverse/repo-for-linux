@@ -1,13 +1,17 @@
 <div v-pre lang="en-US">
 
 <!-- installation-0:start -->
-# Arch Linux / Manjaro
+### Arch Linux / Manjaro
 
-You can install dae directly from the official repository.
+Install dae from the official repository, or choose an alternative package:
 
-Alternatively, get the latest AVX2-optimized binary package or the latest Git version from [AUR](https://aur.archlinux.org) or [archlinuxcn](https://github.com/archlinuxcn/repo).
+| Source | Packages |
+| --- | --- |
+| Official repository | dae |
+| [AUR](https://aur.archlinux.org) | Latest AVX2-optimized binary package or latest Git version |
+| [archlinuxcn](https://github.com/archlinuxcn/repo) | Latest AVX2-optimized binary package or latest Git version |
 
-## Official Repository
+#### Official Repository
 
 ::: code-group
 
@@ -21,9 +25,9 @@ pacman -S dae
 
 :::
 
-## AUR
+#### AUR
 
-### Latest Release (Optimized Binary for x86-64 v3 / AVX2)
+##### Latest Release (Optimized Binary for x86-64 v3 / AVX2)
 
 ::: code-group
 
@@ -37,7 +41,7 @@ paru -S dae-avx2-bin
 
 :::
 
-### Latest Git Version
+##### Latest Git Version
 
 ::: code-group
 
@@ -51,9 +55,9 @@ paru -S dae-git
 
 :::
 
-## archlinuxcn
+#### archlinuxcn
 
-### Latest Release (Optimized Binary for x86-64 v3 / AVX2)
+##### Latest Release (Optimized Binary for x86-64 v3 / AVX2)
 
 ::: code-group
 
@@ -67,7 +71,7 @@ pacman -S dae-avx2-bin
 
 :::
 
-### Latest Git Version
+##### Latest Git Version
 
 ::: code-group
 
@@ -81,12 +85,14 @@ pacman -S dae-git
 
 :::
 
-After completing [Minimal configuration](/dae/start/minimal-configuration), see [Service management](/dae/start/service-management) to start, enable, reload or restart dae.
+After installation, manage dae with `systemctl`:
 
 <!-- installation-0:end -->
+
+See [Service Management](/dae/start/service-management).
 
 </div>
 
 ---
 
-Source: [dae upstream](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/README.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).
+Source: [dae upstream](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/README.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).

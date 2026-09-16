@@ -4,25 +4,25 @@ title: "參與貢獻"
 
 <div v-pre lang="zh-TW">
 
-# 參與貢獻
+# 貢獻指南
 
-如果你想為專案作出貢獻並讓它變得更好，非常歡迎你的協助。貢獻也是深入瞭解 GitHub 上的社交編碼、新技術及其生態系、如何提出具建設性且有幫助的錯誤報告和功能請求，以及最崇高的貢獻——優秀、整潔的提取請求——的絕佳方式。
+如果你想為專案作出貢獻、幫助改進專案，歡迎參與。參與貢獻也是瞭解 GitHub 協作開發、新技術及其生態系統的好方法。你還可以學習如何提交有建設性、能提供幫助的 bug 報告和功能請求，以及其中最可貴的貢獻：高質量、整潔的 Pull Request。
 
-## 錯誤報告和功能請求
+## bug 報告和功能請求
 
-如果你發現 錯誤 或有 功能請求，請先搜尋，以確認是否已經有類似議題。如果沒有，請在此儲存庫中建立一個 [issue](https://github.com/daeuniverse/dae/issues/new)
+如果發現了 bug 或想請求新功能，請先搜尋是否已有類似的 issue。如果沒有，請在本儲存庫中建立 [issue](https://github.com/daeuniverse/dae/issues/new)。
 
 ## 程式碼
 
-如果你想修正錯誤或實作功能，請 `fork` 此儲存庫並 建立提取請求。
+如果想修復 bug 或實現功能，請 fork 本儲存庫並建立 Pull Request。
 
-在發起任何提取請求前，如果你對需求或實作有任何疑問，建議你先 建立議題 進行討論。這樣你可以確認維護者同意要變更什麼以及如何變更，之後也有望快速合併。
+在建立 Pull Request 前，如果對需求或實現有疑問，建議先建立 issue 進行討論。這樣可以確認維護者同意改動的內容和方式，也有望讓後續合併更快。
 
-只有在所有狀態檢查均為綠色時，才能合併 提取請求。
+只有所有狀態檢查都通過後，Pull Request 才能合併。
 
-## 提交前掛鉤
+## pre-commit 鉤子
 
-此儲存庫使用 [pre-commit hook](https://github.com/pre-commit/pre-commit-hooks)，在將提交寫入本機 Git 歷史紀錄前套用 lint 檢查。要設定 pre-commit，請執行下列操作：
+本儲存庫使用 [pre-commit 鉤子](https://github.com/pre-commit/pre-commit-hooks)，在提交寫入本地 Git 歷史之前執行 lint 檢查。按以下步驟設定 pre-commit：
 
 ```bash
 # install pre-commit
@@ -31,31 +31,31 @@ pip3 install pre-commit
 pre-commit install
 ```
 
-## 如何建立整潔的提取請求
+## 如何建立整潔的 Pull Request
 
-- 在 GitHub 上建立專案的 個人 fork。
-- 在本機電腦上複製該 fork。你在 GitHub 上的遠端儲存庫稱為 `origin`。
-- 將原始儲存庫新增為名為 `upstream` 的遠端儲存庫。
-- 如果你在一段時間前建立了 fork，請務必將上游變更拉取到本機儲存庫。
-- 建立一個新分支來工作！從 `main` 分支建立。
-- 實作或修正功能，並為程式碼加上註解。
+- 在 GitHub 上建立專案的個人 fork。
+- 將 fork 複製到本地機器。你在 GitHub 上的遠端版本庫名為 `origin`。
+- 將原始儲存庫新增為名為 `upstream` 的遠端版本庫。
+- 如果 fork 建立已有一段時間，請務必將上游改動拉取到本地儲存庫。
+- 從 `main` 建立一個新分支，用於本次開發。
+- 實現或修復功能，併為程式碼添加註解。
 - 遵循專案的程式碼風格，包括縮排。
-- 如果專案有測試，請執行它們！對於一般單元測試，使用 `go test -tags dae_stub_ebpf ./...`。對於 eBPF 測試，使用 `make ebpf-test`。
-- 依需要編寫或調整測試。
-- 依需要新增或修改文件。
-- 使用 Git 的[互動式 rebase](https://help.github.com/articles/interactive-rebase)將提交壓縮為單一提交。必要時建立新分支。
-- 將分支推送到 GitHub 上 fork 對應的遠端儲存庫 `origin`。
-- 從你的 fork 在正確分支中開啟提取請求。目標為專案的 `main` 分支。
-- 提取請求獲准並合併後，你可以將變更從 `upstream` 拉取到本機儲存庫，並刪除多餘分支。
+- 如果專案有測試，請執行測試。常規單元測試使用 `go test -tags dae_stub_ebpf ./...`，eBPF 測試使用 `make ebpf-test`。
+- 按需編寫或調整測試。
+- 按需新增或修改文件。
+- 使用 Git 的[互動式 rebase](https://help.github.com/articles/interactive-rebase) 將多次提交合併為一次提交。必要時建立一個新分支。
+- 將分支推送到你在 GitHub 上的 fork，即遠端版本庫 `origin`。
+- 從你的 fork 向正確的分支建立 Pull Request。目標分支為專案的 `main`。
+- Pull Request 獲批並合併後，可以將 `upstream` 的改動拉取到本地儲存庫，並刪除多餘的分支。
 
-最後但同樣重要的是：一律使用現在式編寫提交訊息。提交訊息應描述該提交套用後對程式碼產生的作用，而非你對程式碼做了什麼。
+最後還有同樣重要的一點：始終使用現在時編寫提交訊息。提交訊息應描述這次提交應用後會對程式碼產生什麼作用，而不是你對程式碼做了什麼。
 
-## 再次請求審查
+## 重新請求審查
 
-請勿透過在新留言中提及審查者來提醒他們。請改用再次請求審查功能。更多資訊請閱讀 [GitHub 文件：再次請求審查](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/incorporating-feedback-in-your-pull-request#re-requesting-a-review)。
+請勿在新評論中透過提及審查者來提醒他們，而應使用重新請求審查功能。詳情見 [GitHub 文件：重新請求審查](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/incorporating-feedback-in-your-pull-request#re-requesting-a-review)。
 
 </div>
 
 ---
 
-來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/development/contribute.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。
+來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/development/contribute.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。

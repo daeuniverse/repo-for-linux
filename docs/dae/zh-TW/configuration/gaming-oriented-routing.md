@@ -4,9 +4,11 @@ title: "遊戲路由"
 
 <div v-pre lang="zh-TW">
 
-# 遊戲路由
+# 面向遊戲的路由
 
-DAE 設定（例如 /etc/dae/config.dae）
+## 1. 設定 dae
+
+dae 設定，例如 `/etc/dae/config.dae`：
 
 ```
 routing {            
@@ -19,9 +21,11 @@ dscp(8) -> direct(mark:0x800)
 
 ```
 
-OpenWRT 網路設定（例如 /etc/config/network）
+## 2. 設定 OpenWrt 網路
 
-請謹慎選擇通道 MTU（由於 UDP Ping（1300 位元組），CS2 要求 MTU > 1300）
+OpenWrt 網路設定，例如 `/etc/config/network`：
+
+請謹慎選擇隧道 MTU。CS2 的 UDP Ping 為 1300 位元組，因此要求 MTU > 1300。
 
 ```
 config interface 'wg100'                                                 
@@ -58,7 +62,9 @@ config rule6
         option mark '0x800/0x800'
 ```
 
-OpenWRT 防火牆設定（例如 /etc/config/firewall）
+## 3. 設定 OpenWrt 防火牆
+
+OpenWrt 防火牆設定，例如 `/etc/config/firewall`：
 
 ```
 config nat                       
@@ -83,4 +89,4 @@ config nat
 
 ---
 
-來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/configuration/gaming-oriented-routing.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。
+來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/configuration/gaming-oriented-routing.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。

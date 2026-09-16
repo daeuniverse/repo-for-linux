@@ -6,7 +6,9 @@ title: "Gaming-oriented routing"
 
 # Gaming-oriented routing
 
-DAE Config  (e.g. /etc/dae/config.dae)
+## 1. Configure dae
+
+DAE configuration (for example, `/etc/dae/config.dae`):
 
 ```
 routing {            
@@ -19,9 +21,11 @@ dscp(8) -> direct(mark:0x800)
 
 ```
 
-OpenWRT Network Config  (e.g. /etc/config/network)
+## 2. Configure the OpenWrt network
 
-Please choose the tunnel MTU carefully (CS2 Require MTU > 1300 due to UDP Ping (1300 bytes))
+OpenWrt network configuration (for example, `/etc/config/network`):
+
+Choose the tunnel MTU carefully. CS2 requires an MTU greater than 1300 because its UDP ping packets are 1300 bytes.
 
 ```
 config interface 'wg100'                                                 
@@ -58,7 +62,9 @@ config rule6
         option mark '0x800/0x800'
 ```
 
-OpenWRT Firewall Config (e.g. /etc/config/firewall)
+## 3. Configure the OpenWrt firewall
+
+OpenWrt firewall configuration (for example, `/etc/config/firewall`):
 
 ```
 config nat                       
@@ -83,4 +89,4 @@ config nat
 
 ---
 
-Source: [dae upstream](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/configuration/gaming-oriented-routing.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).
+Source: [dae upstream](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/configuration/gaming-oriented-routing.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).

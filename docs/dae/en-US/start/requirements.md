@@ -1,9 +1,9 @@
 <div v-pre lang="en-US">
 
 <!-- quick-start-requirements:start -->
-# Linux Kernel Requirement
+## Linux Kernel Requirements
 
-## 1. Check the kernel version
+### Kernel Version
 
 Use `uname -r` to check the kernel version on your machine.
 
@@ -12,25 +12,52 @@ uname -r
 ```
 
 > **Note**
-> If you find your kernel version is `< 5.17`, follow the [**Upgrade Guide**](/dae/user-guide/kernel-upgrade) to upgrade the kernel to the minimum required version.
+> If your kernel version is below 5.17, follow the [Upgrade Guide](/dae/user-guide/kernel-upgrade) to reach the minimum required version.
 
-## 2. Choose your use case
-
-| Usage | Minimum | Purpose and scope |
+| Use case | Minimum kernel version | Traffic affected |
 | --- | --- | --- |
-| Bind to WAN | `5.17` | Provide network service for local programs.<br>When bound only to WAN, dae does not affect traffic arriving from other interfaces. |
-| Bind to LAN | `5.17` | Act as an intermediate device providing network service for LAN traffic.<br>When bound only to LAN, dae handles only traffic from LAN and does not affect local programs. |
-| `dae trace` | `5.15` | Diagnose network connectivity issues. |
+| Bind to LAN | 5.17 | Traffic from LAN devices when dae acts as an intermediate device; local programs are unaffected if only LAN is bound. |
+| Bind to WAN | 5.17 | Traffic from local programs; traffic arriving on other interfaces is unaffected if only WAN is bound. |
+| Run `dae trace` | 5.15 | Network connectivity troubleshooting. |
 
-If you want to use `dae trace` command to triage network connectivity issue, the kernel version is required to be >= 5.15. The `trace` build tag is not available for `arm`, `mips`, `mips64`, `mips64le`, `mipsle` and `s390x` builds (see [Build Guide](/dae/user-guide/build-by-yourself#trace-support-per-architecture)), so `dae trace` is missing there.
+The `trace` build tag is unavailable for `arm`, `mips`, `mips64`, `mips64le`,
+`mipsle`, and `s390x` builds, so these builds do not include `dae trace`.
+See the [Build Guide](/dae/user-guide/build-by-yourself#trace-support-per-architecture).
 
-## 3. Check kernel configurations
+### Kernel Configurations
 
-Usually, mainstream desktop distributions have these items turned on. But in order to reduce kernel size, some items are turned off by default on embedded device distributions like OpenWRT, Armbian, etc.
+Mainstream desktop distributions usually enable the required options.
+Distributions for embedded devices, such as OpenWrt and Armbian, disable some
+of them by default to reduce kernel size.
 
-Check them using command like:
+Show your machine's kernel configuration:
 
-This command only lists configuration values. Compare the output with the required values below; output alone does not mean all requirements are met.
+```shell
+zcat /proc/config.gz || cat /boot/{config,config-$(uname -r)}
+```
+
+dae requires:
+
+```
+CONFIG_BPF=y
+CONFIG_BPF_SYSCALL=y
+CONFIG_BPF_JIT=y
+CONFIG_CGROUPS=y
+CONFIG_KPROBES=y
+CONFIG_NET_INGRESS=y
+CONFIG_NET_EGRESS=y
+CONFIG_NET_SCH_INGRESS=m
+CONFIG_NET_CLS_BPF=m
+CONFIG_NET_CLS_ACT=y
+CONFIG_BPF_STREAM_PARSER=y
+CONFIG_DEBUG_INFO=y
+# CONFIG_DEBUG_INFO_REDUCED is not set
+CONFIG_DEBUG_INFO_BTF=y
+CONFIG_KPROBE_EVENTS=y
+CONFIG_BPF_EVENTS=y
+```
+
+Check the required options with the following commands.
 
 ::: code-group
 
@@ -57,48 +84,14 @@ end | grep -E \
 
 :::
 
-### Required configuration values
 
-dae needs:
-
-```
-CONFIG_BPF=y
-CONFIG_BPF_SYSCALL=y
-CONFIG_BPF_JIT=y
-CONFIG_CGROUPS=y
-CONFIG_KPROBES=y
-CONFIG_NET_INGRESS=y
-CONFIG_NET_EGRESS=y
-CONFIG_NET_SCH_INGRESS=m
-CONFIG_NET_CLS_BPF=m
-CONFIG_NET_CLS_ACT=y
-CONFIG_BPF_STREAM_PARSER=y
-CONFIG_DEBUG_INFO=y
-# CONFIG_DEBUG_INFO_REDUCED is not set
-CONFIG_DEBUG_INFO_BTF=y
-CONFIG_KPROBE_EVENTS=y
-CONFIG_BPF_EVENTS=y
-```
-
-::: details Show the full kernel configuration
-
-Use following command to show kernel configuration items on your machine.
-
-```shell
-zcat /proc/config.gz || cat /boot/{config,config-$(uname -r)}
-```
-
-:::
-
-### Distribution-specific notes
-
-> **Note**: `Armbian` users can follow the [**Upgrade Guide**](/dae/user-guide/kernel-upgrade) to upgrade the kernel to meet the kernel configuration requirement.
+> **Note**: Armbian users can follow the [Upgrade Guide](/dae/user-guide/kernel-upgrade) to meet the kernel configuration requirements.
 >
-> `Arch Linux ARM` users can use [`linux-aarch64-7ji`](https://github.com/7Ji-PKGBUILDs/linux-aarch64-7ji) which meets the kernel configuration requirement of dae.
+> Arch Linux ARM users can use [`linux-aarch64-7ji`](https://github.com/7Ji-PKGBUILDs/linux-aarch64-7ji), which meets dae's kernel configuration requirements.
 <!-- quick-start-requirements:end -->
 
 </div>
 
 ---
 
-Source: [dae upstream](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/README.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).
+Source: [dae upstream](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/README.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).

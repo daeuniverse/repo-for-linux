@@ -1,8 +1,10 @@
 # Gentoo / Calculate <Badge type="info" text="社区维护" />
 
-软件源不提供 Gentoo 软件包。Gentoo 与 Calculate 用户通过 [gentoo-zh overlay](https://github.com/gentoo-zh/overlay) 安装，软件包由 Gentoo 社区维护，使用 Portage 管理，版本与[软件包列表](/zh-CN/guide/packages)中的软件源版本相互独立。
+Dae Universe 软件源不提供 Gentoo 软件包。Gentoo 与 Calculate 用户通过 [gentoo-zh overlay](https://github.com/gentoo-zh/overlay) 安装。
 
-::: info 执行身份与架构
+软件包由 Gentoo 社区维护，使用 Portage 管理，版本与[软件包列表](/zh-CN/guide/packages)中的软件源版本相互独立。
+
+::: info 适用架构
 测试关键字示例适用于 amd64 系统。
 :::
 
@@ -14,7 +16,9 @@
 
 ## 2. 接受测试关键字
 
-overlay 中的这些软件包只有测试关键字，安装前需要在 `package.accept_keywords` 中写入所选软件的条目。如果 `/etc/portage/package.accept_keywords` 是目录，可写入其中的单独文件；如果它是文件，则直接在该文件中添加。
+overlay 中的这些软件包只有测试关键字。安装前，需要在 `package.accept_keywords` 中写入所选软件的条目。
+
+如果 `/etc/portage/package.accept_keywords` 是目录，可写入其中的单独文件。如果它是文件，则直接在该文件中添加。
 
 ::: code-group
 
@@ -70,12 +74,15 @@ sudo emerge --ask dev-libs/v2ray-rules-dat-bin::gentoo-zh
 
 已进入 root shell 时去掉命令中的 `sudo`。
 
-## 4. 软件包差异
+## 软件包差异
 
-- `net-proxy/juicity` 默认只构建服务端；需要客户端时启用 `client` USE 标志。
-- `dev-libs/v2ray-rules-dat-bin` 安装预编译的规则数据文件，`geosite` 与 `geoip` USE 标志默认启用。
-- overlay 没有 Juicity-rs 的 ebuild。
-- dae 与 daed 的安装步骤见 [dae](/zh-CN/dae/installation/gentoo) 与 [daed](/zh-CN/daed/installation/gentoo)。
+| 软件包 | 说明 |
+| --- | --- |
+| `net-proxy/juicity` | 默认只构建服务端；需要客户端时启用 `client` USE 标志 |
+| `dev-libs/v2ray-rules-dat-bin` | 安装预编译的规则数据文件，`geosite` 与 `geoip` USE 标志默认启用 |
+| Juicity-rs | overlay 没有对应的 ebuild |
+
+dae 与 daed 的安装步骤见 [dae](/zh-CN/dae/installation/gentoo) 与 [daed](/zh-CN/daed/installation/gentoo)。
 
 ### 可选：镜像与二进制包
 

@@ -35,11 +35,11 @@ features:
     link: /dae/troubleshooting
     linkText: "Find a solution"
   - title: "honk"
-    details: "An eBPF proxy engine written in Rust, drawing on dae and sing-box. Still early."
+    details: "An experimental Linux transparent proxy engine written in Rust, based on designs from dae and sing-box."
     link: /honk
     linkText: "About honk"
   - title: "kdae"
-    details: "A branch running ahead of dae, reworking the architecture and the performance."
+    details: "A branch with architecture and performance changes not yet in dae's main branch."
     link: /kdae
     linkText: "About kdae"
   - title: "DaedNext"

@@ -1,6 +1,6 @@
 # openSUSE
 
-Repository setup is shared by all packages. If already configured, skip to package selection. All commands use sudo.
+Configure the repository once for all packages. If it is already configured, skip to package selection. Package installation commands use sudo.
 
 ## 1. Add the repository
 

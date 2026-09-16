@@ -1,6 +1,6 @@
 # 其他可用软件包
 
-本站以 dae 文档为主。软件源还提供 daed、v2rayA 等软件包，下表列出软件源的完整软件包列表。
+本站以 dae 文档为主。软件源还提供 daed、v2rayA 等软件包，完整列表如下。
 
 版本号来自软件源构建结果；单独构建文档时，从 [status 分支](https://github.com/daeuniverse/repo-for-linux/tree/status)补充版本数据。
 

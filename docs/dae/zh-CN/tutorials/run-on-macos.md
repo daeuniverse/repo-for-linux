@@ -4,16 +4,13 @@ title: "macOS / Lima"
 
 <div v-pre lang="zh-CN">
 
-# macOS / Lima
+# 在 macOS 上运行
 
-::: warning 历史教程
-原文中的 Debian 镜像链接已返回 HTTP 404；通过 Homebrew 安装 socket_vmnet 的方式也不符合当前 Lima 的 sudoers 要求。需先更新镜像与网络配置，不能直接执行整套流程。参见 [Lima VMNet 文档](https://lima-vm.io/docs/config/network/vmnet/)。
-:::
-## 安装 brew
+## 安装 Homebrew
 
 ### x86
 
-按照官方文档 <https://docs.brew.sh/Installation> 安装 brew：
+按照[官方文档](https://docs.brew.sh/Installation)安装 Homebrew：
 
 ```shell
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
@@ -34,9 +31,9 @@ curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C ho
 
 ### 配置
 
-本节介绍如何通过 [Lima](https://github.com/lima-vm/lima) 虚拟机运行 dae，并代理整个 macOS 主机的网络。
+通过 [Lima](https://github.com/lima-vm/lima) 虚拟机运行 dae，可代理整个 macOS 主机的网络。
 
-首先安装 `lima` 和 `socket_vmnet`。
+#### 1. 安装 Lima 和 socket_vmnet
 
 ```shell
 # Install lima for VM and socket_vmnet for bridge.
@@ -47,7 +44,7 @@ limactl sudoers >etc_sudoers.d_lima
 sudo install -o root etc_sudoers.d_lima /etc/sudoers.d/lima
 ```
 
-然后配置 Lima 和 dae 虚拟机。
+#### 2. 配置 Lima 和 dae 虚拟机
 
 ```shell
 # Configure lima networks.
@@ -60,12 +57,10 @@ sed -ir "s#^ *socketVMNet:.*#  socketVMNet: \"${socket_vmnet_bin}\"#" ~/.lima/_c
 mkdir ~/.lima/dae/
 cat << 'EOF' | tee ~/.lima/dae/lima.yaml
 images:
-- location: "https://cloud.debian.org/images/cloud/bookworm/daily/20230416-1352/debian-12-generic-amd64-daily-20230416-1352.qcow2"
+- location: "https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-generic-amd64.qcow2"
   arch: "x86_64"
-  digest: "sha512:8dcb07f213bbe7436744ce310252f53eb06d8d0a85378e4bdeb297e29d7f8b8af82b038519fabca84a75f188aa4e5586d21856d1bb09ab89aca70fd39be7c06b"
-- location: "https://cloud.debian.org/images/cloud/bookworm/daily/20230416-1352/debian-12-generic-arm64-daily-20230416-1352.qcow2"
+- location: "https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-generic-arm64.qcow2"
   arch: "aarch64"
-  digest: "sha512:88020fbde570e4bc773d6b05d810150b64fea007a2a18dfee835f1d73025bd2872300352e5cb1acb0bb4784c3c6765be1007880177f5319385d4fdf1d75e3ccf"
 mounts:
 networks:
 - lima: bridged
@@ -75,19 +70,19 @@ disk: "3GiB"
 EOF
 ```
 
-启动 dae 虚拟机并完成配置。
+#### 3. 启动并配置 dae 虚拟机
 
 ```shell
 # Start dae VM.
 limactl start dae
 ```
 
+进入虚拟机，配置网络并安装 dae：
+
 ```shell
 # Enter the dae VM.
 limactl shell dae
 ```
-
-以下命令在 dae 虚拟机内执行：
 
 ```shell
 # Manually configure network.
@@ -179,12 +174,9 @@ sudo systemctl enable --now dae.service
 exit
 ```
 
-将 macOS 的默认路由指向 dae 虚拟机。
+#### 4. 将 macOS 默认路由指向 dae 虚拟机
 
-> **注意**
-> 每次连接网络后，可能都需要执行此命令。
->
-> 如需自动执行，请参阅[自动设置路由和 DNS](#自动设置路由和-dns)。
+> **注意**：每次连接网络后，可能都需要执行此命令。如需自动执行，请参阅[自动设置路由和 DNS](/zh-CN/dae/tutorials/run-on-macos#自动设置路由和-dns)。
 
 ```shell
 # Get IP of dae VM.
@@ -195,7 +187,7 @@ sudo route delete default; sudo route add default $dae_ip
 networksetup -setdnsservers Wi-Fi $dae_ip
 ```
 
-验证配置是否成功。
+#### 5. 验证连通性
 
 ```shell
 # Verify.
@@ -204,7 +196,7 @@ curl -v ipinfo.io
 
 ### 自动设置路由和 DNS
 
-编写要执行的脚本。
+#### 1. 创建网络更新脚本
 
 ```shell
 # The script to execute.
@@ -227,13 +219,13 @@ EOF
 chmod +x /Users/Shared/bin/dae-network-update.sh
 ```
 
-授予免密码执行 route 的权限。
+#### 2. 允许免密码执行 `route`
 
 ```shell
 if [ $(id -u) -eq "0" ]; then echo 'Do not use root!!'; else echo "$(whoami) ALL=(ALL) NOPASSWD: $(which route)" | sudo tee /etc/sudoers.d/"$(whoami)"-route; fi
 ```
 
-编写 plist 服务文件。
+#### 3. 创建 plist 服务文件
 
 ```shell
 cat << 'EOF' > ~/Library/LaunchAgents/org.v2raya.dae.networkchanging.plist
@@ -267,7 +259,7 @@ cat << 'EOF' > ~/Library/LaunchAgents/org.v2raya.dae.networkchanging.plist
 EOF
 ```
 
-加载 plist 服务。
+#### 4. 加载 plist 服务
 
 ```shell
 launchctl load ~/Library/LaunchAgents/org.v2raya.dae.networkchanging.plist
@@ -277,4 +269,4 @@ launchctl load ~/Library/LaunchAgents/org.v2raya.dae.networkchanging.plist
 
 ---
 
-来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/tutorials/run-on-macos.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。
+来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/tutorials/run-on-macos.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。

@@ -1,6 +1,8 @@
 # Arch Linux / Manjaro <Badge type="info" text="社区维护" />
 
-软件源不提供 Arch 软件包。这些软件来自 Arch 官方仓库、[AUR](https://aur.archlinux.org) 与 [archlinuxcn](https://github.com/archlinuxcn/repo)，由各自的维护者打包，版本与[软件包列表](/zh-CN/guide/packages)中的软件源版本相互独立。
+Dae Universe 软件源不提供 Arch 软件包。此页软件来自 Arch 官方仓库、[AUR](https://aur.archlinux.org) 与 [archlinuxcn](https://github.com/archlinuxcn/repo)。
+
+软件包由各自的维护者打包。其版本与[软件包列表](/zh-CN/guide/packages)中的软件源版本相互独立。
 
 | 软件 | 来源 | 软件包 |
 | --- | --- | --- |
@@ -12,9 +14,9 @@
 | daed | AUR、archlinuxcn | `daed`、`daed-avx2-bin`、`daed-git` |
 | v2ray-rules-dat | AUR、archlinuxcn | `v2ray-rules-dat` |
 
-以下命令统一使用 sudo，已进入 root shell 时去掉 `sudo`。
+`pacman` 命令使用 sudo，已进入 root shell 时去掉 `sudo`。
 
-## 1. 从官方仓库安装
+## 从官方仓库安装
 
 `dae` 与 `v2ray` 在官方 `extra` 仓库中，无需 AUR 助手。
 
@@ -30,7 +32,7 @@ sudo pacman -S v2ray
 
 :::
 
-## 2. 从 AUR 安装
+## 从 AUR 安装
 
 其余软件由 AUR 助手构建。
 
@@ -94,7 +96,7 @@ paru -S v2ray-rules-dat
 
 :::
 
-## 3. 从 archlinuxcn 安装
+## 从 archlinuxcn 安装
 
 已启用 archlinuxcn 时，这些软件包直接从软件源安装，无需构建。archlinuxcn 没有 juicity，也没有稳定版 `dae`，该版本在官方 `extra` 仓库中。
 

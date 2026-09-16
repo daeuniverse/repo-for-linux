@@ -1,6 +1,6 @@
 # daed
 
-daed 提供 dae 的 Web 管理介面，本章獨立介紹 daed 的安裝與服務管理。
+daed 提供 dae 的網頁管理介面。本章介紹 daed 的安裝與服務管理。
 
 <img src="/upstream/daed-orchestrate.png" alt="daed 面板：設定、DNS、路由、分組、節點與訂閱" class="app-screenshot">
 
@@ -19,7 +19,7 @@ daed 提供 dae 的 Web 管理介面，本章獨立介紹 daed 的安裝與服�
 
 ## 其他可用套件
 
-套件來源亦提供 v2rayA 等套件，完整列表見[套件列表](/zh-TW/guide/packages)。依系統選擇安裝入口：
+套件來源也提供 v2rayA 等套件，完整清單見[套件列表](/zh-TW/guide/packages)。請依系統選擇安裝入口：
 
 <!--@include: @/.vitepress/snippets/packages/zh-TW/install.md-->
 

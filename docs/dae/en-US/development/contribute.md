@@ -4,7 +4,7 @@ title: "Contributing"
 
 <div v-pre lang="en-US">
 
-# Contributing
+# Contribute
 
 If you want to contribute to a project and make it better, your help is very welcome. Contributing is also a great way to learn more about social coding on GitHub, new technologies and their ecosystems and how to make constructive, helpful bug reports, feature requests and the noblest of all contributions: a good, clean pull request.
 
@@ -59,4 +59,4 @@ Please do not ping your reviewer(s) by mentioning them in a new comment. Instead
 
 ---
 
-Source: [dae upstream](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/development/contribute.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).
+Source: [dae upstream](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/development/contribute.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).

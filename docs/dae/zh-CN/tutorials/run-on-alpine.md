@@ -4,18 +4,19 @@ title: "Alpine Linux"
 
 <div v-pre lang="zh-CN">
 
-# Alpine Linux
+# 在 Alpine Linux 上运行
 
-以下命令使用 OpenRC。已配置 sudo 的普通用户选择 sudo 标签；已进入 root shell 时选择 root 标签。
-**注意：**
+本教程适用于 Alpine Linux 3.20 及更新版本。内核要求如下：
 
-1. Alpine Linux 3.18 或更新版本开箱即支持完整 eBPF；较旧的 Alpine Linux 版本需要自行构建内核。
-2. 从 3.20 起，因 Alpine Linux 的跨 CPU 架构兼容性，Alpine Linux 已正式禁用 dae 所需的一些功能，因此默认只能使用 `linux-virt` 运行 dae。对于 `linux-lts` 或 `linux-edge`，应自行构建内核。
-3. 本教程适用于 Alpine Linux 3.20 及更新版本。
+| Alpine Linux 版本 | eBPF 支持与内核要求 |
+| --- | --- |
+| 早于 3.18 | 需要自行构建内核 |
+| 3.18 及更新版本 | 默认完整支持 eBPF，但 3.20 起有下述限制 |
+| 3.20 及更新版本 | 为兼容不同 CPU 架构，禁用了 dae 所需的部分功能；默认仅 `linux-virt` 可运行 dae，使用 `linux-lts` 或 `linux-edge` 时需自行构建内核 |
 
 ## 启用 Community 仓库
 
-运行 `setup-apkrepos` 命令后，会得到如下菜单列表：
+执行 `setup-apkrepos` 后，会显示以下菜单：
 
 ::: code-group
 
@@ -38,7 +39,7 @@ setup-apkrepos
  (skip) Skip setting up apk repositories
 ```
 
-然后输入 `c` 以启用 Community 仓库。
+输入 `c` 以启用 Community 仓库。
 
 ## 启用 CGroups
 
@@ -85,11 +86,7 @@ vi /etc/init.d/sysfs
         fi
 ```
 
-请注意，脚本 `/etc/init.d/sysfs` 的格式必须正确，否则 `sysfs` 服务将失败。
-
-## 使启动配置生效
-
-完成 cgroups 和 sysfs 配置后重新启动系统，使开机挂载生效，再启动 dae。
+确保 `/etc/init.d/sysfs` 的脚本格式正确，否则 `sysfs` 服务会失败。
 
 ::: code-group
 
@@ -105,9 +102,9 @@ reboot
 
 ## 安装 dae
 
-安装程序：<https://github.com/daeuniverse/dae-installer/>
+安装程序：<https://github.com/daeuniverse/dae-installer>。
 
-该安装程序提供 dae 的 OpenRC 服务脚本。安装后，应在 `/usr/local/etc/dae/config.dae` 添加配置文件，再将其权限设为 600 或 640：
+该安装程序提供 dae 的 OpenRC 服务脚本。安装后，在 `/usr/local/etc/dae/config.dae` 添加配置文件，再将其权限设为 600 或 640：
 
 ::: code-group
 
@@ -121,10 +118,18 @@ chmod 640 /usr/local/etc/dae/config.dae
 
 :::
 
-完成[最小配置](/zh-CN/dae/start/minimal-configuration)后，请参阅[服务管理](/zh-CN/dae/start/service-management)，启动 dae、设置开机启动、重载或重新启动服务。
+配置文件准备好后，启动 dae 服务：
+
+参见[立即启动](/zh-CN/dae/start/service-management#立即启动)。
+
+## 开机启动 dae
+
+使用 `rc-update` 启用 dae 服务：
+
+参见[开机启动](/zh-CN/dae/start/service-management#开机启动)。
 
 </div>
 
 ---
 
-来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/tutorials/run-on-alpine.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。
+来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/tutorials/run-on-alpine.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。

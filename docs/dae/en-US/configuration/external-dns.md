@@ -4,16 +4,19 @@ title: "External DNS"
 
 <div v-pre lang="en-US">
 
-# External DNS
+# Use external DNS
 
-> **Note**
-> DNS request should be forwarded by dae for domain based traffic split. This guide will show you how to configure dae with external DNS.
+This page shows how to make an external resolver, AdGuardHome in the examples,
+answer every DNS query that dae intercepts, while the resolver's own upstream
+queries go out through dae and its proxies. The resolver can run on the dae
+host or on another machine in the LAN. How dae intercepts DNS and how the
+sniffed domain feeds back into routing is described in [DNS](/dae/configuration/dns) and
+[how it works](/dae/how-it-works).
 
-If you use a external DNS like AdguardHome, you could refer to the following guide.
+## External DNS on the dae host
 
-## External DNS on localhost
-
-If you set up an external DNS on localhost, you may want to let the DNS queries to `dns.google` proxied. For example, if you have the following configuration in AdguardHome:
+AdGuardHome runs on the dae host and resolves China mainland domains directly
+and everything else through `dns.google`:
 
 ```
 Listen on: the same machine with dae, port 53.
@@ -22,19 +25,24 @@ China mainland: udp://223.5.5.5:53
 Others: https://dns.google/dns-query
 ```
 
-You should configure dae as follows:
+Configure dae as follows:
 
-1. Complete `wan_interface` in "global" section to proxy requests of AdguardHome.
+1. Set `wan_interface` in the `global` section, so that AdGuardHome's own
+   upstream queries leave the host through dae and can be proxied.
 
-2. Insert following rule as the first line of "routing" section to avoid loops.
+2. Insert the following rule at the start of the `routing` section. Without
+   it, dae would intercept AdGuardHome's plain UDP queries to `223.5.5.5` and
+   hand them back to AdGuardHome, which loops:
 
    ```python
    pname(AdGuardHome) && l4proto(udp) && dport(53) -> must_direct
    ```
 
-   And make sure domain `dns.google` will be proxied in routing rules.
+   Keep a routing rule that sends `dns.google` through a proxy, so the DoH
+   upstream is proxied.
 
-3. Add upstream and request to section "dns".
+3. Make AdGuardHome the upstream for every intercepted query in the `dns`
+   section:
 
    ```
    dns {
@@ -49,9 +57,15 @@ You should configure dae as follows:
    }
    ```
 
-4. When binding to WAN, do not use the local external DNS directly in `/etc/resolv.conf`. For example, use `nameserver 119.29.29.29`; dae can then intercept DNS traffic as packets leave the network interface.
+4. If you bind to WAN, point `/etc/resolv.conf` at a public resolver, for
+   example `nameserver 119.29.29.29`, not at the local AdGuardHome. Queries to
+   `127.0.0.1` stay on the loopback interface and never reach dae; queries to a
+   public address leave through the NIC, where dae intercepts them and sends
+   them to AdGuardHome through the `dns` section, so dae sees the answers.
 
-   After a reboot, services such as dnsmasq may restore `/etc/resolv.conf`. If this occurs, the source recommends uninstalling those services or making the file immutable:
+   DNS services such as dnsmasq often overwrite `/etc/resolv.conf` after a
+   reboot. If this happens, uninstall the service or run
+   `sudo chattr +i /etc/resolv.conf`.
 
    ::: code-group
 
@@ -65,15 +79,23 @@ You should configure dae as follows:
 
    :::
 
-5. If you bind to LAN, make sure your DHCP server will distribute dae as the DNS server (DNS request should be forwarded by dae for domain based traffic split).
+5. If you bind to LAN, have the DHCP server advertise a public resolver, not
+   the dae host, as the DNS server. A UDP query from a LAN client to the dae
+   host's port 53 is delivered to AdGuardHome before routing, so dae never sees
+   the answer and its `domain()` rules do not match that client's traffic. dae
+   intercepts a query to any other address, answers it through AdGuardHome and
+   sees the answer.
 
-6. If there is still a DNS issue and there are no warn/error logs, you have to change your listening port of external DNS (here is AdGuardHome) from 53 to non-53 port. See [#31](https://github.com/daeuniverse/dae/issues/31#issuecomment-1467358364).
+6. If DNS still fails without warning or error logs, move AdGuardHome off port
+   53. Another program on port 53 breaks interception on NICs that cannot
+   disable checksum verification; see
+   [#31](https://github.com/daeuniverse/dae/issues/31#issuecomment-1467358364).
 
 7. If you use PVE, refer to [#37](https://github.com/daeuniverse/dae/discussions/37).
 
-## External DNS on another machine in LAN
+## External DNS on another LAN machine
 
-If you set up a external DNS on another machine in LAN, you may want to let the DNS queries to `dns.google` proxied. For example, if you have following configuration in `AdguardHome`:
+AdGuardHome runs on another machine in the LAN:
 
 ```
 Listen on: 192.168.30.3:53 (mac address: 8c:16:45:36:1c:5a)
@@ -82,11 +104,13 @@ China mainland: udp://223.5.5.5:53
 Others: https://dns.google/dns-query
 ```
 
-You should configure dae as follows:
+Configure dae as follows:
 
-1. Fill in `lan_interface` in "global" section to proxy requests of AdguardHome.
+1. Set `lan_interface` in the `global` section, so that AdGuardHome's own
+   upstream queries pass through dae and can be proxied.
 
-2. Insert following rule as the first line of "routing" section to avoid loops.
+2. Insert the following rule at the start of the `routing` section, for the
+   same reason as on the dae host:
 
    ```python
    sip(192.168.30.3) && l4proto(udp) && dport(53) -> must_direct
@@ -94,9 +118,10 @@ You should configure dae as follows:
    # mac('8c:16:45:36:1c:5a') && l4proto(udp) && dport(53) -> must_direct
    ```
 
-   And make sure domain `dns.google` will be proxied in routing rules.
+   Keep a routing rule that sends `dns.google` through a proxy.
 
-3. Add upstream and request to section "dns".
+3. Make AdGuardHome the upstream for every intercepted query in the `dns`
+   section:
 
    ```
    dns {
@@ -111,9 +136,15 @@ You should configure dae as follows:
    }
    ```
 
-4. If you bind to LAN, make sure your DHCP server will distribute dae as the DNS server (DNS request should be forwarded by dae for domain based traffic split).
+4. Have the DHCP server advertise a public resolver, not the AdGuardHome
+   machine, as the DNS server. A query sent straight to `192.168.30.3`
+   normally travels over the LAN without passing dae, so dae does not see the
+   answer; dae intercepts a query to any other address, answers it through
+   AdGuardHome and sees the answer.
 
-5. If there is still a DNS issue and there are no warn/error logs, you have to change your listening port of external DNS (here is AdGuardHome) from 53 to non-53 port. See [#31](https://github.com/daeuniverse/dae/issues/31#issuecomment-1467358364).
+5. If DNS still fails without warning or error logs, move AdGuardHome off port
+   53; see
+   [#31](https://github.com/daeuniverse/dae/issues/31#issuecomment-1467358364).
 
 6. If you use PVE, refer to [#37](https://github.com/daeuniverse/dae/discussions/37).
 
@@ -121,4 +152,4 @@ You should configure dae as follows:
 
 ---
 
-Source: [dae upstream](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/configuration/external-dns.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).
+Source: [dae upstream](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/configuration/external-dns.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).

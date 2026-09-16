@@ -1,6 +1,6 @@
 # Nix / NixOS
 
-将 daed 模块合并到现有 NixOS flake，保留原有 Nixpkgs、系统与硬件配置，并将 `HOSTNAME` 替换为配置名称。
+将 daed 模块合并到现有 NixOS flake，并将 `HOSTNAME` 替换为配置名称。保留原有 Nixpkgs、系统与硬件配置。
 
 ## 1. 导入 NixOS 模块
 
@@ -46,7 +46,9 @@
 }
 ```
 
-默认配置目录为 `/etc/daed`，Web 界面监听 `127.0.0.1:2023`，仅供本机访问。`openFirewall.port` 是代理端口，并非 Web 界面端口。参见[模块选项](https://github.com/daeuniverse/flake.nix/blob/main/daed/module.nix)。
+默认配置目录为 `/etc/daed`，Web 界面监听 `127.0.0.1:2023`，仅供本机访问。
+
+`openFirewall.port` 是代理端口，并非 Web 界面端口。参见[模块选项](https://github.com/daeuniverse/flake.nix/blob/main/daed/module.nix)。
 
 ## 3. 应用系统配置
 

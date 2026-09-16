@@ -1,10 +1,8 @@
 # Debian / Ubuntu
 
-從 Dae Universe 套件來源安裝 daed。
+在 Debian、Ubuntu 及其他使用 APT 的發行版上，從 Dae Universe 套件來源安裝 daed。
 
-適用於 Debian、Ubuntu 及其他使用 APT 的發行版。
-
-以下指令要求目前使用者已設定 sudo。
+已設定 sudo 的一般使用者選擇 sudo 標籤；已進入 root shell 時選擇 root 標籤。
 
 ## 1. 安裝 `curl`
 

@@ -1,6 +1,6 @@
 # 服務管理
 
-請先完成 dae 設定，再選擇系統使用的服務管理器，預設使用 sudo。
+請先完成 dae 設定，再選擇系統使用的服務管理器。頁面預設選中 sudo 標籤。
 
 | 安裝方式 | 服務管理器 | 設定檔／前提 |
 | --- | --- | --- |
@@ -14,10 +14,10 @@
 | NixOS | systemd | 開機啟動由 [NixOS 模組](/zh-TW/dae/installation/nix) 管理 |
 | Alpine（dae-installer） | OpenRC | `/usr/local/etc/dae/config.dae` |
 | 手動安裝 | 取決於安裝的服務 | 需先安裝對應的服務檔案 |
-| Docker | 不適用本頁命令 | 請參閱對應平台教學 |
-| macOS 主機 | 不適用本頁命令 | 請參閱對應平台教學 |
+| Docker | 不適用本頁命令 | 請參閱對應平臺教學 |
+| macOS 主機 | 不適用本頁命令 | 請參閱對應平臺教學 |
 
-依需求選擇以下操作，無需依序執行。
+按需選擇以下操作，無需依次執行。
 
 <!-- shared-service-actions:start -->
 ## 立即啟動並設為開機啟動
@@ -68,7 +68,7 @@ rc-service dae start
 
 ## 開機啟動
 
-此操作不會立即啟動服務。
+設定開機啟動不會立即啟動服務。
 
 ::: code-group
 
@@ -90,11 +90,11 @@ rc-update add dae default
 
 :::
 
-## 重載設定
+## 重新載入設定
 
-修改設定檔後，重載執行中的 dae 服務。
+修改設定檔後，重新載入正在執行的 dae 服務。
 
-OpenRC 服務腳本未定義 reload 動作。服務執行時，使用 dae 自帶的重載命令。
+OpenRC 服務指令碼未定義 reload 動作。服務執行時，使用 dae 自帶的重新載入命令。
 
 ::: code-group
 
@@ -118,7 +118,7 @@ dae reload
 
 ## 重新啟動服務
 
-重新啟動會停止並再次啟動 dae，中斷現有連線。套用設定變更時，可使用上方的重載命令。
+重新啟動會停止並再次啟動 dae，中斷現有連線。套用設定變更時，可使用上方的重新載入命令。
 
 ::: code-group
 
@@ -143,4 +143,4 @@ rc-service dae restart
 
 ---
 
-來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/README.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。
+來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/README.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。

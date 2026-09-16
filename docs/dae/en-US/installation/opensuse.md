@@ -1,14 +1,13 @@
-# openSUSE
+### openSUSE
 
-For openSUSE.
-
+Use the Dae Universe repository at <https://daeuniverse.pages.dev>.
 The commands below assume sudo is configured for your account.
 
-## 1. Add the repository
+#### 1. Add the Zypper Repository
 
 <!--@include: @/.vitepress/snippets/repositories/en-US/opensuse-1.md-->
 
-## 2. Install dae
+#### 2. Install dae
 
 ::: code-group
 
@@ -22,6 +21,7 @@ zypper install dae
 
 :::
 
-The package includes a systemd service. The example is `/etc/dae/example.dae`; save your configuration as `/etc/dae/config.dae`.
-
-After completing [Minimal configuration](/dae/start/minimal-configuration), see [Service management](/dae/start/service-management) to start, enable, reload or restart dae.
+The package includes a systemd service and an example at `/etc/dae/example.dae`.
+Save your configuration as `/etc/dae/config.dae`.
+Complete [Minimal Configuration](/dae/start/minimal-configuration#minimal-configuration), then see
+[Service Management](/dae/start/service-management#service-management).

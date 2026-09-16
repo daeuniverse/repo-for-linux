@@ -6,11 +6,13 @@ title: "DNS"
 
 # DNS
 
-dae 會攔截所有送往連接埠 53 的 UDP 流量並嗅探 DNS。以下提供 DNS 設定的一些範例和範本。
+dae 會攔截所有經它路由或從本機發出、發往連接埠 53 的 UDP 和 TCP 流量，並嗅探 DNS。只有命中 `must_direct` 的流量不經過 dae；僅寫 `direct` 仍會交給 DNS 模組處理。兩種情況不會進入 DNS 模組。區域網路用戶端發往 dae 主機自身 socket（例如本機監聽連接埠 53 的 dnsmasq）的 UDP 查詢，在路由之前就交給該 socket。經 loopback 介面的查詢不會經過 dae 的任何 hook。區域網路用戶端發往該本機 socket 的 TCP 查詢仍會經過路由。
 
-## DNS 位址格式
+dae 不重組 IP 分片：只處理封包的第一個分片，後續分片原樣放行，因此被分片的 UDP DNS 報文無法被正確攔截。若為區域網路用戶端應答的解析器自己的上游查詢走了 `must_direct` 規則，dae 看不到這些應答，也就學不到返回 IP 對應的網域，`domain()` 規則不會匹配用戶端的流量。
 
-DoH3
+## URI 格式
+
+### DoH3
 
 ```
 h3://<host>:<port>/<path>
@@ -20,7 +22,7 @@ default port: 443
 default path: /dns-query
 ```
 
-DoH
+### DoH
 
 ```
 https://<host>:<port>/<path>
@@ -29,7 +31,7 @@ default port: 443
 default path: /dns-query
 ```
 
-DoT
+### DoT
 
 ```
 tls://<host>:<port>
@@ -37,7 +39,7 @@ tls://<host>:<port>
 default port: 853
 ```
 
-DoQ
+### DoQ
 
 ```
 quic://<host>:<port>
@@ -45,15 +47,15 @@ quic://<host>:<port>
 default port: 853
 ```
 
-UDP
-  
+### UDP
+
 ```
 udp://<host>:<port>
 
 default port: 53
 ```
 
-TCP
+### TCP
 
 ```
 tcp://<host>:<port>
@@ -61,7 +63,7 @@ tcp://<host>:<port>
 default port: 53
 ```
 
-TCP 和 UDP
+### TCP 和 UDP
 
 ```
 tcp+udp://<host>:<port>
@@ -69,20 +71,20 @@ tcp+udp://<host>:<port>
 default port: 53
 ```
 
-收到截斷的回應（`TC=1`，RFC 1035 第 4.2.1 節）時，dae 會依 RFC 7766 第 5 節的要求，透過 TCP 重試：`udp://` 上游會改用 TCP 重試該查詢，`tcp+udp://` 上游原本就會如此處理。內建的 `asis` 目的地不會重試；dae 會將目的地傳回的回應原樣交給用戶端，由用戶端決定是否重試，與流量未經 dae 時相同。其他位址格式均維持其指定的傳輸方式。
+對於 dae 代替用戶端轉送的查詢，收到截斷的回應（`TC=1`，RFC 1035 §4.2.1）時，dae 會按 RFC 7766 §5 的要求透過 TCP 重試。`udp://` 上游只在回應被截斷後重試；`tcp+udp://` 上游在任何 UDP 失敗後都會重試。由 `sub()`、`node()` 和 `subnode()` 選中的 dae 自身查詢在 `udp://` 上游沒有這種重試。回應被截斷時查詢直接失敗，錯誤為 `internal dns response truncated`。只有 `tcp+udp://` 上游會透過 TCP 重試這些查詢，因此預期回應較大時，這些規則應指向 `tcp+udp://` 或 `tcp://` 上游。
+
+內建目標 `asis` 沿用用戶端所用的位址和連接埠，但不沿用用戶端的傳輸方式：dae 總是透過 UDP 查詢該伺服器，即使用戶端是透過 TCP 發起查詢。`asis` 不會透過 TCP 重試。該伺服器回覆 `TC=1` 時，dae 丟棄伺服器的回應。dae 改為根據用戶端的查詢構造一條訊息回覆用戶端：ID 和 Question 段與查詢相同，`NOERROR`、`RA=1`、`TC=1`，Answer 段為空。之後由用戶端決定是否通過 TCP 重試。其他協定仍使用各自指定的傳輸方式。
 
 ## 範例
 
-::: details 完整參考範例
-
 ```shell
 dns {
-    # For example, if ipversion_prefer is 4 and the domain name has both type A and type AAAA records, the dae will only
-    # respond to type A queries and response empty answer to type AAAA queries.
+    # For example, if ipversion_prefer is 4 and dae already knows the domain has type A records, dae returns an empty
+    # answer to type AAAA queries; otherwise dae returns the AAAA answer unchanged.
     ipversion_prefer: 4
 
-    # Give a fixed ttl for domains. Zero means that dae will request to upstream every time and not cache DNS results
-    # for these domains.
+    # Give a fixed ttl for domains. Zero makes the cached answer expire immediately; with optimistic_cache (default true)
+    # dae may still serve it as a stale answer while refreshing.
     fixed_domain_ttl {
         ddns.example.org: 10
         test.example.org: 3600
@@ -122,7 +124,7 @@ dns {
         # Match rules from top to bottom.
         request {
             # Built-in outbounds in 'request': asis, reject.
-            # asis queries the server the request was addressed to, as the request arrived.
+            # asis queries the server the request was addressed to, always over UDP.
             # Do not point other LAN devices at dae:53 (loop risk).
             # You can also use user-defined upstreams.
 
@@ -178,11 +180,17 @@ dns {
 }
 ```
 
-:::
+`ipversion_prefer` 不會讓 dae 主動查詢首選的位址族。設定 `ipversion_prefer: 4` 時，只有 dae 已經知道該網域有 `A` 記錄，才會把 `AAAA` 回應替換成空的 `NOERROR` 回覆。已知有 `A` 記錄指兩種情況之一：快取中存在未過期的 `A` 回應；或者 `AAAA` 回應最多等待 50 ms（RFC 8305 的解析延遲），在此期間收到了帶記錄的 `A` 回應。否則 dae 原樣返回 `AAAA` 回應。`ipversion_prefer: 6` 的行為相同，只是兩個位址族對調。
 
-## Bootstrap 解析器（`global`）
+`fixed_domain_ttl` 設為 `0` 不會關閉快取。dae 仍會儲存回應，並把快取截止時間設為收到回應的時刻，因此該條目在下次查詢時已經過期。`optimistic_cache` 預設為 `true`。因此在 `optimistic_cache_ttl`（預設 `60` 秒；`0` 表示不限）內，dae 用這條過期條目回答後續查詢，並在後臺向上遊重新整理一次。回覆中的記錄 TTL 不超過 `optimistic_stale_reply_ttl`（預設 `30`）。設定 `optimistic_cache: false` 後，該網域的每次查詢都同步發往上游。
 
-`global.bootstrap_resolver` 僅用於 dae 自身 DNS 路由建立前必須完成的查詢：解析 DNS 上游的主機名稱，以及 `dial_mode: real-domain` 探測。未設定時，dae 會先使用 `119.29.29.29:53`，再使用 `223.5.5.5:53`；設定此選項後，會完全取代這兩個預設值，且僅使用指定的解析器。位於中國大陸以外的主機通常適合選擇較近的解析器：
+## 引導解析器（`global`）
+
+三類查詢由 dae 直接發往 `global.bootstrap_resolver`，從不經過代理。第一類是 `dns.upstream` 中非 IP 字面量條目的主機名稱。第二類是 `dial_mode: domain`（預設值）對嗅探到的網域執行的後臺探測，前提是 dae 的 DNS 快取中沒有該網域的 `A` 或 `AAAA` 記錄。`domain+` 和 `domain++` 跳過該探測；`ip` 從不按網域建立連線。`dial_mode` 只接受 `ip`、`domain`、`domain+` 和 `domain++`。
+
+第三類在 `dns.routing.request` 含有任何規則時生效，此時 dae 的內部 DNS 路由已啟用。當沒有 `sub()`、`node()` 或 `subnode()` 規則把訂閱 URL 的主機或某個節點的伺服器主機名稱分配給上游，或者分配到的上游未返回位址時，dae 透過引導解析器解析該主機名稱。這些查詢繞過 `qname` 和 `qtype` 規則，並且在 DNS 路由執行期間隨時發生，不只在啟動時。
+
+未設定時，dae 依次嘗試 `119.29.29.29:53` 和 `223.5.5.5:53`。設定後只使用指定的解析器，完全替代這兩個預設值。中國大陸以外的主機通常應選擇距離更近的解析器：
 
 ```shell
 global {
@@ -192,11 +200,11 @@ global {
 
 ## 範本
 
-依所需的 DNS 行為選擇一種範本。
+根據所需的 DNS 行為選擇一種範本。
 
 ::: code-group
 
-```shell [依網域分流]
+```shell [按域名分流]
 # Use alidns for China mainland domains and googledns for others.
 dns {
   upstream {
@@ -216,7 +224,7 @@ dns {
 }
 ```
 
-```shell [污染回應重新查詢]
+```shell [污染响应重新查询]
 # Use alidns for all DNS queries and fallback to googledns if pollution result detected.
 dns {
   upstream {
@@ -250,4 +258,4 @@ dns {
 
 ---
 
-來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/configuration/dns.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。
+來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/configuration/dns.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。

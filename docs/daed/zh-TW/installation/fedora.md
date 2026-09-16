@@ -1,10 +1,8 @@
 # Fedora / RHEL
 
-從 Dae Universe 套件來源安裝 daed。
+在 Fedora 與 RHEL 上，從 Dae Universe 套件來源安裝 daed。
 
-適用於 Fedora 與 RHEL。
-
-以下指令要求目前使用者已設定 sudo。
+已設定 sudo 的一般使用者選擇 sudo 標籤；已進入 root shell 時選擇 root 標籤。
 
 ## 1. 新增套件來源
 

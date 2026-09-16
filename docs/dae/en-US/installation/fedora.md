@@ -1,14 +1,15 @@
-# Fedora / RHEL
+### Fedora / RHEL
 
-For Fedora and RHEL.
+#### Dae Universe RPM Repository
 
+For Fedora and RHEL, use the Dae Universe repository at <https://daeuniverse.pages.dev>.
 The commands below assume sudo is configured for your account.
 
-## 1. Add the repository
+##### 1. Add the DNF Repository
 
 <!--@include: @/.vitepress/snippets/repositories/en-US/fedora-1.md-->
 
-## 2. Install dae
+##### 2. Install dae
 
 ::: code-group
 
@@ -22,12 +23,19 @@ dnf install dae
 
 :::
 
-:::: details Alternative: Fedora Copr
+The package includes a systemd service and an example at `/etc/dae/example.dae`.
+Save your configuration as `/etc/dae/config.dae`.
+Complete [Minimal Configuration](/dae/start/minimal-configuration#minimal-configuration), then see
+[Service Management](/dae/start/service-management#service-management).
 
 <div v-pre lang="en-US">
 
 <!-- installation-4:start -->
-For Fedora only. Use this instead of the Dae Universe repository above. [`zhullyb/v2rayA`](https://copr.fedorainfracloud.org/coprs/zhullyb/v2rayA/package/dae) is the Copr project name; the package installed is `dae`.
+#### Fedora Copr
+
+For Fedora only, use [Fedora Copr](https://copr.fedorainfracloud.org/coprs/zhullyb/v2rayA/package/dae)
+instead of the Dae Universe repository.
+`zhullyb/v2rayA` is the Copr project name; the package installed is `dae`.
 
 ::: code-group
 
@@ -46,13 +54,7 @@ dnf install dae
 
 </div>
 
-::::
-
-The package includes a systemd service. The example is `/etc/dae/example.dae`; save your configuration as `/etc/dae/config.dae`.
-
-After completing [Minimal configuration](/dae/start/minimal-configuration), see [Service management](/dae/start/service-management) to start, enable, reload or restart dae.
-
 
 ---
 
-Source: [dae upstream](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/README.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).
+Source: [dae upstream](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/README.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).

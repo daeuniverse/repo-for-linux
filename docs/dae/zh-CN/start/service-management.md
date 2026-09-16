@@ -1,6 +1,6 @@
 # 服务管理
 
-请先完成 dae 配置，再选择系统使用的服务管理器，默认使用 sudo。
+请先完成 dae 配置，再选择系统使用的服务管理器。页面默认选中 sudo 标签。
 
 | 安装方式 | 服务管理器 | 配置文件／前提 |
 | --- | --- | --- |
@@ -68,7 +68,7 @@ rc-service dae start
 
 ## 开机启动
 
-此操作不会立即启动服务。
+设置开机启动不会立即启动服务。
 
 ::: code-group
 
@@ -143,4 +143,4 @@ rc-service dae restart
 
 ---
 
-来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/README.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。
+来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/README.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。

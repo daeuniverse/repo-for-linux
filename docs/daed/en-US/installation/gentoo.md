@@ -36,7 +36,9 @@ emerge --ask net-proxy/daed::gentoo-zh
 
 :::
 
-Review Portage’s kernel checks. The `webui` USE flag is enabled by default; keep it enabled for the daed binary and service described here. Disabling it installs dae-wing instead. Follow the [upstream configuration guide](https://github.com/daeuniverse/daed/blob/main/docs/getting-started.md).
+Review Portage's kernel checks. Keep the default `webui` USE flag enabled for the daed binary and service described here. Disabling it installs dae-wing instead.
+
+Follow the [upstream configuration guide](https://github.com/daeuniverse/daed/blob/main/docs/getting-started.md).
 
 ### Optional: mirrors and binary packages
 

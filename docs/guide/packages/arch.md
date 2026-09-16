@@ -1,6 +1,8 @@
 # Arch Linux / Manjaro <Badge type="info" text="Community maintained" />
 
-The repository provides no Arch packages. This software comes from the official Arch repositories, the [AUR](https://aur.archlinux.org) and [archlinuxcn](https://github.com/archlinuxcn/repo), packaged by their own maintainers. Those versions are independent of the repository versions in the [package list](/guide/packages).
+The Dae Universe repository provides no Arch packages. Use the official Arch repositories, the [AUR](https://aur.archlinux.org) or [archlinuxcn](https://github.com/archlinuxcn/repo).
+
+Each source has its own package maintainers. Its versions are independent of those in the [package list](/guide/packages).
 
 | Software | Source | Package |
 | --- | --- | --- |
@@ -12,9 +14,9 @@ The repository provides no Arch packages. This software comes from the official 
 | daed | AUR, archlinuxcn | `daed`, `daed-avx2-bin`, `daed-git` |
 | v2ray-rules-dat | AUR, archlinuxcn | `v2ray-rules-dat` |
 
-The commands below use sudo; drop `sudo` when already in a root shell.
+The `pacman` commands below use sudo. Omit `sudo` when already in a root shell.
 
-## 1. Install from the official repositories
+## Install from the official repositories
 
 `dae` and `v2ray` are in the official `extra` repository and need no AUR helper.
 
@@ -30,9 +32,9 @@ sudo pacman -S v2ray
 
 :::
 
-## 2. Install from the AUR
+## Install from the AUR
 
-The remaining software is built by an AUR helper.
+Use an AUR helper to install the remaining software.
 
 With yay:
 
@@ -94,9 +96,9 @@ paru -S v2ray-rules-dat
 
 :::
 
-## 3. Install from archlinuxcn
+## Install from archlinuxcn
 
-With archlinuxcn enabled, these packages install from the repository without building. archlinuxcn carries no juicity and no stable `dae`, which is in the official `extra` repository.
+With archlinuxcn enabled, install these packages without building them locally. archlinuxcn has no Juicity package or stable `dae` package. Stable `dae` is in the official `extra` repository.
 
 ::: code-group
 

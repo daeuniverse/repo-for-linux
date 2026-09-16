@@ -6,13 +6,11 @@ title: "重新載入與暫停"
 
 # 重新載入與暫停
 
-dae 支援重新載入設定和暫停流量處理。
+dae 可在不重啟的情況下重新載入設定或臨時暫停。
 
 ## 重新載入
 
-通常，dae 在重新載入設定的過程中不會中斷既有連線。重新載入的速度也比重新啟動快得多。重新載入還會同時手動更新全部訂閱。
-
-用法：
+dae 重新載入設定時通常不會中斷現有連線，且比重啟快得多。執行重新載入還會同時更新全部訂閱。
 
 ::: code-group
 
@@ -44,7 +42,7 @@ dae suspend
 
 ## 恢復
 
-如果想復原，請使用重新載入：
+使用重新載入命令恢復：
 
 ::: code-group
 
@@ -62,4 +60,4 @@ dae reload
 
 ---
 
-來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/user-guide/reload-and-suspend.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。
+來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/user-guide/reload-and-suspend.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。

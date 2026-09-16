@@ -1,6 +1,5 @@
-The source config file is downloaded directly from the repository.
-
-Choose the configuration matching your APT version; use one of these alternatives.
+Download the source configuration directly from the repository.
+Choose one of the following alternatives to match your APT version.
 
 ::: code-group
 

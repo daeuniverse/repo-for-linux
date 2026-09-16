@@ -1,23 +1,23 @@
 <div v-pre lang="zh-TW">
 
 <!-- installation-2:start -->
-# 手動安裝
+## 手動安裝
 
-> **注意**：此方法**僅**建議 進階 使用者使用。使用此方法可彈性測試不同版本的 dae。請注意，新加入的功能有時可能有錯誤，請自行承擔風險。
+> **注意**：手動安裝僅建議有經驗的使用者使用，便於測試不同版本的 dae。新功能有時存在缺陷，使用者需自行承擔風險。
 
-dae 可作為 daemon（systemd）服務執行。請參閱 [以服務執行](/zh-TW/dae/user-guide/run-as-daemon)。
+dae 可以作為 systemd 常駐程式執行，參見[作為常駐程式執行](/zh-TW/dae/user-guide/run-as-daemon)。
 
-## 安裝指令碼
+### 安裝指令碼
 
-請參閱 [daeuniverse/dae-installer](https://github.com/daeuniverse/dae-installer)（或[鏡像](https://hubmirror.v2raya.org/daeuniverse/dae-installer)）。
+參見 [daeuniverse/dae-installer](https://github.com/daeuniverse/dae-installer)（或[鏡像站](https://hubmirror.v2raya.org/daeuniverse/dae-installer)）。
 
-## 從頭建置
+### 從原始碼建置
 
-請參閱[建置指南](/zh-TW/dae/user-guide/build-by-yourself)。
+參見[建置指南](/zh-TW/dae/user-guide/build-by-yourself)。
 <!-- installation-2:end -->
 
 </div>
 
 ---
 
-來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/README.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。
+來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/README.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。

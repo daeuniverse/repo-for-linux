@@ -4,15 +4,15 @@ title: "作为服务运行"
 
 <div v-pre lang="zh-CN">
 
-# 作为服务运行
+# 作为守护进程运行
 
-本指南适用于使用 [systemd](https://wiki.debian.org/systemd) 的系统，说明如何启动 dae 服务并设置开机自动启动。
+在使用 [systemd](https://wiki.debian.org/systemd) 管理服务的发行版上，dae 可以作为守护进程运行，并设置为开机自动启动。
 
 ## 前提条件
 
 ### 可选的 Geo 数据文件
 
-为了更方便地进行流量分流，dae 依赖以下数据源：[geoip.dat](https://github.com/v2fly/geoip/releases/latest) 和 [geosite.dat](https://github.com/v2fly/domain-list-community/releases/latest)。
+为便于流量分流，dae 使用 [geoip.dat](https://github.com/v2fly/geoip/releases/latest) 和 [geosite.dat](https://github.com/v2fly/domain-list-community/releases/latest) 数据。
 
 ::: code-group
 
@@ -36,7 +36,7 @@ popd
 
 ### 配置文件
 
-> **注意**：建议将配置文件保存在 `/etc/dae` 下
+> **注意**：建议将配置文件保存在 `/etc/dae` 下。
 
 下载示例配置文件：
 
@@ -56,15 +56,13 @@ chmod 600 /etc/dae/config.dae
 
 :::
 
-启动服务前，编辑 `/etc/dae/config.dae`，设置网络接口、订阅或节点。参见[最小配置](/zh-CN/dae/start/minimal-configuration)。
-
 ## 下载预编译二进制文件
 
-发布版本位于 <https://github.com/daeuniverse/dae/releases>
+发布版本位于 <https://github.com/daeuniverse/dae/releases>。
 
-> **注意**：如果你想体验新功能，可以使用夜间（最新）构建。大多数时候，新提出的变更会包含在 `PRs` 中，并会在构建（GitHub Action Workflow Build）中导出为跨平台可执行二进制文件。请注意，新引入的功能有时存在错误，风险由你自行承担。不过，我们仍强烈鼓励你查看最新构建，因为这可能有助于我们进一步分析功能稳定性并相应地解决潜在错误。
+> **注意**：如需体验新功能，可使用夜间（最新）构建。新变更通常通过 PR 提出，GitHub Actions 构建工作流会提供跨平台可执行二进制文件。新功能有时存在缺陷，使用者需自行承担风险。测试最新构建有助于分析功能稳定性并修复潜在问题。
 
-夜间构建位于 <https://github.com/daeuniverse/dae/actions/workflows/build-nightly.yml>
+夜间构建位于 <https://github.com/daeuniverse/dae/actions/workflows/build-nightly.yml>。
 
 ::: code-group
 
@@ -80,8 +78,6 @@ install -Dm755 dae /usr/bin/
 
 :::
 
-### 检查可执行文件
-
 ```shell
 # helper
 dae --help
@@ -89,7 +85,7 @@ dae --help
 dae version
 ```
 
-## 设置
+## 安装服务
 
 ::: code-group
 
@@ -104,8 +100,6 @@ curl -L -o /etc/systemd/system/dae.service https://github.com/daeuniverse/dae/ra
 ```
 
 :::
-
-### 启动并启用服务
 
 ::: code-group
 
@@ -123,11 +117,15 @@ systemctl status dae
 
 :::
 
-## 内存与透明大页
+## 内存与 THP
 
-`GOMEMLIMIT` 根据进程的 cgroup 上限计算，而不是根据服务单元的设置计算。计算时仅使用 `memory.max`，得到的软限制为该上限的 90%；显式设置的 `GOMEMLIMIT` 环境变量始终优先。随附的服务单元已不再设置 `MemoryHigh`，因为运行时无法将其识别为内存上限。
+`GOMEMLIMIT` 根据进程的 cgroup 上限计算，而不是根据服务单元的设置计算。计算时仅使用 `memory.max`，软限制为该上限的 90%。显式设置的 `GOMEMLIMIT` 环境变量始终优先。
 
-如果主机将透明大页设为 `always`，即使 Go 堆中的存活对象占用没有增加，内核也可能使 dae 的驻留内存增大。设置 `disable_thp: true` 可通过 `prctl(PR_SET_THP_DISABLE)` 为该进程禁用透明大页；默认值 `false` 不改变内核策略：
+随附的服务单元已不再设置 `MemoryHigh`，因为运行时无法将其识别为内存上限。
+
+如果主机将 THP（transparent huge pages）设为 `always`，即使 Go 堆中的存活对象占用没有增加，内核也可能使 dae 的驻留内存增大。
+
+dae 在每次启动、重载和回滚时，都会以当前的 `disable_thp` 值为自身进程调用 `prctl(PR_SET_THP_DISABLE)`。`true` 传入 1，为该进程禁用 THP。默认值 `false` 传入 0，清除该进程已有的 THP 禁用状态（包括从父进程继承的），因此 dae 遵循系统级的 THP 设置。两个值都不会修改 `/sys/kernel/mm/transparent_hugepage`：
 
 ```shell
 global {
@@ -149,10 +147,8 @@ journalctl -xefu dae
 
 :::
 
-完成[最小配置](/zh-CN/dae/start/minimal-configuration)后，请参阅[服务管理](/zh-CN/dae/start/service-management)，启动 dae、设置开机启动、重载或重新启动服务。
-
 </div>
 
 ---
 
-来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/user-guide/run-as-daemon.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。
+来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/user-guide/run-as-daemon.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。

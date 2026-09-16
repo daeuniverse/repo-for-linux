@@ -36,7 +36,9 @@ emerge --ask net-proxy/daed::gentoo-zh
 
 :::
 
-檢查 Portage 提供的核心設定提示。`webui` USE 旗標預設啟用；本頁介紹的 daed 程式與服務要求保留該旗標。停用後安裝的是 dae-wing。設定方法請見[上游說明](https://github.com/daeuniverse/daed/blob/main/docs/getting-started.md)。
+檢查 Portage 提供的核心設定提示。`webui` USE 旗標預設啟用；本頁介紹的 daed 程式與服務要求保留該旗標。停用後安裝的是 dae-wing。
+
+設定方法請見[上游說明](https://github.com/daeuniverse/daed/blob/main/docs/getting-started.md)。
 
 ### 選用：鏡像與二進位套件
 
@@ -44,7 +46,7 @@ emerge --ask net-proxy/daed::gentoo-zh
 Distfiles 鏡像、binhost 頻道與簽章驗證的設定方法請見 [gentoo-zh overlay 文件](https://gentoozh.org/overlay/)。可用的二進位套件以[套件列表](https://distfiles.gentoozh.org/packages)為準；沒有合適的二進位套件時，Portage 可以從原始碼編譯。
 :::
 
-ebuild 提供 systemd 與 OpenRC 服務檔。使用 OpenRC 時，請先依安裝後的提示設定 `rc.conf` 與 `sysfs`，並重新啟動系統。接著參閱 [服務管理](/zh-TW/daed/service-management).
+ebuild 提供 systemd 與 OpenRC 服務檔。使用 OpenRC 時，請先依安裝後的提示設定 `rc.conf` 與 `sysfs`，並重新啟動系統。接著參閱[服務管理](/zh-TW/daed/service-management)。
 
 ---
 

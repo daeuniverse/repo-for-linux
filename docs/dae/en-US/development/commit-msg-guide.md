@@ -4,7 +4,7 @@ title: "Commit messages"
 
 <div v-pre lang="en-US">
 
-# Commit messages
+# Semantic Commit Messages
 
 ## The reasons for these conventions
 
@@ -34,15 +34,17 @@ feat: add hat wobble
 
 Example `<type>` values:
 
-- `feat`: (new feature for the user, not a new feature for build script)
-- `fix`: (bug fix for the user, not a fix to a build script)
-- `docs`: (changes to the documentation)
-- `style`: (formatting, missing semi colons, etc; no production code change)
-- `refactor`: (refactoring production code, eg. renaming a variable)
-- `test`: (adding missing tests, refactoring tests; no production code change)
-- `chore`: (updating grunt tasks etc; no production code change, e.g. dependencies upgrade)
-- `perf`: (perfomance improvement change, e.g. better concurrency performance)
-- `ci`: (updating CI configuration files and scripts e.g. `.gitHub/workflows/*.yml` )
+| Type | Meaning |
+| --- | --- |
+| `feat` | new feature for the user, not a new feature for build script |
+| `fix` | bug fix for the user, not a fix to a build script |
+| `docs` | changes to the documentation |
+| `style` | formatting, missing semi colons, etc; no production code change |
+| `refactor` | refactoring production code, eg. renaming a variable |
+| `test` | adding missing tests, refactoring tests; no production code change |
+| `chore` | updating grunt tasks etc; no production code change, e.g. dependencies upgrade |
+| `perf` | performance improvement change, e.g. better concurrency performance |
+| `ci` | updating CI configuration files and scripts e.g. `.gitHub/workflows/*.yml` |
 
 Example `<Scope>` values:
 
@@ -90,4 +92,4 @@ Closes #123, #245, #992
 
 ---
 
-Source: [dae upstream](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/development/commit-msg-guide.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).
+Source: [dae upstream](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/development/commit-msg-guide.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).

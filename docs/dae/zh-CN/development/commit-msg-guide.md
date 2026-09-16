@@ -4,14 +4,14 @@ title: "提交信息规范"
 
 <div v-pre lang="zh-CN">
 
-# 提交信息规范
+# 语义化提交信息
 
 ## 采用这些约定的原因
 
-- 自动生成变更日志
-- 便于浏览 Git 历史（例如忽略样式变更）
+- 自动生成更新日志
+- 便于浏览 Git 历史（例如，忽略代码风格改动）
 
-了解对提交消息风格作出的小改动如何让你成为更出色的开发者。
+了解如何通过小幅调整提交信息的风格，成为更好的开发者。
 
 ## 格式
 
@@ -32,19 +32,21 @@ feat: add hat wobble
 +-------> Type: chore, docs, feat, fix, refactor, style, or test.
 ```
 
-`<type>` 的示例值：
+`<type>` 的取值示例：
 
-- `feat`：（面向用户的新功能，而非构建脚本的新功能）
-- `fix`：（面向用户的错误修复，而非构建脚本的修复）
-- `docs`：（文档变更）
-- `style`：（格式化、缺少分号等；不更改生产代码）
-- `refactor`：（重构生产代码，例如重命名变量）
-- `test`：（添加缺失测试、重构测试；不更改生产代码）
-- `chore`：（更新 grunt 任务等；不更改生产代码，例如升级依赖项）
-- `perf`：（性能改进变更，例如更好的并发性能）
-- `ci`：（更新 CI 配置文件和脚本，例如 `.gitHub/workflows/*.yml`）
+| 类型 | 含义 |
+| --- | --- |
+| `feat` | 面向用户的新功能，而非构建脚本的新功能 |
+| `fix` | 面向用户的 bug 修复，而非构建脚本的修复 |
+| `docs` | 文档改动 |
+| `style` | 格式调整、补充缺失的分号等；不改动生产代码 |
+| `refactor` | 重构生产代码，例如重命名变量 |
+| `test` | 添加缺失的测试、重构测试；不改动生产代码 |
+| `chore` | 更新 grunt 任务等；不改动生产代码，例如升级依赖 |
+| `perf` | 改善性能，例如提高并发性能 |
+| `ci` | 更新 CI 配置文件和脚本，例如 `.gitHub/workflows/*.yml` |
 
-`<Scope>` 的示例值：
+`<Scope>` 的取值示例：
 
 - `init`
 - `runner`
@@ -53,27 +55,27 @@ feat: add hat wobble
 - `web-server`
 - `proxy`
 
-`<scope>` 可以为空（例如变更是全局性的，或难以归属给单个组件），此时省略括号。在较小的项目中，例如 Karma 插件，`<scope>` 为空。
+`<scope>` 可以为空（例如，改动是全局性的，或难以归属于单个组件），此时省略圆括号。在 Karma 插件等较小的项目中，`<scope>` 为空。
 
-## 消息主题（第一行）
+## 提交信息主题（首行）
 
-第一行不能超过 `72` 个字符，且其后应有一个空行。类型和范围始终应使用小写，如下所示
+首行不得超过 `72` 个字符，其后应留一个空行。类型和范围始终使用小写，如下所示。
 
-## 消息正文
+## 提交信息正文
 
-与 `<subject>` 一样，使用祈使现在时：“change”，而不是“changed”或“changes”。消息正文应包含变更动机，以及与先前行为的对比。
+与 `<subject>` 一样，使用祈使语气和现在时：用 `change`，而不是 `changed` 或 `changes`。正文应说明改动的动机，以及与此前行为的对比。
 
-## 消息页脚
+## 提交信息页脚
 
-### 引用议题
+### 引用 issue
 
-已关闭的议题应在页脚中单独列出，并以 “Closes” 关键字作为前缀，如下所示：
+应在页脚中单独一行列出要关闭的 issue，并以 `Closes` 关键字开头，如下所示：
 
 ```
 Closes #234
 ```
 
-或在存在多个议题时：
+如果有多个 issue：
 
 ```
 Closes #123, #245, #992
@@ -90,4 +92,4 @@ Closes #123, #245, #992
 
 ---
 
-来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/development/commit-msg-guide.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。
+来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/development/commit-msg-guide.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。

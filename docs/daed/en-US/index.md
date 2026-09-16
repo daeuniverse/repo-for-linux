@@ -19,11 +19,11 @@ daed provides a web dashboard for dae. This chapter covers daed installation and
 
 ## Other available packages
 
-The repository also provides v2rayA and other packages; the [package list](/guide/packages) holds the complete table. Choose an entry point by system:
+The repository also provides v2rayA and other packages. See the [package list](/guide/packages) for all packages, or choose your system below:
 
 <!--@include: @/.vitepress/snippets/packages/en-US/install.md-->
 
-The dae installation steps are on the [installation guide](/dae/installation/).
+For dae, see the [installation guide](/dae/installation/).
 
 [GitHub](https://github.com/daeuniverse/daed)
 

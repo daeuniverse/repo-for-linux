@@ -6,10 +6,10 @@ title: "拆分設定檔"
 
 # 拆分設定檔
 
-有時可能想將設定檔拆分為多個檔案。以下情況可能很有用：
+以下情況適合將設定拆分為多個檔案：
 
-1. 想透過 `sed` 等工具修改設定檔來切換節點。
-2. 複製他人的設定檔，並想覆寫其中的某些部分。
+- 透過 `sed` 等工具修改設定檔來切換節點。
+- 複製他人的設定檔後，覆蓋其中的某些部分。
 
 ## 範例
 
@@ -25,15 +25,16 @@ title: "拆分設定檔"
 └── config.dae
 ```
 
-設定檔：
+入口設定檔是傳遞給 `dae -c ...` 的檔案。`include` 路徑按以下規則處理：
 
-關於 `include` 路徑的說明：
+| 路徑型別 | 範例 | 處理方式 |
+| --- | --- | --- |
+| 相對路徑 | `config.d/*.dae` | 相對於入口設定檔所在目錄解析，而非當前工作目錄 |
+| 絕對路徑 | `/etc/dae/config.d/*.dae` | 按原樣使用 |
 
-- 相對路徑（例如 `config.d/*.dae`）相對於*進入點*設定檔（傳遞給 `dae -c ...` 的檔案）所在目錄解析，而不是相對於目前的工作目錄。
-- 絕對路徑（例如 `/etc/dae/config.d/*.dae`）會原樣使用。
-- 基於安全理由，dae 僅允許包含進入點設定目錄下的檔案。
+出於安全原因，dae 僅允許包含入口設定目錄下的檔案。
 
-以下四個檔案配合使用。標籤用於查看不同檔案，不代表任選其一。
+設定檔如下：
 
 ::: code-group
 
@@ -138,6 +139,12 @@ routing {
 
 :::
 
+
+
+
+
+
+
 然後透過以下命令執行 `dae`：
 
 ::: code-group
@@ -156,4 +163,4 @@ dae run -c /etc/dae/config.dae
 
 ---
 
-來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/1ec85feddc721088ecdda73015bd78f652926b39/docs/en/configuration/separate-config.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。
+來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/configuration/separate-config.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。
