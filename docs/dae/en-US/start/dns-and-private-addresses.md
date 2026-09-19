@@ -8,10 +8,9 @@ title: DNS and private addresses
 
 dae handles two kinds of packets: packets it routes (ingress on a LAN interface) and packets that leave the host (egress on a WAN interface). Among them, UDP and TCP traffic to destination port 53 is marked as a DNS query first and then passes through the routing rules. Everything except traffic that matches `must_direct` goes to the DNS module. A plain `direct` does not let DNS bypass dae, and neither does the `dip(geoip:private) -> direct` rule for private addresses in the bundled configuration.
 
-Three kinds of traffic never reach the DNS module:
+Two kinds of traffic never reach the DNS module:
 
-- Traffic that matches `must_direct`.
-- A UDP query from a LAN client to a socket on the dae host itself, such as a local dnsmasq listening on port 53. dae delivers such a query to that socket before routing. A TCP query to the same socket has no such exception and still goes through routing.
+- Traffic that matches `must_direct`. A query from a LAN client to a socket on the dae host itself, such as a local dnsmasq listening on port 53, is routed like any other packet and reaches the DNS module, UDP and TCP alike; to let the host's own resolver answer it, say so with `l4proto(udp) && dport(53) && dip(<address of the dae host>) -> must_direct`.
 - Queries over the loopback interface. dae only hooks the LAN and WAN interfaces.
 
 dae does not reassemble IP fragments. It processes only the first fragment of a datagram and passes later fragments through unchanged, so a fragmented UDP DNS message cannot be intercepted correctly.
@@ -22,7 +21,7 @@ An intercepted query selects an upstream through `dns.routing.request`. The matc
 
 On a truncated answer (`TC=1`), `udp://` and `tcp+udp://` upstreams retry over TCP. `asis` does not retry. dae discards the server's answer and replies with a message that keeps the query's ID and question, sets `TC=1` and carries an empty Answer section. The client then decides whether to retry over TCP.
 
-Because dae takes over every DNS query it routes out, LAN devices can use any public DNS address. With `asis`, do not point LAN devices at port 53 of dae itself, because the query would loop between dae and itself. Setting `dns.bind`, for example to `'127.0.0.1:5353'`, also makes dae listen for DNS queries at that address.
+Because dae takes over every DNS query it routes, LAN devices can use any DNS address, including the dae host itself. With `asis`, do not point LAN devices at port 53 of dae itself, because the query would loop between dae and itself. Setting `dns.bind`, for example to `'127.0.0.1:5353'`, also makes dae listen for DNS queries at that address.
 
 The `domain()` routing rules depend on DNS answers dae has seen. When the resolver that answers LAN clients sends its own upstream queries through a `must_direct` rule, dae never sees those answers. dae then learns no domain for the returned IPs, so `domain()` rules do not match the clients' traffic.
 

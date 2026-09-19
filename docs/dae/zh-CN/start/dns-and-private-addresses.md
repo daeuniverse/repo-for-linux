@@ -8,10 +8,9 @@ title: DNS 与保留地址
 
 dae 只处理两类数据包：经它路由的包（LAN 接口 ingress）和从本机发出的包（WAN 接口 egress）。其中目的端口为 53 的 UDP 和 TCP 流量，先标记为 DNS 查询，再经过 routing 规则。除了命中 `must_direct` 的流量，其余都交给 DNS 模块。仅写 `direct` 不能让 DNS 绕过 dae，随附配置里保留地址的 `dip(geoip:private) -> direct` 也不能。
 
-三种流量不会进入 DNS 模块：
+两种流量不会进入 DNS 模块：
 
-- 命中 `must_direct` 的流量。
-- 局域网客户端发往 dae 主机自身 socket 的 UDP 查询，例如本机监听 53 端口的 dnsmasq。这类查询在路由之前就交给该 socket。发往同一 socket 的 TCP 查询没有这个例外，仍会经过路由。
+- 命中 `must_direct` 的流量。局域网客户端发往 dae 主机自身 socket 的查询（例如本机监听 53 端口的 dnsmasq）也和其它报文一样走路由，UDP 与 TCP 都会进入 DNS 模块；要让本机解析器直接应答，用 `l4proto(udp) && dport(53) && dip(<dae 主机地址>) -> must_direct` 显式表达。
 - 经 loopback 接口的查询。dae 只挂在 LAN 和 WAN 接口上。
 
 dae 不重组 IP 分片。它只处理数据报的第一个分片，后续分片原样放行，因此被分片的 UDP DNS 报文无法被正确拦截。
@@ -22,7 +21,7 @@ dae 不重组 IP 分片。它只处理数据报的第一个分片，后续分片
 
 收到截断响应（`TC=1`）时，`udp://` 和 `tcp+udp://` 上游会通过 TCP 重试。`asis` 不重试：dae 丢弃服务器的响应，改为回复一条 ID 和问题相同、`TC=1`、Answer 段为空的响应，由客户端决定是否通过 TCP 重试。
 
-因为 dae 会接管所有经它路由出去的 DNS 查询，所以局域网设备的 DNS 服务器填任意公网地址即可。使用 `asis` 时，不要让局域网设备把 dae 自身的 53 端口当作 DNS 服务器，否则查询会在 dae 与自身之间形成环路。设置 `dns.bind`（例如 `'127.0.0.1:5353'`）后，dae 还会在该地址监听 DNS 查询。
+因为 dae 会接管所有经它路由的 DNS 查询，所以局域网设备的 DNS 服务器填任意地址即可，填 dae 主机自身也可以。使用 `asis` 时，不要让局域网设备把 dae 自身的 53 端口当作 DNS 服务器，否则查询会在 dae 与自身之间形成环路。设置 `dns.bind`（例如 `'127.0.0.1:5353'`）后，dae 还会在该地址监听 DNS 查询。
 
 `domain()` 路由规则依赖 dae 看到的 DNS 应答。如果为局域网客户端应答的解析器自己的上游查询走了 `must_direct`，dae 看不到这些应答，也就学不到返回 IP 对应的域名，`domain()` 规则不会匹配客户端的流量。
 

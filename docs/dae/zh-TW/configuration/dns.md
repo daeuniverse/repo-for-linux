@@ -6,7 +6,7 @@ title: "DNS"
 
 # DNS
 
-dae 會攔截所有經它路由或從本機發出、發往連接埠 53 的 UDP 和 TCP 流量，並嗅探 DNS。只有命中 `must_direct` 的流量不經過 dae；僅寫 `direct` 仍會交給 DNS 模組處理。兩種情況不會進入 DNS 模組。區域網路用戶端發往 dae 主機自身 socket（例如本機監聽連接埠 53 的 dnsmasq）的 UDP 查詢，在路由之前就交給該 socket。經 loopback 介面的查詢不會經過 dae 的任何 hook。區域網路用戶端發往該本機 socket 的 TCP 查詢仍會經過路由。
+dae 會攔截所有經它路由或從本機發出、發往連接埠 53 的 UDP 和 TCP 流量，並嗅探 DNS。只有命中 `must_direct` 的流量不經過 dae；僅寫 `direct` 仍會交給 DNS 模組處理。區域網路用戶端發往 dae 主機自身 socket（例如本機監聽連接埠 53 的 dnsmasq）的查詢和其它報文一樣走路由，UDP 與 TCP 都會進入 DNS 模組。要把這類查詢直接交給該 socket（dae 看不到應答），靠的是 `must_direct` 規則，例如 `l4proto(udp) && dport(53) && dip(<dae 主機位址>) -> must_direct`。只有經 loopback 介面的查詢不會經過 dae 的任何 hook。
 
 dae 不重組 IP 分片：只處理封包的第一個分片，後續分片原樣放行，因此被分片的 UDP DNS 報文無法被正確攔截。若為區域網路用戶端應答的解析器自己的上游查詢走了 `must_direct` 規則，dae 看不到這些應答，也就學不到返回 IP 對應的網域，`domain()` 規則不會匹配用戶端的流量。
 
@@ -258,4 +258,4 @@ dns {
 
 ---
 
-來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/configuration/dns.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。
+來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/fb5eae6c2578e3ec99ae5b2844cb4f4ed93557a5/docs/en/configuration/dns.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。

@@ -6,7 +6,7 @@ title: "DNS"
 
 # DNS
 
-dae intercepts all UDP and TCP traffic to port 53 that it routes or that leaves the host, and sniffs DNS. Only a rule that resolves to `must_direct` keeps port 53 traffic away from dae; `direct` alone still hands it to the DNS module. Two cases never reach the DNS module: a UDP query from a LAN client to a socket on the dae host itself, such as a local dnsmasq on port 53, is delivered to that socket before routing; and queries over the loopback interface never pass a dae hook. A TCP query from a LAN client to that local socket still goes through routing.
+dae intercepts all UDP and TCP traffic to port 53 that it routes or that leaves the host, and sniffs DNS. Only a rule that resolves to `must_direct` keeps port 53 traffic away from dae; `direct` alone still hands it to the DNS module. A query from a LAN client to a socket on the dae host itself, such as a local dnsmasq on port 53, is routed like any other and reaches the DNS module, UDP and TCP alike. What delivers such a query to that socket instead — with dae never seeing the answer — is a `must_direct` rule, for example `l4proto(udp) && dport(53) && dip(<address of the dae host>) -> must_direct`. Only queries over the loopback interface never pass a dae hook.
 
 dae does not reassemble IP fragments: it processes only the first fragment of a datagram and passes later fragments through unchanged, so a fragmented UDP DNS message cannot be intercepted correctly. When the resolver that answers LAN clients sends its own upstream queries through a `must_direct` rule, dae never sees those answers and learns no domain for the returned IPs, so `domain()` rules do not match the clients' traffic.
 
@@ -294,4 +294,4 @@ dns {
 
 ---
 
-Source: [dae upstream](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/configuration/dns.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).
+Source: [dae upstream](https://github.com/daeuniverse/dae/blob/fb5eae6c2578e3ec99ae5b2844cb4f4ed93557a5/docs/en/configuration/dns.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).

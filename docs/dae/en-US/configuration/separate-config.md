@@ -152,4 +152,4 @@ dae run -c /etc/dae/config.dae
 
 ---
 
-Source: [dae upstream](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/configuration/separate-config.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).
+Source: [dae upstream](https://github.com/daeuniverse/dae/blob/fb5eae6c2578e3ec99ae5b2844cb4f4ed93557a5/docs/en/configuration/separate-config.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).

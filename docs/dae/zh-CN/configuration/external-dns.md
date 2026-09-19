@@ -62,7 +62,7 @@ Others: https://dns.google/dns-query
 
    :::
 
-5. 绑定 LAN 时，让 DHCP 服务器下发公网解析器作为 DNS 服务器，不要下发 dae 主机。局域网客户端发往 dae 主机 53 端口的 UDP 查询在路由之前就交给了 AdGuardHome，dae 看不到应答，`domain()` 规则也就不会匹配该客户端的流量。发往其他任何地址的查询都会被 dae 拦截，经 AdGuardHome 应答，dae 能看到应答。
+5. 绑定 LAN 时，局域网客户端发往 dae 主机自身 53 端口的 UDP 查询和其它报文一样走路由，随后交给 `dns` 部分配置的解析器，因此 dae 能看到应答，`domain()` 规则也会匹配该客户端的流量。也就是说，DHCP 可以直接下发 dae 主机作为 DNS 服务器。如果希望由主机自身的解析器直接应答这类查询而不经过 dae，用路由规则显式表达，例如 `l4proto(udp) && dport(53) && dip(<dae 主机地址>) -> must_direct`。
 
 6. 如果仍有 DNS 问题且没有 warn/error 日志，把 AdGuardHome 的监听端口从 53 改开。网卡无法关闭校验和验证时，另一个程序占用 53 端口会破坏拦截，见 [#31](https://github.com/daeuniverse/dae/issues/31#issuecomment-1467358364)。
 
@@ -118,4 +118,4 @@ Others: https://dns.google/dns-query
 
 ---
 
-来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/configuration/external-dns.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。
+来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/fb5eae6c2578e3ec99ae5b2844cb4f4ed93557a5/docs/en/configuration/external-dns.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。

@@ -1,6 +1,6 @@
 {
   "repository": "https://github.com/daeuniverse/dae",
-  "revision": "ed92f27457d952b60339e63772e64eaef91698f6",
+  "revision": "fb5eae6c2578e3ec99ae5b2844cb4f4ed93557a5",
   "license": "AGPL-3.0-only",
   "entries": [
     {
@@ -275,7 +275,7 @@
       "title": "DNS",
       "source": "docs/en/configuration/dns.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "b355044f1b08fc1f38eebf0f7f3175c0755f34e76812008c20e3e43141ac5136",
+      "sourceSha256": "accac9d8dedd1afbc5f20c29ab49742d6c64212237ad414968f974e947c27ab9",
       "fallback": false,
       "sourceCodeSha256": [
         "4388f7c58486b9dd0dc5333354861141830d735c8ab675e4a531da8891bc7fc6",
@@ -315,7 +315,7 @@
       "title": "External DNS",
       "source": "docs/en/configuration/external-dns.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "69c14f9046a99d9e32e7cf2eb1bd7f4831cfaca803a5740de297083c54ef2a99",
+      "sourceSha256": "0ab12c7987395d9f540f649d2d8cdd1b875d52d4eb7c01f52eaedc36ce39d69a",
       "fallback": false,
       "sourceCodeSha256": [
         "9e08f79b14dc5f44d94526d71bca829abda9b33c5a9ee5f0b442ae6023092823",
@@ -1248,7 +1248,7 @@
       "title": "DNS",
       "source": "docs/en/configuration/dns.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "b355044f1b08fc1f38eebf0f7f3175c0755f34e76812008c20e3e43141ac5136",
+      "sourceSha256": "accac9d8dedd1afbc5f20c29ab49742d6c64212237ad414968f974e947c27ab9",
       "fallback": false,
       "sourceCodeSha256": [
         "4388f7c58486b9dd0dc5333354861141830d735c8ab675e4a531da8891bc7fc6",
@@ -1288,7 +1288,7 @@
       "title": "外部 DNS",
       "source": "docs/en/configuration/external-dns.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "69c14f9046a99d9e32e7cf2eb1bd7f4831cfaca803a5740de297083c54ef2a99",
+      "sourceSha256": "0ab12c7987395d9f540f649d2d8cdd1b875d52d4eb7c01f52eaedc36ce39d69a",
       "fallback": false,
       "sourceCodeSha256": [
         "9e08f79b14dc5f44d94526d71bca829abda9b33c5a9ee5f0b442ae6023092823",
@@ -2221,7 +2221,7 @@
       "title": "DNS",
       "source": "docs/en/configuration/dns.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "b355044f1b08fc1f38eebf0f7f3175c0755f34e76812008c20e3e43141ac5136",
+      "sourceSha256": "accac9d8dedd1afbc5f20c29ab49742d6c64212237ad414968f974e947c27ab9",
       "fallback": false,
       "sourceCodeSha256": [
         "4388f7c58486b9dd0dc5333354861141830d735c8ab675e4a531da8891bc7fc6",
@@ -2261,7 +2261,7 @@
       "title": "外部 DNS",
       "source": "docs/en/configuration/external-dns.md",
       "sourceLanguage": "en-US",
-      "sourceSha256": "69c14f9046a99d9e32e7cf2eb1bd7f4831cfaca803a5740de297083c54ef2a99",
+      "sourceSha256": "0ab12c7987395d9f540f649d2d8cdd1b875d52d4eb7c01f52eaedc36ce39d69a",
       "fallback": false,
       "sourceCodeSha256": [
         "9e08f79b14dc5f44d94526d71bca829abda9b33c5a9ee5f0b442ae6023092823",

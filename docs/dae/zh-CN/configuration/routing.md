@@ -246,4 +246,4 @@ dae 只在来源端口或目标端口为 443 或 8443 且数据包是 QUIC Initi
 
 ---
 
-来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/ed92f27457d952b60339e63772e64eaef91698f6/docs/en/configuration/routing.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。
+来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/fb5eae6c2578e3ec99ae5b2844cb4f4ed93557a5/docs/en/configuration/routing.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。
