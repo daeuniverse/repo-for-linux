@@ -1,0 +1,33 @@
+name: "honk"
+arch: "REAL_ARCH"
+platform: "linux"
+version: "REAL_VERSION"
+section: "default"
+priority: "extra"
+provides:
+  - honk
+depends:
+  - v2ray-rules-dat
+maintainer: "dae@daeuniverse"
+description: |
+  honk is a Linux transparent proxy engine written in Rust, following dae's eBPF datapath and sing-box's outbound design.
+vendor: "daeuniverse"
+homepage: "https://github.com/daeuniverse/honk"
+license: "GPL-3.0-only"
+scripts:
+  postinstall: ./scripts/reload-systemd.postinstall.sh
+  postremove: ./scripts/reload-systemd.postinstall.sh
+contents:
+  - src: ./honk-core_REAL_ARCH_vREAL_VERSION
+    dst: /usr/bin/honk-core
+  - src: /usr/share/v2ray-rules-dat/geoip.dat
+    dst: /usr/share/honk/geoip.dat
+    type: symlink
+  - src: /usr/share/v2ray-rules-dat/geosite.dat
+    dst: /usr/share/honk/geosite.dat
+    type: symlink
+  - src: ./example/honk.dae
+    dst: /etc/honk/example.dae
+    type: config
+  - src: ./service/honk.service
+    dst: /lib/systemd/system/honk.service
