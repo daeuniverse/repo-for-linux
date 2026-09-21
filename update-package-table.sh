@@ -13,6 +13,7 @@ output_file=""
 packages=(
   dae
   daed
+  honk
   juicity
   juicity-rs
   v2ray
@@ -24,6 +25,7 @@ packages=(
 software_names=(
   dae
   daed
+  honk
   Juicity
   Juicity-rs
   v2ray
