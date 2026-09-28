@@ -26,8 +26,12 @@ contents:
   - src: /usr/share/v2ray-rules-dat/geosite.dat
     dst: /usr/share/dae/geosite.dat
     type: symlink 
-  - src: ./example/dae.dae
+  - src: ./dae_example_vREAL_VERSION.dae
     dst: /etc/dae/example.dae
     type: config
-  - src: ./service/dae.service
+    file_info:
+      mode: 0644
+  - src: ./dae_vREAL_VERSION.service
     dst: /lib/systemd/system/dae.service
+    file_info:
+      mode: 0644
