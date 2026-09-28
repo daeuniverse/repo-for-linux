@@ -23,5 +23,6 @@ unzip "$dae_temp_dir/dae_amd64_${dae_remote_version}.zip" dae-linux-x86_64 -d ./
 unzip "$dae_temp_dir/dae_arm64_${dae_remote_version}.zip" dae-linux-arm64 -d ./ && mv ./dae-linux-arm64 ./dae_arm64_${dae_remote_version} && chmod +x ./dae_arm64_${dae_remote_version}
 unzip "$dae_temp_dir/dae_i386_${dae_remote_version}.zip" dae-linux-x86_32 -d ./ && mv ./dae-linux-x86_32 ./dae_i386_${dae_remote_version} && chmod +x ./dae_i386_${dae_remote_version}
 unzip "$dae_temp_dir/dae_riscv64_${dae_remote_version}.zip" dae-linux-riscv64_rva23u64 -d ./ && mv ./dae-linux-riscv64_rva23u64 ./dae_riscv64_${dae_remote_version} && chmod +x ./dae_riscv64_${dae_remote_version}
+unzip "$dae_temp_dir/dae_amd64_${dae_remote_version}.zip" dae.service example.dae -d "$dae_temp_dir" && mv "$dae_temp_dir/dae.service" ./dae_${dae_remote_version}.service && mv "$dae_temp_dir/example.dae" ./dae_example_${dae_remote_version}.dae
 rm -rf "$dae_temp_dir"
 echo ${dae_remote_version#v} > dae_version.txt
