@@ -29,7 +29,7 @@ unzip "$dae_temp_dir/dae_amd64_${dae_remote_version}.zip" dae.service example.da
 rm -rf "$dae_temp_dir"
 
 for dae_arch in amd64 arm64 i386 riscv64; do
-    upx -9 --no-progress "./dae_${dae_arch}_${dae_remote_version}"
+    upx --lzma --best "./dae_${dae_arch}_${dae_remote_version}"
 done
 
 echo ${dae_remote_version#v} > dae_version.txt

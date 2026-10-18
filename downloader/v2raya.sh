@@ -32,7 +32,7 @@ curl -L "$v2raya_core_url_riscv64" -o "./v2raya_core_riscv64_${v2raya_remote_ver
 chmod +x ./v2raya_*
 
 for v2raya_arch in amd64 arm64 i386 riscv64; do
-    upx -9 --no-progress "./v2raya_${v2raya_arch}_${v2raya_remote_version}" "./v2raya_core_${v2raya_arch}_${v2raya_remote_version}"
+    upx --lzma --best "./v2raya_${v2raya_arch}_${v2raya_remote_version}" "./v2raya_core_${v2raya_arch}_${v2raya_remote_version}"
 done
 
 echo ${v2raya_remote_version#v} > v2raya_version.txt

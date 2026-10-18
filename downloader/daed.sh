@@ -28,7 +28,7 @@ unzip "$daed_temp_dir/daed_riscv64_${daed_remote_version}.zip" "daed-linux-riscv
 rm -rf "$daed_temp_dir"
 
 for daed_arch in amd64 arm64 i386 riscv64; do
-    upx -9 --no-progress "./daed_${daed_arch}_${daed_remote_version}"
+    upx --lzma --best "./daed_${daed_arch}_${daed_remote_version}"
 done
 
 echo ${daed_remote_version#v} > daed_version.txt
