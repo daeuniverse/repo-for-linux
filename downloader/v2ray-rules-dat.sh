@@ -2,6 +2,8 @@
 
 set -e
 
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
 v2ray_rules_dat_temp_file="$(mktemp /tmp/v2ray-rules-dat.XXXXXX)"
 if ! curl -s "https://api.github.com/repos/Loyalsoldier/v2ray-rules-dat/releases/latest" -o "$v2ray_rules_dat_temp_file"; then
     echo "Error: Cannot get latest version of v2ray-rules-dat!"

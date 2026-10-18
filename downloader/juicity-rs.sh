@@ -2,6 +2,8 @@
 
 set -e
 
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
 juicity_rs_temp_file="$(mktemp juicity_rs_temp_file.XXXXXX)"
 if ! curl -s "https://api.github.com/repos/juicity/juicity-rs/releases/latest" -o "$juicity_rs_temp_file"; then
     echo "Error: Cannot get latest version of juicity-rs!"

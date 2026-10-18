@@ -2,6 +2,8 @@
 
 set -e
 
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
 v2raya_temp_file="$(mktemp v2raya_temp_file.XXXXXX)"
 if ! curl -s "https://api.github.com/repos/v2rayA/v2rayA/releases/latest" -o "$v2raya_temp_file"; then
     echo "Error: Cannot get latest version of v2rayA!"
@@ -28,5 +30,9 @@ curl -L "$v2raya_core_url_i386" -o "./v2raya_core_i386_${v2raya_remote_version}"
 curl -L "$v2raya_url_riscv64" -o "./v2raya_riscv64_${v2raya_remote_version}"
 curl -L "$v2raya_core_url_riscv64" -o "./v2raya_core_riscv64_${v2raya_remote_version}"
 chmod +x ./v2raya_*
+
+for v2raya_arch in amd64 arm64 i386 riscv64; do
+    upx -9 --no-progress "./v2raya_${v2raya_arch}_${v2raya_remote_version}" "./v2raya_core_${v2raya_arch}_${v2raya_remote_version}"
+done
 
 echo ${v2raya_remote_version#v} > v2raya_version.txt

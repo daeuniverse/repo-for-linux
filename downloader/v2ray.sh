@@ -2,6 +2,8 @@
 
 set -e
 
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
 v2ray_temp_file="$(mktemp /tmp/v2ray.XXXXXX)"
 if ! curl -s "https://api.github.com/repos/v2fly/v2ray-core/releases/latest" -o "$v2ray_temp_file"; then
     echo "Error: Cannot get latest version of v2ray!"

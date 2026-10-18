@@ -2,6 +2,8 @@
 
 set -e
 
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
 dae_temp_file="$(mktemp /tmp/dae.XXXXXX)"
 if ! curl -s "https://api.github.com/repos/daeuniverse/dae/releases/latest" -o "$dae_temp_file"; then
     echo "Error: Cannot get latest version of dae!"
@@ -25,4 +27,9 @@ unzip "$dae_temp_dir/dae_i386_${dae_remote_version}.zip" dae-linux-x86_32 -d ./ 
 unzip "$dae_temp_dir/dae_riscv64_${dae_remote_version}.zip" dae-linux-riscv64_rva23u64 -d ./ && mv ./dae-linux-riscv64_rva23u64 ./dae_riscv64_${dae_remote_version} && chmod +x ./dae_riscv64_${dae_remote_version}
 unzip "$dae_temp_dir/dae_amd64_${dae_remote_version}.zip" dae.service example.dae -d "$dae_temp_dir" && mv "$dae_temp_dir/dae.service" ./dae_${dae_remote_version}.service && mv "$dae_temp_dir/example.dae" ./dae_example_${dae_remote_version}.dae
 rm -rf "$dae_temp_dir"
+
+for dae_arch in amd64 arm64 i386 riscv64; do
+    upx -9 --no-progress "./dae_${dae_arch}_${dae_remote_version}"
+done
+
 echo ${dae_remote_version#v} > dae_version.txt

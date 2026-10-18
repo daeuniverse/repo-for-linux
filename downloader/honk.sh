@@ -2,6 +2,8 @@
 
 set -e
 
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
 honk_temp_file="$(mktemp /tmp/honk.XXXXXX)"
 if ! curl -s "https://api.github.com/repos/daeuniverse/honk/releases" -o "$honk_temp_file"; then
     echo "Error: Cannot get latest version of honk!"

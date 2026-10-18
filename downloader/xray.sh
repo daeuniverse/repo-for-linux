@@ -2,6 +2,8 @@
 
 set -e
 
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
 xray_temp_file="$(mktemp /tmp/xray.XXXXXX)"
 if ! curl -s "https://api.github.com/repos/XTLS/Xray-core/releases/latest" -o "$xray_temp_file"; then
     echo "Error: Cannot get latest version of xray!"
