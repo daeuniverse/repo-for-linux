@@ -1,29 +1,17 @@
 ---
-title: "導覽"
+title: "快速入門"
 ---
 
 <div v-pre lang="zh-TW">
 
 # 快速入門
 
-[**簡體中文**](/zh-CN/dae/) | [**English**](/dae/)
+## 開始使用
 
-## 安裝
-
-| 系統 | 來源 | 章節 |
-| --- | --- | --- |
-| Debian / Ubuntu | Dae Universe APT 套件庫 | [Debian / Ubuntu](/zh-TW/dae/installation/debian#debian-ubuntu) |
-| Fedora / RHEL | Dae Universe RPM 套件庫 | [Fedora / RHEL](/zh-TW/dae/installation/fedora#fedora-rhel) |
-| Fedora | Copr | [Fedora Copr](/zh-TW/dae/installation/fedora#fedora-copr) |
-| openSUSE | Dae Universe RPM 套件庫 | [openSUSE](/zh-TW/dae/installation/opensuse#opensuse) |
-| Arch Linux | 官方套件庫、AUR、archlinuxcn | [Arch Linux / Manjaro](/zh-TW/dae/installation/arch#arch-linux-manjaro) |
-| Manjaro | AUR / archlinuxcn | [Arch Linux / Manjaro](/zh-TW/dae/installation/arch#arch-linux-manjaro) |
-| Gentoo / Calculate | gentoo-zh overlay | [Gentoo Linux](/zh-TW/dae/installation/gentoo#gentoo-linux) |
-| Nix / NixOS | daeuniverse/flake.nix | [Nix / NixOS](/zh-TW/dae/installation/nix#nix-nixos) |
-| Alpine | dae-installer | [Alpine](/zh-TW/dae/installation/#alpine) |
-| macOS | 平臺教學 | [macOS](/zh-TW/dae/installation/#macos) |
-| Docker | 預建置映像或 Docker Compose | [Docker](/zh-TW/dae/installation/docker#docker) |
-| 手動安裝 | 安裝指令碼或從原始碼建置 | [手動安裝](/zh-TW/dae/installation/manual-installation#手動安裝) |
+1. [檢查核心需求](/zh-TW/dae/start/requirements)：dae 需要 Linux 5.17 或更新版本。
+2. [選擇安裝方式](/zh-TW/dae/installation/)：套件、Docker 或手動建置。
+3. [撰寫最小設定](/zh-TW/dae/start/minimal-configuration)：加入訂閱與路由規則。
+4. [啟動並驗證服務](/zh-TW/dae/start/service-management#驗證服務)：啟用 dae 並確認其正在執行。
 
 ## 重新載入與暫停
 
@@ -39,4 +27,4 @@ title: "導覽"
 
 ---
 
-來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/fb5eae6c2578e3ec99ae5b2844cb4f4ed93557a5/docs/en/README.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。
+來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/fb5eae6c2578e3ec99ae5b2844cb4f4ed93557a5/docs/en/README.md)，採用 [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。

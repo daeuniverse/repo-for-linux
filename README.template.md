@@ -16,18 +16,10 @@ sudo apt install curl
 
 **2. Add the repository**
 
-The source config file is downloaded directly from the repository.
-
-For APT version 3.0 or higher:
+The source config file is downloaded directly from the repository. It is a plain deb822 file, which APT has read since version 1.1.
 
 ```sh
 sudo curl -fsSL -o /etc/apt/sources.list.d/daeuniverse.sources https://daeuniverse.pages.dev/daeuniverse.sources
-```
-
-For APT version lower than 3.0:
-
-```sh
-sudo curl -fsSL -o /etc/apt/sources.list.d/daeuniverse.list https://daeuniverse.pages.dev/daeuniverse.list
 ```
 
 **3. Import the GPG key**
@@ -115,5 +107,7 @@ sudo setfacl -m u:nobody:rX /etc/letsencrypt
 ### Set hook to certbot to automatically set ACL when certs are renewed
 
 ```sh
-sudo certbot renew --deploy-hook "setfacl -R -m u:nobody:rX /etc/letsencrypt/{live,archive}"
+sudo install -d -m 0755 /etc/letsencrypt/renewal-hooks/deploy
+printf '%s\n' '#!/bin/sh' 'setfacl -R -m u:nobody:rX /etc/letsencrypt/live /etc/letsencrypt/archive' | sudo tee /etc/letsencrypt/renewal-hooks/deploy/restore-acl.sh >/dev/null
+sudo chmod 0755 /etc/letsencrypt/renewal-hooks/deploy/restore-acl.sh
 ```

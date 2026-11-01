@@ -8,8 +8,10 @@ The brand palette uses dark amber in light mode and soft gold in dark mode.
 `theme/index.mjs` re-exports the default theme; `theme/brand.css` overrides only official
 brand tokens and dark-mode brand-button text tokens. Dark text on gold buttons preserves
 contrast. Keep layout, typography and component styles in the upstream theme.
-The footer uses the official message option for Dae Universe and the upstream GitHub
-repository link. Package licenses remain in the package reference.
+The footer uses the official message option for the Dae Universe GitHub link alone, with no separator
+or repeated site name. Package licenses remain in the package reference.
+The 404 page uses the official `notFound` option; each locale's `ui.json` supplies its text, which
+says the page may have moved, points to search and links home.
 The header follows the official layout: language, appearance and social controls remain on
 the right at desktop widths, with the default theme's responsive menus on narrower screens.
 Do not reorder these controls through CSS, transformed components or replacement navigation.
@@ -62,16 +64,38 @@ These are attributed upstream documents, including historical examples. They are
 from this repository's APT/RPM installation instructions. Preserve their conditions and code;
 do not silently modernize versions, replace commands or present recorded upstream test results
 as validation performed for this site. Internal documentation links use the matching locale.
-The native language control replaces redundant language links inside upstream prose.
+The native language control replaces redundant language links inside upstream prose: a sync must
+not copy a line such as `[**简体中文**](/zh-CN/dae/) | [**English**](/dae/)` into the body, and a
+test fails when one returns. The dae landing page's `title` equals its H1.
 Markdown wrappers use `v-pre` to keep upstream examples from becoming Vue expressions.
+
+The dae landing page (Quick Start Guide) lists four numbered steps instead of an installation table:
+kernel requirements, installation method, minimal configuration, and starting and verifying the
+service. The installation index carries every installation route, OpenWrt, Alpine and macOS included.
+The minimal configuration page leads with a working configuration (`/etc/dae/config.dae`, a named
+subscription, a group and routing that use it, and `chmod 600` with sudo and root tabs); the empty
+skeleton follows as the syntax skeleton. The recorded code and prose hashes in `upstream.json` for that
+page carry the change as a documented code replacement. The manual-binary systemd page keeps the URL
+`user-guide/run-as-daemon`, is titled Manual systemd setup and sits in the installation group beside
+Manual installation; it points package users to Service management.
 
 The homepage exposes installation, usage, configuration, platform tutorials, packages and
 development. The sidebar derives manual page titles and routes from the same manifest, so
 imported pages cannot silently fall outside the navigation inventory.
 
-The home hero has a primary Quick start action and a secondary Install dae action. APT, RPM and Gentoo installation
-remain in the native sidebar. The top navigation contains only Guide and Development;
-configuration and package links remain available through the sidebar and home features. Gentoo's dae package comes from the
+dae, honk and doona are presented as equals. The home hero has no actions: the first three feature
+cards, dae, honk and doona, are where a reader picks a project, followed by OpenWrt, one card for the remaining packages and, last, the archived
+daed. Each project has its own sidebar keyed by its route
+prefix (`dae/`, `honk/`, `doona/`, `openwrt/`); daed, the package guides, kdae and DaedNext share one.
+A landing page appears once: the heading of dae's first group, honk's Overview group and doona's
+top group links to it, and no item repeats it. Only the first group of each project is open (dae:
+getting started; honk: installation; doona: getting started and install and first run); the others
+start collapsed, and VitePress opens the group holding the current page. OpenWrt is never collapsed:
+its sidebar, and every installation list that holds an OpenWrt item, stays open. The dae and honk
+installation lists both link the OpenWrt feed guide.
+The top navigation holds dae, honk and doona, and a More menu with OpenWrt, the other packages, kdae and DaedNext.
+Code-group tabs with the same label switch together across a page, and `.tab-variant` text follows
+the chosen dae/honk tab, which keeps the OpenWrt feed guide's system and service switches. Gentoo's dae package comes from the
 independently maintained gentoo-zh overlay; its versions are not represented by the APT/RPM table.
 The Gentoo guide references https://gentoozh.org/overlay/ and the overlay's net-proxy/dae ebuild.
 
@@ -81,11 +105,62 @@ pages using VitePress's Markdown include syntax. Each reference owns its transla
 The existing package-table script remains the source of version data. README installation prose
 is maintained separately; checks enforce that its shell commands remain represented in the docs.
 
+## Fetched upstream manuals
+
+New manuals are fetched at build time rather than copied into Git. `sources.json` in
+`.vitepress/` pins honk's repository, release tag, full commit, license and locale directories.
+`scripts/fetch-docs.mjs` downloads the archive of the pinned commit, checks that the archive
+is that commit, and extracts only the mapped documentation directories. `commit` is the commit
+the release tag points to, not an annotated tag's own object. Network failures are retried
+twice; a commit mismatch or a failed download stops the build.
+
+Committed honk installation pages share the repository snippets and cover APT/RPM packages, AUR and OpenWrt.
+Each APT/RPM distribution page keeps its prerequisites and the steps up to installing the package, then
+links to First run (`installation/first-run.md`) and ends with its own Upgrade and Uninstall sections.
+First run holds the shared flow once, with sudo and root tabs: the direct-only configuration, starting
+and checking the service, and a Next steps section linking doona's first sign-in, node and rule
+management, and troubleshooting pages. It follows the distribution pages in the sidebar and is linked
+from the installation index. The Arch and Docker pages keep their own Next steps.
+
+Generated pages live in `docs/honk/<locale>/` beside committed `index.md` landing pages.
+VitePress rewrites expose `/honk/`, `/zh-CN/honk/` and `/zh-TW/honk/`. The generated inventory
+supplies sidebar titles from the first heading, grouped by top-level pages, design, operations
+and reference. The honk import resolves link fragments against headings parsed by VitePress.
+Existing IDs are preserved; punctuation variants map only to a unique target heading. Relative links within each manual stay local; links outside it resolve to the
+pinned upstream tree. Each page carries a pinned source and license footer. Traditional Chinese
+currently uses the Simplified Chinese source with a notice on every page; it is not a translation.
+
+doona is fetched from Zakkaus/doona-docs at its pinned commit, including native English,
+Simplified Chinese and Traditional Chinese landing pages and shared images. Its routes are
+`/doona/`, `/zh-CN/doona/` and `/zh-TW/doona/`. The fetch preserves upstream heading ids,
+converts tabbed fences to VitePress code groups, removes the language line and keywords,
+and links screenshots from the upstream site. Sidebar sections follow the upstream order;
+tests check page coverage and rendered anchors. Footers cite the pinned CC BY 4.0 license.
+
+To bump honk, change its `ref` and `commit` together in `.vitepress/sources.json` and update the
+version in `docs/honk/{en-US,zh-CN,zh-TW}/index.md`. To bump doona, change its pinned `commit`
+(and `ref` if needed); its landing pages are fetched from upstream, so do not edit them here. Run `npm run docs:test` and `npm run docs:build`,
+then inspect the generated pages and links. `docs:prepare`, `docs:dev`, `docs:build` and
+`docs:test` fetch the sources automatically; both CI workflows use these commands through the
+documentation composite action. Generated manuals and their inventory are ignored by Git.
+Existing dae and daed manuals keep their current workflow.
+
+OpenWrt guides are fetched from the English, Simplified Chinese and Traditional Chinese
+Markdown pages at `https://openwrt.daeuniverse.org/` during `docs:fetch`. Set
+`DOCS_OPENWRT_SITE` to a local site directory containing `en/`, `zh-cn/` and `zh-tw/`,
+each with `index.md`, `mirror.md` and `thanks.md`, for offline builds and tests. Generated
+pages under `docs/openwrt/<locale>/` are ignored by Git and cite the upstream feed-site
+source without a license link. A missing file or failed download stops the build.
+Feed-file links resolve to the upstream site; links between guides remain relative.
+Each locale’s OpenWrt sidebar also links to the upstream file browser.
+
 ## Build and preview
 
 Use Node.js 22 or newer. Run `npm ci`, then `npm run docs:dev`.
 Run `npm run docs:test` for command and locale parity checks, `npm run docs:build` for production
-output, and `npm run docs:preview` to inspect it. Markdown changes reload during development;
+output, and `npm run docs:preview` to inspect it. `docs:build` also runs
+`docs:check-anchors`, which checks internal fragments against IDs in the built HTML.
+Run this check separately after a direct `vitepress build docs` invocation. Markdown changes reload during development;
 rerun preparation when package metadata changes.
 `DOCS_OUT_DIR` and `DOCS_CACHE_DIR` can place build output and cache outside the checkout.
 
@@ -125,8 +200,10 @@ and OIDC permissions. Repositories without the opt-in variable keep checks and a
 APT and RPM repository setup lives in localized Markdown fragments under
 `.vitepress/snippets/repositories`, included by the dae, daed and general package pages.
 These setup and primary installation commands use sudo directly. Native code groups
-select the APT source format or the package to install. Gentoo retains sudo/root tabs,
-prerequisite callouts and optional mirror details. Its community-maintained badge
+select the APT source format. The package guides for Debian, Fedora and openSUSE give one
+table of package names and one sudo and root code group with a `PACKAGE` placeholder; Arch gives
+one table per source and one `yay`, `paru` and `pacman` group. Gentoo retains per-package
+sudo/root tabs, prerequisite callouts and optional mirror details. Its community-maintained badge
 describes ownership, not stability.
 
 Manual pages also use native code groups for sudo/root commands, alternative builds and
@@ -143,13 +220,16 @@ provide a preview repository URL containing `:path`; the Pages build sets it fro
 repository and publishing branch. Last-updated dates come from Git history. Build checkouts
 need full history so dates reflect file commits rather than a shallow checkout boundary.
 
-Home cards link directly to kernel requirements, DNS, services, troubleshooting, contribution
-and other available packages. Avoid presenting a single platform tutorial as a platform index.
+Avoid presenting a single platform tutorial as a platform index.
 Adapted articles retain their upstream source and license, followed by an explicit site-editing
 credit. The default theme has no article view count or reading-time display; do not add a
 tracking service or replacement theme merely to show metadata.
 
 ## Package version refresh
+
+The doona menu uses the newest non-draft GitHub release, including prereleases, when
+the package table has no doona row. A failed release lookup leaves its version out
+without failing the build; a package-table row always takes precedence.
 
 Production builds use versions generated by the packaging workflow. Standalone documentation builds fill missing versions from the upstream status branch README. A missing or unavailable status version fails the build. `DOCS_STATUS_README` can supply a local snapshot for offline builds and tests.
 

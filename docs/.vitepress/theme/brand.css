@@ -28,3 +28,15 @@
   border: 1px solid var(--vp-c-divider);
   border-radius: 8px;
 }
+
+/* Text that differs between dae and honk on the OpenWrt pages follows the chosen code-group tab. */
+.tab-variant { display: none; }
+:root:has(.vp-code-group input:checked + label[data-title="dae"]) .tab-variant[data-tab="dae"],
+:root:has(.vp-code-group input:checked + label[data-title="honk"]) .tab-variant[data-tab="honk"],
+:root:not(:has(.vp-code-group label[data-title="dae"])) .tab-variant { display: block; }
+
+.project-version {
+  margin: 0 0 8px;
+  color: var(--vp-c-text-2);
+  font-size: 14px;
+}

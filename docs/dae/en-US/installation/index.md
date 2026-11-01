@@ -21,6 +21,7 @@ Choose the entry for your system. Before installation, check [kernel requirement
 | Gentoo | gentoo-zh overlay | [Installation](/dae/installation/gentoo) |
 | Calculate | gentoo-zh overlay | [Installation](/dae/installation/gentoo) |
 | NixOS | daeuniverse/flake.nix | [Installation](/dae/installation/nix) |
+| OpenWrt | Dae Universe apk feed | [Installation](/openwrt/) |
 
 Fedora also offers an alternative [Copr](/dae/installation/fedora) installation method.
 
@@ -68,4 +69,4 @@ The daed installation steps are in the [daed chapter](/daed/); the [other availa
 
 ---
 
-Source: [dae upstream](https://github.com/daeuniverse/dae/blob/fb5eae6c2578e3ec99ae5b2844cb4f4ed93557a5/docs/en/README.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).
+Source: [dae upstream](https://github.com/daeuniverse/dae/blob/fb5eae6c2578e3ec99ae5b2844cb4f4ed93557a5/docs/en/README.md), licensed under [AGPL-3.0](/upstream/dae-LICENSE.txt).

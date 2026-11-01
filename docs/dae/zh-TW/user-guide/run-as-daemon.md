@@ -1,10 +1,12 @@
 ---
-title: "作為服務執行"
+title: "手動安裝的 systemd 設定"
 ---
 
 <div v-pre lang="zh-TW">
 
-# 作為常駐程式執行
+# 手動安裝的 systemd 設定
+
+本頁僅適用於手動安裝的二進位檔。以套件安裝的使用者請參閱[服務管理](/zh-TW/dae/start/service-management)。
 
 在使用 [systemd](https://wiki.debian.org/systemd) 管理服務的發行版上，dae 可以作為常駐程式執行，並設定為開機自動啟動。
 
@@ -151,4 +153,4 @@ journalctl -xefu dae
 
 ---
 
-來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/fb5eae6c2578e3ec99ae5b2844cb4f4ed93557a5/docs/en/user-guide/run-as-daemon.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。
+來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/fb5eae6c2578e3ec99ae5b2844cb4f4ed93557a5/docs/en/user-guide/run-as-daemon.md)，採用 [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。

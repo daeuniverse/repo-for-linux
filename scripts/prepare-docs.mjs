@@ -67,5 +67,22 @@ await writeFile(new URL('package-rows.md', directory), rows.map(row => `| ${row.
 // instead of including the whole table. A package the build could not resolve
 // is absent rather than 'N/A', so a consumer renders nothing for it.
 const versions = Object.fromEntries(rows.filter(row => row[1] !== 'N/A').map(row => [row[0], row[1]]))
+if (!rows.some(([name]) => name === 'doona')) {
+  try {
+    const headers = { Accept: 'application/vnd.github+json' }
+    if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`
+    const response = await fetch('https://api.github.com/repos/Zakkaus/doona/releases?per_page=100', {
+      headers, signal: AbortSignal.timeout(30000)
+    })
+    if (!response.ok) throw new Error(`HTTP ${response.status}`)
+    const releases = await response.json()
+    const release = releases.filter(release => !release.draft)
+      .sort((a, b) => Date.parse(b.published_at) - Date.parse(a.published_at))[0]
+    if (!release?.tag_name) throw new Error('No published doona release')
+    versions.doona = release.tag_name.replace(/^v/, '')
+  } catch (error) {
+    console.warn(`Cannot load doona release version: ${error.message}`)
+  }
+}
 await writeFile(new URL('versions.json', directory), JSON.stringify(versions, null, 2) + '\n')
 console.log(`Prepared ${rows.length} package rows shared by all documentation locales`)

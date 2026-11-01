@@ -2,3 +2,8 @@ node_modules/
 docs/.vitepress/cache/
 docs/.vitepress/dist/
 docs/.vitepress/generated/
+docs/honk/*/*
+!docs/honk/*/index.md
+!docs/honk/*/installation/
+docs/doona/
+docs/openwrt/

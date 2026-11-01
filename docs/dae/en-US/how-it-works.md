@@ -6,8 +6,6 @@ title: "How dae works"
 
 # Working Principle of dae
 
-[**简体中文**](/zh-CN/dae/how-it-works) | [**English**](/dae/how-it-works)
-
 dae uses [eBPF](https://en.wikipedia.org/wiki/EBPF) to load a program at the Linux
 kernel's tc (traffic control) hook. The program splits traffic before it enters
 the TCP/IP network stack.
@@ -185,4 +183,4 @@ Benchmarks show higher direct-connection performance than other proxy solutions.
 
 ---
 
-Source: [dae upstream](https://github.com/daeuniverse/dae/blob/fb5eae6c2578e3ec99ae5b2844cb4f4ed93557a5/docs/en/how-it-works.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).
+Source: [dae upstream](https://github.com/daeuniverse/dae/blob/fb5eae6c2578e3ec99ae5b2844cb4f4ed93557a5/docs/en/how-it-works.md), licensed under [AGPL-3.0](/upstream/dae-LICENSE.txt).

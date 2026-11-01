@@ -1,10 +1,12 @@
 ---
-title: "作为服务运行"
+title: "手动安装的 systemd 配置"
 ---
 
 <div v-pre lang="zh-CN">
 
-# 作为守护进程运行
+# 手动安装的 systemd 配置
+
+本页仅适用于手动安装的二进制文件。通过软件包安装的用户请参阅[服务管理](/zh-CN/dae/start/service-management)。
 
 在使用 [systemd](https://wiki.debian.org/systemd) 管理服务的发行版上，dae 可以作为守护进程运行，并设置为开机自动启动。
 
@@ -151,4 +153,4 @@ journalctl -xefu dae
 
 ---
 
-来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/fb5eae6c2578e3ec99ae5b2844cb4f4ed93557a5/docs/en/user-guide/run-as-daemon.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。
+来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/fb5eae6c2578e3ec99ae5b2844cb4f4ed93557a5/docs/en/user-guide/run-as-daemon.md)，采用 [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。

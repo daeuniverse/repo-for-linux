@@ -4,130 +4,56 @@ Dae Universe 软件源不提供 Arch 软件包。此页软件来自 Arch 官方�
 
 软件包由各自的维护者打包。其版本与[软件包列表](/zh-CN/guide/packages)中的软件源版本相互独立。
 
-| 软件 | 来源 | 软件包 |
-| --- | --- | --- |
-| v2ray | 官方 `extra` | `v2ray` |
-| Xray | AUR、archlinuxcn | `xray` |
-| v2rayA | AUR、archlinuxcn | `v2raya`、`v2raya-bin` |
-| Juicity | AUR | `juicity-server`、`juicity-client` |
-| dae | 官方 `extra`、AUR、archlinuxcn | `dae`、`dae-avx2-bin`、`dae-git` |
-| daed | AUR、archlinuxcn | `daed`、`daed-avx2-bin`、`daed-git` |
-| v2ray-rules-dat | AUR、archlinuxcn | `v2ray-rules-dat` |
+## 官方仓库
 
-`pacman` 命令使用 sudo，已进入 root shell 时去掉 `sudo`。
+这些软件包在官方 `extra` 仓库中，无需 AUR 助手。
 
-## 从官方仓库安装
+| 软件 | 软件包名称 |
+| --- | --- |
+| dae | `dae` |
+| v2ray | `v2ray` |
 
-`dae` 与 `v2ray` 在官方 `extra` 仓库中，无需 AUR 助手。
+## AUR
 
-::: code-group
+| 软件 | 软件包名称 |
+| --- | --- |
+| dae | `dae-avx2-bin`、`dae-git` |
+| [daed](/zh-CN/daed/)（已归档，请勿用于新安装） | `daed`、`daed-avx2-bin`、`daed-git` |
+| Xray | `xray` |
+| v2rayA | `v2raya`、`v2raya-bin` |
+| Juicity | `juicity-server`、`juicity-client` |
+| v2ray-rules-dat | `v2ray-rules-dat` |
 
-```sh [dae]
-sudo pacman -S dae
-```
-
-```sh [v2ray]
-sudo pacman -S v2ray
-```
-
-:::
-
-## 从 AUR 安装
-
-其余软件由 AUR 助手构建。
-
-使用 yay：
-
-::: code-group
-
-```sh [Xray]
-yay -S xray
-```
-
-```sh [v2rayA]
-yay -S v2raya
-```
-
-```sh [v2rayA（预编译）]
-yay -S v2raya-bin
-```
-
-```sh [Juicity 服务端]
-yay -S juicity-server
-```
-
-```sh [Juicity 客户端]
-yay -S juicity-client
-```
-
-```sh [v2ray-rules-dat]
-yay -S v2ray-rules-dat
-```
-
-:::
-
-使用 paru：
-
-::: code-group
-
-```sh [Xray]
-paru -S xray
-```
-
-```sh [v2rayA]
-paru -S v2raya
-```
-
-```sh [v2rayA（预编译）]
-paru -S v2raya-bin
-```
-
-```sh [Juicity 服务端]
-paru -S juicity-server
-```
-
-```sh [Juicity 客户端]
-paru -S juicity-client
-```
-
-```sh [v2ray-rules-dat]
-paru -S v2ray-rules-dat
-```
-
-:::
-
-## 从 archlinuxcn 安装
+## archlinuxcn
 
 已启用 archlinuxcn 时，这些软件包直接从软件源安装，无需构建。archlinuxcn 没有 juicity，也没有稳定版 `dae`，该版本在官方 `extra` 仓库中。
 
+| 软件 | 软件包名称 |
+| --- | --- |
+| dae | `dae-avx2-bin`、`dae-git` |
+| [daed](/zh-CN/daed/)（已归档，请勿用于新安装） | `daed`、`daed-avx2-bin` |
+| Xray | `xray` |
+| v2rayA | `v2raya` |
+| v2ray-rules-dat | `v2ray-rules-dat` |
+
+## 安装
+
+将命令中的 `PACKAGE` 替换为上方表格中的软件包名称。
+
+`yay` 与 `paru` 可从上方所有来源安装；`pacman` 只能从官方仓库和 archlinuxcn 安装，并使用 sudo，已进入 root shell 时去掉 `sudo`。
+
 ::: code-group
 
-```sh [dae（AVX2 二进制）]
-sudo pacman -S dae-avx2-bin
+```sh [yay]
+yay -S PACKAGE
 ```
 
-```sh [dae（Git）]
-sudo pacman -S dae-git
+```sh [paru]
+paru -S PACKAGE
 ```
 
-```sh [daed]
-sudo pacman -S daed
-```
-
-```sh [daed（AVX2 二进制）]
-sudo pacman -S daed-avx2-bin
-```
-
-```sh [Xray]
-sudo pacman -S xray
-```
-
-```sh [v2rayA]
-sudo pacman -S v2raya
-```
-
-```sh [v2ray-rules-dat]
-sudo pacman -S v2ray-rules-dat
+```sh [pacman]
+sudo pacman -S PACKAGE
 ```
 
 :::

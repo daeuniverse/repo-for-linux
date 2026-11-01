@@ -2,8 +2,9 @@
   "lang": "en-US",
   "label": "English",
   "prefix": "",
-  "description": "Check kernel requirements, install dae, and configure DNS, routing and services.",
+  "description": "Install, configure and troubleshoot dae, honk, doona and related software.",
   "labels": {
+    "fileBrowser": "File browser",
     "install": "Install",
     "packages": "Packages",
     "maintenance": "Maintenance",
@@ -33,13 +34,29 @@
     "overview": "Overview",
     "fedora": "Fedora / RHEL",
     "opensuse": "openSUSE",
+    "firstRun": "First run",
     "serviceManagement": "Service management",
-    "otherSoftware": "v2rayA & other software",
+    "otherSoftware": "Other software",
     "packageList": "Package list",
+    "daedArchived": "daed (archived)",
     "experimental": "Experimental",
-    "dnsAndPrivateAddresses": "DNS and private addresses"
+    "dnsAndPrivateAddresses": "DNS and private addresses",
+    "design": "Design",
+    "operations": "Operations",
+    "currentVersion": "Current version: {version}",
+    "more": "More",
+    "openwrt": "Install on OpenWrt",
+    "openwrtInstall": "Install",
+    "openwrtMirror": "Mirror",
+    "openwrtThanks": "Thanks"
   },
   "theme": {
+    "notFound": {
+      "title": "Page not found",
+      "quote": "This page may have moved or been renamed. Search for it, or go to the home page.",
+      "linkLabel": "Go to the home page",
+      "linkText": "Home page"
+    },
     "lastUpdated": {
       "text": "Last updated",
       "formatOptions": {

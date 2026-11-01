@@ -141,6 +141,44 @@ rc-service dae restart
 :::
 <!-- shared-service-actions:end -->
 
+## Verify the service
+
+After starting, check that dae is running. systemd prints `active`; OpenRC reports `status: started`.
+
+::: code-group
+
+```shell [systemd · sudo]
+sudo systemctl is-active dae
+```
+
+```shell [systemd · root]
+systemctl is-active dae
+```
+
+```shell [OpenRC · sudo]
+sudo rc-service dae status
+```
+
+```shell [OpenRC · root]
+rc-service dae status
+```
+
+:::
+
+If systemd does not print `active`, read the last 50 journal lines of this boot:
+
+::: code-group
+
+```shell [systemd · sudo]
+sudo journalctl -u dae -b -n 50 --no-pager
+```
+
+```shell [systemd · root]
+journalctl -u dae -b -n 50 --no-pager
+```
+
+:::
+
 ---
 
-Source: [dae upstream](https://github.com/daeuniverse/dae/blob/fb5eae6c2578e3ec99ae5b2844cb4f4ed93557a5/docs/en/README.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).
+Source: [dae upstream](https://github.com/daeuniverse/dae/blob/fb5eae6c2578e3ec99ae5b2844cb4f4ed93557a5/docs/en/README.md), licensed under [AGPL-3.0](/upstream/dae-LICENSE.txt).

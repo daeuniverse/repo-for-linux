@@ -242,4 +242,4 @@ uname -r
 
 ---
 
-來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/fb5eae6c2578e3ec99ae5b2844cb4f4ed93557a5/docs/en/user-guide/kernel-upgrade.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。
+來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/fb5eae6c2578e3ec99ae5b2844cb4f4ed93557a5/docs/en/user-guide/kernel-upgrade.md)，採用 [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。

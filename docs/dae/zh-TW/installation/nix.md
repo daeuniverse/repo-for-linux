@@ -129,4 +129,5 @@ nix.settings = {
 
 ---
 
-[daeuniverse/flake.nix README](https://github.com/daeuniverse/flake.nix#readme) · [ISC](https://github.com/daeuniverse/flake.nix/blob/main/LICENSE)
+- [daeuniverse/flake.nix README](https://github.com/daeuniverse/flake.nix#readme)
+- [ISC](https://github.com/daeuniverse/flake.nix/blob/main/LICENSE)

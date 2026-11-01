@@ -1,5 +1,9 @@
 # Arch Linux / Manjaro <Badge type="info" text="社区维护" />
 
+::: danger 已归档
+daed 已归档，请勿使用。
+:::
+
 官方仓库没有 daed，可从 [AUR](https://aur.archlinux.org/packages/daed) 或 [archlinuxcn](https://github.com/archlinuxcn/repo) 安装。
 
 两处的软件包均由社区维护，与本站的 APT/RPM 软件源无关。

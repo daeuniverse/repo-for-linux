@@ -2,8 +2,9 @@
   "lang": "zh-CN",
   "label": "简体中文",
   "prefix": "/zh-CN",
-  "description": "检查内核要求，安装 dae，配置 DNS、路由与服务。",
+  "description": "dae、honk、doona 及相关软件的安装、配置与故障排查。",
   "labels": {
+    "fileBrowser": "文件浏览器",
     "install": "安装",
     "packages": "软件包",
     "maintenance": "维护",
@@ -33,13 +34,29 @@
     "overview": "导览",
     "fedora": "Fedora / RHEL",
     "opensuse": "openSUSE",
+    "firstRun": "首次运行",
     "serviceManagement": "服务管理",
-    "otherSoftware": "v2rayA 与其他软件",
+    "otherSoftware": "其他软件",
     "packageList": "软件列表",
+    "daedArchived": "daed（已归档）",
     "experimental": "实验性",
-    "dnsAndPrivateAddresses": "DNS 与保留地址"
+    "dnsAndPrivateAddresses": "DNS 与保留地址",
+    "design": "设计",
+    "operations": "运维",
+    "currentVersion": "当前版本：{version}",
+    "more": "更多",
+    "openwrt": "在 OpenWrt 上安装",
+    "openwrtInstall": "安装",
+    "openwrtMirror": "镜像",
+    "openwrtThanks": "致谢"
   },
   "theme": {
+    "notFound": {
+      "title": "页面不存在",
+      "quote": "请检查地址，或返回首页选择文档。",
+      "linkLabel": "返回首页",
+      "linkText": "返回首页"
+    },
     "langMenuLabel": "切换语言",
     "sidebarMenuLabel": "目录",
     "returnToTopLabel": "返回顶部",
@@ -47,12 +64,6 @@
     "darkModeSwitchLabel": "外观",
     "lightModeSwitchTitle": "切换到浅色主题",
     "darkModeSwitchTitle": "切换到深色主题",
-    "notFound": {
-      "title": "页面不存在",
-      "quote": "请检查地址，或返回首页选择文档。",
-      "linkLabel": "返回首页",
-      "linkText": "返回首页"
-    },
     "lastUpdated": {
       "text": "最后更新时间",
       "formatOptions": {

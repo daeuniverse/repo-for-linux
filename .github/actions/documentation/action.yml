@@ -1,5 +1,5 @@
 name: Documentation
-description: Install the dependencies, then validate and build the documentation site.
+description: Install dependencies, fetch pinned manuals, then validate and build the documentation site.
 
 inputs:
   node-version:
@@ -36,6 +36,8 @@ runs:
     - if: inputs.test == 'true'
       run: npm run docs:test
       shell: bash
+      env:
+        DOCS_ALLOW_MISSING_VERSIONS: ${{ inputs.allow-missing-versions }}
     - if: inputs.build == 'true'
       run: npm run docs:build
       shell: bash

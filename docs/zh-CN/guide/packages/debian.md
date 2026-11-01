@@ -1,6 +1,6 @@
 # Debian / Ubuntu
 
-所有软件包共用软件源配置。已添加软件源时，请直接跳到第 4 步选择软件。安装命令使用 sudo。
+所有软件包共用软件源配置。已添加软件源时，请直接跳到第 4 步选择软件。已配置 sudo 的普通用户选择 sudo 标签；已进入 root shell 时选择 root 标签。
 
 ## 1. 安装 `curl`
 
@@ -16,46 +16,29 @@
 
 ## 4. 选择软件
 
+| 软件 | 软件包名称 |
+| --- | --- |
+| dae | `dae` |
+| [daed](/zh-CN/daed/)（已归档，请勿用于新安装） | `daed` |
+| v2rayA | `v2raya` |
+| v2ray | `v2ray` |
+| Xray | `xray` |
+| Juicity | `juicity` |
+| Juicity-rs | `juicity-rs` |
+| v2ray-rules-dat | `v2ray-rules-dat` |
+
+将命令中的 `PACKAGE` 替换为表中的软件包名称。
+
 ::: code-group
 
-```sh [dae]
+```sh [sudo]
 sudo apt update
-sudo apt install dae
+sudo apt install PACKAGE
 ```
 
-```sh [daed]
-sudo apt update
-sudo apt install daed
-```
-
-```sh [v2rayA]
-sudo apt update
-sudo apt install v2raya
-```
-
-```sh [v2ray]
-sudo apt update
-sudo apt install v2ray
-```
-
-```sh [Xray]
-sudo apt update
-sudo apt install xray
-```
-
-```sh [Juicity]
-sudo apt update
-sudo apt install juicity
-```
-
-```sh [Juicity-rs]
-sudo apt update
-sudo apt install juicity-rs
-```
-
-```sh [v2ray-rules-dat]
-sudo apt update
-sudo apt install v2ray-rules-dat
+```sh [root]
+apt update
+apt install PACKAGE
 ```
 
 :::
