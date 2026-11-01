@@ -141,6 +141,44 @@ rc-service dae restart
 :::
 <!-- shared-service-actions:end -->
 
+## 验证服务
+
+启动后确认 dae 正在运行。systemd 输出 `active`，OpenRC 报告 `status: started`。
+
+::: code-group
+
+```shell [systemd · sudo]
+sudo systemctl is-active dae
+```
+
+```shell [systemd · root]
+systemctl is-active dae
+```
+
+```shell [OpenRC · sudo]
+sudo rc-service dae status
+```
+
+```shell [OpenRC · root]
+rc-service dae status
+```
+
+:::
+
+若 systemd 未输出 `active`，查看本次启动的最近 50 行日志：
+
+::: code-group
+
+```shell [systemd · sudo]
+sudo journalctl -u dae -b -n 50 --no-pager
+```
+
+```shell [systemd · root]
+journalctl -u dae -b -n 50 --no-pager
+```
+
+:::
+
 ---
 
-来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/fb5eae6c2578e3ec99ae5b2844cb4f4ed93557a5/docs/en/README.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。
+来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/fb5eae6c2578e3ec99ae5b2844cb4f4ed93557a5/docs/en/README.md)，采用 [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。

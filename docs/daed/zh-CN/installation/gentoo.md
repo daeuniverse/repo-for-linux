@@ -1,5 +1,9 @@
 # Gentoo / Calculate <Badge type="info" text="社区维护" />
 
+::: danger 已归档
+daed 已归档，请勿使用。
+:::
+
 Gentoo 用户可通过 [gentoo-zh overlay](https://github.com/gentoo-zh/overlay/tree/master/net-proxy/daed) 安装 `net-proxy/daed`。该软件包由 Gentoo 社区维护，使用 Portage 管理。本网站的 APT/RPM 版本表对应另一个软件源。
 
 ::: info 适用架构
@@ -50,4 +54,5 @@ ebuild 提供 systemd 与 OpenRC 服务文件。使用 OpenRC 时，请先按照
 
 ---
 
-[gentoo-zh: daed ebuild](https://github.com/gentoo-zh/overlay/blob/master/net-proxy/daed/daed-1.27.0-r1.ebuild) · [OpenRC](https://github.com/gentoo-zh/overlay/blob/master/net-proxy/daed/files/daed.initd)
+- [gentoo-zh: daed ebuild](https://github.com/gentoo-zh/overlay/blob/master/net-proxy/daed/daed-1.27.0-r1.ebuild)
+- [OpenRC](https://github.com/gentoo-zh/overlay/blob/master/net-proxy/daed/files/daed.initd)

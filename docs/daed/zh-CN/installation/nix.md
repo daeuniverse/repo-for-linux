@@ -1,5 +1,9 @@
 # Nix / NixOS
 
+::: danger 已归档
+daed 已归档，请勿使用。
+:::
+
 将 daed 模块合并到现有 NixOS flake，并将 `HOSTNAME` 替换为配置名称。保留原有 Nixpkgs、系统与硬件配置。
 
 ## 1. 导入 NixOS 模块
@@ -96,4 +100,5 @@ nix.settings = {
 
 ---
 
-[daeuniverse/flake.nix README](https://github.com/daeuniverse/flake.nix#readme) · [ISC](https://github.com/daeuniverse/flake.nix/blob/main/LICENSE)
+- [daeuniverse/flake.nix README](https://github.com/daeuniverse/flake.nix#readme)
+- [ISC](https://github.com/daeuniverse/flake.nix/blob/main/LICENSE)

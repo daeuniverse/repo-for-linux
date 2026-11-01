@@ -57,11 +57,15 @@ setfacl -m u:nobody:rX /etc/letsencrypt
 ::: code-group
 
 ```sh [sudo]
-sudo certbot renew --deploy-hook "setfacl -R -m u:nobody:rX /etc/letsencrypt/{live,archive}"
+sudo install -d -m 0755 /etc/letsencrypt/renewal-hooks/deploy
+printf '%s\n' '#!/bin/sh' 'setfacl -R -m u:nobody:rX /etc/letsencrypt/live /etc/letsencrypt/archive' | sudo tee /etc/letsencrypt/renewal-hooks/deploy/restore-acl.sh >/dev/null
+sudo chmod 0755 /etc/letsencrypt/renewal-hooks/deploy/restore-acl.sh
 ```
 
 ```sh [root]
-certbot renew --deploy-hook "setfacl -R -m u:nobody:rX /etc/letsencrypt/{live,archive}"
+install -d -m 0755 /etc/letsencrypt/renewal-hooks/deploy
+printf '%s\n' '#!/bin/sh' 'setfacl -R -m u:nobody:rX /etc/letsencrypt/live /etc/letsencrypt/archive' > /etc/letsencrypt/renewal-hooks/deploy/restore-acl.sh
+chmod 0755 /etc/letsencrypt/renewal-hooks/deploy/restore-acl.sh
 ```
 
 :::

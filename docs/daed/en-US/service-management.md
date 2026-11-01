@@ -1,5 +1,9 @@
 # daed: service management
 
+::: danger Archived
+daed is archived. Do not use it.
+:::
+
 daed from the Dae Universe DEB/RPM repository uses `/etc/daed/` as its configuration directory.
 
 The systemd unit conflicts with `dae.service`; choose one service. It has no reload action, so do not use `systemctl reload daed`.

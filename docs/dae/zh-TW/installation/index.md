@@ -21,6 +21,7 @@
 | Gentoo | gentoo-zh overlay | [安裝說明](/zh-TW/dae/installation/gentoo) |
 | Calculate | gentoo-zh overlay | [安裝說明](/zh-TW/dae/installation/gentoo) |
 | NixOS | daeuniverse/flake.nix | [安裝說明](/zh-TW/dae/installation/nix) |
+| OpenWrt | Dae Universe apk 套件來源 | [安裝說明](/zh-TW/openwrt/) |
 
 Fedora 另有 [Copr](/zh-TW/dae/installation/fedora) 安裝方式。
 
@@ -68,4 +69,4 @@ daed 的安裝步驟見 [daed](/zh-TW/daed/)；套件庫套件的說明見[其�
 
 ---
 
-來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/fb5eae6c2578e3ec99ae5b2844cb4f4ed93557a5/docs/en/README.md) · [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。
+來源：[dae 上游文件](https://github.com/daeuniverse/dae/blob/fb5eae6c2578e3ec99ae5b2844cb4f4ed93557a5/docs/en/README.md)，採用 [AGPL-3.0 授權條款](/upstream/dae-LICENSE.txt)。

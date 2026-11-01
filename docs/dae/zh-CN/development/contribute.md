@@ -58,4 +58,4 @@ pre-commit install
 
 ---
 
-来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/fb5eae6c2578e3ec99ae5b2844cb4f4ed93557a5/docs/en/development/contribute.md) · [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。
+来源：[dae 上游文档](https://github.com/daeuniverse/dae/blob/fb5eae6c2578e3ec99ae5b2844cb4f4ed93557a5/docs/en/development/contribute.md)，采用 [AGPL-3.0 许可证](/upstream/dae-LICENSE.txt)。

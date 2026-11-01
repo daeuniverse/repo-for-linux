@@ -1,5 +1,9 @@
 # openSUSE
 
+::: danger Archived
+daed is archived. Do not use it.
+:::
+
 Install daed from the Dae Universe repository.
 
 Use the sudo tab if sudo is configured for your account. Use the root tab when already in a root shell.
@@ -24,4 +28,5 @@ zypper install daed
 
 The package provides `daed.service`; its configuration directory is `/etc/daed/`.
 
-[Upstream setup guide](https://github.com/daeuniverse/daed/blob/main/docs/getting-started.md) · [Service management](/daed/service-management)
+- [Upstream setup guide](https://github.com/daeuniverse/daed/blob/main/docs/getting-started.md)
+- [Service management](/daed/service-management)

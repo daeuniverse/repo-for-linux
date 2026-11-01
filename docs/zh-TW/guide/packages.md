@@ -1,6 +1,6 @@
 # 其他可用套件
 
-本站以 dae 文件為主。套件來源也提供 daed、v2rayA 等套件，完整清單如下。
+下表列出 Dae Universe APT/RPM 套件來源提供的全部套件。
 
 版本號來自套件來源的建置結果；單獨建置文件時，從 [status 分支](https://github.com/daeuniverse/repo-for-linux/tree/status)補充版本資料。
 

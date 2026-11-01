@@ -5,7 +5,9 @@ on:
     paths:
       - 'docs/**'
       - 'scripts/prepare-docs.mjs'
-      - 'tests/docs.test.mjs'
+      - 'scripts/fetch-docs.mjs'
+      - '.github/actions/documentation/**'
+      - 'tests/*.test.mjs'
       - 'README.md'
       - 'package*.json'
       - '.github/workflows/docs.yml'
@@ -14,7 +16,9 @@ on:
     paths:
       - 'docs/**'
       - 'scripts/prepare-docs.mjs'
-      - 'tests/docs.test.mjs'
+      - 'scripts/fetch-docs.mjs'
+      - '.github/actions/documentation/**'
+      - 'tests/*.test.mjs'
       - 'README.md'
       - 'package*.json'
       - '.github/workflows/docs.yml'

@@ -1,5 +1,9 @@
 # daed
 
+::: danger 已归档
+daed 已归档，请勿使用。
+:::
+
 daed 提供 dae 的 Web 管理界面。
 
 <img src="/upstream/daed-orchestrate.png" alt="daed 面板：配置、DNS、路由、分组、节点与订阅" class="app-screenshot">
@@ -29,4 +33,4 @@ dae 的安装步骤见[安装指南](/zh-CN/dae/installation/)。
 
 ---
 
-截图来源：[daed 上游仓库](https://github.com/daeuniverse/daed/blob/671e65d2fdcd62fe6a3ec18ecda209c5addea898/docs/screenshots/pc/orchestrate.png) · [MIT 许可证](/upstream/daed-LICENSE.txt)。
+截图来源：[daed 上游仓库](https://github.com/daeuniverse/daed/blob/671e65d2fdcd62fe6a3ec18ecda209c5addea898/docs/screenshots/pc/orchestrate.png)，采用 [MIT 许可证](/upstream/daed-LICENSE.txt)。

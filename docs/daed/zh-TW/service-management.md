@@ -1,5 +1,9 @@
 # daed：服務管理
 
+::: danger 已歸檔
+daed 已歸檔，請勿使用。
+:::
+
 以下適用於 Dae Universe DEB/RPM 套件來源提供的 daed，設定目錄為 `/etc/daed/`。
 
 服務檔案宣告與 `dae.service` 衝突，請選擇其中一個服務。該服務未定義 reload 動作，不應使用 `systemctl reload daed`。

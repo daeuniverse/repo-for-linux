@@ -4,11 +4,16 @@ import { cp, mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { execFileSync } from 'node:child_process'
+import { execFileSync, spawnSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import { locales } from '../docs/.vitepress/locales.mjs'
 
 const root = fileURLToPath(new URL('../', import.meta.url))
+
+async function mockReleaseFetch(directory, body = "throw new Error('offline')") {
+  await writeFile(join(directory, 'mock-fetch.mjs'), `globalThis.fetch = async (url, options) => { ${body} }`)
+}
+
 const guideDirectory = locale => join(root, `docs/dae/${locale.lang}/installation`)
 const guideFile = (locale, page) => ['packages.md', 'maintenance.md'].includes(page)
   ? join(root, `docs${locale.prefix}/guide`, page)
@@ -26,7 +31,7 @@ function assertPrivilegeTabs(text, label) {
     assert.match(tabs[i][1], /sudo$/, label)
     assert.match(tabs[i + 1][1], /root$/, label)
     assert.equal(tabs[i][1].replace(/sudo$/, ''), tabs[i + 1][1].replace(/root$/, ''), label)
-    assert.equal(tabs[i][2].replace(/^sudo /gm, ''), tabs[i + 1][2], label)
+    assert.equal(tabs[i][2].replace(/^sudo /gm, '').replaceAll('&& sudo ', '&& '), tabs[i + 1][2], label)
     assert.ok(tabs[i][2].trim().split('\n').every(line => line.startsWith('sudo ')), label)
   }
 }
@@ -57,7 +62,7 @@ function restoreCommandGroups(text, lang) {
       if (first === 'sudo') {
         assert.equal(second, 'root')
         assert.match(original, /^sudo /m)
-        assert.equal(alternative, original.replace(/^sudo /gm, ''), 'Root commands must only remove sudo')
+        assert.equal(alternative, original.replace(/^sudo /gm, '').replaceAll('&& sudo ', '&& '), 'Root commands must only remove sudo')
       } else {
         assert.equal(second, 'paru')
         assert.match(original, /^yay /m)
@@ -112,14 +117,12 @@ test('translated documents preserve routes, commands and required messages', asy
       const translated = await readDocument(guideFile(locale, page))
       assert.deepEqual(commands(translated), commands(source), `${locale.lang}/${page}`)
     }
-    const home = await readFile(join(directory, 'index.md'), 'utf8')
-    assert.ok(home.includes(`${locale.prefix}/dae/`), `${locale.lang}: missing quick-start entry`)
   }
 })
 
 test('repository setup is shared and primary install commands offer sudo and root', async () => {
   for (const locale of Object.values(locales)) {
-    for (const project of ['dae', 'daed']) {
+    for (const project of ['dae', 'daed', 'honk']) {
       for (const name of ['debian', 'fedora', 'opensuse']) {
         const packages = await readFile(join(root, `docs${locale.prefix}/guide/packages/${name}.md`), 'utf8')
         const path = join(root, `docs/${project}/${locale.lang}/installation/${name}.md`)
@@ -159,6 +162,7 @@ test('the version menu and the package table come from the same rows', async () 
   const directory = await mkdtemp(join(tmpdir(), 'dae-versions-'))
   try {
     await cp(join(root, 'scripts/prepare-docs.mjs'), join(directory, 'scripts/prepare-docs.mjs'), { recursive: true })
+    await mockReleaseFetch(directory)
     const fixture = blankVersions(await readFile(join(root, 'README.md'), 'utf8'))
     await writeFile(join(directory, 'README.md'), fixture)
     // One package stays unresolved, so the two files have to disagree in the one
@@ -168,7 +172,7 @@ test('the version menu and the package table come from the same rows', async () 
     await writeFile(statusPath, fixture.split('\n')
       .map(line => line.startsWith(`| ${withheld} |`) ? line : line.replace('| N/A |', '| test-version |'))
       .join('\n'))
-    execFileSync(process.execPath, ['scripts/prepare-docs.mjs'], { cwd: directory, stdio: 'pipe',
+    execFileSync(process.execPath, ['--import', './mock-fetch.mjs', 'scripts/prepare-docs.mjs'], { cwd: directory, stdio: 'pipe',
       env: { ...process.env, DOCS_STATUS_README: statusPath, DOCS_ALLOW_MISSING_VERSIONS: 'true' } })
 
     const generated = join(directory, 'docs/.vitepress/generated')
@@ -224,13 +228,14 @@ test('all package references include the same generated data; malformed data fai
   const directory = await mkdtemp(join(tmpdir(), 'dae-docs-'))
   try {
     await cp(join(root, 'scripts/prepare-docs.mjs'), join(directory, 'scripts/prepare-docs.mjs'), { recursive: true })
+    await mockReleaseFetch(directory)
     const statusPath = join(directory, 'status.md')
     const fixtureReadme = blankVersions(await readFile(join(root, 'README.md'), 'utf8'))
     await writeFile(join(directory, 'README.md'), fixtureReadme)
     await writeFile(statusPath, fixtureReadme.replaceAll('| N/A |', '| test-version |'))
     // Clear the opt-out explicitly: the repository build sets it, and inheriting it
     // here would silence the failure this test asserts.
-    const prepare = () => execFileSync(process.execPath, ['scripts/prepare-docs.mjs'], { cwd: directory, stdio: 'pipe', env: { ...process.env, DOCS_STATUS_README: statusPath, DOCS_ALLOW_MISSING_VERSIONS: '' } })
+    const prepare = () => execFileSync(process.execPath, ['--import', './mock-fetch.mjs', 'scripts/prepare-docs.mjs'], { cwd: directory, stdio: 'pipe', env: { ...process.env, DOCS_STATUS_README: statusPath, DOCS_ALLOW_MISSING_VERSIONS: '' } })
     prepare()
     const rows = await readFile(join(directory, 'docs/.vitepress/generated/package-rows.md'), 'utf8')
     const readme = await readFile(join(directory, 'README.md'), 'utf8')
@@ -239,7 +244,7 @@ test('all package references include the same generated data; malformed data fai
     assert.throws(prepare, error => /Missing status version/.test(error.stderr.toString()))
     // The repository build opts out so a package that failed to build cannot withhold
     // the deployment; the row keeps N/A instead.
-    execFileSync(process.execPath, ['scripts/prepare-docs.mjs'], { cwd: directory, stdio: 'pipe', env: { ...process.env, DOCS_STATUS_README: statusPath, DOCS_ALLOW_MISSING_VERSIONS: 'true' } })
+    execFileSync(process.execPath, ['--import', './mock-fetch.mjs', 'scripts/prepare-docs.mjs'], { cwd: directory, stdio: 'pipe', env: { ...process.env, DOCS_STATUS_README: statusPath, DOCS_ALLOW_MISSING_VERSIONS: 'true' } })
     assert.match(await readFile(join(directory, 'docs/.vitepress/generated/package-rows.md'), 'utf8'), /\| N\/A \|/)
     await writeFile(join(directory, 'README.md'), readme.replaceAll('| N/A |', '| built-version |'))
     prepare()
@@ -378,5 +383,103 @@ test('forwarding example writes both IP versions and reboot checks remain separa
   assert.ok(unstable.indexOf('apt update') < unstable.indexOf('apt dist-upgrade'))
   for (const [, block] of upgrade.matchAll(/```shell[^\n]*\n([\s\S]*?)```/g)) {
     assert.ok(!(block.includes('reboot') && block.includes('uname -r')))
+  }
+})
+
+
+test('doona release fallback includes prereleases, authenticates, and defers to package rows', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'doona-version-'))
+  try {
+    await cp(join(root, 'scripts/prepare-docs.mjs'), join(directory, 'scripts/prepare-docs.mjs'), { recursive: true })
+    const readme = (await readFile(join(root, 'README.md'), 'utf8')).replaceAll('| N/A |', '| built-version |')
+    await writeFile(join(directory, 'README.md'), readme)
+    const run = token => execFileSync(process.execPath, ['--import', './mock-fetch.mjs', 'scripts/prepare-docs.mjs'], {
+      cwd: directory, encoding: 'utf8', stdio: 'pipe', env: { ...process.env, GITHUB_TOKEN: token }
+    })
+    const versions = async () => JSON.parse(await readFile(join(directory, 'docs/.vitepress/generated/versions.json'), 'utf8'))
+    for (const token of ['', 'fixture-token']) {
+      await mockReleaseFetch(directory, `
+        if (url !== 'https://api.github.com/repos/Zakkaus/doona/releases?per_page=100') throw new Error('Wrong URL')
+        if (options.headers.Authorization !== ${token ? JSON.stringify('Bearer ' + token) : 'undefined'}) throw new Error('Wrong authorization')
+        return { ok: true, json: async () => [
+          { tag_name: 'v9.0.0', draft: true, published_at: '2026-11-02' },
+          { tag_name: 'v0.1.0', draft: false, published_at: '2026-10-01' },
+          { tag_name: 'v0.1.0-rc.4', draft: false, prerelease: true, published_at: '2026-11-01' }
+        ] }
+      `)
+      run(token)
+      assert.equal((await versions()).doona, '0.1.0-rc.4')
+    }
+    for (const body of ["throw new Error('offline')", 'return { ok: false, status: 503 }', 'return { ok: true, json: async () => [] }']) {
+      await mockReleaseFetch(directory, body)
+      const result = spawnSync(process.execPath, ['--import', './mock-fetch.mjs', 'scripts/prepare-docs.mjs'], { cwd: directory, encoding: 'utf8' })
+      assert.equal(result.status, 0, result.stderr)
+      assert.match(result.stderr, /Cannot load doona release version:/)
+      assert.ok(!('doona' in await versions()))
+    }
+    await mockReleaseFetch(directory, 'process.exit(91)')
+    await writeFile(join(directory, 'README.md'), readme.replace('\n<!-- END GENERATED PACKAGE TABLE -->', '| doona | table-version | project | MIT |\n<!-- END GENERATED PACKAGE TABLE -->'))
+    run('')
+    assert.equal((await versions()).doona, 'table-version')
+  } finally {
+    await rm(directory, { recursive: true, force: true })
+  }
+})
+
+test('honk native installation starts with the pinned direct config and preserves lifecycle commands', async () => {
+  const upstream = await readFile(join(root, 'docs/honk/en-US/how-to-start.md'), 'utf8')
+  const minimal = upstream.match(/```dae\n(global \{[\s\S]*?fallback: direct\n\})\n```/)[1]
+  for (const locale of Object.values(locales)) {
+    const directory = join(root, 'docs/honk', locale.lang, 'installation')
+    const docker = await readFile(join(directory, 'docker.md'), 'utf8')
+    // The configure and start steps are written once, on the first-run page.
+    const firstRun = await readFile(join(directory, 'first-run.md'), 'utf8')
+    assert.ok(firstRun.includes(minimal), `${locale.lang}/first-run: pinned minimal config`)
+    assert.doesNotMatch(firstRun, /cp \/etc\/honk\/example\.dae/)
+    assertPrivilegeTabs(firstRun, `${locale.lang}/first-run`)
+    const api = firstRun.match(/```dae\n(experimental \{[\s\S]*?)\n```/)[1]
+    assert.ok(docker.includes(api))
+    for (const [page, manager, upgrade] of [['debian', 'apt', 'apt update && apt install --only-upgrade honk'], ['fedora', 'dnf', 'dnf upgrade honk'], ['opensuse', 'zypper', 'zypper update honk']]) {
+      const text = await readFile(join(directory, `${page}.md`), 'utf8')
+      assert.ok(text.includes('(./first-run.md)'), `${locale.lang}/${page}: link to first run`)
+      assert.ok(!text.includes(minimal), `${locale.lang}/${page}: configuration lives on the first-run page`)
+      assertPrivilegeTabs(text, `${locale.lang}/${page}`)
+      assert.ok(text.includes(`${upgrade}\nsystemctl restart honk.service\nsystemctl status honk.service --no-pager`))
+      assert.ok(text.includes(`systemctl disable --now honk.service\n${manager} remove honk`))
+    }
+    assert.ok(docker.indexOf('systemctl disable --now honk.service') < docker.indexOf('docker compose up -d'))
+    assert.ok(docker.includes('systemctl disable --now dae.service'))
+    assert.ok(docker.includes('docker compose down'))
+    assert.ok(docker.includes('http://127.0.0.1:9527/ui/'))
+  }
+})
+
+test('dae pages carry no in-body language switch and the landing title matches its heading', async () => {
+  const pages = async directory => (await readdir(directory, { recursive: true })).filter(name => name.endsWith('.md')).map(name => join(directory, name))
+  for (const locale of Object.values(locales)) {
+    for (const page of await pages(join(root, `docs/dae/${locale.lang}`))) {
+      const text = await readFile(page, 'utf8')
+      assert.doesNotMatch(text, /^\[\*\*[^\]]+\*\*\]\([^)]*\) \| \[\*\*[^\]]+\*\*\]\([^)]*\)$/m, `${page}: the language menu replaces this line`)
+    }
+    const landing = await readFile(join(root, `docs/dae/${locale.lang}/index.md`), 'utf8')
+    assert.equal(landing.match(/^title: "(.+)"$/m)[1], landing.match(/^# (.+)$/m)[1])
+  }
+})
+
+test('dae lists OpenWrt next to the other installation entries and the sidebar opens only the first groups', async () => {
+  const { default: config } = await import('../docs/.vitepress/config.mjs')
+  for (const [key, locale] of Object.entries(locales)) {
+    const overview = await readFile(join(root, `docs/dae/${locale.lang}/installation/index.md`), 'utf8')
+    assert.ok(overview.includes(`(${locale.prefix}/openwrt/)`), `${locale.lang}: installation overview lacks OpenWrt`)
+    const sidebar = config.locales[key].themeConfig.sidebar[`${locale.prefix}/dae/`]
+    const [first, ...rest] = sidebar
+    assert.equal(first.link, `${locale.prefix}/dae/`)
+    assert.ok(!first.items.some(item => item.link === `${locale.prefix}/dae/`), 'the landing page appears once')
+    const installation = first.items.find(item => item.link === `${locale.prefix}/dae/installation/`)
+    // OpenWrt must stay visible: neither the group nor its parent can be folded.
+    assert.equal(first.collapsed, undefined)
+    assert.equal(installation.collapsed, undefined)
+    assert.ok(installation.items.some(item => item.link === `${locale.prefix}/openwrt/`))
+    assert.ok(rest.every(group => group.collapsed === true))
   }
 })

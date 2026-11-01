@@ -1,3 +1,17 @@
+Install `curl` if the system does not have it yet.
+
+::: code-group
+
+```sh [sudo]
+sudo zypper install curl
+```
+
+```sh [root]
+zypper install curl
+```
+
+:::
+
 The repository configuration file includes the GPG key address.
 Zypper asks whether to trust the key the first time it is used.
 

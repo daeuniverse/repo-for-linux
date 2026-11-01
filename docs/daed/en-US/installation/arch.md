@@ -1,5 +1,9 @@
 # Arch Linux / Manjaro <Badge type="info" text="Community maintained" />
 
+::: danger Archived
+daed is archived. Do not use it.
+:::
+
 daed is not in the official repositories. Install it from the [AUR](https://aur.archlinux.org/packages/daed) or [archlinuxcn](https://github.com/archlinuxcn/repo).
 
 Both sources are community-maintained and independent of the APT/RPM repository described on this site.

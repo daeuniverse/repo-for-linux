@@ -1,5 +1,9 @@
 # Gentoo / Calculate <Badge type="info" text="Community maintained" />
 
+::: danger Archived
+daed is archived. Do not use it.
+:::
+
 Gentoo users can install `net-proxy/daed` from the [gentoo-zh overlay](https://github.com/gentoo-zh/overlay/tree/master/net-proxy/daed). This package is maintained by the Gentoo community and uses Portage. The APT/RPM version table on this site describes a separate repository.
 
 ::: info User and architecture
@@ -50,4 +54,5 @@ The ebuild installs systemd and OpenRC service files. For OpenRC, first follow t
 
 ---
 
-[gentoo-zh: daed ebuild](https://github.com/gentoo-zh/overlay/blob/master/net-proxy/daed/daed-1.27.0-r1.ebuild) · [OpenRC](https://github.com/gentoo-zh/overlay/blob/master/net-proxy/daed/files/daed.initd)
+- [gentoo-zh: daed ebuild](https://github.com/gentoo-zh/overlay/blob/master/net-proxy/daed/daed-1.27.0-r1.ebuild)
+- [OpenRC](https://github.com/gentoo-zh/overlay/blob/master/net-proxy/daed/files/daed.initd)

@@ -1,10 +1,12 @@
 ---
-title: "Run as a service"
+title: "Manual systemd setup"
 ---
 
 <div v-pre lang="en-US">
 
-# Run dae as a Daemon Service
+# Manual systemd setup
+
+This page is for manual binary installations only. If you installed a package, follow [Service management](/dae/start/service-management).
 
 Run dae as a [systemd](https://wiki.debian.org/systemd) service to start it at boot.
 This requires a distribution that uses systemd as its service manager.
@@ -157,4 +159,4 @@ journalctl -xefu dae
 
 ---
 
-Source: [dae upstream](https://github.com/daeuniverse/dae/blob/fb5eae6c2578e3ec99ae5b2844cb4f4ed93557a5/docs/en/user-guide/run-as-daemon.md) · [AGPL-3.0 license](/upstream/dae-LICENSE.txt).
+Source: [dae upstream](https://github.com/daeuniverse/dae/blob/fb5eae6c2578e3ec99ae5b2844cb4f4ed93557a5/docs/en/user-guide/run-as-daemon.md), licensed under [AGPL-3.0](/upstream/dae-LICENSE.txt).

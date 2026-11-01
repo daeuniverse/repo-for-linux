@@ -109,7 +109,19 @@
         {
           "path": "dae/en-US/start/minimal-configuration.md",
           "marker": "quick-start-minimal-configuration",
-          "sha256": "bc74c22a9abf1d1fea9ab83c159f688b5564bda3d3e7b73a1087c784ca087efc"
+          "sha256": "8c4a0b520dfc09f14c5028d1317863f16c5a5cc7657bf5a058e4bebe2cd5d59b",
+          "codeReplacements": [
+            {
+              "originalSha256": "e6edeccfd4e61492e5b4e83e479dad7eeb470ae5a7049e03e5c4976bf6655ca7",
+              "sha256": [
+                "f09b23f073e6876812a564201779a7aa6e61079c10e7428d236174470b263ca8"
+              ],
+              "reason": "Lead with a working configuration: a named subscription and a group that selects its nodes."
+            }
+          ],
+          "additionalCodeSha256": [
+            "ceda2264e3d803f934e60d76b266d4177dcab466eceb63b24a32256e2a587ab4"
+          ]
         },
         {
           "path": "dae/en-US/start/pppoe.md",
@@ -174,12 +186,10 @@
             "1f987d89387f1a6fed6874ea06a51476004b108494622d5cf6cfdd8cbb859dd4",
             "3157e948c0419bc3a4ef0715d1fb07e569de9a428fb370e14837a1b84ae2d4b8",
             "5050a6a1b699985e757b629423470eb12926ea0fd95d810afd23f0e0c73398aa",
-            "5174615e9c72e23bd7f07a21f5256043004dc75c10a632bb60a5a3d907fd4bf5",
+            "57bafbf9b355d38e1630c55da66ef77f42e6577c6eed8308a7291095910fe708",
             "6e88235d991ed09617556a43f5fc73c13df9e84bef879d00ebc7c108d44c9d3c",
             "70de1dd5f1548f62fb26a66cbca75d7107c89acc71bf58b17ac548e8add38f4e",
-            "7a4894ea099cc5bbfa63d8fe0a91fd34391e9e6839b5c6e2c272e1c270f8cea6",
-            "95ad378583312e4fe63858e71731955e51b1f99a73525d54b6482bd1a637efdc",
-            "be689435e6e6448f003532d0d437f15b054c75e6451cc699731a12d0c8a10246"
+            "bcf2042501e416a2fc2d793ecf45375db0b886b0736b707dd7133ae274a6c26a"
           ],
           "reason": "Covered by the debian installation page; commands identical apart from sudo and root tabs."
         },
@@ -915,7 +925,7 @@
       "locale": "en-US",
       "path": "dae/en-US/user-guide/run-as-daemon.md",
       "topic": "user-guide/run-as-daemon.md",
-      "title": "Run as a service",
+      "title": "Manual systemd setup",
       "source": "docs/en/user-guide/run-as-daemon.md",
       "sourceLanguage": "en-US",
       "sourceSha256": "ab80b74b26431b90fbf504c9a3131293d618b35191832c6a5bfcbadd35bfbb5a",
@@ -1082,7 +1092,19 @@
         {
           "path": "dae/zh-CN/start/minimal-configuration.md",
           "marker": "quick-start-minimal-configuration",
-          "sha256": "228709ec0e92fe9abd3e988f4e6dc91acde6958e1e131da833380cd50efc24e4"
+          "sha256": "f4fb751e5ce53882929a37d417aeca2b9994908d056f613aa16eaa047000ca34",
+          "codeReplacements": [
+            {
+              "originalSha256": "e6edeccfd4e61492e5b4e83e479dad7eeb470ae5a7049e03e5c4976bf6655ca7",
+              "sha256": [
+                "f09b23f073e6876812a564201779a7aa6e61079c10e7428d236174470b263ca8"
+              ],
+              "reason": "Lead with a working configuration: a named subscription and a group that selects its nodes."
+            }
+          ],
+          "additionalCodeSha256": [
+            "ceda2264e3d803f934e60d76b266d4177dcab466eceb63b24a32256e2a587ab4"
+          ]
         },
         {
           "path": "dae/zh-CN/start/pppoe.md",
@@ -1147,12 +1169,10 @@
             "1f987d89387f1a6fed6874ea06a51476004b108494622d5cf6cfdd8cbb859dd4",
             "3157e948c0419bc3a4ef0715d1fb07e569de9a428fb370e14837a1b84ae2d4b8",
             "5050a6a1b699985e757b629423470eb12926ea0fd95d810afd23f0e0c73398aa",
-            "5174615e9c72e23bd7f07a21f5256043004dc75c10a632bb60a5a3d907fd4bf5",
+            "57bafbf9b355d38e1630c55da66ef77f42e6577c6eed8308a7291095910fe708",
             "6e88235d991ed09617556a43f5fc73c13df9e84bef879d00ebc7c108d44c9d3c",
             "70de1dd5f1548f62fb26a66cbca75d7107c89acc71bf58b17ac548e8add38f4e",
-            "7a4894ea099cc5bbfa63d8fe0a91fd34391e9e6839b5c6e2c272e1c270f8cea6",
-            "95ad378583312e4fe63858e71731955e51b1f99a73525d54b6482bd1a637efdc",
-            "be689435e6e6448f003532d0d437f15b054c75e6451cc699731a12d0c8a10246"
+            "bcf2042501e416a2fc2d793ecf45375db0b886b0736b707dd7133ae274a6c26a"
           ],
           "reason": "Covered by the debian installation page; commands identical apart from sudo and root tabs."
         },
@@ -1888,7 +1908,7 @@
       "locale": "zh-CN",
       "path": "dae/zh-CN/user-guide/run-as-daemon.md",
       "topic": "user-guide/run-as-daemon.md",
-      "title": "作为服务运行",
+      "title": "手动安装的 systemd 配置",
       "source": "docs/en/user-guide/run-as-daemon.md",
       "sourceLanguage": "en-US",
       "sourceSha256": "ab80b74b26431b90fbf504c9a3131293d618b35191832c6a5bfcbadd35bfbb5a",
@@ -2055,7 +2075,19 @@
         {
           "path": "dae/zh-TW/start/minimal-configuration.md",
           "marker": "quick-start-minimal-configuration",
-          "sha256": "4dc67d9eb3d7469f23531bb853ec8f470a32a349925df500ffb1c44ff3753c86"
+          "sha256": "35217a170dd47eef620259dacf281cec94dd6ff74d48961995756a553469d459",
+          "codeReplacements": [
+            {
+              "originalSha256": "e6edeccfd4e61492e5b4e83e479dad7eeb470ae5a7049e03e5c4976bf6655ca7",
+              "sha256": [
+                "f09b23f073e6876812a564201779a7aa6e61079c10e7428d236174470b263ca8"
+              ],
+              "reason": "Lead with a working configuration: a named subscription and a group that selects its nodes."
+            }
+          ],
+          "additionalCodeSha256": [
+            "ceda2264e3d803f934e60d76b266d4177dcab466eceb63b24a32256e2a587ab4"
+          ]
         },
         {
           "path": "dae/zh-TW/start/pppoe.md",
@@ -2120,12 +2152,10 @@
             "1f987d89387f1a6fed6874ea06a51476004b108494622d5cf6cfdd8cbb859dd4",
             "3157e948c0419bc3a4ef0715d1fb07e569de9a428fb370e14837a1b84ae2d4b8",
             "5050a6a1b699985e757b629423470eb12926ea0fd95d810afd23f0e0c73398aa",
-            "5174615e9c72e23bd7f07a21f5256043004dc75c10a632bb60a5a3d907fd4bf5",
+            "57bafbf9b355d38e1630c55da66ef77f42e6577c6eed8308a7291095910fe708",
             "6e88235d991ed09617556a43f5fc73c13df9e84bef879d00ebc7c108d44c9d3c",
             "70de1dd5f1548f62fb26a66cbca75d7107c89acc71bf58b17ac548e8add38f4e",
-            "7a4894ea099cc5bbfa63d8fe0a91fd34391e9e6839b5c6e2c272e1c270f8cea6",
-            "95ad378583312e4fe63858e71731955e51b1f99a73525d54b6482bd1a637efdc",
-            "be689435e6e6448f003532d0d437f15b054c75e6451cc699731a12d0c8a10246"
+            "bcf2042501e416a2fc2d793ecf45375db0b886b0736b707dd7133ae274a6c26a"
           ],
           "reason": "Covered by the debian installation page; commands identical apart from sudo and root tabs."
         },
@@ -2861,7 +2891,7 @@
       "locale": "zh-TW",
       "path": "dae/zh-TW/user-guide/run-as-daemon.md",
       "topic": "user-guide/run-as-daemon.md",
-      "title": "以服務執行",
+      "title": "手動安裝的 systemd 設定",
       "source": "docs/en/user-guide/run-as-daemon.md",
       "sourceLanguage": "en-US",
       "sourceSha256": "ab80b74b26431b90fbf504c9a3131293d618b35191832c6a5bfcbadd35bfbb5a",

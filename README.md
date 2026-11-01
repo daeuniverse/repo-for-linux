@@ -16,18 +16,10 @@ sudo apt install curl
 
 **2. Add the repository**
 
-The source config file is downloaded directly from the repository.
-
-For APT version 3.0 or higher:
+The source config file is downloaded directly from the repository. It is a plain deb822 file, which APT has read since version 1.1.
 
 ```sh
 sudo curl -fsSL -o /etc/apt/sources.list.d/daeuniverse.sources https://daeuniverse.pages.dev/daeuniverse.sources
-```
-
-For APT version lower than 3.0:
-
-```sh
-sudo curl -fsSL -o /etc/apt/sources.list.d/daeuniverse.list https://daeuniverse.pages.dev/daeuniverse.list
 ```
 
 **3. Import the GPG key**
@@ -88,6 +80,7 @@ This table is generated after packaging completes.
 | --- | --- | --- | --- |
 | dae | N/A | [https://github.com/daeuniverse/dae](https://github.com/daeuniverse/dae) | [AGPL-3.0-only](https://github.com/daeuniverse/dae/blob/main/LICENSE) |
 | daed | N/A | [https://github.com/daeuniverse/daed](https://github.com/daeuniverse/daed) | [MIT](https://github.com/daeuniverse/daed/blob/main/LICENSE) + [AGPL-3.0-only](https://github.com/daeuniverse/dae-wing/blob/main/LICENSE) |
+| honk | N/A | [https://github.com/daeuniverse/honk](https://github.com/daeuniverse/honk) | [GPL-3.0-only](https://github.com/daeuniverse/honk/blob/main/LICENSE) |
 | Juicity | N/A | [https://github.com/juicity/juicity](https://github.com/juicity/juicity) | [AGPL-3.0-only](https://github.com/juicity/juicity/blob/main/LICENSE) |
 | Juicity-rs | N/A | [https://github.com/juicity/juicity-rs](https://github.com/juicity/juicity-rs) | [AGPL-3.0-only](https://github.com/juicity/juicity-rs/blob/main/LICENSE) |
 | v2ray | N/A | [https://github.com/v2fly/v2ray-core](https://github.com/v2fly/v2ray-core) | [MIT](https://github.com/v2fly/v2ray-core/blob/main/LICENSE) |
@@ -127,5 +120,7 @@ sudo setfacl -m u:nobody:rX /etc/letsencrypt
 ### Set hook to certbot to automatically set ACL when certs are renewed
 
 ```sh
-sudo certbot renew --deploy-hook "setfacl -R -m u:nobody:rX /etc/letsencrypt/{live,archive}"
+sudo install -d -m 0755 /etc/letsencrypt/renewal-hooks/deploy
+printf '%s\n' '#!/bin/sh' 'setfacl -R -m u:nobody:rX /etc/letsencrypt/live /etc/letsencrypt/archive' | sudo tee /etc/letsencrypt/renewal-hooks/deploy/restore-acl.sh >/dev/null
+sudo chmod 0755 /etc/letsencrypt/renewal-hooks/deploy/restore-acl.sh
 ```

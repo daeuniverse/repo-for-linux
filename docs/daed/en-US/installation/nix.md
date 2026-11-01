@@ -1,5 +1,9 @@
 # Nix / NixOS
 
+::: danger Archived
+daed is archived. Do not use it.
+:::
+
 Import the daed module into your existing NixOS flake. Keep your Nixpkgs, system and hardware configuration. Replace `HOSTNAME` with your configuration name.
 
 ## 1. Import the NixOS module
@@ -96,4 +100,5 @@ nix.settings = {
 
 ---
 
-[daeuniverse/flake.nix README](https://github.com/daeuniverse/flake.nix#readme) · [ISC](https://github.com/daeuniverse/flake.nix/blob/main/LICENSE)
+- [daeuniverse/flake.nix README](https://github.com/daeuniverse/flake.nix#readme)
+- [ISC](https://github.com/daeuniverse/flake.nix/blob/main/LICENSE)

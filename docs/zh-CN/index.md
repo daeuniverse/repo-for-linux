@@ -2,48 +2,34 @@
 layout: home
 hero:
   name: Dae Universe
-  text: "dae 安装与使用指南"
-  tagline: "检查内核要求，安装 dae，配置 DNS、路由与服务。"
+  text: "软件安装与使用指南"
+  tagline: "dae、honk、doona 及相关软件的安装、配置与故障排查。"
   image:
     src: /daeuniverse-hero.png
     alt: Dae Universe
-  actions:
-    - theme: brand
-      text: "快速开始"
-      link: /zh-CN/dae/
-    - theme: alt
-      text: "安装 daed"
-      link: /zh-CN/daed/
-    - theme: alt
-      text: "v2rayA 与其他软件"
-      link: /zh-CN/guide/packages
 features:
-  - title: "内核要求"
-    details: "安装前检查内核版本及所需配置项。"
-    link: /zh-CN/dae/start/requirements
-    linkText: "检查运行环境"
-  - title: "DNS 配置"
-    details: "设置上游 DNS，按使用场景选择 DNS 分流模板。"
-    link: /zh-CN/dae/configuration/dns
-    linkText: "配置 DNS"
-  - title: "路由配置"
-    details: "按域名、IP、进程与网络分流，选择出站分组。"
-    link: /zh-CN/dae/configuration/routing
-    linkText: "编写分流规则"
-  - title: "故障排查"
-    details: "排查网络、DNS、防火墙及 eBPF 加载问题。"
-    link: /zh-CN/dae/troubleshooting
-    linkText: "查阅排查步骤"
+  - title: "dae"
+    details: "基于 eBPF 的轻量、高性能 Linux 透明代理。手册包括内核要求、DNS 与路由配置、故障排查。"
+    link: /zh-CN/dae/
+    linkText: "阅读 dae 手册"
   - title: "honk"
     details: "Rust 编写的 eBPF 代理引擎，借鉴 dae 与 sing-box，仍在早期开发。"
-    link: /zh-CN/honk
-    linkText: "了解 honk"
-  - title: "kdae"
-    details: "在 dae 主线之外重构架构并优化性能的分支。"
-    link: /zh-CN/kdae
-    linkText: "了解 kdae"
-  - title: "DaedNext"
-    details: "Rust 版 daed，把面板和 DaeNext 核心打包在一起，尚未发布。"
-    link: /zh-CN/daednext
-    linkText: "了解 DaedNext"
+    link: /zh-CN/honk/
+    linkText: "阅读 honk 手册"
+  - title: "doona"
+    details: "honk 内置的网页界面，用于管理 honk 并查看流量。"
+    link: /zh-CN/doona/
+    linkText: "阅读 doona 手册"
+  - title: "OpenWrt"
+    details: "从 Dae Universe 的 apk 软件源安装 dae 或 honk。"
+    link: /zh-CN/openwrt/
+    linkText: "在 OpenWrt 上安装"
+  - title: "其他软件"
+    details: "v2rayA、Juicity、v2ray、Xray 等软件源中的其他软件包，以及 kdae 和 DaedNext。"
+    link: /zh-CN/guide/packages
+    linkText: "查看软件包"
+  - title: "daed"
+    details: "dae 的网页管理界面，已归档，请勿用于新安装。"
+    link: /zh-CN/daed/
+    linkText: "查看 daed"
 ---

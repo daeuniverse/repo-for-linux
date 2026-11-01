@@ -1,5 +1,5 @@
 name: Documentation
-description: Install the dependencies, then validate and build the documentation site.
+description: Install dependencies, fetch pinned manuals, then validate and build the documentation site.
 
 inputs:
   node-version:

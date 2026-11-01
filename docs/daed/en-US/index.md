@@ -1,5 +1,9 @@
 # daed
 
+::: danger Archived
+daed is archived. Do not use it.
+:::
+
 daed provides a web dashboard for dae. This chapter covers daed installation and service management.
 
 <img src="/upstream/daed-orchestrate.png" alt="daed dashboard: config, DNS, routing, groups, nodes and subscriptions" class="app-screenshot">
@@ -29,4 +33,4 @@ For dae, see the [installation guide](/dae/installation/).
 
 ---
 
-Screenshot: [daed upstream](https://github.com/daeuniverse/daed/blob/671e65d2fdcd62fe6a3ec18ecda209c5addea898/docs/screenshots/pc/orchestrate.png) · [MIT license](/upstream/daed-LICENSE.txt).
+Screenshot: [daed upstream](https://github.com/daeuniverse/daed/blob/671e65d2fdcd62fe6a3ec18ecda209c5addea898/docs/screenshots/pc/orchestrate.png), licensed under [MIT](/upstream/daed-LICENSE.txt).

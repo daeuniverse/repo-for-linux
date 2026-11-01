@@ -1,22 +1,13 @@
-Download the source configuration directly from the repository.
-Choose one of the following alternatives to match your APT version.
+Download the source file, a plain deb822 file that APT has read since version 1.1.
 
 ::: code-group
 
-```sh [APT ≥ 3.0 · sudo]
+```sh [sudo]
 sudo curl -fsSL -o /etc/apt/sources.list.d/daeuniverse.sources https://daeuniverse.pages.dev/daeuniverse.sources
 ```
 
-```sh [APT ≥ 3.0 · root]
+```sh [root]
 curl -fsSL -o /etc/apt/sources.list.d/daeuniverse.sources https://daeuniverse.pages.dev/daeuniverse.sources
-```
-
-```sh [APT < 3.0 · sudo]
-sudo curl -fsSL -o /etc/apt/sources.list.d/daeuniverse.list https://daeuniverse.pages.dev/daeuniverse.list
-```
-
-```sh [APT < 3.0 · root]
-curl -fsSL -o /etc/apt/sources.list.d/daeuniverse.list https://daeuniverse.pages.dev/daeuniverse.list
 ```
 
 :::

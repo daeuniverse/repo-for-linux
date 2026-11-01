@@ -1,0 +1,28 @@
+{
+  "honk": {
+    "repository": "https://github.com/daeuniverse/honk",
+    "ref": "v0.1.0-beta.4",
+    "commit": "d3fb81f4d7155581f9d276936690dc9f60ef2b77",
+    "license": "GPL-3.0-only",
+    "locales": {
+      "en-US": "doc/en",
+      "zh-CN": "doc/zh",
+      "zh-TW": "doc/zh"
+    }
+  },
+  "doona": {
+    "repository": "https://github.com/Zakkaus/doona-docs",
+    "ref": "main",
+    "commit": "1ffab35ff9553ad1869fae21dba36be010cc5e2a",
+    "license": "CC BY 4.0",
+    "licensePath": "LICENSES/CC-BY-4.0.txt",
+    "upstreamIndex": true,
+    "assets": "docs/images",
+    "transform": "doona",
+    "locales": {
+      "en-US": "docs/en",
+      "zh-CN": "docs/zh-CN",
+      "zh-TW": "docs/zh-TW"
+    }
+  }
+}
