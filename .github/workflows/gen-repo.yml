@@ -107,6 +107,21 @@ jobs:
             --project-name=daeuniverse \
             --branch=main
 
+      # daeuniverse.org lives in another Cloudflare account, so the documentation is
+      # deployed there on its own; the package repository stays on daeuniverse.pages.dev.
+      - name: Upload the documentation to daeuniverse.org
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.DOCS_CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.DOCS_CLOUDFLARE_API_TOKEN }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "DOCS_CLOUDFLARE_API_TOKEN is not set; skipping the daeuniverse.org deployment"
+            exit 0
+          fi
+          wrangler pages deploy docs/.vitepress/dist \
+            --project-name=daeuniverse-docs \
+            --branch=main
+
       - name: Clean Old Cloudflare Pages Deployments
         uses: Th3S4mur41/cleanup-cloudflare-deployments@main
         with:
