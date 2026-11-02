@@ -1,6 +1,6 @@
 # The Linux Repository of Dae Universe
 
-This repo contains dae, honk, v2rayA, v2ray, xray, juicity and juicity-rs programs.
+This repo contains dae, honk, doona, v2rayA, v2ray, xray, juicity and juicity-rs programs.
 
 ## Usage
 

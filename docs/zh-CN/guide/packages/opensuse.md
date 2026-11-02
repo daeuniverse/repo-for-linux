@@ -12,6 +12,7 @@
 | --- | --- |
 | dae | `dae` |
 | [daed](/zh-CN/daed/)（已归档，请勿用于新安装） | `daed` |
+| [doona](/zh-CN/doona/) | `doona` |
 | v2rayA | `v2raya` |
 | v2ray | `v2ray` |
 | Xray | `xray` |
@@ -20,6 +21,8 @@
 | v2ray-rules-dat | `v2ray-rules-dat` |
 
 将命令中的 `PACKAGE` 替换为表中的软件包名称。
+
+doona 另提供 `doona-fonts` 和 `doona-precompressed`，均为可选软件包。
 
 ::: code-group
 

@@ -12,6 +12,7 @@
 | --- | --- |
 | dae | `dae` |
 | [daed](/zh-TW/daed/)（已歸檔，請勿用於新安裝） | `daed` |
+| [doona](/zh-TW/doona/) | `doona` |
 | v2rayA | `v2raya` |
 | v2ray | `v2ray` |
 | Xray | `xray` |
@@ -20,6 +21,8 @@
 | v2ray-rules-dat | `v2ray-rules-dat` |
 
 將指令中的 `PACKAGE` 替換為表中的套件名稱。
+
+doona 另提供 `doona-fonts` 與 `doona-precompressed`，均為可選套件。
 
 ::: code-group
 
