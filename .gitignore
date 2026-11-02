@@ -6,3 +6,5 @@ docs/honk/*/*
 !docs/honk/*/index.md
 !docs/honk/*/installation/
 docs/openwrt/
+docs/public/doona/screenshots/
+.doona-release/
