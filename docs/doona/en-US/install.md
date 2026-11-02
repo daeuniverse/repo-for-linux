@@ -13,8 +13,8 @@ Install separate UI files when you do not want honk's embedded doona. For the em
 
 | System | Guide |
 | --- | --- |
-| Debian or Ubuntu | [Install the deb](install-debian.md) |
-| Fedora or RHEL | [Install the RPM](install-fedora.md) |
+| Debian or Ubuntu | [Install with APT](install-debian.md) |
+| Fedora or RHEL | [Install with DNF](install-fedora.md) |
 | Arch Linux | [Install with pacman](install-arch.md) |
 | Gentoo | [Install with Portage](install-gentoo.md) |
 | OpenWrt | [Install on the router manually](install-openwrt.md) |

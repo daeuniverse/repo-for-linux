@@ -29,7 +29,7 @@ lastUpdated: false
 
 使用 Token 登录时，可通过 **Token** 字段的显示／隐藏控件，在连接前核对输入的密钥。
 
-![创建管理员](https://doona.daeuniverse.org/screenshots/zh-CN/login-setup.webp)
+![创建管理员](/doona/screenshots/zh-CN/login-setup.webp)
 
 ## 3. 检查后端 {#3-检查后端}
 

@@ -33,10 +33,89 @@ runs:
         cache: npm
     - run: npm ci
       shell: bash
+    # The manual links doona's screenshots on this site. They are rendered from the doona release the pages document,
+    # which prepare-docs resolves, so the version is known before anything is built or tested.
+    - id: release
+      if: inputs.test == 'true' || inputs.build == 'true'
+      run: |
+        npm run docs:prepare
+        version=$(node -p "require('./docs/.vitepress/generated/versions.json').doona ?? ''")
+        if [ -z "$version" ]; then
+          echo "::error::No doona version resolved for the screenshots"
+          exit 1
+        fi
+        echo "tag=v$version" >> "$GITHUB_OUTPUT"
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+        DOCS_ALLOW_MISSING_VERSIONS: ${{ inputs.allow-missing-versions }}
+    - id: doona
+      if: steps.release.outputs.tag
+      uses: actions/checkout@v6
+      with:
+        repository: Zakkaus/doona
+        ref: refs/tags/${{ steps.release.outputs.tag }}
+        path: .doona-release
+        persist-credentials: false
+    # A tag's commit and its screenshot tool decide the result, so a hit needs neither the doona dependencies nor a browser.
+    - id: screenshots
+      if: steps.release.outputs.tag
+      uses: actions/cache@v4
+      with:
+        path: docs/public/doona/screenshots
+        key: doona-screenshots-${{ steps.doona.outputs.commit }}-${{ hashFiles('.doona-release/tools/screenshots.mjs') }}
+    - if: steps.release.outputs.tag && steps.screenshots.outputs.cache-hit != 'true'
+      uses: pnpm/action-setup@v4
+      with:
+        package_json_file: .doona-release/package.json
+    - id: build-doona
+      if: steps.release.outputs.tag && steps.screenshots.outputs.cache-hit != 'true'
+      working-directory: .doona-release
+      run: |
+        pnpm install --frozen-lockfile
+        pnpm build
+        # pnpm exec adds its own status lines, which would break the one-line output.
+        echo "playwright=$(./node_modules/.bin/playwright --version | awk '{print $2; exit}')" >> "$GITHUB_OUTPUT"
+      shell: bash
+    - id: playwright
+      if: steps.release.outputs.tag && steps.screenshots.outputs.cache-hit != 'true'
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/ms-playwright
+        key: ${{ runner.os }}-playwright-shell-${{ steps.build-doona.outputs.playwright }}
+    # doona's CJK fonts are split into subsets that load with font-display: optional, so a subset that arrives late
+    # falls back to the system font; the runner has no CJK font of its own.
+    - if: steps.release.outputs.tag && steps.screenshots.outputs.cache-hit != 'true'
+      working-directory: .doona-release
+      run: |
+        pnpm exec playwright install --only-shell chromium
+        sudo apt-get update -qq
+        sudo apt-get install -y -qq --no-install-recommends webp fonts-noto-cjk
+      shell: bash
+    # tools/screenshots.mjs signs in to the mock backend itself, against the build served on 4177, and writes
+    # docs/screenshots/, which is copied where the site build publishes it as /doona/screenshots/.
+    - if: steps.release.outputs.tag && steps.screenshots.outputs.cache-hit != 'true'
+      working-directory: .doona-release
+      run: |
+        pnpm exec vite preview --host 127.0.0.1 --port 4177 --strictPort > /dev/null &
+        server=$!
+        curl -sf --retry 30 --retry-delay 1 --retry-connrefused -o /dev/null http://127.0.0.1:4177/
+        rm -rf docs/screenshots
+        node tools/screenshots.mjs
+        kill "$server"
+        rm -rf "$GITHUB_WORKSPACE/docs/public/doona/screenshots"
+        mkdir -p "$GITHUB_WORKSPACE/docs/public/doona"
+        cp -r docs/screenshots "$GITHUB_WORKSPACE/docs/public/doona/screenshots"
+      shell: bash
+    # A render that fails, or writes too little, stops here, before the tests, the build and any deployment.
+    - if: steps.release.outputs.tag
+      run: test -s docs/public/doona/screenshots/palettes.webp && test -s docs/public/doona/screenshots/en/activity-light.webp
+      shell: bash
     - if: inputs.test == 'true'
       run: npm run docs:test
       shell: bash
       env:
+        DOONA_DIR: ${{ github.workspace }}/.doona-release
         DOCS_ALLOW_MISSING_VERSIONS: ${{ inputs.allow-missing-versions }}
     - if: inputs.build == 'true'
       run: npm run docs:build

@@ -25,7 +25,7 @@ If a page or action is unavailable, check its [feature requirements](feature-req
 
 Press `g`, then a page letter within 800 ms, to open that page. For example, `g` then `r` opens **Rules**.
 
-![Activity and the page navigation](https://doona.daeuniverse.org/screenshots/en/activity-light.webp)
+![Activity and the page navigation](/doona/screenshots/en/activity-light.webp)
 
 
 ## Use search and the top bar {#top-bar}
@@ -97,6 +97,6 @@ Below 1024 px, the bottom bar and page strip replace the sidebar. Choose a secti
 
 Search, **Refresh** and the held-rule apply button remain in the top bar. **More options** contains reload, language, theme, palette and backend controls. Page toolbars keep their first action visible and move the remaining actions into overflow. Below 600 px, pages use the phone spacing and wrapping layout.
 
-![Phone navigation and the More options menu](https://doona.daeuniverse.org/screenshots/en/phone.webp)
+![Phone navigation and the More options menu](/doona/screenshots/en/phone.webp)
 
 </div>

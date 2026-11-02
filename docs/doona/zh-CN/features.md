@@ -60,7 +60,7 @@ lastUpdated: false
 
 ## 浏览器中保存的设置 {#theme-gallery}
 
-查看[配色图集](https://doona.daeuniverse.org/screenshots/palettes.webp)，再调整[外观设置](config-and-settings.md#appearance)。
+查看[配色图集](/doona/screenshots/palettes.webp)，再调整[外观设置](config-and-settings.md#appearance)。
 
 语言、外观、日期与时间格式、启动页面和探测偏好都在[设置](config-and-settings.md#settings-page)中调整。浏览器偏好、已保存配置和后端临时更改的区别见[更改的存储位置](what-doona-can-change.md)。
 

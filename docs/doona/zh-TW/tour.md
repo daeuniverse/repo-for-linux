@@ -25,7 +25,7 @@ lastUpdated: false
 
 按 `g` 後，在 800 ms 內按頁面字母可切換頁面。例如，先按 `g` 再按 `r` 開啟**規則**。
 
-![活動頁面與頁面導覽](https://doona.daeuniverse.org/screenshots/zh-TW/activity-light.webp)
+![活動頁面與頁面導覽](/doona/screenshots/zh-TW/activity-light.webp)
 
 
 ## 使用搜尋與頂列 {#top-bar}
@@ -99,6 +99,6 @@ lastUpdated: false
 
 搜尋、**重新整理**和暫存規則套用按鈕仍在頂列。**更多選項**包含重新載入、語言、主題、配色與後端控制項。頁面工具列保留第一個操作，其餘操作收進溢位選單。寬度小於 600 px 時，頁面採用手機間距與換行版面。
 
-![手機導覽與更多選項選單](https://doona.daeuniverse.org/screenshots/zh-TW/phone.webp)
+![手機導覽與更多選項選單](/doona/screenshots/zh-TW/phone.webp)
 
 </div>

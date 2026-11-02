@@ -1,6 +1,6 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { access, readFile, readdir } from 'node:fs/promises'
+import { access, readFile, readdir, stat } from 'node:fs/promises'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createMarkdownRenderer } from 'vitepress'
@@ -181,17 +181,13 @@ const isPage = route => {
   return route.startsWith('/doona') && topics.includes(topic)
 }
 
-test('every local link and image resolves, and only screenshots stay on the doona site', async () => {
+test('every local link and image resolves, and none leaves for the doona site', async () => {
   let links = 0, images = 0
   for (const { lang, topic, text } of pages.values()) {
     const where = `${lang}/${topic}`
     const prose = text.replace(/^\s*(`{3,}|~{3,}).*\n[\s\S]*?^\s*\1\s*$/gm, '')
     for (const [, url] of prose.matchAll(/(?:\]\(|\]:\s*|(?:href|src)=")<?([^\s)>"]+)/g)) {
-      const doonaSite = url.match(/^https?:\/\/doona\.daeuniverse\.org(\/[^?#]*)?/)
-      if (doonaSite) {
-        assert.ok(doonaSite[1]?.startsWith('/screenshots/'), `${where}: ${url} should link this site`)
-        continue
-      }
+      assert.doesNotMatch(url, /^https?:\/\/doona\.daeuniverse\.org/, `${where}: ${url} should link this site`)
       if (/^(?:[a-z][a-z0-9+.-]*:|\/\/)/i.test(url)) continue
       const [target, hash] = url.split('#')
       if (!target) {
@@ -202,6 +198,8 @@ test('every local link and image resolves, and only screenshots stay on the doon
       if (path.startsWith('/')) {
         const route = siteRoute(path)
         if (route.startsWith('/doona/images/')) { await access(join(publicRoot, route)); images++ }
+        // Rendered from the documented doona release by the docs build; the next test checks them against the files.
+        else if (route.startsWith('/doona/screenshots/')) continue
         // honk's OpenWrt package embeds doona, so the router install is the feed guide.
         else if (route === '/openwrt/') await access(join(root, 'docs/openwrt', lang, 'index.md'))
         else assert.ok(isPage(route), `${where}: ${url} is not a doona page or public file`)
@@ -227,14 +225,74 @@ async function markdownFiles(directory) {
   }))).flat()
 }
 
-test('no page of this site links the doona site except its screenshots', async () => {
+test('no page of this site links the doona site', async () => {
   const files = await markdownFiles(join(root, 'docs'))
   assert.ok(files.length > 100)
   for (const path of files) {
     for (const [url] of (await readFile(path, 'utf8')).matchAll(/https?:\/\/doona\.daeuniverse\.org[^\s)"'<>]*/g)) {
-      assert.match(url, /^https:\/\/doona\.daeuniverse\.org\/screenshots\//, `${path}: ${url} should link this site's /doona/ pages`)
+      assert.fail(`${path}: ${url} should link this site's /doona/ pages`)
     }
   }
+})
+
+// The docs build renders the screenshots from the documented doona release into docs/public/doona/screenshots/ (see
+// .github/actions/documentation and docs/DESIGN.md). A local run without them skips; CI must have them.
+const screenshotRoot = join(publicRoot, 'doona/screenshots')
+const exists = path => access(path).then(() => true, () => false)
+test('every screenshot a page links is a rendered file', async (t) => {
+  const screenshotLinks = new Set([...pages.values()].flatMap(({ text }) => [...text.matchAll(/(?:\]\(|src=")(\/doona\/screenshots\/[^\s)"]+)/g)].map(match => match[1])))
+  assert.ok(screenshotLinks.size >= 30, `Only ${screenshotLinks.size} screenshot links found`)
+  if (!await exists(screenshotRoot)) {
+    assert.ok(!process.env.CI, `${screenshotRoot} is missing; the docs action renders it before the tests`)
+    return t.skip(`${screenshotRoot} is missing: render the screenshots (docs/DESIGN.md) to check the screenshot links`)
+  }
+  for (const route of screenshotLinks) {
+    const file = join(publicRoot, decodeURI(route))
+    assert.ok((await stat(file).catch(() => null))?.size > 0, `${route} is not a rendered screenshot (${file})`)
+  }
+})
+
+// A link into doona's GitHub source must name a path that exists in the checkout of the documented release, and for a
+// Markdown file an anchor that GitHub renders for one of its headings.
+const sourceLink = /https:\/\/github\.com\/Zakkaus\/doona\/(?:blob|tree)\/([^/\s)>"'#]+)\/([^\s)>"'#]*)(?:#([^\s)>"']+))?/g
+const githubSlugs = text => {
+  const seen = new Map(), slugs = new Set()
+  let fence
+  for (const line of text.split('\n')) {
+    const marker = line.match(/^\s*(`{3,}|~{3,})/)
+    if (marker) { fence = fence ? undefined : marker[1]; continue }
+    if (fence) continue
+    for (const [, id] of line.matchAll(/<(?:a name|[a-z]+ id)="([^"]+)"/g)) slugs.add(id)
+    const heading = line.match(/^#{1,6}\s+(.+?)\s*#*\s*$/)
+    if (!heading) continue
+    const base = heading[1].replace(/!?\[([^\]]*)\]\([^)]*\)/g, '$1').replace(/<[^>]+>/g, '').replace(/[`*_~]/g, '')
+      .toLowerCase().replace(/[^\p{L}\p{M}\p{N}\p{Pc} -]/gu, '').replace(/ /g, '-')
+    const count = seen.get(base) ?? 0
+    seen.set(base, count + 1)
+    slugs.add(count ? `${base}-${count}` : base)
+  }
+  return slugs
+}
+test('links into the doona source resolve in the checkout of the documented release', async (t) => {
+  const checkout = process.env.DOONA_DIR && resolve(process.env.DOONA_DIR)
+  if (!checkout) {
+    assert.ok(!process.env.CI, 'DOONA_DIR must name the doona checkout in CI; the docs action sets it')
+    return t.skip('DOONA_DIR is not set: point it at a doona checkout of the documented release to check the source links')
+  }
+  let checked = 0
+  for (const { lang, topic, text } of pages.values()) {
+    for (const [url, , path, hash] of text.matchAll(sourceLink)) {
+      const where = `${lang}/${topic}: ${url}`
+      const file = join(checkout, decodeURIComponent(path))
+      const info = await stat(file).catch(() => null)
+      assert.ok(info, `${where}: ${path || '/'} does not exist in ${checkout}`)
+      if (hash && info.isFile() && /\.md$/.test(path)) {
+        assert.ok(githubSlugs(await readFile(file, 'utf8')).has(decodeURIComponent(hash)), `${where}: no #${hash} in ${path}`)
+      }
+      checked++
+    }
+  }
+  assert.ok(checked > 0, 'No links into the doona source found')
 })
 
 test('rendered pages keep callouts, tabs, screenshots and every local anchor', async () => {
@@ -252,7 +310,7 @@ test('rendered pages keep callouts, tabs, screenshots and every local anchor', a
     rendered.set(path, { html, ids: new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(match => decodeURIComponent(match[1]))) })
     if (text.includes('> [!')) assert.match(html, /custom-block/)
     if (text.includes('::: code-group')) { assert.match(html, /vp-code-group/); tabs++ }
-    for (const [, url] of text.matchAll(/(?:\]\(|src=")(https:\/\/doona\.daeuniverse\.org\/screenshots\/[^\s)"]+)/g)) {
+    for (const [, url] of text.matchAll(/(?:\]\(|src=")(\/doona\/screenshots\/[^\s)"]+)/g)) {
       assert.ok(html.includes(url)); screenshots++
     }
   }

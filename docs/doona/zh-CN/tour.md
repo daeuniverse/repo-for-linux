@@ -25,7 +25,7 @@ lastUpdated: false
 
 按 `g` 后，在 800 ms 内按页面字母可切换页面。例如，先按 `g` 再按 `r` 打开**规则**。
 
-![活动页面与页面导航](https://doona.daeuniverse.org/screenshots/zh-CN/activity-light.webp)
+![活动页面与页面导航](/doona/screenshots/zh-CN/activity-light.webp)
 
 
 ## 使用搜索和顶栏 {#top-bar}
@@ -99,6 +99,6 @@ lastUpdated: false
 
 搜索、**刷新**和暂存规则应用按钮仍在顶栏。**更多选项**包含重载、语言、主题、配色和后端控件。页面工具栏保留第一个操作，其余操作收进溢出菜单。宽度小于 600 px 时，页面采用手机间距与换行布局。
 
-![手机导航与更多选项菜单](https://doona.daeuniverse.org/screenshots/zh-CN/phone.webp)
+![手机导航与更多选项菜单](/doona/screenshots/zh-CN/phone.webp)
 
 </div>

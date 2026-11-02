@@ -29,7 +29,7 @@ lastUpdated: false
 
 使用 Token 登入時，可透過 **Token** 欄位的顯示／隱藏控制項，在連線前核對輸入的密鑰。
 
-![建立管理員](https://doona.daeuniverse.org/screenshots/zh-TW/login-setup.webp)
+![建立管理員](/doona/screenshots/zh-TW/login-setup.webp)
 
 ## 3. 檢查後端 {#3-檢查後端}
 
