@@ -4,9 +4,11 @@ import upstream from './upstream.json' with { type: 'json' }
 import fetched from './generated/fetched-docs.json' with { type: 'json' }
 import versions from './generated/versions.json' with { type: 'json' }
 
+// An array is a page followed by the pages nested under it.
 export const doonaGroups = {
   start: ['index', 'quick-start', 'editions', 'requirements'],
-  install: ['install-debian', 'install-fedora', 'install-arch', 'install-gentoo', 'install-openwrt', 'install-manual', 'install', 'minimal-configuration', 'service-management'],
+  // honk embeds doona (Quick start, OpenWrt); a separate install is a choice with its own pages.
+  install: ['install-openwrt', ['install', 'install-debian', 'install-fedora', 'install-arch', 'install-gentoo', 'install-manual'], 'minimal-configuration', 'service-management'],
   standard: ['tutorial', 'first-sign-in', 'tour', 'observe', 'routing', 'config-and-settings', 'common-tasks', 'features'],
   lite: ['lite', 'lite-connect', 'lite-tasks'],
   reference: ['configuration', 'what-doona-can-change', 'feature-requirements', 'troubleshooting', 'development']
@@ -73,18 +75,21 @@ function localeConfig({ lang, label, prefix, description, labels: t, theme }) {
       ...manualItems('user-guide').filter(item => item.link === `${prefix}/dae/user-guide/run-as-daemon`)
     ]
   }
+  const doonaItem = topic => {
+    const entry = fetched.entries.find(entry => entry.project === 'doona' && entry.locale === lang && entry.topic === `${topic}.md`)
+    if (!entry) throw new Error(`Missing doona page: ${lang}/${topic}`)
+    // honk's OpenWrt package embeds doona, so the router install is the feed guide.
+    if (topic === 'install-openwrt') return { text: entry.title, link: `${prefix}/openwrt/` }
+    return { text: entry.title, link: `${prefix}/doona/${topic === 'index' ? '' : topic}` }
+  }
   const doona = { text: 'doona', link: `${prefix}/doona/`, items:
     Object.entries(doonaGroups).map(([section, topics]) => ({
       text: doonaLabels[lang][section],
       // The groups a newcomer needs, including the OpenWrt install page, cannot be folded.
       ...(['start', 'install'].includes(section) ? {} : { collapsed: true }),
-      items: topics.filter(topic => topic !== 'index').map(topic => {
-        const entry = fetched.entries.find(entry => entry.project === 'doona' && entry.locale === lang && entry.topic === `${topic}.md`)
-        if (!entry) throw new Error(`Missing doona page: ${lang}/${topic}`)
-        // honk's OpenWrt package embeds doona, so the router install is the feed guide.
-        if (topic === 'install-openwrt') return { text: entry.title, link: `${prefix}/openwrt/` }
-        return { text: entry.title, link: `${prefix}/doona/${topic === 'index' ? '' : topic}` }
-      })
+      items: topics.filter(topic => topic !== 'index').map(topic => Array.isArray(topic)
+        ? { ...doonaItem(topic[0]), items: topic.slice(1).map(doonaItem) }
+        : doonaItem(topic))
     }))
   }
   // Short labels for the feed site's three guide pages; their headings stay the page titles.
