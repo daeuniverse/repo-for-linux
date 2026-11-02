@@ -391,7 +391,9 @@ test('doona release fallback includes prereleases, authenticates, and defers to 
   const directory = await mkdtemp(join(tmpdir(), 'doona-version-'))
   try {
     await cp(join(root, 'scripts/prepare-docs.mjs'), join(directory, 'scripts/prepare-docs.mjs'), { recursive: true })
-    const readme = (await readFile(join(root, 'README.md'), 'utf8')).replaceAll('| N/A |', '| built-version |')
+    // CI regenerates README.md with a doona row; drop it so the release fallback is exercised.
+    const readme = (await readFile(join(root, 'README.md'), 'utf8'))
+      .replaceAll('| N/A |', '| built-version |').replace(/^\| doona \|.*\n/m, '')
     await writeFile(join(directory, 'README.md'), readme)
     const run = token => execFileSync(process.execPath, ['--import', './mock-fetch.mjs', 'scripts/prepare-docs.mjs'], {
       cwd: directory, encoding: 'utf8', stdio: 'pipe', env: { ...process.env, GITHUB_TOKEN: token }
