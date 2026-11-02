@@ -15,7 +15,7 @@ const blob = `${honk.repository}/blob/${honk.commit}/`
 
 test('manual sources pin a release, revision, license and all site locales', () => {
   validateSources(sources)
-  assert.deepEqual(Object.keys(sources), ['honk', 'doona'])
+  assert.deepEqual(Object.keys(sources), ['honk'])
   assert.match(honk.ref, /^v\d+\.\d+\.\d+/)
   assert.match(honk.commit, /^[a-f0-9]{40}$/)
   assert.equal(honk.repository, 'https://github.com/daeuniverse/honk')
@@ -26,6 +26,9 @@ test('manual sources pin a release, revision, license and all site locales', () 
   assert.equal(honk.locales['zh-TW'], honk.locales['zh-CN'])
   assert.throws(() => validateSources({ honk: { ...honk, commit: 'main' } }))
   assert.throws(() => validateSources({ honk: { ...honk, ref: '' } }))
+  for (const path of ['doc/../en', '../doc/en', '/doc/en', 'doc/en/../../escape']) {
+    assert.throws(() => validateSources({ honk: { ...honk, locales: { 'en-US': path } } }))
+  }
 })
 
 test('archive metadata must identify the resolved pinned commit', () => {
@@ -105,91 +108,6 @@ test('every fetched topic is present, attributed and reachable in every locale',
     }
   }
 })
-
-test('doona transforms preserve heading anchors, literal examples and adjacent tabs', async () => {
-  const { transformDoona, slugger } = await import('../scripts/fetch-docs.mjs')
-  const slug = slugger()
-  assert.deepEqual(['中文：設定', 'Repeat', 'Repeat', 'Repeat-1', 'Repeat'].map(slug),
-    ['中文設定', 'repeat', 'repeat-1', 'repeat-1-1', 'repeat-2'])
-  const input = '---\nkeywords: install, setup\n---\nEnglish / [简体中文](../zh-CN/install.md)\n\n# Install\n\n<a name="stable"></a>\n\n## 中文：設定\n\n```sh tab="sudo"\n# literal heading\nsudo command\n```\n\n```sh tab="root"\ncommand\n```\n\nProse\n\n```md\n## literal\n```'
-  const result = transformDoona(input)
-  assert.ok(!result.includes('keywords:') && !result.includes('../zh-CN'))
-  assert.ok(result.includes('## 中文：設定 {#stable}'))
-  assert.equal((result.match(/::: code-group/g) || []).length, 1)
-  assert.ok(result.includes('```sh [sudo]\n# literal heading\nsudo command\n```'))
-  assert.ok(result.includes('```md\n## literal\n```'))
-  const { doona } = sources
-  for (const path of ['docs/../en', '../docs/en', '/docs/en', 'docs/en/../../escape']) {
-    assert.throws(() => validateSources({ doona: { ...doona, locales: { 'en-US': path } } }))
-  }
-  assert.equal(rewriteUrl('../images/example.svg', 'docs/en/index.md', 'docs/en', doona), '../images/example.svg')
-  assert.equal(rewriteUrl('../screenshots/en/activity-light.webp', 'docs/en/index.md', 'docs/en', doona),
-    'https://doona.daeuniverse.org/screenshots/en/activity-light.webp')
-})
-
-test('doona sections cover every fetched page exactly once in upstream order', async () => {
-  const { default: config, doonaGroups } = await import('../docs/.vitepress/config.mjs')
-  const topics = Object.values(doonaGroups).flat(2).map(topic => `${topic}.md`)
-  assert.equal(new Set(topics).size, topics.length)
-  assert.equal(topics.length, 29)
-  for (const locale of Object.values(locales)) {
-    const entries = inventory.entries.filter(entry => entry.project === 'doona' && entry.locale === locale.lang)
-    assert.deepEqual(entries.map(entry => entry.topic).sort(), [...topics].sort())
-    const key = Object.keys(locales).find(key => locales[key] === locale)
-    const sidebar = config.locales[key].themeConfig.sidebar[`${locale.prefix}/doona/`]
-    const manual = sidebar.find(item => item.text === 'doona')
-    assert.ok(manual)
-    // The group heading is the landing page, so the sections list every other page once.
-    assert.equal(manual.link, `${locale.prefix}/doona/`)
-    const links = items => items.flatMap(item => [item.link, ...links(item.items || [])])
-    assert.deepEqual(manual.items.flatMap(section => links(section.items)),
-      topics.filter(topic => topic !== 'index.md').map(topic => topic === 'install-openwrt.md'
-        ? `${locale.prefix}/openwrt/` : `${locale.prefix}/doona/${topic.replace(/\.md$/, '')}`))
-  }
-})
-
-test('doona rendered pages retain assets, callouts, tabs, attribution and every local anchor', async () => {
-  const { createMarkdownRenderer } = await import('vitepress')
-  const md = await createMarkdownRenderer(join(root, 'docs'))
-  const { transformDoona } = await import('../scripts/fetch-docs.mjs')
-  for (const alert of ['NOTE', 'TIP', 'IMPORTANT', 'WARNING', 'CAUTION']) {
-    const html = md.render(transformDoona(`> [!${alert}]\n> Keep this warning.`))
-    assert.match(html, /custom-block/)
-    assert.ok(html.includes('Keep this warning.'))
-  }
-  const pages = new Map()
-  let anchors = 0, images = 0, screenshots = 0, tabs = 0
-  for (const entry of inventory.entries.filter(entry => entry.project === 'doona')) {
-    const path = join(root, 'docs/doona', entry.locale, entry.topic)
-    const text = await readFile(path, 'utf8')
-    assert.equal(entry.fallback, false)
-    assert.ok(!text.includes(fallbackNotice))
-    assert.ok(!text.includes('tab="'))
-    assert.ok(text.includes(`${sources.doona.repository}/blob/${sources.doona.commit}/${sources.doona.licensePath}`))
-    const html = md.render(text, { path, relativePath: `doona/${entry.locale}/${entry.topic}` })
-    pages.set(path, { html, ids: new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(match => decodeURIComponent(match[1]))) })
-    if (text.includes('> [!')) { assert.match(html, /custom-block/) }
-    if (text.includes('::: code-group')) { assert.match(html, /vp-code-group/); tabs++ }
-    for (const [, url] of text.matchAll(/(?:\]\(|src=")([^\s)"]+)/g)) {
-      if (url.startsWith('../images/')) { await access(resolve(dirname(path), url)); images++ }
-      if (url.startsWith('https://doona.daeuniverse.org/screenshots/')) { assert.ok(html.includes(url)); screenshots++ }
-    }
-  }
-  for (const [path, { html }] of pages) {
-    for (const [, url] of html.matchAll(/\bhref="([^"]+)"/g)) {
-      if (/^(?:[a-z]+:|\/\/)/i.test(url)) continue
-      const [file, hash] = url.split('#')
-      if (!hash) continue
-      const target = file ? resolve(dirname(path), decodeURIComponent(file).replace(/\.html$/, '.md')) : path
-      assert.ok(pages.has(target), `${path}: missing target ${url}`)
-      assert.ok(pages.get(target).ids.has(decodeURIComponent(hash)), `${path}: missing anchor ${url}`)
-      anchors++
-    }
-  }
-  assert.ok(anchors > 450, `Only ${anchors} anchors checked`)
-  for (const count of [images, screenshots, tabs]) assert.ok(count > 0)
-})
-
 
 test('honk fragments resolve to rendered target headings without changing literal examples', async () => {
   const pages = new Map([

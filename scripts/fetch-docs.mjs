@@ -1,5 +1,5 @@
 import { execFileSync } from 'node:child_process'
-import { cp, mkdir, mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises'
+import { mkdir, mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { gunzipSync } from 'node:zlib'
 import { dirname, join, posix } from 'node:path'
@@ -17,18 +17,12 @@ const footers = {
 
 const keptPaths = { honk: ['index.md', 'installation/'] }
 
-const safePath = value => typeof value === 'string' && /^[\w.-]+(?:\/[\w.-]+)*$/.test(value) && !value.split('/').some(part => part === '.' || part === '..')
-
 export function validateSources(sources) {
   for (const [project, source] of Object.entries(sources)) {
     if (!/^[a-z][a-z0-9-]*$/.test(project) ||
         !/^https:\/\/github\.com\/[\w-]+\/[\w.-]+$/.test(source.repository) ||
         !/^[\w][\w.-]*$/.test(source.ref) || !/^[a-f0-9]{40}$/.test(source.commit) ||
         !source.license || !source.locales ||
-        (source.licensePath !== undefined && !safePath(source.licensePath)) ||
-        (source.assets !== undefined && !/^docs?\/[\w-]+$/.test(source.assets)) ||
-        (source.upstreamIndex !== undefined && typeof source.upstreamIndex !== 'boolean') ||
-        (source.transform !== undefined && source.transform !== 'doona') ||
         Object.entries(source.locales).some(([locale, directory]) =>
           !/^[a-z]{2}-[A-Z]{2}$/.test(locale) || !/^docs?\/[a-zA-Z-]+$/.test(directory))) {
       throw new Error(`Invalid documentation source: ${project}`)
@@ -42,10 +36,6 @@ export function rewriteUrl(url, sourcePath, sourceDirectory, source) {
   if (!path) return url
   const resolved = posix.normalize(path.startsWith('/') ? decodeURI(path).slice(1) : posix.join(posix.dirname(sourcePath), decodeURI(path)))
   if (resolved.startsWith(`${sourceDirectory}/`)) return url
-  if (source.assets && resolved.startsWith(`${source.assets}/`)) return url
-  if (source.transform === 'doona' && resolved.startsWith('docs/screenshots/')) {
-    return `https://doona.daeuniverse.org/${resolved.slice(5)}${suffix}`
-  }
   if (resolved.startsWith('../') || resolved === '..') throw new Error(`Link leaves repository: ${url}`)
   return `${source.repository}/blob/${source.commit}/${resolved.replace(/^\/+/, '')}${suffix}`
 }
@@ -97,74 +87,6 @@ export async function createHonkAnchorRewriter(pages) {
   })
 }
 
-export function slugger() {
-  const seen = new Map()
-  return source => {
-    const text = source
-      .replace(/!?\[([^\]]*)\]\([^)]*\)/g, '$1')
-      .replace(/<[^>]+>/g, '')
-      .replace(/[*_~]/g, '')
-    const base = text
-      .toLowerCase()
-      .replace(/[^\p{L}\p{M}\p{N}\p{Pc} -]/gu, '')
-      .replace(/ /g, '-')
-    // A numbered id can be taken by a heading whose own text ends in that number, so count on until one is free.
-    let id = base
-    while (seen.has(id)) {
-      const count = seen.get(base) + 1
-      seen.set(base, count)
-      id = `${base}-${count}`
-    }
-    seen.set(id, 0)
-    return id
-  }
-}
-
-export function transformDoona(markdown) {
-  const lines = markdown.replace(/^---\nkeywords:[^\n]*\n---\n+/, '')
-    .replace(/^(?=[^\n]*\.\.\/(?:en|zh-CN|zh-TW)\/)[^\n]+\n+/, '').split('\n')
-  const slug = slugger()
-  const output = []
-  let anchor
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i]
-    const named = line.match(/^<a name="([^"]+)"><\/a>$/)
-    if (named) { anchor = named[1]; continue }
-    const heading = line.match(/^(#{1,6})\s+(.+?)\s*#*$/)
-    if (heading) {
-      const generated = slug(heading[2])
-      // Upstream gives explicit anchors precedence and still counts every heading.
-      const id = anchor || (heading[1] === '#' ? `title-${generated}` : generated)
-      output.push(`${heading[1]} ${heading[2]} {#${id}}`)
-      anchor = undefined
-      continue
-    }
-    const fence = line.match(/^(`{3,}|~{3,})(.*)$/)
-    if (!fence) { output.push(line); continue }
-    const blocks = []
-    const tab = fence[2].trim().match(/^(\S+)\s+tab="([^"]+)"$/)
-    while (true) {
-      const opening = lines[i].match(/^(`{3,}|~{3,})(.*)$/)
-      const label = opening[2].trim().match(/^(\S+)\s+tab="([^"]+)"$/)
-      blocks.push(label ? `${opening[1]}${label[1]} [${label[2]}]` : lines[i])
-      let closed = false
-      while (++i < lines.length) {
-        blocks.push(lines[i])
-        const closing = lines[i].match(/^(`{3,}|~{3,})\s*$/)
-        if (closing && closing[1][0] === opening[1][0] && closing[1].length >= opening[1].length) { closed = true; break }
-      }
-      if (!closed) throw new Error('Unclosed doona code fence')
-      let next = i + 1
-      while (next < lines.length && !lines[next].trim()) next++
-      if (!tab || !/^(`{3,}|~{3,})\S+\s+tab="[^"]+"\s*$/.test(lines[next] || '')) break
-      blocks.push('')
-      i = next
-    }
-    output.push(...(tab ? ['::: code-group', '', ...blocks, '', ':::'] : blocks))
-  }
-  return output.join('\n')
-}
-
 async function download(url) {
   for (let attempt = 1; ; attempt++) {
     try {
@@ -198,6 +120,15 @@ export function verifyArchiveCommit(compressed, commit) {
   }
 }
 
+// The feed site links the doona manual at its old address; the manual is a section of this site now.
+const doonaPrefixes = { en: '', 'zh-CN': '/zh-CN', 'zh-TW': '/zh-TW' }
+export function localDoonaUrl(url) {
+  const match = url.match(/^https:\/\/doona\.daeuniverse\.org\/(en|zh-CN|zh-TW)\/([^?#]*?)(?:\.html)?([?#].*)?$/)
+  if (!match) return url
+  const [, locale, page, suffix = ''] = match
+  return `${doonaPrefixes[locale]}/doona/${page === 'index' ? '' : page}${suffix}`
+}
+
 export async function fetchOpenWrtDocs(outputRoot = root) {
   const site = process.env.DOCS_OPENWRT_SITE
   const source = 'https://github.com/daeuniverse/openwrt-packages/tree/main/scripts/feed-site'
@@ -216,7 +147,7 @@ export async function fetchOpenWrtDocs(outputRoot = root) {
       const content = site ? await readFile(join(site, path)) : await download(url)
       const text = rewriteMarkdownLinks(content.toString('utf8'), link =>
         /^\.\.\/(?:files(?:[/?#]|$)|public-key\.pem(?:[?#]|$)|[^/?#]+\/)/.test(link)
-          ? new URL(link, url).href : link)
+          ? new URL(link, url).href : localDoonaUrl(link))
       const title = text.match(/^#\s+(.+)$/m)?.[1]
       if (!title) throw new Error(`Missing page title: ${url}`)
       await writeFile(join(target, topic), `---\neditLink: false\nlastUpdated: false\n---\n\n<div v-pre lang="${locale}">\n\n${text.trim()}\n\n</div>\n\n---\n\n${footers[locale]}\n`)
@@ -245,19 +176,12 @@ export async function fetchDocs() {
       if (members.some(name => !name.startsWith(`${prefix}/`) || name.split('/').includes('..'))) {
         throw new Error(`${project}: archive does not match pinned commit ${source.commit}`)
       }
-      const directories = [...new Set([...Object.values(source.locales), ...(source.assets ? [source.assets] : [])])]
+      const directories = [...new Set(Object.values(source.locales))]
       execFileSync('tar', ['-xzf', archive, '-C', directory, '--', ...directories.map(path => `${prefix}/${path}`)])
-      if (source.assets) {
-        const assets = join(directory, prefix, source.assets)
-        await files(assets)
-        const target = join(root, 'docs', project, posix.basename(source.assets))
-        await rm(target, { recursive: true, force: true })
-        await cp(assets, target, { recursive: true })
-      }
       for (const [locale, sourceDirectory] of Object.entries(source.locales)) {
         const target = join(root, 'docs', project, locale)
         // Keep committed pages alongside the fetched manual.
-        const keep = keptPaths[project] || (source.upstreamIndex ? [] : ['index.md'])
+        const keep = keptPaths[project] || ['index.md']
         await mkdir(target, { recursive: true })
         for (const name of await readdir(target)) {
           if (!keep.includes(name) && !keep.includes(`${name}/`)) await rm(join(target, name), { recursive: true, force: true })
@@ -285,10 +209,10 @@ export async function fetchDocs() {
           const fallback = locale === 'zh-TW' && sourceDirectory === source.locales['zh-CN']
           const notice = fallback ? `::: info\n${fallbackNotice}\n:::\n\n` : ''
           const blob = `${source.repository}/blob/${source.commit}`
-          const footer = footers[fallback ? 'zh-TW' : locale](project, `${blob}/${sourcePath}`, source.license, `${blob}/${source.licensePath || 'LICENSE'}`)
+          const footer = footers[fallback ? 'zh-TW' : locale](project, `${blob}/${sourcePath}`, source.license, `${blob}/${'LICENSE'}`)
           // The feed site's guide pages now live in this site, so link the local copy.
           const openwrtPrefix = { 'en-US': '', 'zh-CN': '/zh-CN', 'zh-TW': '/zh-TW' }[locale]
-          const body = rewriteMarkdownLinks(rewriteMarkdown(source.transform === 'doona' ? transformDoona(text) : fixAnchors(text, topic), sourcePath, sourceDirectory, source),
+          const body = rewriteMarkdownLinks(rewriteMarkdown(fixAnchors(text, topic), sourcePath, sourceDirectory, source),
             link => link.replace(/^https:\/\/openwrt\.daeuniverse\.org\/(?:en|zh-cn|zh-tw)\/(?:index\.html)?((?:mirror|thanks)(?:\.html)?)?(#.*)?$/,
               (_, page, hash) => `${openwrtPrefix}/openwrt/${(page || '').replace(/\.html$/, '')}${hash || ''}`))
           await writeFile(output, `---\neditLink: false\nlastUpdated: false\n---\n\n${notice}<div v-pre lang="${fallback ? 'zh-CN' : locale}">\n\n${body.trim()}\n\n</div>\n\n---\n\n${footer}\n`)

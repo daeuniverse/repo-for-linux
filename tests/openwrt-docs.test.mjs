@@ -21,6 +21,7 @@ test('OpenWrt site override preserves Markdown, wraps and attributes all locales
     '[Files](../files/) [Key](../public-key.pem) [Series](../25.12/x86_64/?sort=name#files)',
     '[Other series](../snapshots/packages/) [Mirror](./mirror.md) [Home](../index.md) [Thanks](thanks.md)',
     '[feed]: ../24.10/packages/ "Feed"', '<a href="../files/">Files</a>',
+    '[Doona](https://doona.daeuniverse.org/en/install.html#doona) [Lite](https://doona.daeuniverse.org/zh-TW/)',
     '`[literal](../files/)`', '```sh', 'echo "../files/"', '```', '',
     '::: code-group', '',
     '```sh [OpenWrt]', 'echo "{{ literal }}"', '```', '',
@@ -47,6 +48,8 @@ test('OpenWrt site override preserves Markdown, wraps and attributes all locales
         .replace('](../snapshots/', '](https://openwrt.daeuniverse.org/snapshots/')
         .replace('[feed]: ../24.10/', '[feed]: https://openwrt.daeuniverse.org/24.10/')
         .replace('href="../files/"', 'href="https://openwrt.daeuniverse.org/files/"')
+        .replace('](https://doona.daeuniverse.org/en/install.html#doona)', '](/doona/install#doona)')
+        .replace('](https://doona.daeuniverse.org/zh-TW/)', '](/zh-TW/doona/)')
         .replace('`[literal](https://openwrt.daeuniverse.org/files/)`', '`[literal](../files/)`')
       assert.ok(page.includes(`<div v-pre lang="${entry.locale}">\n\n${expected.trim()}\n\n</div>`))
       assert.equal(entry.title, original.match(/^# (.+)$/m)[1])

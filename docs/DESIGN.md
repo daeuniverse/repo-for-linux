@@ -107,8 +107,8 @@ is maintained separately; checks enforce that its shell commands remain represen
 
 ## Fetched upstream manuals
 
-New manuals are fetched at build time rather than copied into Git. `sources.json` in
-`.vitepress/` pins honk's repository, release tag, full commit, license and locale directories.
+The honk manual is fetched at build time rather than copied into Git. `sources.json` in
+`.vitepress/` pins its repository, release tag, full commit, license and locale directories.
 `scripts/fetch-docs.mjs` downloads the archive of the pinned commit, checks that the archive
 is that commit, and extracts only the mapped documentation directories. `commit` is the commit
 the release tag points to, not an annotated tag's own object. Network failures are retried
@@ -130,19 +130,21 @@ Existing IDs are preserved; punctuation variants map only to a unique target hea
 pinned upstream tree. Each page carries a pinned source and license footer. Traditional Chinese
 currently uses the Simplified Chinese source with a notice on every page; it is not a translation.
 
-doona is fetched from Zakkaus/doona-docs at its pinned commit, including native English,
-Simplified Chinese and Traditional Chinese landing pages and shared images. Its routes are
-`/doona/`, `/zh-CN/doona/` and `/zh-TW/doona/`. The fetch preserves upstream heading ids,
-converts tabbed fences to VitePress code groups, removes the language line and keywords,
-and links screenshots from the upstream site. Sidebar sections follow the upstream order;
-tests check page coverage and rendered anchors. Footers cite the pinned CC BY 4.0 license.
+The doona manual is committed source: `docs/doona/{en-US,zh-CN,zh-TW}/` holds its 29 pages per
+locale, and their routes are `/doona/`, `/zh-CN/doona/` and `/zh-TW/doona/`. It began as the
+Zakkaus/doona-docs pages at commit 1ffab35, so every footer cites that repository and its CC BY 4.0
+license. Every heading carries an explicit `{#id}`; the ids that doona's help links use are listed in
+`docs/public/doona/anchors.json` (served at `/doona/anchors.json`) and must stay identical in all
+three locales. Tabbed fences are VitePress code groups. Images are under `docs/public/doona/images/`
+and are linked by their site path; screenshots link `doona.daeuniverse.org/screenshots/`. The sidebar takes titles
+from each page's first heading and its order from `doonaGroups` in `config.mjs`. Tests check
+locale parity, `anchors.json`, the anchors in doona's `docsAnchors.json` and local links.
 
 To bump honk, change its `ref` and `commit` together in `.vitepress/sources.json` and update the
-version in `docs/honk/{en-US,zh-CN,zh-TW}/index.md`. To bump doona, change its pinned `commit`
-(and `ref` if needed); its landing pages are fetched from upstream, so do not edit them here. Run `npm run docs:test` and `npm run docs:build`,
+version in `docs/honk/{en-US,zh-CN,zh-TW}/index.md`. The doona pages are edited here. Run `npm run docs:test` and `npm run docs:build`,
 then inspect the generated pages and links. `docs:prepare`, `docs:dev`, `docs:build` and
-`docs:test` fetch the sources automatically; both CI workflows use these commands through the
-documentation composite action. Generated manuals and their inventory are ignored by Git.
+`docs:test` fetch the honk and OpenWrt sources automatically; both CI workflows use these commands through the
+documentation composite action. Fetched manuals and their inventory are ignored by Git.
 Existing dae and daed manuals keep their current workflow.
 
 OpenWrt guides are fetched from the English, Simplified Chinese and Traditional Chinese

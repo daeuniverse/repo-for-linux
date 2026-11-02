@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="250" viewBox="0 0 720 250" role="img" aria-labelledby="title">
+  <title id="title">localStorage / sessionStorage / honk</title>
+  <style>
+    :root { color-scheme: light dark; --rp-base: #faf4ed; --rp-text: #464261; --rp-pine: #286983; color: var(--rp-text); }
+    @media (prefers-color-scheme: dark) { :root { --rp-base: #232136; --rp-text: #e0def4; --rp-pine: #9ccfd8; } }
+    text { fill: currentColor; font: 22px system-ui, sans-serif; text-anchor: middle; }
+    .box { fill: var(--rp-base); stroke: currentColor; stroke-width: 2; }
+    .divider { stroke: var(--rp-pine); stroke-width: 2; }
+    .small { font: 18px ui-monospace, monospace; }
+  </style>
+  <rect width="720" height="250" rx="12" fill="var(--rp-base)"/>
+  <rect class="box" x="20" y="24" width="216" height="202" rx="8"/>
+  <text x="128" y="62">localStorage</text><path class="divider" d="M 36 80 H 220"/>
+  <text class="small" x="128" y="108">doona-profiles</text><text class="small" x="128" y="132">{api, token}</text>
+  <text class="small" x="128" y="162">doona-session</text><text x="128" y="188">session token</text>
+  <text class="small" x="128" y="214">doona-*</text>
+  <rect class="box" x="252" y="24" width="216" height="202" rx="8"/>
+  <text x="360" y="62">sessionStorage</text><path class="divider" d="M 268 80 H 452"/>
+  <text class="small" x="360" y="130">doona-hub-pages</text><text x="360" y="168">last pages</text>
+  <rect class="box" x="484" y="24" width="216" height="202" rx="8"/>
+  <text x="592" y="62">honk</text><path class="divider" d="M 500 80 H 684"/>
+  <text class="small" x="592" y="130">*.dae</text><text class="small" x="592" y="168">state/honk.db</text>
+</svg>
