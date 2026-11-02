@@ -163,7 +163,3 @@ CPU 和延遲趨勢需要兩個樣本。延遲測試失敗會留下缺口，更�
 重新連線後，可重播仍保留的事件。缺口標記表示更早的事件已無法重播。
 
 </div>
-
----
-
-來源：[doona-docs](https://github.com/Zakkaus/doona-docs)，採用 [CC BY 4.0 授權條款](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt)。

@@ -265,7 +265,3 @@ fallback 無法寫入時，對話框會提示無法自動新增規則。此時�
 先解析再模擬時，會顯示 DNS 查詢卡片，提供**查詢 DNS**和**檢視快取**連結。群組結果在**節點**下顯示群組到節點的鏈及**連通性**，並提供測試節點、開啟群組或節點頁面的操作。
 
 </div>
-
----
-
-來源：[doona-docs](https://github.com/Zakkaus/doona-docs)，採用 [CC BY 4.0 授權條款](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt)。

@@ -265,7 +265,3 @@ fallback 无法写入时，对话框会提示无法自动添加规则。此时�
 先解析再模拟时，会显示 DNS 查询卡片，提供**查询 DNS**和**查看缓存**链接。组结果在**节点**下显示组到节点的链及**连通性**，并提供测试节点、打开组或节点页面的操作。
 
 </div>
-
----
-
-来源：[doona-docs](https://github.com/Zakkaus/doona-docs)，采用 [CC BY 4.0 许可证](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt)。

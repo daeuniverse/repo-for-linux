@@ -209,7 +209,3 @@ JSON 讀取回傳空本文或沒有收到回應時，會重試一次再顯示錯
 寫入瀏覽器中暫存的規則，參閱[暫存規則](routing.md#held-rules)。
 
 </div>
-
----
-
-來源：[doona-docs](https://github.com/Zakkaus/doona-docs)，採用 [CC BY 4.0 授權條款](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt)。

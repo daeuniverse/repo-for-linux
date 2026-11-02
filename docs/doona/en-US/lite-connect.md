@@ -35,7 +35,3 @@ After connecting, continue with [Common tasks in doona lite](lite-tasks.md). For
 Open the [doona lite demo](https://demo.daeuniverse.org/lite/) to explore sample data without a backend. Changes to the sample data reset when the page reloads. Release builds of lite connect only to honk and do not offer a demo button.
 
 </div>
-
----
-
-Source: [doona-docs](https://github.com/Zakkaus/doona-docs), licensed under [CC BY 4.0](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt).

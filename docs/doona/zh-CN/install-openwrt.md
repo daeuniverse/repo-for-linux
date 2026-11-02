@@ -191,7 +191,3 @@ sysupgrade -l
 检查[服务日志](service-management.md)，再按[首次登录](first-sign-in.md)操作。
 
 </div>
-
----
-
-来源：[doona-docs](https://github.com/Zakkaus/doona-docs)，采用 [CC BY 4.0 许可证](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt)。

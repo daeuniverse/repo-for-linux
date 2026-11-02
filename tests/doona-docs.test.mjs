@@ -15,7 +15,6 @@ const { default: config, doonaGroups } = await import('../docs/.vitepress/config
 const topics = Object.values(doonaGroups).flat(2)
 const anchors = JSON.parse(await readFile(join(publicRoot, 'doona/anchors.json'), 'utf8'))
 const versions = JSON.parse(await readFile(join(root, 'docs/.vitepress/generated/versions.json'), 'utf8'))
-const license = 'https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt'
 
 const pagePath = (lang, topic) => join(manual, lang, `${topic}.md`)
 
@@ -96,7 +95,7 @@ test('every locale has the same pages, and the sidebar lists each once in order 
   }
 })
 
-test('pages carry one H1, the source and license footer, and nothing left from the old language line or tab syntax', () => {
+test('pages carry one H1, no doona-docs footer, and nothing left from the old language line or tab syntax', () => {
   for (const { lang, topic, text, headings: list } of pages.values()) {
     const where = `${lang}/${topic}`
     assert.equal(list.filter(heading => heading.level === 1).length, 1, where)
@@ -105,10 +104,7 @@ test('pages carry one H1, the source and license footer, and nothing left from t
     assert.ok(!/^keywords:/m.test(text), where)
     assert.ok(!/\]\(\.\.\/(?:en|zh-CN|zh-TW)\//.test(text), where)
     assert.ok(!text.includes('tab="'), where)
-    const footer = text.slice(text.lastIndexOf('</div>'))
-    assert.ok(footer.includes('](https://github.com/Zakkaus/doona-docs)'), where)
-    assert.ok(footer.includes(`(${license})`), where)
-    assert.ok(footer.includes('CC BY 4.0'), where)
+    assert.ok(!/^(?:Source:|来源：|來源：) \[doona-docs\]/m.test(text), where)
     assert.ok(!text.includes('本頁暫以簡體中文顯示'), where)
   }
 })

@@ -238,7 +238,3 @@ Select **Copy error** in the failure notice, or **Copy recent errors** under **S
 The history retains at most 20 errors. Copied details include request method and path, status, error code and request ID when available. The copy omits request bodies and configuration text, and redacts recognized secret fields. See [About](config-and-settings.md#settings-page) for the copy actions.
 
 </div>
-
----
-
-Source: [doona-docs](https://github.com/Zakkaus/doona-docs), licensed under [CC BY 4.0](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt).

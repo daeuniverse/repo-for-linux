@@ -88,7 +88,3 @@ lastUpdated: false
 此处不提供订阅节点的分享链接。链接过长而无法生成二维码时，复制链接即可。分享链接包含连接凭据，请仅发给预期的接收人。
 
 </div>
-
----
-
-来源：[doona-docs](https://github.com/Zakkaus/doona-docs)，采用 [CC BY 4.0 许可证](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt)。

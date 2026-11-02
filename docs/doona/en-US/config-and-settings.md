@@ -205,7 +205,3 @@ If a read returns empty JSON or no response, doona retries it once before showin
 For writing rules held in the browser, use [held rules](routing.md#held-rules).
 
 </div>
-
----
-
-Source: [doona-docs](https://github.com/Zakkaus/doona-docs), licensed under [CC BY 4.0](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt).

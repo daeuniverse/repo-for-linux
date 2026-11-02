@@ -163,7 +163,3 @@ CPU 和延迟趋势需要两个样本。延迟测试失败会留下缺口，更�
 重新连接后，可重播仍保留的事件。缺口标记表示更早的事件已无法重播。
 
 </div>
-
----
-
-来源：[doona-docs](https://github.com/Zakkaus/doona-docs)，采用 [CC BY 4.0 许可证](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt)。

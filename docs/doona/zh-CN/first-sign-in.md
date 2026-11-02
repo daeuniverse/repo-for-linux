@@ -51,7 +51,3 @@ lastUpdated: false
 认证配置项见[配置参考](configuration.md)。不要在截图或问题报告中包含密码或 Token。
 
 </div>
-
----
-
-来源：[doona-docs](https://github.com/Zakkaus/doona-docs)，采用 [CC BY 4.0 许可证](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt)。

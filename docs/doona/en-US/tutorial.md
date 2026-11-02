@@ -98,7 +98,3 @@ While it transfers, look for `example.com` on **Connections** and open its row. 
 honk handles proxied traffic in userspace, so it appears in Connections. The kernel forwards direct traffic, which does not appear there. Use [Trace](routing.md#trace) to inspect the direct fallback, and the [configuration reference](configuration.md#config) for the complete file example.
 
 </div>
-
----
-
-Source: [doona-docs](https://github.com/Zakkaus/doona-docs), licensed under [CC BY 4.0](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt).

@@ -40,7 +40,3 @@ experimental {
 按[安装与切换版本](editions.md#editions-switch)选择标准版文件或内嵌界面。
 
 </div>
-
----
-
-来源：[doona-docs](https://github.com/Zakkaus/doona-docs)，采用 [CC BY 4.0 许可证](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt)。

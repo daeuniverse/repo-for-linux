@@ -261,7 +261,3 @@ An IP-only trace evaluates that IP and port. Domain-family `dial_mode` can disco
 Query resolution adds a DNS query card with **Query DNS** and **View cache** links. Group results show the group-to-node chain under **Node** and its **Reachability**, with controls to test the node or open its group and node pages.
 
 </div>
-
----
-
-Source: [doona-docs](https://github.com/Zakkaus/doona-docs), licensed under [CC BY 4.0](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt).

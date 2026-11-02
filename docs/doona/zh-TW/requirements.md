@@ -60,7 +60,3 @@ honk-core --version
 只有[開發](development.md)時才需要 Node 與 pnpm，託管已建置的介面不需要。依程序名稱路由的額外條件見[功能需求](feature-requirements.md#req-process-routing)。
 
 </div>
-
----
-
-來源：[doona-docs](https://github.com/Zakkaus/doona-docs)，採用 [CC BY 4.0 授權條款](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt)。

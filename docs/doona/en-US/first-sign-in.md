@@ -51,7 +51,3 @@ Continue with [Route your first connection](tutorial.md) to add a subscription a
 See [Configuration](configuration.md) for authentication keys. Do not put a password or token in a screenshot or issue report.
 
 </div>
-
----
-
-Source: [doona-docs](https://github.com/Zakkaus/doona-docs), licensed under [CC BY 4.0](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt).

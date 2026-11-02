@@ -292,7 +292,3 @@ Write the API block from [Quick start](quick-start.md) to `/etc/honk/config.d/ap
 Then [restart honk](service-management.md). For the corresponding UI steps, follow [Route your first connection](tutorial.md).
 
 </div>
-
----
-
-Source: [doona-docs](https://github.com/Zakkaus/doona-docs), licensed under [CC BY 4.0](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt).

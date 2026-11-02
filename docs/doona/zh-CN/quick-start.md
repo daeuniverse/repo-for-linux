@@ -52,7 +52,3 @@ ssh -L 9527:127.0.0.1:9527 root@<router>
 在电脑打开相同网址。首次访问会创建管理员，详见[首次登录](first-sign-in.md)。
 
 </div>
-
----
-
-来源：[doona-docs](https://github.com/Zakkaus/doona-docs)，采用 [CC BY 4.0 许可证](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt)。

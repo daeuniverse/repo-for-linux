@@ -163,7 +163,3 @@ The list shows **Time**, **Kind** and **Summary**. Its toolbar reports connectio
 After reconnecting, replay can recover retained events. A gap marker means the earlier events are no longer available for replay.
 
 </div>
-
----
-
-Source: [doona-docs](https://github.com/Zakkaus/doona-docs), licensed under [CC BY 4.0](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt).

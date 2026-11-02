@@ -43,7 +43,3 @@ doona 透過原生 API 管理 honk、查看流量。本文件適用於 v0.1.0-rc
 引擎問題請提交至 [honk issues](https://github.com/daeuniverse/honk/issues)。
 
 </div>
-
----
-
-來源：[doona-docs](https://github.com/Zakkaus/doona-docs)，採用 [CC BY 4.0 授權條款](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt)。

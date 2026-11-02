@@ -78,7 +78,3 @@ Geodata updates have separate destination rules: packaged assets are normally re
 An accepted edit only starts an operation. The change is active when the operation reaches `succeeded`; read the source back to confirm it. Even then, a compatibility field does not change traffic behavior.
 
 </div>
-
----
-
-Source: [doona-docs](https://github.com/Zakkaus/doona-docs), licensed under [CC BY 4.0](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt).

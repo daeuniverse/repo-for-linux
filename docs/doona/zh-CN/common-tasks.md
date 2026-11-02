@@ -142,7 +142,3 @@ lastUpdated: false
 **保留修改**不会合并两个版本。写入被拒绝时，见[只读文件与写入错误](troubleshooting.md#read-only)。
 
 </div>
-
----
-
-来源：[doona-docs](https://github.com/Zakkaus/doona-docs)，采用 [CC BY 4.0 许可证](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt)。

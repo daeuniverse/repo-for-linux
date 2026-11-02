@@ -88,7 +88,3 @@ lastUpdated: false
 此處不提供訂閱節點的分享連結。連結過長而無法產生 QR code 時，複製連結即可。分享連結包含連線憑證，請僅傳給預期的接收人。
 
 </div>
-
----
-
-來源：[doona-docs](https://github.com/Zakkaus/doona-docs)，採用 [CC BY 4.0 授權條款](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt)。

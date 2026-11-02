@@ -98,7 +98,3 @@ curl --http1.1 --limit-rate 32 https://example.com/ -o /dev/null
 代理流量由使用者空間處理，會出現在連線頁。直連流量由核心轉送，不會出現在該頁。使用[追蹤](routing.md#trace)檢查直連回退，或檢視[組態參考](configuration.md#config)中的完整檔案範例。
 
 </div>
-
----
-
-來源：[doona-docs](https://github.com/Zakkaus/doona-docs)，採用 [CC BY 4.0 授權條款](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt)。

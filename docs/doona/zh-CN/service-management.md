@@ -158,7 +158,3 @@ sudo /usr/local/bin/honk-core --config /etc/honk/config.dae
 启动服务前，先停止前台进程。使用 `--mock-ebpf` 检查启动时，不会测试实际 eBPF 挂载或路由。若原因是 `the mock eBPF backend was selected`，出现 `NFQUEUE is unavailable at startup; continuing with NFQUEUE staging disabled` 警告属于预期行为。
 
 </div>
-
----
-
-来源：[doona-docs](https://github.com/Zakkaus/doona-docs)，采用 [CC BY 4.0 许可证](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt)。

@@ -35,7 +35,3 @@ lastUpdated: false
 打开 [doona lite 演示站点](https://demo.daeuniverse.org/lite/)，使用示例数据体验界面，无需连接后端。重新加载页面会重置对示例数据的修改。lite 的发布版本只能连接 honk，不提供试用演示按钮。
 
 </div>
-
----
-
-来源：[doona-docs](https://github.com/Zakkaus/doona-docs)，采用 [CC BY 4.0 许可证](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt)。

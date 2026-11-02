@@ -292,7 +292,3 @@ assets {
 然后[重启 honk](service-management.md)。对应的界面操作见[为第一条连接设置路由](tutorial.md)。
 
 </div>
-
----
-
-来源：[doona-docs](https://github.com/Zakkaus/doona-docs)，采用 [CC BY 4.0 许可证](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt)。

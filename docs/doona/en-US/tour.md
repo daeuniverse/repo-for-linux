@@ -100,7 +100,3 @@ Search, **Refresh** and the held-rule apply button remain in the top bar. **More
 ![Phone navigation and the More options menu](https://doona.daeuniverse.org/screenshots/en/phone.webp)
 
 </div>
-
----
-
-Source: [doona-docs](https://github.com/Zakkaus/doona-docs), licensed under [CC BY 4.0](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt).

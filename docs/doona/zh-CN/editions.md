@@ -74,7 +74,3 @@ honk 的 `/ui/` 一次只提供一个版本。通过 `experimental.native_api.ui
 体验[标准版演示](https://demo.daeuniverse.org/)或 [doona lite 演示](https://demo.daeuniverse.org/lite/)。
 
 </div>
-
----
-
-来源：[doona-docs](https://github.com/Zakkaus/doona-docs)，采用 [CC BY 4.0 许可证](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt)。

@@ -238,7 +238,3 @@ honk-core --data-dir /var/lib/honk admin reset
 历史最多保留 20 条错误。复制内容包括可用的请求方法与路径、状态、错误代码及请求 ID。请求正文和配置文本不会保留，识别出的秘密字段会被遮蔽。复制入口见[关于](config-and-settings.md#settings-page)。
 
 </div>
-
----
-
-来源：[doona-docs](https://github.com/Zakkaus/doona-docs)，采用 [CC BY 4.0 许可证](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt)。

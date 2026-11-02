@@ -71,7 +71,3 @@ lastUpdated: false
 安全漏洞报告方式见 [SECURITY.md](https://github.com/Zakkaus/doona/blob/main/.github/SECURITY.md)。
 
 </div>
-
----
-
-来源：[doona-docs](https://github.com/Zakkaus/doona-docs)，采用 [CC BY 4.0 许可证](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt)。

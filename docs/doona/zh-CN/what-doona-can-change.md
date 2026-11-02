@@ -78,7 +78,3 @@ API 会在写入前拒绝以下实际生效值的更改。请使用外部编辑�
 编辑被接受只表示操作已开始。操作状态变为 `succeeded` 后更改才生效，请重新读取来源确认。即使如此，兼容性字段也不会改变流量行为。
 
 </div>
-
----
-
-来源：[doona-docs](https://github.com/Zakkaus/doona-docs)，采用 [CC BY 4.0 许可证](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt)。

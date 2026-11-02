@@ -158,7 +158,3 @@ Keep the terminal open and use the browser steps in [Quick start](quick-start.md
 Stop the foreground process before starting the service. If you use `--mock-ebpf` for a startup check, it does not test real eBPF attachment or routing. Expect the warning `NFQUEUE is unavailable at startup; continuing with NFQUEUE staging disabled` when its reason is `the mock eBPF backend was selected`.
 
 </div>
-
----
-
-Source: [doona-docs](https://github.com/Zakkaus/doona-docs), licensed under [CC BY 4.0](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt).

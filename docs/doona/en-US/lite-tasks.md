@@ -88,7 +88,3 @@ Restart-only settings show read-only values with a **Copy** button for the confi
 Subscription nodes do not expose share links here. If a link is too long for a QR code, copy the link. Share links contain connection credentials; share them only with intended recipients.
 
 </div>
-
----
-
-Source: [doona-docs](https://github.com/Zakkaus/doona-docs), licensed under [CC BY 4.0](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt).

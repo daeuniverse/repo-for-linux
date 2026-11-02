@@ -78,7 +78,3 @@ API 會在寫入前拒絕以下實際生效值的更改。請使用外部編輯�
 編輯被接受只表示操作已開始。操作狀態變為 `succeeded` 後變更才生效，請重新讀取來源確認。即使如此，相容性欄位也不會改變流量行為。
 
 </div>
-
----
-
-來源：[doona-docs](https://github.com/Zakkaus/doona-docs)，採用 [CC BY 4.0 授權條款](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt)。

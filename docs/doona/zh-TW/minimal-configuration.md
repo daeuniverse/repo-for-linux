@@ -18,7 +18,3 @@ lastUpdated: false
 這些區塊啟用介面與原生 API，不設定代理路由。請保留現有 honk 組態，或按[快速入門](quick-start.md)準備後端。
 
 </div>
-
----
-
-來源：[doona-docs](https://github.com/Zakkaus/doona-docs)，採用 [CC BY 4.0 授權條款](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt)。
