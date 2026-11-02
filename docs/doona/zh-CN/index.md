@@ -7,7 +7,7 @@ lastUpdated: false
 
 # doona 文档 {#title-doona-文档}
 
-doona 通过原生 API 管理 honk、查看流量。本文档适用于 v0.1.0-rc.4。
+doona 通过原生 API 管理 honk、查看流量。本文档适用于 v0.1.0-rc.5。
 
 
 ## 选择版本 {#choose-edition}
