@@ -13,8 +13,8 @@ lastUpdated: false
 
 | 系统 | 指南 |
 | --- | --- |
-| Debian 或 Ubuntu | [安装 deb](install-debian.md) |
-| Fedora 或 RHEL | [安装 RPM](install-fedora.md) |
+| Debian 或 Ubuntu | [使用 APT 安装](install-debian.md) |
+| Fedora 或 RHEL | [使用 DNF 安装](install-fedora.md) |
 | Arch Linux | [通过 pacman 安装](install-arch.md) |
 | Gentoo | [通过 Portage 安装](install-gentoo.md) |
 | OpenWrt | [在路由器上手动安装](install-openwrt.md) |

@@ -7,47 +7,39 @@ lastUpdated: false
 
 # 在 Debian 或 Ubuntu 上安裝 {#title-在-debian-或-ubuntu-上安裝}
 
-使用系統套件管理員安裝 doona v0.1.0-rc.4 標準版。doona lite 請依照[壓縮檔安裝說明](install-manual.md)操作。
+透過 APT 從 Dae Universe 套件來源安裝 doona 標準版。doona lite 請依照[壓縮檔安裝說明](install-manual.md)操作。
 
-在閘道器上開啟終端機，進入新建的下載目錄，並在同一 shell 中完成各步。使用 root shell 時省略 `sudo`。安裝後端前先檢查 [honk 的前提條件](install.md#install)。
+已設定 sudo 的一般使用者選擇 sudo 標籤；已進入 root shell 時選擇 root 標籤。安裝後端前先檢查 [honk 的前提條件](install.md#install)。
 
-## 1. 準備下載工具 {#1-準備下載工具}
+## 1. 安裝 curl {#1-安裝-curl}
+
+<!--@include: @/.vitepress/snippets/repositories/zh-TW/debian-1.md-->
+
+## 2. 新增套件來源 {#2-新增套件來源}
+
+<!--@include: @/.vitepress/snippets/repositories/zh-TW/debian-2.md-->
+
+## 3. 匯入 GPG 公鑰 {#3-匯入-gpg-公鑰}
+
+<!--@include: @/.vitepress/snippets/repositories/zh-TW/debian-3.md-->
+
+## 4. 安裝網頁檔案 {#4-安裝網頁檔案}
 
 ::: code-group
 
 ```sh [sudo]
 sudo apt update
-sudo apt install curl ca-certificates
+sudo apt install doona-web
+ls -l /usr/share/doona-web/index.html
 ```
 
 ```sh [root]
 apt update
-apt install curl ca-certificates
+apt install doona-web
+ls -l /usr/share/doona-web/index.html
 ```
 
 :::
-
-## 2. 下載並驗證套件 {#2-下載並驗證套件}
-
-從 [v0.1.0-rc.4 發行頁](https://github.com/Zakkaus/doona/releases/tag/v0.1.0-rc.4)下載：
-
-```sh
-BASE=https://github.com/Zakkaus/doona/releases/download/v0.1.0-rc.4
-FILE=doona-web_0.1.0-rc.4-1_all.deb
-curl -fL -O "$BASE/$FILE" -O "$BASE/SHA256SUMS"
-awk -v file="$FILE" '$2 == file' SHA256SUMS | sha256sum -c -
-```
-
-所有選定檔案都顯示 `OK` 後才能繼續。如果驗證失敗或找不到檢查碼項目，先核對檔名並重新下載，再安裝。
-
-下載或執行檔出錯時，見[安裝故障](install.md#安裝故障)。
-
-## 3. 安裝網頁檔案 {#3-安裝網頁檔案}
-
-```sh
-sudo apt install "./$FILE"
-ls -l /usr/share/doona-web/index.html
-```
 
 確認最後一條命令列出 `index.html`。在[獨立介面組態](install.md)中使用該目錄。
 
@@ -57,27 +49,34 @@ Debian 套件名為 `doona-web`。不要改用 `apt install doona`，Debian 和 
 
 如果 `apt upgrade` 將舊 `doona` 網頁套件替換成無關的網路模糊測試工具，導致 UI 消失：
 
-1. 依照上文安裝已驗證的 `doona-web`，需要字型時再依照下文安裝 `doona-web-fonts`。新套件宣告替換或衝突的舊網頁套件版本範圍為低於 1.0。
+1. 依照上文安裝 `doona-web`，需要字型時再依照下文安裝 `doona-web-fonts`。新套件宣告替換或衝突的舊網頁套件版本範圍為低於 1.0。
 2. 將現有 [`ui` 設定項目](configuration.md#config)改為 `/usr/share/doona-web`，再[重新啟動 honk](service-management.md)並重新載入瀏覽器頁面。
 3. 如果仍安裝了無關的 `doona`，執行 `sudo apt remove doona`。這會保留 `doona-web`。
 
 ### 選用套件 {#選用套件}
 
-字型與預先壓縮檔案的用途見[選用資源](install.md#doona)。在下列命令中將 `FILE` 設為表中對應的檔名；範例使用字型套件。
+字型與預先壓縮檔案的用途見[選用資源](install.md#doona)。
 
-| 資源 | 檔名 |
+| 資源 | 套件 |
 | --- | --- |
-| 字型 | `doona-web-fonts_0.1.0-rc.4-1_all.deb` |
-| 預先壓縮的檔案 | `doona-web-precompressed_0.1.0-rc.4-1_all.deb` |
+| 字型 | `doona-web-fonts` |
+| 預先壓縮的檔案 | `doona-web-precompressed` |
 
-```sh
-FILE=doona-web-fonts_0.1.0-rc.4-1_all.deb
-curl -fL -O "$BASE/$FILE"
-awk -v file="$FILE" '$2 == file' SHA256SUMS | sha256sum -c - &&
-  sudo apt install "./$FILE"
+安裝所選套件；範例使用字型套件。
+
+::: code-group
+
+```sh [sudo]
+sudo apt install doona-web-fonts
 ```
 
-## 4. 安裝後端 {#4-安裝後端}
+```sh [root]
+apt install doona-web-fonts
+```
+
+:::
+
+## 5. 安裝後端 {#5-安裝後端}
 
 依照[安裝 honk](install.md#install)安裝後端後返回本頁。已有相容的 honk 時無需重複安裝。
 
