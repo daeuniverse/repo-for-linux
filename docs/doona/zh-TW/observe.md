@@ -32,7 +32,7 @@ lastUpdated: false
 
 完成全部步驟或關閉卡片後，卡片會隱藏，目前瀏覽器會記住此狀態。
 
-![活動儀表板](https://doona.daeuniverse.org/screenshots/zh-TW/activity-light.webp)
+![活動儀表板](/doona/screenshots/zh-TW/activity-light.webp)
 
 | 卡片或控制項 | 如何解讀 |
 | --- | --- |
@@ -60,7 +60,7 @@ CPU 和延遲趨勢需要兩個樣本。延遲測試失敗會留下缺口，更�
 
 元件庫提供**訂閱額度**、**出站失敗**、**節點可用性**和**DNS 延遲**。記憶體可顯示為圖表或帶數值的**迷你折線圖**卡片。寬圖表會在旁邊顯示峰值和平均值。儀表板與浮動面板共用的元件庫見[元件](features.md#widgets)。
 
-![儀表板編輯器](https://doona.daeuniverse.org/screenshots/zh-TW/dashboard-settings.webp)
+![儀表板編輯器](/doona/screenshots/zh-TW/dashboard-settings.webp)
 
 
 ## 系統狀態 {#overview}
@@ -82,18 +82,18 @@ CPU 和延遲趨勢需要兩個樣本。延遲測試失敗會留下缺口，更�
 
 狀態卡片載入時會用佔位內容保留空間。載入提示顯示進度指示，計量元件向輔助技術提供名稱和數值文字。
 
-![系統狀態](https://doona.daeuniverse.org/screenshots/zh-TW/system-status-meters.webp)
+![系統狀態](/doona/screenshots/zh-TW/system-status-meters.webp)
 
 
 ## 連線 {#connections}
 
 **連線**預設開啟**流量**。選擇**清單**可查看單條連線；指向具體連線或篩選清單的連結會直接開啟此分頁。
 
-![流量檢視](https://doona.daeuniverse.org/screenshots/zh-TW/connections-traffic.webp)
+![流量檢視](/doona/screenshots/zh-TW/connections-traffic.webp)
 
 按圖中的資料點或清單列可查看連線詳細資料。後端提供資訊時，詳細資料會顯示出站、鏈和命中規則。依[出站排查步驟](common-tasks.md#why-outbound)可開啟規則或執行追蹤。
 
-![連線清單](https://doona.daeuniverse.org/screenshots/zh-TW/connections-list.webp)
+![連線清單](/doona/screenshots/zh-TW/connections-list.webp)
 
 篩選也會搜尋出站、鏈和規則。**匯出 CSV**匯出篩選後的清單。清單為空時，先閱讀截斷或可見範圍提示；[連線條件](feature-requirements.md#req-connections)說明了涵蓋範圍及哪些連線可以關閉。
 
@@ -106,7 +106,7 @@ CPU 和延遲趨勢需要兩個樣本。延遲測試失敗會留下缺口，更�
 
 **分流**在**總覽**和**記錄**中顯示已記錄的流程，需要[流程記錄功能](feature-requirements.md#req-flows)。
 
-![分流圖](https://doona.daeuniverse.org/screenshots/zh-TW/routing.webp)
+![分流圖](/doona/screenshots/zh-TW/routing.webp)
 
 在**總覽**中選擇一條路徑，再按顯示流程數量的按鈕，開啟對應記錄。在**記錄**中選擇一列可查看路由追蹤；追蹤不完整時，先閱讀原因。關聯連線仍存在時，**檢視連線**可開啟該連線。
 
@@ -119,7 +119,7 @@ CPU 和延遲趨勢需要兩個樣本。延遲測試失敗會留下缺口，更�
 
 可用分頁取決於後端的[查詢](feature-requirements.md#req-dns-query)、[快取](feature-requirements.md#req-dns-cache)和[記錄](feature-requirements.md#req-dns-log)能力。
 
-![DNS 統計](https://doona.daeuniverse.org/screenshots/zh-TW/dns.webp)
+![DNS 統計](/doona/screenshots/zh-TW/dns.webp)
 
 | 分頁 | 資料與操作 |
 | --- | --- |
@@ -136,14 +136,14 @@ CPU 和延遲趨勢需要兩個樣本。延遲測試失敗會留下缺口，更�
 
 快取回報僅存於記憶體時，重新啟動會清空項目。刪除符合項目時，確認內容顯示符合數量；依名稱刪除時，顯示網域和記錄類型；**清除全部快取**無法復原。**沒有快取項目**表示快取為空，**沒有符合的快取項目**則表示目前篩選條件沒有符合項目。
 
-![包含已到期項目的 DNS 快取](https://doona.daeuniverse.org/screenshots/zh-TW/dns-cache-expired.webp)
+![包含已到期項目的 DNS 快取](/doona/screenshots/zh-TW/dns-cache-expired.webp)
 
 
 ## 日誌 {#logs}
 
 **日誌**顯示引擎日誌。收不到記錄時，先檢查[日誌記錄條件](feature-requirements.md#req-logs)。
 
-![引擎日誌](https://doona.daeuniverse.org/screenshots/zh-TW/logs.webp)
+![引擎日誌](/doona/screenshots/zh-TW/logs.webp)
 
 用**等級**和**模組**篩選日誌串流。**暫停**暫停畫面更新，期間緩衝區僅保留頁面上限內的最新記錄。**清空**清空本頁記錄，**匯出**下載已接收的記錄，**複製記錄**以與**匯出**相同的格式複製單列記錄。
 

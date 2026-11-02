@@ -28,7 +28,7 @@ doona 透過原生 API 管理 honk、查看流量。本文件適用於 v0.1.0-rc
 | 需要獨立介面檔案 | [單獨安裝 doona](install.md) |
 | 已登入，想找到某項操作 | [介面導覽](tour.md) |
 
-![活動頁面](https://doona.daeuniverse.org/screenshots/zh-TW/activity-light.webp)
+![活動頁面](/doona/screenshots/zh-TW/activity-light.webp)
 
 ## 查找需求或排查問題 {#查找需求或排查問題}
 

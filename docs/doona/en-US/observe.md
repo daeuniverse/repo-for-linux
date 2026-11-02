@@ -32,7 +32,7 @@ Each step completes automatically when its condition is met:
 
 Completing all steps or dismissing the card hides it; this browser remembers that state.
 
-![Activity dashboard](https://doona.daeuniverse.org/screenshots/en/activity-light.webp)
+![Activity dashboard](/doona/screenshots/en/activity-light.webp)
 
 | Card or control | How to read it |
 | --- | --- |
@@ -60,7 +60,7 @@ You can place each widget at most three times. Available sizes depend on the wid
 
 The gallery includes **Subscription quota**, **Outbound failures**, **Node availability** and **DNS latency**. Memory can use a chart or a **Sparkline** value tile. Wide charts show peak and average statistics beside the chart. See [Widgets](features.md#widgets) for the shared dashboard and floating-panel gallery.
 
-![Dashboard editor](https://doona.daeuniverse.org/screenshots/en/dashboard-settings.webp)
+![Dashboard editor](/doona/screenshots/en/dashboard-settings.webp)
 
 
 ## System status {#overview}
@@ -82,18 +82,18 @@ Select **Export state JSON** to save the reported state. For absent fields or ac
 
 Status cards retain their space with placeholders while loading. Loading notices show progress indicators, and meters expose their names and value text to assistive technology.
 
-![System status](https://doona.daeuniverse.org/screenshots/en/system-status-meters.webp)
+![System status](/doona/screenshots/en/system-status-meters.webp)
 
 
 ## Connections {#connections}
 
 **Connections** opens on **Traffic**. Choose **List** to inspect individual connections; links to a connection or a filtered list open that tab directly.
 
-![Traffic view](https://doona.daeuniverse.org/screenshots/en/connections-traffic.webp)
+![Traffic view](/doona/screenshots/en/connections-traffic.webp)
 
 Select a chart point or list row to inspect the connection. Its details show the outbound, chain and matched rule when reported. Use [the outbound investigation steps](common-tasks.md#why-outbound) to open the rule or run a trace.
 
-![Connection list](https://doona.daeuniverse.org/screenshots/en/connections-list.webp)
+![Connection list](/doona/screenshots/en/connections-list.webp)
 
 Filters also search the outbound, chain and rule. **Export CSV** exports the filtered list. Read truncation and visibility notices before interpreting an empty list; the [connection requirements](feature-requirements.md#req-connections) explain coverage and which connections you can close.
 
@@ -106,7 +106,7 @@ A row's add-rule icon is unavailable when the connection has no usable address o
 
 **Routing log** shows recorded flows in **Map** and **Records**. It depends on [flow recording](feature-requirements.md#req-flows).
 
-![Routing map](https://doona.daeuniverse.org/screenshots/en/routing.webp)
+![Routing map](/doona/screenshots/en/routing.webp)
 
 Select a path in **Map**, then use its flow-count button to open the matching records. In **Records**, select a row to read its routing trace. Read the reason when a trace is incomplete. **View connection** opens the associated live connection if it still exists.
 
@@ -119,7 +119,7 @@ Select **Clear path filter** to remove the pinned path. To create a rule from a 
 
 The available tabs depend on the backend's [query](feature-requirements.md#req-dns-query), [cache](feature-requirements.md#req-dns-cache) and [recording](feature-requirements.md#req-dns-log) capabilities.
 
-![DNS statistics](https://doona.daeuniverse.org/screenshots/en/dns.webp)
+![DNS statistics](/doona/screenshots/en/dns.webp)
 
 | Tab | Data and actions |
 | --- | --- |
@@ -136,14 +136,14 @@ Filtering also works without deletion support. **Clear filters** resets the crit
 
 When the cache reports memory-only storage, restarting clears its entries. The deletion confirmation shows the matching count, or the domain name and record type for name-based deletion. You cannot undo **Clear all cache**. **No cache entries** means the cache is empty; **No matching cache entries** means the current filters matched nothing.
 
-![DNS cache with expired entries](https://doona.daeuniverse.org/screenshots/en/dns-cache-expired.webp)
+![DNS cache with expired entries](/doona/screenshots/en/dns-cache-expired.webp)
 
 
 ## Logs {#logs}
 
 **Logs** displays engine log records. Check [log recording requirements](feature-requirements.md#req-logs) if no records arrive.
 
-![Engine logs](https://doona.daeuniverse.org/screenshots/en/logs.webp)
+![Engine logs](/doona/screenshots/en/logs.webp)
 
 Use **Level** and **Module** to narrow the stream. **Pause** pauses display updates while the buffer retains only the newest records up to the page limit. **Clear** clears this page's records; **Export** downloads the received records, and **Copy record** copies one row in the same format used by **Export**.
 

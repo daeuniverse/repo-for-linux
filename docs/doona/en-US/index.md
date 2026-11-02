@@ -28,7 +28,7 @@ See the [edition comparison](editions.md). To explore sample data, open the [sta
 | You need separate UI files | [Install doona separately](install.md) |
 | You have signed in and want to find a control | [Interface tour](tour.md) |
 
-![The activity page](https://doona.daeuniverse.org/screenshots/en/activity-light.webp)
+![The activity page](/doona/screenshots/en/activity-light.webp)
 
 ## Look up a requirement or solve a problem {#look-up-a-requirement-or-solve-a-problem}
 

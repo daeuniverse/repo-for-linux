@@ -60,7 +60,7 @@ lastUpdated: false
 
 ## 瀏覽器中儲存的設定 {#theme-gallery}
 
-查看[配色圖集](https://doona.daeuniverse.org/screenshots/palettes.webp)，再調整[外觀設定](config-and-settings.md#appearance)。
+查看[配色圖集](/doona/screenshots/palettes.webp)，再調整[外觀設定](config-and-settings.md#appearance)。
 
 語言、外觀、日期與時間格式、啟動頁面和探測偏好都在[設定](config-and-settings.md#settings-page)中調整。瀏覽器偏好、已儲存組態和後端暫時變更的區別見[變更的儲存位置](what-doona-can-change.md)。
 

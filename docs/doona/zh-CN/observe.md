@@ -32,7 +32,7 @@ lastUpdated: false
 
 完成全部步骤或关闭卡片后，卡片会隐藏，当前浏览器会记住此状态。
 
-![活动仪表盘](https://doona.daeuniverse.org/screenshots/zh-CN/activity-light.webp)
+![活动仪表盘](/doona/screenshots/zh-CN/activity-light.webp)
 
 | 卡片或控件 | 如何解读 |
 | --- | --- |
@@ -60,7 +60,7 @@ CPU 和延迟趋势需要两个样本。延迟测试失败会留下缺口，更�
 
 组件库提供**订阅额度**、**出站失败**、**节点可用性**和**DNS 延迟**。内存可显示为图表或带数值的**迷你折线图**卡片。宽图表会在旁边显示峰值和平均值。仪表盘与浮动面板共用的组件库见[组件](features.md#widgets)。
 
-![仪表盘编辑器](https://doona.daeuniverse.org/screenshots/zh-CN/dashboard-settings.webp)
+![仪表盘编辑器](/doona/screenshots/zh-CN/dashboard-settings.webp)
 
 
 ## 系统状态 {#overview}
@@ -82,18 +82,18 @@ CPU 和延迟趋势需要两个样本。延迟测试失败会留下缺口，更�
 
 状态卡片加载时会用占位内容保留空间。加载提示显示进度指示，计量组件向辅助技术提供名称和数值文本。
 
-![系统状态](https://doona.daeuniverse.org/screenshots/zh-CN/system-status-meters.webp)
+![系统状态](/doona/screenshots/zh-CN/system-status-meters.webp)
 
 
 ## 连接 {#connections}
 
 **连接**默认打开**流量**。选择**列表**可查看单条连接；指向具体连接或筛选列表的链接会直接打开此标签页。
 
-![流量视图](https://doona.daeuniverse.org/screenshots/zh-CN/connections-traffic.webp)
+![流量视图](/doona/screenshots/zh-CN/connections-traffic.webp)
 
 点击图中的数据点或列表行可查看连接详情。后端提供信息时，详情会显示出站、链和命中规则。按[出站排查步骤](common-tasks.md#why-outbound)可打开规则或执行追踪。
 
-![连接列表](https://doona.daeuniverse.org/screenshots/zh-CN/connections-list.webp)
+![连接列表](/doona/screenshots/zh-CN/connections-list.webp)
 
 筛选也会搜索出站、链和规则。**导出 CSV**导出筛选后的列表。列表为空时，先阅读截断或可见范围提示；[连接条件](feature-requirements.md#req-connections)说明了覆盖范围及哪些连接可以关闭。
 
@@ -106,7 +106,7 @@ CPU 和延迟趋势需要两个样本。延迟测试失败会留下缺口，更�
 
 **分流**在**总览**和**记录**中显示已记录的流程，需要[流程记录功能](feature-requirements.md#req-flows)。
 
-![分流图](https://doona.daeuniverse.org/screenshots/zh-CN/routing.webp)
+![分流图](/doona/screenshots/zh-CN/routing.webp)
 
 在**总览**中选择一条路径，再点击显示流程数量的按钮，打开对应记录。在**记录**中选择一行可查看路由追踪；追踪不完整时，先阅读原因。关联连接仍存在时，**查看连接**可打开该连接。
 
@@ -119,7 +119,7 @@ CPU 和延迟趋势需要两个样本。延迟测试失败会留下缺口，更�
 
 可用标签页取决于后端的[查询](feature-requirements.md#req-dns-query)、[缓存](feature-requirements.md#req-dns-cache)和[记录](feature-requirements.md#req-dns-log)能力。
 
-![DNS 统计](https://doona.daeuniverse.org/screenshots/zh-CN/dns.webp)
+![DNS 统计](/doona/screenshots/zh-CN/dns.webp)
 
 | 标签页 | 数据与操作 |
 | --- | --- |
@@ -136,14 +136,14 @@ CPU 和延迟趋势需要两个样本。延迟测试失败会留下缺口，更�
 
 缓存报告仅存于内存时，重启会清空条目。删除匹配项时，确认内容显示匹配数量；按名称删除时，显示域名和记录类型；**清除全部缓存**无法撤销。**没有缓存条目**表示缓存为空，**没有符合的缓存条目**则表示当前筛选条件没有匹配项。
 
-![包含已到期条目的 DNS 缓存](https://doona.daeuniverse.org/screenshots/zh-CN/dns-cache-expired.webp)
+![包含已到期条目的 DNS 缓存](/doona/screenshots/zh-CN/dns-cache-expired.webp)
 
 
 ## 日志 {#logs}
 
 **日志**显示引擎日志。收不到记录时，先检查[日志记录条件](feature-requirements.md#req-logs)。
 
-![引擎日志](https://doona.daeuniverse.org/screenshots/zh-CN/logs.webp)
+![引擎日志](/doona/screenshots/zh-CN/logs.webp)
 
 用**级别**和**模块**筛选日志流。**暂停**暂停画面更新，期间缓冲区仅保留页面上限内的最新记录。**清空**清空本页记录，**导出**下载已接收的记录，**复制记录**以与**导出**相同的格式复制单行记录。
 

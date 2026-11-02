@@ -29,7 +29,7 @@ For a new account, the username must contain 1 to 64 ASCII letters, digits, unde
 
 In token mode, use the **Token** field's show/hide control to check the entered secret before connecting.
 
-![Administrator setup](https://doona.daeuniverse.org/screenshots/en/login-setup.webp)
+![Administrator setup](/doona/screenshots/en/login-setup.webp)
 
 ## 3. Check the backend {#3-check-the-backend}
 

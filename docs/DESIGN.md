@@ -136,9 +136,17 @@ Zakkaus/doona-docs pages at commit 1ffab35, so every footer cites that repositor
 license. Every heading carries an explicit `{#id}`; the ids that doona's help links use are listed in
 `docs/public/doona/anchors.json` (served at `/doona/anchors.json`) and must stay identical in all
 three locales. Tabbed fences are VitePress code groups. Images are under `docs/public/doona/images/`
-and are linked by their site path; screenshots link `doona.daeuniverse.org/screenshots/`. The sidebar takes titles
+and are linked by their site path. The sidebar takes titles
 from each page's first heading and its order from `doonaGroups` in `config.mjs`. Tests check
-locale parity, `anchors.json`, the anchors in doona's `docsAnchors.json` and local links.
+locale parity, `anchors.json`, the anchors in doona's `docsAnchors.json`, local links, and links into doona's
+GitHub source.
+
+Screenshots are not committed. The documentation action checks out Zakkaus/doona at the release tag that
+`prepare-docs.mjs` resolves, renders its `tools/screenshots.mjs`, and copies the result to
+`docs/public/doona/screenshots/` (ignored by Git), cached by the tag's commit and the hash of that script. To render
+them locally, follow the same steps in a doona checkout of the tag (`pnpm install`, `pnpm build`, a `vite preview` on port 4177, then `node tools/screenshots.mjs`, which needs Playwright
+Chromium, `cwebp`, `img2webp` and a CJK font), copy its `docs/screenshots/` there, and set `DOONA_DIR` to the checkout for the source-link test. Without them the pages show
+broken images, and `docs:test` skips the screenshot and source-link checks outside CI.
 
 To bump honk, change its `ref` and `commit` together in `.vitepress/sources.json` and update the
 version in `docs/honk/{en-US,zh-CN,zh-TW}/index.md`. The doona pages are edited here. Run `npm run docs:test` and `npm run docs:build`,
