@@ -129,7 +129,7 @@ test('doona transforms preserve heading anchors, literal examples and adjacent t
 
 test('doona sections cover every fetched page exactly once in upstream order', async () => {
   const { default: config, doonaGroups } = await import('../docs/.vitepress/config.mjs')
-  const topics = Object.values(doonaGroups).flat().map(topic => `${topic}.md`)
+  const topics = Object.values(doonaGroups).flat(2).map(topic => `${topic}.md`)
   assert.equal(new Set(topics).size, topics.length)
   assert.equal(topics.length, 29)
   for (const locale of Object.values(locales)) {
@@ -141,7 +141,8 @@ test('doona sections cover every fetched page exactly once in upstream order', a
     assert.ok(manual)
     // The group heading is the landing page, so the sections list every other page once.
     assert.equal(manual.link, `${locale.prefix}/doona/`)
-    assert.deepEqual(manual.items.flatMap(section => section.items.map(item => item.link)),
+    const links = items => items.flatMap(item => [item.link, ...links(item.items || [])])
+    assert.deepEqual(manual.items.flatMap(section => links(section.items)),
       topics.filter(topic => topic !== 'index.md').map(topic => topic === 'install-openwrt.md'
         ? `${locale.prefix}/openwrt/` : `${locale.prefix}/doona/${topic.replace(/\.md$/, '')}`))
   }
