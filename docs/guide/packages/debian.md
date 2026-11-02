@@ -20,6 +20,7 @@ Configure the repository once for all packages. If it is already configured, ski
 | --- | --- |
 | dae | `dae` |
 | [daed](/daed/) (archived; do not use it for new installations) | `daed` |
+| [doona](/doona/) | `doona-web` |
 | v2rayA | `v2raya` |
 | v2ray | `v2ray` |
 | Xray | `xray` |
@@ -28,6 +29,8 @@ Configure the repository once for all packages. If it is already configured, ski
 | v2ray-rules-dat | `v2ray-rules-dat` |
 
 Replace `PACKAGE` with a name from the table.
+
+doona also publishes `doona-web-fonts` and `doona-web-precompressed` as optional add-on packages.
 
 ::: code-group
 
