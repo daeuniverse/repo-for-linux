@@ -13,6 +13,7 @@ output_file=""
 packages=(
   dae
   daed
+  doona
   honk
   juicity
   juicity-rs
@@ -25,6 +26,7 @@ packages=(
 software_names=(
   dae
   daed
+  doona
   honk
   Juicity
   Juicity-rs
@@ -41,19 +43,35 @@ read_yaml_value() {
   sed -nE "s/^${key}: \"?([^\"]+)\"?$/\1/p" "$file" | head -n 1
 }
 
+# doona ships the packages built upstream, so there is no nfpm file to read.
+homepage_for_package() {
+  local package="$1"
+
+  case "$package" in
+    doona)
+      printf '%s\n' 'https://github.com/Zakkaus/doona'
+      ;;
+    *)
+      read_yaml_value "nfpm/${package}.yaml" homepage
+      ;;
+  esac
+}
+
 license_cell_for_package() {
   local package="$1"
   local homepage
   local license
 
-  homepage="$(read_yaml_value "nfpm/${package}.yaml" homepage)"
-  license="$(read_yaml_value "nfpm/${package}.yaml" license)"
-
   case "$package" in
     daed)
       printf '%s\n' '[MIT](https://github.com/daeuniverse/daed/blob/main/LICENSE) + [AGPL-3.0-only](https://github.com/daeuniverse/dae-wing/blob/main/LICENSE)'
       ;;
+    doona)
+      printf '%s\n' '[GPL-3.0-only](https://github.com/Zakkaus/doona/blob/main/LICENSE)'
+      ;;
     *)
+      homepage="$(read_yaml_value "nfpm/${package}.yaml" homepage)"
+      license="$(read_yaml_value "nfpm/${package}.yaml" license)"
       printf '[%s](%s/blob/main/LICENSE)\n' "$license" "$homepage"
       ;;
   esac
@@ -103,7 +121,7 @@ generate_table_block() {
   for index in "${!packages[@]}"; do
     package="${packages[$index]}"
     software_name="${software_names[$index]}"
-    homepage="$(read_yaml_value "nfpm/${package}.yaml" homepage)"
+    homepage="$(homepage_for_package "$package")"
     license_cell="$(license_cell_for_package "$package")"
     version="$(resolve_version "$package")"
 
