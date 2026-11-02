@@ -1,0 +1,94 @@
+---
+editLink: false
+lastUpdated: false
+---
+
+<div v-pre lang="zh-TW">
+
+# doona lite 常用任務 {#lite-tasks}
+
+[連線至 lite](lite-connect.md) 後，可匯入節點與編輯 honk 組態。無法編輯時，檢查[組態寫入需求](feature-requirements.md#req-config-edit)、[完整驗證需求](feature-requirements.md#req-validation)和 [lite 後端需求](editions.md#backend-requirements)。
+
+## 套用草稿 {#套用草稿}
+
+修改訂閱、策略群組、路由、DNS 或全域設定後，按以下步驟套用：
+
+1. 選取**檢視並套用**。
+2. 核對待套用的修改，再選取**套用**。
+3. 等待**設定已儲存並套用。**通知，再次檢查資源。如果通知報告失敗或結果尚未確認，請先閱讀詳細資訊再重試。
+
+節點匯入使用下文的直接套用流程。儲存位置與生效規則見 [doona 能修改什麼](what-doona-can-change.md)。
+
+
+## 從分享連結匯入節點 {#lite-task-import}
+
+1. 開啟**節點**，選取**新增節點**。
+2. 選取**貼上連結**，在**分享連結**中每行貼上一個連結。
+3. 核對辨識出的節點，修正無效行。
+4. 匯入一個節點時，選取**新增**；多個節點則選取**新增 N 個節點**。此操作會立即寫入並套用。隨後檢查節點是否出現在清單中。
+
+無法匯入時，查看[節點需求](feature-requirements.md#req-nodes)與[語法驗證](feature-requirements.md#req-validation)。
+
+
+## 新增訂閱 {#lite-task-subscription}
+
+1. 開啟**訂閱**，選取**新增訂閱**。
+2. 輸入**訂閱連結**；填寫**名稱（選填）**，或留空使用建議名稱。
+3. 選取**儲存**。新增列仍是草稿。
+4. 按本頁的**套用草稿**操作，再檢查訂閱節點。
+
+編輯與刪除訂閱也使用這一審閱流程。擷取失敗時，檢查[訂閱更新需求](feature-requirements.md#req-subscription-refresh)。
+
+
+## 建立策略群組 {#lite-task-group}
+
+1. 開啟**策略群組**，選取**建立群組**。
+2. 輸入**名稱**，在**策略**中選擇**手動選擇**，再選取**建立**。
+3. 在**編輯群組**中，從**可用節點與訂閱**找到一個節點，選取其**加入**按鈕。確認節點出現在**已加入**中。
+4. 按本頁的**套用草稿**操作，再檢查群組成員。
+
+群組操作的條件見[群組編輯需求](feature-requirements.md#req-group-edit)。
+
+
+## 新增網域規則 {#lite-task-rule}
+
+1. 開啟**路由**，選取**新增規則**。
+2. 選擇**網域及子網域**，在**值**中輸入 `example.com`，按 Enter。
+3. 在**走向**中選擇目標群組，設定**位置**，再選取**新增**。
+4. 按本頁的**套用草稿**操作，再檢查網域規則是否出現。
+
+**用範本重建規則**會替換草稿中的規則，套用前請審閱替換內容。無法編輯時，查看[規則需求](feature-requirements.md#req-rules)。
+
+
+## 新增 DNS 伺服器 {#lite-task-dns}
+
+1. 開啟 **DNS**，選取**新增 DNS 伺服器**。
+2. 在**服務商**中選擇**自訂**，輸入唯一的**名稱**和**伺服器位址**，例如 `tls://1.1.1.1:853`，再選取**新增**。
+3. 開啟該伺服器的**操作**選單，選取**設為預設**。
+4. 按本頁的**套用草稿**操作，檢查伺服器和預設規則。
+
+組態欄位見[組態參考](configuration.md)，寫入條件見[規則需求](feature-requirements.md#req-rules)。
+
+
+## 修改全域設定 {#lite-task-setting}
+
+1. 開啟**設定**，選擇**流量辨識**。
+2. 將**嗅探逾時**設為 `200`，**時間單位**設為 `ms`。
+3. 按本頁的**套用草稿**操作，再開啟設定核對其值。
+
+需要重新啟動的設定顯示為唯讀值，旁邊的**複製**按鈕可複製對應組態行。複製後，在 honk 主機上編輯檔案的 `global` 區段，再重新啟動 honk。複製介面顯示的重新啟動命令不會執行該命令。欄位說明見[需要重新啟動的全域設定](what-doona-can-change.md#restart-global)和[組態參考](configuration.md)。
+
+
+## 分享手動新增的節點 {#lite-task-share}
+
+1. 開啟**節點**，找到手動新增的節點。
+2. 開啟其**操作**選單，選取**分享**。
+3. 選取**複製連結**或掃描 QR code。如果無法複製，可選取顯示的連結手動複製。
+
+此處不提供訂閱節點的分享連結。連結過長而無法產生 QR code 時，複製連結即可。分享連結包含連線憑證，請僅傳給預期的接收人。
+
+</div>
+
+---
+
+來源：[doona-docs](https://github.com/Zakkaus/doona-docs)，採用 [CC BY 4.0 授權條款](https://github.com/Zakkaus/doona-docs/blob/1ffab35ff9553ad1869fae21dba36be010cc5e2a/LICENSES/CC-BY-4.0.txt)。

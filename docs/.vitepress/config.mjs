@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs'
 import { defineConfig } from 'vitepress'
 import { locales } from './locales.mjs'
 import upstream from './upstream.json' with { type: 'json' }
@@ -18,6 +19,14 @@ const doonaLabels = {
   'en-US': {start: 'Getting started', install: 'Install and first run', standard: 'Standard edition', lite: 'doona lite', reference: 'Reference'},
   'zh-CN': {start: '入门', install: '安装与首次运行', standard: '标准版', lite: 'doona lite', reference: '参考'},
   'zh-TW': {start: '入門', install: '安裝與首次執行', standard: '標準版', lite: 'doona lite', reference: '參考'}
+}
+
+// A page's title is its H1, without the explicit id the heading carries.
+function doonaTitle(lang, topic) {
+  const page = readFileSync(new URL(`../doona/${lang}/${topic}.md`, import.meta.url), 'utf8')
+  const title = page.match(/^# (.+?)(?: \{#[^}]+\})?$/m)?.[1]
+  if (!title) throw new Error(`Missing doona page title: ${lang}/${topic}`)
+  return title
 }
 
 const organizationUrl = 'https://github.com/daeuniverse'
@@ -76,11 +85,10 @@ function localeConfig({ lang, label, prefix, description, labels: t, theme }) {
     ]
   }
   const doonaItem = topic => {
-    const entry = fetched.entries.find(entry => entry.project === 'doona' && entry.locale === lang && entry.topic === `${topic}.md`)
-    if (!entry) throw new Error(`Missing doona page: ${lang}/${topic}`)
+    const text = doonaTitle(lang, topic)
     // honk's OpenWrt package embeds doona, so the router install is the feed guide.
-    if (topic === 'install-openwrt') return { text: entry.title, link: `${prefix}/openwrt/` }
-    return { text: entry.title, link: `${prefix}/doona/${topic === 'index' ? '' : topic}` }
+    if (topic === 'install-openwrt') return { text, link: `${prefix}/openwrt/` }
+    return { text, link: `${prefix}/doona/${topic === 'index' ? '' : topic}` }
   }
   const doona = { text: 'doona', link: `${prefix}/doona/`, items:
     Object.entries(doonaGroups).map(([section, topics]) => ({

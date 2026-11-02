@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="284" viewBox="0 0 720 284" role="img" aria-labelledby="title">
+  <title id="title">include / listener secret / config_write</title>
+  <style>
+    :root { color-scheme: light dark; --rp-base: #faf4ed; --rp-text: #464261; --rp-pine: #286983; color: var(--rp-text); }
+    @media (prefers-color-scheme: dark) { :root { --rp-base: #232136; --rp-text: #e0def4; --rp-pine: #9ccfd8; } }
+    text { fill: currentColor; font: 22px system-ui, sans-serif; text-anchor: middle; }
+    .box { fill: var(--rp-base); stroke: currentColor; stroke-width: 2; }
+    .arrow { fill: none; stroke: var(--rp-pine); stroke-width: 2; marker-end: url(#arrow); }
+    .small { font: 18px ui-monospace, monospace; }
+  </style>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 1 1 L 9 5 L 1 9" fill="none" stroke="var(--rp-pine)" stroke-width="2"/></marker></defs>
+  <rect width="720" height="284" rx="12" fill="var(--rp-base)"/>
+  <rect class="box" x="24" y="44" width="252" height="192" rx="8"/>
+  <text x="150" y="88">config.dae</text><text x="150" y="132">include</text>
+  <text class="small" x="150" y="170">config.d/*.dae</text><text class="small" x="150" y="212">global / node / …</text>
+  <path class="arrow" d="M 276 140 H 318 V 76 H 362"/>
+  <path class="arrow" d="M 318 140 V 208 H 362"/>
+  <rect class="box" x="364" y="24" width="332" height="104" rx="8" stroke-dasharray="6 4"/>
+  <text x="530" y="61">config.d/api.dae</text><text class="small" x="512" y="102">native_api.secret?</text>
+  <g fill="none" stroke="currentColor" stroke-width="2"><circle cx="670" cy="96" r="14"/><path d="M 660 106 L 680 86"/></g>
+  <rect class="box" x="364" y="156" width="332" height="104" rx="8"/>
+  <text x="530" y="195">config.d/rules.dae</text><text class="small" x="530" y="235">group / routing</text>
+</svg>

@@ -9,20 +9,5 @@
       "zh-CN": "doc/zh",
       "zh-TW": "doc/zh"
     }
-  },
-  "doona": {
-    "repository": "https://github.com/Zakkaus/doona-docs",
-    "ref": "main",
-    "commit": "1ffab35ff9553ad1869fae21dba36be010cc5e2a",
-    "license": "CC BY 4.0",
-    "licensePath": "LICENSES/CC-BY-4.0.txt",
-    "upstreamIndex": true,
-    "assets": "docs/images",
-    "transform": "doona",
-    "locales": {
-      "en-US": "docs/en",
-      "zh-CN": "docs/zh-CN",
-      "zh-TW": "docs/zh-TW"
-    }
   }
 }
