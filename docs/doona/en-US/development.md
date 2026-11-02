@@ -7,7 +7,7 @@ lastUpdated: false
 
 # Development {#title-development}
 
-Build and check doona locally. The app lives in [Zakkaus/doona](https://github.com/Zakkaus/doona); these pages and their site live in [Zakkaus/doona-docs](https://github.com/Zakkaus/doona-docs).
+Build and check doona locally. The app lives in [Zakkaus/doona](https://github.com/Zakkaus/doona); these pages and their site live in [daeuniverse/repo-for-linux](https://github.com/daeuniverse/repo-for-linux).
 
 Read the app's [CONTRIBUTING.md](https://github.com/Zakkaus/doona/blob/main/CONTRIBUTING.md) before submitting changes. For tool versions, see [Requirements](requirements.md).
 

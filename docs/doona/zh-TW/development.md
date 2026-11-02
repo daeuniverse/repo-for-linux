@@ -7,7 +7,7 @@ lastUpdated: false
 
 # 開發 {#title-開發}
 
-使用以下命令在本機建置與檢查 doona。應用程式位於 [Zakkaus/doona](https://github.com/Zakkaus/doona)，本文件及其網站位於 [Zakkaus/doona-docs](https://github.com/Zakkaus/doona-docs)。
+使用以下命令在本機建置與檢查 doona。應用程式位於 [Zakkaus/doona](https://github.com/Zakkaus/doona)，本文件及其網站位於 [daeuniverse/repo-for-linux](https://github.com/daeuniverse/repo-for-linux)。
 
 提交改動前，閱讀應用程式的 [CONTRIBUTING.md](https://github.com/Zakkaus/doona/blob/main/CONTRIBUTING.md)。工具版本見[執行需求](requirements.md)。
 

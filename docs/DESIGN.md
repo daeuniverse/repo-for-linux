@@ -132,8 +132,7 @@ currently uses the Simplified Chinese source with a notice on every page; it is 
 
 The doona manual is committed source: `docs/doona/{en-US,zh-CN,zh-TW}/` holds its 29 pages per
 locale, and their routes are `/doona/`, `/zh-CN/doona/` and `/zh-TW/doona/`. It began as the
-Zakkaus/doona-docs pages at commit 1ffab35, so every footer cites that repository and its CC BY 4.0
-license. Every heading carries an explicit `{#id}`; the ids that doona's help links use are listed in
+Zakkaus/doona-docs pages (CC BY 4.0) at commit 1ffab35. Every heading carries an explicit `{#id}`; the ids that doona's help links use are listed in
 `docs/public/doona/anchors.json` (served at `/doona/anchors.json`) and must stay identical in all
 three locales. Tabbed fences are VitePress code groups. Images are under `docs/public/doona/images/`
 and are linked by their site path. The sidebar takes titles
