@@ -55,9 +55,8 @@ jobs:
           git commit --allow-empty -m "docs(status): update README [skip ci]"
           git push --force origin HEAD:status
 
-      # The site and the package repository share one Cloudflare Pages deployment, so
-      # build the documentation before the signing key is imported and the repository
-      # is assembled. A failure here then leaves the live deployment intact.
+      # Build the documentation before the signing key is imported and the repository
+      # is assembled, so a failure here leaves both live deployments intact.
       # A package that failed to build leaves N/A in the table, and the status branch
       # already carries it; render N/A rather than withhold the whole deployment.
       - name: Check and build documentation
@@ -89,8 +88,8 @@ jobs:
           cp public-key.asc repo/public-key.asc
           cat public-key.asc | gpg --dearmor -o repo/daeuniverse-archive-goose.gpg
 
-      - name: Copy the site into the repository
-        run: cp -a docs/.vitepress/dist/. repo/
+      - name: Redirect the documentation paths to daeuniverse.org
+        run: cp package-site/_redirects repo/_redirects
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v7
@@ -108,7 +107,8 @@ jobs:
             --branch=main
 
       # daeuniverse.org lives in another Cloudflare account, so the documentation is
-      # deployed there on its own; the package repository stays on daeuniverse.pages.dev.
+      # deployed there on its own; the package repository stays on daeuniverse.pages.dev,
+      # whose documentation paths redirect there (package-site/_redirects).
       - name: Upload the documentation to daeuniverse.org
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.DOCS_CLOUDFLARE_ACCOUNT_ID }}
