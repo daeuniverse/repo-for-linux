@@ -1,0 +1,28 @@
+# daeuniverse.pages.dev serves the package repository; the documentation moved to daeuniverse.org.
+# Only documentation paths redirect. apt/, rpm/, daeuniverse.{list,sources,repo}, public-key.asc and
+# daeuniverse-archive-goose.gpg keep answering here, so configured systems need no change.
+/                 https://daeuniverse.org/                  301
+/index.html       https://daeuniverse.org/                  301
+/sitemap.xml      https://daeuniverse.org/sitemap.xml       301
+/dae              https://daeuniverse.org/dae/              301
+/dae/*            https://daeuniverse.org/dae/:splat        301
+/daed             https://daeuniverse.org/daed/             301
+/daed/*           https://daeuniverse.org/daed/:splat       301
+/doona            https://daeuniverse.org/doona/            301
+/doona/*          https://daeuniverse.org/doona/:splat      301
+/guide            https://daeuniverse.org/guide/packages    301
+/guide/*          https://daeuniverse.org/guide/:splat      301
+/honk             https://daeuniverse.org/honk/             301
+/honk.html        https://daeuniverse.org/honk/             301
+/honk/*           https://daeuniverse.org/honk/:splat       301
+/openwrt          https://daeuniverse.org/openwrt/          301
+/openwrt/*        https://daeuniverse.org/openwrt/:splat    301
+/upstream/*       https://daeuniverse.org/upstream/:splat   301
+/kdae             https://daeuniverse.org/kdae              301
+/kdae.html        https://daeuniverse.org/kdae              301
+/daednext         https://daeuniverse.org/daednext          301
+/daednext.html    https://daeuniverse.org/daednext          301
+/zh-CN            https://daeuniverse.org/zh-CN/            301
+/zh-CN/*          https://daeuniverse.org/zh-CN/:splat      301
+/zh-TW            https://daeuniverse.org/zh-TW/            301
+/zh-TW/*          https://daeuniverse.org/zh-TW/:splat      301
