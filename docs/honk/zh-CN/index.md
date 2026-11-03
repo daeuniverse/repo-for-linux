@@ -6,7 +6,7 @@ honk 是用 Rust 编写的 Linux 透明代理引擎，将 dae 风格的 eBPF 数
 honk 是实验性项目，接口、配置与功能可能变动，不建议用于生产环境。
 :::
 
-本手册对应 **v0.1.0-beta.4**，构建时从固定的上游版本获取，以 GPL-3.0-only 许可证发布。
+本手册对应 **v0.1.0-beta.5**，构建时从固定的上游版本获取，以 GPL-3.0-only 许可证发布。
 
 - [安装 honk](./installation/)
 - [配置指南](./configuration.md)
