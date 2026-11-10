@@ -7,7 +7,7 @@ lastUpdated: false
 
 # 在 Arch Linux 上安装 {#title-在-arch-linux-上安装}
 
-使用系统包管理器安装 doona v0.1.0-rc.5 标准版。doona lite 请按[压缩包安装说明](install-manual.md)操作。
+使用系统包管理器安装 doona v0.1.0-rc.6 标准版。doona lite 请按[压缩包安装说明](install-manual.md)操作。
 
 在网关上打开终端，进入新建的下载目录，并在同一 shell 中完成各步。使用 root shell 时省略 `sudo`。安装后端前先检查 [honk 的前提条件](install.md#install)。
 
@@ -27,11 +27,11 @@ pacman -Syu --needed curl ca-certificates
 
 ## 2. 下载并校验软件包 {#2-下载并校验软件包}
 
-从 [v0.1.0-rc.5 发布页](https://github.com/Zakkaus/doona/releases/tag/v0.1.0-rc.5)下载：
+从 [v0.1.0-rc.6 发布页](https://github.com/Zakkaus/doona/releases/tag/v0.1.0-rc.6)下载：
 
 ```sh
-BASE=https://github.com/Zakkaus/doona/releases/download/v0.1.0-rc.5
-FILE=doona-0.1.0rc5-1-any.pkg.tar.zst
+BASE=https://github.com/Zakkaus/doona/releases/download/v0.1.0-rc.6
+FILE=doona-0.1.0rc6-1-any.pkg.tar.zst
 curl -fL -O "$BASE/$FILE" -O "$BASE/SHA256SUMS"
 awk -v file="$FILE" '$2 == file' SHA256SUMS | sha256sum -c -
 ```
@@ -55,11 +55,11 @@ ls -l /usr/share/doona/index.html
 
 | 资源 | 文件名 |
 | --- | --- |
-| 字体 | `doona-fonts-0.1.0rc5-1-any.pkg.tar.zst` |
-| 预压缩文件 | `doona-precompressed-0.1.0rc5-1-any.pkg.tar.zst` |
+| 字体 | `doona-fonts-0.1.0rc6-1-any.pkg.tar.zst` |
+| 预压缩文件 | `doona-precompressed-0.1.0rc6-1-any.pkg.tar.zst` |
 
 ```sh
-FILE=doona-fonts-0.1.0rc5-1-any.pkg.tar.zst
+FILE=doona-fonts-0.1.0rc6-1-any.pkg.tar.zst
 curl -fL -O "$BASE/$FILE"
 awk -v file="$FILE" '$2 == file' SHA256SUMS | sha256sum -c - &&
   sudo pacman -U "./$FILE"

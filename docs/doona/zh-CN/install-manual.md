@@ -7,7 +7,7 @@ lastUpdated: false
 
 # 通过压缩包或在 Alpine 上安装 {#title-通过压缩包或在-alpine-上安装}
 
-系统没有对应软件包时，可通过压缩包安装 doona v0.1.0-rc.5。Alpine 用户也可选择[已签名的软件包](#install-alpine)。
+系统没有对应软件包时，可通过压缩包安装 doona v0.1.0-rc.6。Alpine 用户也可选择[已签名的软件包](#install-alpine)。
 
 在网关上打开终端，进入新建的下载目录，并在同一 shell 中完成各步。使用 root shell 时省略 `sudo`。安装后端前先检查 [honk 的前提条件](install.md#install)。
 
@@ -20,12 +20,12 @@ lastUpdated: false
 ::: code-group
 
 ```sh [标准版]
-FILE=doona-0.1.0-rc.5.tar.gz
+FILE=doona-0.1.0-rc.6.tar.gz
 UI_DIR=/usr/share/doona
 ```
 
 ```sh [Lite]
-FILE=doona-lite-0.1.0-rc.5.tar.gz
+FILE=doona-lite-0.1.0-rc.6.tar.gz
 UI_DIR=/usr/share/doona-lite
 ```
 
@@ -34,7 +34,7 @@ UI_DIR=/usr/share/doona-lite
 ## 2. 下载并校验 {#2-下载并校验}
 
 ```sh
-BASE=https://github.com/Zakkaus/doona/releases/download/v0.1.0-rc.5
+BASE=https://github.com/Zakkaus/doona/releases/download/v0.1.0-rc.6
 curl -fL -O "$BASE/$FILE" -O "$BASE/SHA256SUMS"
 awk -v file="$FILE" '$2 == file' SHA256SUMS | sha256sum -c -
 ```
@@ -59,11 +59,11 @@ ls -l "$UI_DIR/index.html"
 
 | 资源 | 文件名 |
 | --- | --- |
-| 字体 | `doona-fonts-0.1.0-rc.5.tar.gz` |
-| 预压缩文件 | `doona-precompressed-0.1.0-rc.5.tar.gz` |
+| 字体 | `doona-fonts-0.1.0-rc.6.tar.gz` |
+| 预压缩文件 | `doona-precompressed-0.1.0-rc.6.tar.gz` |
 
 ```sh
-FILE=doona-fonts-0.1.0-rc.5.tar.gz
+FILE=doona-fonts-0.1.0-rc.6.tar.gz
 curl -fL -O "$BASE/$FILE"
 awk -v file="$FILE" '$2 == file' SHA256SUMS | sha256sum -c - &&
   sudo tar -xzf "$FILE" -C /usr/share/doona
@@ -77,8 +77,8 @@ awk -v file="$FILE" '$2 == file' SHA256SUMS | sha256sum -c - &&
 此方式安装标准版。准备好前述工具后，在新的下载目录中操作。选择名称以 `.alpine.apk` 结尾的 Alpine 资源；OpenWrt 的 apk 文件格式不同。
 
 ```sh
-BASE=https://github.com/Zakkaus/doona/releases/download/v0.1.0-rc.5
-FILE=doona-0.1.0-rc.5-r0.alpine.apk
+BASE=https://github.com/Zakkaus/doona/releases/download/v0.1.0-rc.6
+FILE=doona-0.1.0-rc.6-r0.alpine.apk
 curl -fL -O "$BASE/$FILE" -O "$BASE/doona-alpine.rsa.pub" -O "$BASE/SHA256SUMS"
 awk -v file="$FILE" '$2 == file' SHA256SUMS | sha256sum -c -
 awk '$2 == "doona-alpine.rsa.pub"' SHA256SUMS | sha256sum -c -
@@ -93,7 +93,7 @@ apk add "./$FILE"
 ls -l /usr/share/doona/index.html
 ```
 
-确认最后一条命令列出 `index.html`。可选软件包为 `doona-fonts-0.1.0-rc.5-r0.alpine.apk` 和 `doona-precompressed-0.1.0-rc.5-r0.alpine.apk`。安装时修改 `FILE`，按前述方式下载并校验，再以 root 执行 `apk add "./$FILE"`。
+确认最后一条命令列出 `index.html`。可选软件包为 `doona-fonts-0.1.0-rc.6-r0.alpine.apk` 和 `doona-precompressed-0.1.0-rc.6-r0.alpine.apk`。安装时修改 `FILE`，按前述方式下载并校验，再以 root 执行 `apk add "./$FILE"`。
 
 不添加发布公钥而直接安装时，先按上文校验下载的软件包，再以 root 执行：
 

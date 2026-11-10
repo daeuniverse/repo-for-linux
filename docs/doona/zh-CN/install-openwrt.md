@@ -7,7 +7,7 @@ lastUpdated: false
 
 # 在 OpenWrt 上安装 {#title-在-openwrt-上安装}
 
-在 OpenWrt 路由器上安装 doona v0.1.0-rc.5 和 honk。所有命令均在路由器的 root shell 中执行，安装期间保持同一 shell。
+在 OpenWrt 路由器上安装 doona v0.1.0-rc.6 和 honk。所有命令均在路由器的 root shell 中执行，安装期间保持同一 shell。
 
 ## 从 daeuniverse 软件源快速安装 {#从-daeuniverse-软件源快速安装}
 
@@ -55,13 +55,13 @@ opkg install curl ca-bundle kmod-veth kmod-nft-queue
 ```sh
 mkdir -p /tmp/doona
 cd /tmp/doona
-BASE=https://github.com/Zakkaus/doona/releases/download/v0.1.0-rc.5
+BASE=https://github.com/Zakkaus/doona/releases/download/v0.1.0-rc.6
 ```
 
 ::: code-group
 
 ```sh [apk]
-FILE=doona-0.1.0_rc5-r1.apk
+FILE=doona-0.1.0_rc6-r1.apk
 curl -fL -O "$BASE/$FILE" -O "$BASE/doona-openwrt.adb" \
   -O "$BASE/doona-openwrt.pem" -O "$BASE/SHA256SUMS"
 awk -v file="$FILE" '$2 == file' SHA256SUMS | sha256sum -c -
@@ -70,7 +70,7 @@ awk '$2 == "doona-openwrt.pem"' SHA256SUMS | sha256sum -c -
 ```
 
 ```sh [opkg]
-FILE=doona_0.1.0-rc.5-1_all.ipk
+FILE=doona_0.1.0-rc.6-1_all.ipk
 curl -fL -O "$BASE/$FILE" -O "$BASE/SHA256SUMS"
 awk -v file="$FILE" '$2 == file' SHA256SUMS | sha256sum -c -
 ```
@@ -119,8 +119,8 @@ ls -l /usr/share/doona/index.html
 
 | 软件包 | apk 文件名 | opkg 文件名 |
 | --- | --- | --- |
-| `doona-fonts` | `doona-fonts-0.1.0_rc5-r1.apk` | `doona-fonts_0.1.0-rc.5-1_all.ipk` |
-| `doona-precompressed` | `doona-precompressed-0.1.0_rc5-r1.apk` | `doona-precompressed_0.1.0-rc.5-1_all.ipk` |
+| `doona-fonts` | `doona-fonts-0.1.0_rc6-r1.apk` | `doona-fonts_0.1.0-rc.6-1_all.ipk` |
+| `doona-precompressed` | `doona-precompressed-0.1.0_rc6-r1.apk` | `doona-precompressed_0.1.0-rc.6-1_all.ipk` |
 
 使用 apk 时，将安装命令中的 `doona` 改为所选软件包名后执行。使用 opkg 时，将 `FILE` 设为所选文件名，再执行安装命令。
 
