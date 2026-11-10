@@ -2,7 +2,7 @@
 
 Run honk from the `ghcr.io/daeuniverse/honk` image on [GitHub Container Registry](https://github.com/daeuniverse/honk/pkgs/container/honk). The image contains the musl `full` release binary and the GeoIP and Geosite files pinned by the repository; the build checks every download against its SHA-256 checksum.
 
-Each release is tagged with its version without the `v`, for example `ghcr.io/daeuniverse/honk:0.1.0-beta.5`. `latest` follows formal releases only, never pre-releases. Images are published for linux/amd64 and linux/arm64, and pulling needs no login.
+Each release is tagged with its version without the `v`, for example `ghcr.io/daeuniverse/honk:0.1.0-beta.6`. `latest` follows formal releases only, never pre-releases. Images are published for linux/amd64 and linux/arm64, and pulling needs no login.
 
 Use the sudo tab if sudo is configured for your account. Use the root tab when already in a root shell.
 
@@ -66,7 +66,7 @@ Download the repository's `docker-compose.yml` and write the release version to 
 
 ```sh
 curl -fLO https://raw.githubusercontent.com/daeuniverse/honk/main/docker-compose.yml
-echo 'HONK_VERSION=<version>' > .env   # for example 0.1.0-beta.5
+echo 'HONK_VERSION=<version>' > .env   # for example 0.1.0-beta.6
 ```
 
 If the host uses an external BTF file, set it up as described in step 5 first. Create the lock file, then start the container and follow its logs:

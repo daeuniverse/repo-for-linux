@@ -72,7 +72,7 @@ async function markdownFiles(directory) {
 
 test('every fetched topic is present, attributed and reachable in every locale', async () => {
   const topics = inventory.entries.filter(entry => entry.project === 'honk' && entry.locale === 'en-US').map(entry => entry.topic).sort()
-  assert.equal(topics.length, 23, 'The pinned release contains 23 manual pages per source locale')
+  assert.equal(topics.length, 24, 'The pinned release contains 24 manual pages per source locale')
   assert.equal(new Set(topics).size, topics.length)
   for (const section of ['design', 'operations', 'reference']) assert.ok(topics.some(topic => topic.startsWith(`${section}/`)))
   for (const locale of Object.values(locales)) {
