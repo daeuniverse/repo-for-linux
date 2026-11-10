@@ -64,6 +64,8 @@ global {
 
 Apply then writes normally.
 
+doona 0.1.0-rc.6 and later word this refusal differently when no loaded file states the settings honk refuses the write over: the notice says that they are not in the configuration and asks you to state them there and restart honk once. That wording covers any restart-only setting, not only `nfqueue_enable`.
+
 
 ## Apply says a required file is unavailable {#offline-dependency}
 

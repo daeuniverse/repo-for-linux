@@ -7,7 +7,7 @@ lastUpdated: false
 
 # 在 Gentoo 上安裝 {#title-在-gentoo-上安裝}
 
-將儲存庫中的 ebuild 加入本機 Portage 儲存庫，安裝 doona v0.1.0-rc.5。doona lite 請使用[手動安裝](install-manual.md)。
+將儲存庫中的 ebuild 加入本機 Portage 儲存庫，安裝 doona v0.1.0-rc.6。doona lite 請使用[手動安裝](install-manual.md)。
 
 在閘道器上開啟終端機，進入新建的下載目錄，並在同一 shell 中完成各步。使用 root shell 時省略 `sudo`。安裝後端前先檢查 [honk 的前提條件](install.md#install)。
 
@@ -40,8 +40,8 @@ portageq get_repos /
 ## 2. 新增 ebuild {#2-新增-ebuild}
 
 ```sh
-VERSION=0.1.0-rc.5
-PV=0.1.0_rc5
+VERSION=0.1.0-rc.6
+PV=0.1.0_rc6
 RAW=https://raw.githubusercontent.com/Zakkaus/doona/v${VERSION}/install/gentoo/net-proxy/doona
 sudo mkdir -p "$REPO/net-proxy/doona"
 sudo curl -fL -o "$REPO/net-proxy/doona/doona-$PV.ebuild" "$RAW/doona-$PV.ebuild"
@@ -74,12 +74,12 @@ sudo ebuild "$REPO/net-proxy/doona/doona-$PV.ebuild" manifest
 
 ## 4. 接受測試關鍵字並安裝 {#4-接受測試關鍵字並安裝}
 
-將 `=net-proxy/doona-0.1.0_rc5 ~amd64` 新增至 `package.accept_keywords` 設定，將 `~amd64` 替換為目前架構的測試關鍵字，例如 `~arm64`。如果該設定是目錄，則寫入其中的檔案。
+將 `=net-proxy/doona-0.1.0_rc6 ~amd64` 新增至 `package.accept_keywords` 設定，將 `~amd64` 替換為目前架構的測試關鍵字，例如 `~arm64`。如果該設定是目錄，則寫入其中的檔案。
 
 不需要字型時，在安裝前將 `net-proxy/doona -fonts` 新增至 `package.use`。
 
 ```sh
-sudo emerge --ask =net-proxy/doona-0.1.0_rc5
+sudo emerge --ask =net-proxy/doona-0.1.0_rc6
 ls -l /usr/share/doona/index.html
 ```
 

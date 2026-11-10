@@ -78,6 +78,8 @@ The header shows engine state, **Config version**, **Uptime**, **CPU usage** and
 | **Backend features** | Features advertised by this backend. Select an entry to open its corresponding page. |
 | **Features that are off** | Each limitation's cause, the setting or startup option needed to enable it, and a link to its requirements. Includes rule and group editing, import and revision history, and geodata settings. Appears only when limitations exist. |
 
+**Features that are off** names the cause, not only the feature. Flow recording appears as **Flows are recorded only while viewed** in demand mode, as **Flow recording is set to Off in Settings** when the runtime mode is Off, and as **Flow recording is off** when the configuration prohibits recording. **How to turn on** describes the change and links to Settings → **Temporary runtime overrides** when that switch exists.
+
 Select **Export state JSON** to save the reported state. For absent fields or actions, see [status requirements](feature-requirements.md#req-runtime-status) and [reload, suspend and resume requirements](feature-requirements.md#req-reload-suspend).
 
 Status cards retain their space with placeholders while loading. Loading notices show progress indicators, and meters expose their names and value text to assistive technology.

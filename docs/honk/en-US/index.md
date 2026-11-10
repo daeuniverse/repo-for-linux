@@ -6,7 +6,7 @@ honk is a Linux transparent proxy engine written in Rust, combining a dae-style 
 honk is experimental. Its interfaces, configuration and features may change; it is not recommended for production.
 :::
 
-This manual shows **v0.1.0-beta.5** and is fetched from the pinned upstream release under GPL-3.0-only.
+This manual shows **v0.1.0-beta.6** and is fetched from the pinned upstream release under GPL-3.0-only.
 
 - [Install honk](./installation/)
 - [Configuration](./configuration.md)

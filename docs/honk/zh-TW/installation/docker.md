@@ -2,7 +2,7 @@
 
 使用 [GitHub Container Registry](https://github.com/daeuniverse/honk/pkgs/container/honk) 上的映像檔 `ghcr.io/daeuniverse/honk` 執行 honk。映像檔包含 musl `full` 發行版二進位檔，以及儲存庫固定版本的 GeoIP 和 Geosite 檔案；建置時會以 SHA-256 驗證每個下載的檔案。
 
-每個發行版以去掉 `v` 的版本號作為映像檔標籤，例如 `ghcr.io/daeuniverse/honk:0.1.0-beta.5`；`latest` 只指向正式版，不含預發行版。映像檔提供 linux/amd64 和 linux/arm64 兩種架構，下載時無需登入。
+每個發行版以去掉 `v` 的版本號作為映像檔標籤，例如 `ghcr.io/daeuniverse/honk:0.1.0-beta.6`；`latest` 只指向正式版，不含預發行版。映像檔提供 linux/amd64 和 linux/arm64 兩種架構，下載時無需登入。
 
 已設定 sudo 的一般使用者選擇 sudo 標籤；已進入 root shell 時選擇 root 標籤。
 
@@ -66,7 +66,7 @@ systemctl disable --now honk.service
 
 ```sh
 curl -fLO https://raw.githubusercontent.com/daeuniverse/honk/main/docker-compose.yml
-echo 'HONK_VERSION=<version>' > .env   # 例如 0.1.0-beta.5
+echo 'HONK_VERSION=<version>' > .env   # 例如 0.1.0-beta.6
 ```
 
 若主機使用外部 BTF 檔案，請先依第 5 步設定。建立鎖定檔，然後啟動容器並查看日誌：

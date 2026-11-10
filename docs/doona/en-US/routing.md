@@ -103,6 +103,8 @@ For selections across restarts, see [persistence requirements](feature-requireme
 5. Review **Default member**, **Final outbound** and the connection-interruption switch when offered. The default is the initial member for manual selection. The group uses the final outbound when no member is available.
 6. Choose **Create** for a new group or **Apply** for an edit, then check the result. **Cancel** abandons the draft after any discard confirmation.
 
+**Selection policy** recommends **Score**, the policy honk’s own shipped configuration uses; new groups and the routing templates start with it. **Load balance** rotates nodes per connection, so sign-ins and Cloudflare checks may break.
+
 Removing an explicit member does not exclude it if another filter still matches it. Change that filter too. For read-only fields, see [group editing requirements](feature-requirements.md#req-group-edit).
 
 **Default member** appears only for manual selection and lists direct members. Choosing an automatic policy leaves the stored `default` unchanged. **Final outbound** offers `direct`, `block`, groups and nodes, excluding groups that would form a cycle. **None** removes the corresponding `default` or `final` setting.
@@ -111,7 +113,7 @@ Removing an explicit member does not exclude it if another filter still matches 
 
 After a configuration conflict, retrying preserves fields you did not edit. Reopen the editor if edits conflict or the group has a new name. If someone removed the group elsewhere, the editor stays open and reports that it did not save the changes.
 
-Expand **Regions** to choose regions; selected tags stay visible. **Add filter** supports name and `subtag` matches, and custom expressions remain editable as text. In the **Groups** and **Nodes** pickers, search stays fixed while the options scroll.
+Expand **Regions** to choose regions; selected tags stay visible. The picker lists only the regions that have nodes, plus the ones already selected. A node named only by a flag emoji, such as `🇭🇰-家宽`, counts toward that flag’s region. **Add filter** supports name and `subtag` matches, and custom expressions remain editable as text. In the **Groups** and **Nodes** pickers, search stays fixed while the options scroll.
 
 ### Test members or change background checks {#test-members-or-change-background-checks}
 
@@ -156,7 +158,7 @@ The defaults apply when the routing holds no rules. Otherwise each option starts
 
 Warnings identify reused groups that select one exact node or use a `fixed` policy. If a new group has the same name as a node, rules naming it reach the group instead of the node.
 
-The target is the file containing top-level `routing`, or the main file when none exists. doona adds missing groups there. Existing DNS routing, other content and other files stay unchanged. New group labels follow the interface language; region labels include country flags.
+The target is the file containing top-level `routing`, or the main file when none exists. doona adds missing groups there. Existing DNS routing, other content and other files stay unchanged. New group labels follow the interface language; region labels include country flags. A template creates its groups with the Score policy.
 
 
 ## Add service rules {#service-rules}
@@ -186,7 +188,7 @@ If doona cannot write the fallback's file, the dialog reports that rules cannot 
 3. Choose **Outbound** and **Insert**. Review earlier rules when choosing a position: the first matching rule determines the result.
 4. Choose **Add rule** and check the result in the list.
 
-Switching from **Expression** to **Select** converts representable expressions into condition rows; other expressions stay in **Expression** with a hint. **Domain keyword** matches a substring: `tracker, ads` matches either keyword.
+Switching from **Expression** to **Select** converts representable expressions into condition rows; other expressions stay in **Expression** with a hint. **Domain keyword** matches a substring: `tracker, ads` matches either keyword. **Device MAC address** matches the source device by its hardware address, beside the geosite and IP conditions.
 
 **Outbound** offers `direct`, `block` and groups, but not individual nodes. Turn on **Lock this outbound** to add `must`. **Insert** offers **Last, before the fallback** or a position before a listed rule, starting at the first offered position. Both pickers support search.
 

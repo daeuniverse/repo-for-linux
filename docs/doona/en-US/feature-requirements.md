@@ -372,6 +372,7 @@ Error codes identify API failures. The sections distinguish them from read-only 
 **Check in doona**
 
 - Check Routing log, Rules' recorded hits, and Settings → Temporary runtime overrides.
+- **System status** → **Features that are off** names the state: **Flows are recorded only while viewed** in demand mode, **Flow recording is set to Off in Settings** when the runtime mode is Off, and **Flow recording is off** when the configuration prohibits recording.
 
 **To enable**
 
@@ -386,7 +387,9 @@ Error codes identify API failures. The sections distinguish them from read-only 
 
 **Details**
 
-- Off records nothing; On records supported scopes; Auto records on client demand; Sampled records a subset.
+- **Off** records nothing, **Always** records the supported scopes, **On flow demand** records while a client asks for flows, and a sampled mode records a subset.
+- **On flow demand** is the default. Recording starts when a client asks for flows and stops after the reported grace period, so flows from before you opened a page are not kept. Connections, Rules and Routing log ask for flows while they are open.
+- To record without a client, set **Flow recording** to **Always** in Settings → **Temporary runtime overrides**. The configuration cannot pin the mode: its `record_flows` only permits or prohibits recording, and a restart or an accepted configuration activation returns the mode to **On flow demand**.
 
 
 ## Routing rules, DNS rules, and templates {#req-rules}
