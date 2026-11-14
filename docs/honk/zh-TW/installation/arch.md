@@ -16,7 +16,7 @@ paru -S honk-core-bin
 
 :::
 
-安裝完成後，請依[如何開始](../how-to-start.md)設定 honk 並啟動服務。
+安裝完成後，請依[快速上手](../how-to-start.md)設定 honk 並啟動服務。
 
 ## 下一步
 

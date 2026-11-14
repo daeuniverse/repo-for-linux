@@ -2,7 +2,7 @@
 
 Install honk from the Dae Universe repository.
 
-Use the sudo tab if sudo is configured for your account. Use the root tab when already in a root shell.
+If sudo is configured for your account, use the sudo tab. If you are already in a root shell, use the root tab.
 
 These steps need systemd and Linux 6.12 or later. Check the kernel version with `uname -r`; the [kernel requirements](../how-to-start.md#linux-kernel-requirements) list the rest.
 

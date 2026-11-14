@@ -16,7 +16,7 @@ paru -S honk-core-bin
 
 :::
 
-After installation, see [How to start](../how-to-start.md) for configuration and service startup.
+After installation, see [Quick Start](../how-to-start.md) for configuration and service startup.
 
 ## Next steps
 

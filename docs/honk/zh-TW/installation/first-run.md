@@ -6,7 +6,7 @@
 
 ## 1. 設定 honk
 
-首次安裝時，將以下僅直連設定儲存為目前目錄下的 `config.dae`。把 `br-lan` 替換為接收用戶端流量的 LAN 介面；只處理本機流量時，刪除 `lan_interface`。`wan_interface: auto` 跟隨 IPv4 預設路由。
+首次安裝時，將以下只走直連的設定儲存為目前目錄下的 `config.dae`。把 `br-lan` 替換為接收用戶端流量的 LAN 介面；只處理本機流量時，刪除 `lan_interface`。`wan_interface: auto` 跟隨 IPv4 預設路由。
 
 ```dae
 global {
@@ -39,7 +39,7 @@ install -m 0600 ./config.dae /etc/honk/config.dae
 
 :::
 
-請依實際網路環境編輯 `/etc/honk/config.dae`，再啟動服務。[如何開始](../how-to-start.md)列出核心需求與最小設定。
+請依實際網路環境編輯 `/etc/honk/config.dae`，再啟動服務。[快速上手](../how-to-start.md)列出核心要求與最小設定。
 
 套件內含 doona。請在設定檔加入以下內容以啟用網頁介面；若已有 `experimental` 區段，將內容併入該區段：
 

@@ -6,7 +6,7 @@
 
 ## 1. 配置 honk
 
-首次安装时，将以下仅直连配置保存为当前目录下的 `config.dae`。把 `br-lan` 替换为接收客户端流量的 LAN 接口；只处理本机流量时，删除 `lan_interface`。`wan_interface: auto` 跟随 IPv4 默认路由。
+首次安装时，把以下仅直连配置保存为当前目录下的 `config.dae`。把 `br-lan` 替换为客户端流量实际进入的 LAN 接口；只代理本机流量时删除 `lan_interface`。`wan_interface: auto` 跟随最低 metric 的 IPv4 默认路由。
 
 ```dae
 global {
@@ -23,7 +23,7 @@ routing {
 }
 ```
 
-如果 `/etc/honk/config.dae` 已存在，请保留并跳过此步；否则以限制访问的权限安装配置文件：
+如果 `/etc/honk/config.dae` 已存在，保留该文件并跳过此步；否则用下面的命令安装配置文件，目录与文件只允许 root 访问：
 
 ::: code-group
 
@@ -39,9 +39,9 @@ install -m 0600 ./config.dae /etc/honk/config.dae
 
 :::
 
-启动前，按实际网络修改 `/etc/honk/config.dae`。内核要求和最小配置见[如何开始](../how-to-start.md)。
+启动前，按实际网络修改 `/etc/honk/config.dae`。内核要求见[Linux 内核要求](../how-to-start.md#linux-内核要求)，完整配置见[配置指南](../configuration.md)。
 
-软件包已内嵌 doona。要启用网页界面，请将以下配置加入配置文件；如果已有 `experimental` 小节，将内容合并到该小节：
+软件包已内嵌 doona。要启用网页界面，把以下配置加入配置文件；如果已有 `experimental` 小节，把内容合并到该小节：
 
 ```dae
 experimental {
@@ -57,7 +57,7 @@ experimental {
 
 ## 2. 启动服务
 
-如果已安装 dae，请先停止服务并禁用开机自启，再启动 honk：
+如果已安装 dae，先停止服务并禁用开机自启，再启动 honk：
 
 ::: code-group
 
@@ -115,6 +115,6 @@ journalctl -u honk.service -b -n 50 --no-pager
 
 ## 下一步
 
-- [首次登录](/zh-CN/doona/first-sign-in)：打开 <http://127.0.0.1:9527/ui/>，创建管理员账号。
+- [首次登录](/zh-CN/doona/first-sign-in)：连接 doona 与 honk，并创建管理员账号。
 - [管理节点、策略组和规则](/zh-CN/doona/routing)：添加节点或订阅和路由规则；在此之前所有流量直连。
 - [故障排除](/zh-CN/doona/troubleshooting)：无法正常使用时的排查步骤。

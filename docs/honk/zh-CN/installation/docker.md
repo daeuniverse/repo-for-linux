@@ -8,9 +8,9 @@
 
 ## 1. 检查宿主机
 
-honk 需要加载并挂载 eBPF 程序、创建 `dae0` 和 `daens` 命名空间、修改 sysctl，并在宿主机的 bpffs 上固定 map，因此容器以特权模式运行，并共享宿主机的网络和 PID 命名空间。它对宿主机的改动与直接安装相同，不提供任何隔离。
+honk 要加载并挂接 eBPF 程序、创建 `dae0` 和 `daens` 命名空间、修改 sysctl，还要在宿主机的 bpffs 上固定 map，因此容器以特权模式运行，并共享宿主机的网络和 PID 命名空间。它对宿主机的改动与直接安装相同，没有任何隔离。
 
-宿主机必须满足[内核要求](https://github.com/daeuniverse/honk/blob/main/doc/zh/how-to-start.md#linux-内核要求)，包括 Linux 6.12+ 和已挂载的 bpffs。
+宿主机必须满足[内核要求](../how-to-start.md#linux-内核要求)，包括 Linux 6.12+ 和已挂载的 bpffs。
 
 后续步骤还需要带 Compose 插件的 [Docker Engine](https://docs.docker.com/engine/install/) 和 `curl`。用以下命令检查 Compose；已安装插件时会输出 Compose 的版本。
 
@@ -28,9 +28,9 @@ docker compose version
 
 ## 2. 准备配置
 
-按[最小配置](https://github.com/daeuniverse/honk/blob/main/doc/zh/how-to-start.md#最小配置)准备 `/etc/honk/config.dae` 和 `/var/lib/honk`。
+按[最小配置](../how-to-start.md#最小配置)准备 `/etc/honk/config.dae` 和 `/var/lib/honk`。
 
-镜像已内嵌 doona。要启用网页界面，请将以下配置加入配置文件；如果已有 `experimental` 小节，将内容合并到该小节：
+镜像已内嵌 doona。要启用网页界面，把以下配置加入配置文件；如果已有 `experimental` 小节，把内容合并到该小节：
 
 ```dae
 experimental {
@@ -69,7 +69,7 @@ curl -fLO https://raw.githubusercontent.com/daeuniverse/honk/main/docker-compose
 echo 'HONK_VERSION=<version>' > .env   # 例如 0.1.0-beta.6
 ```
 
-如果宿主机使用外部 BTF 文件，请先按第 5 步配置。创建锁文件，然后启动容器并查看日志：
+如果宿主机使用外部 BTF 文件，先按第 5 步配置。创建锁文件，然后启动容器并查看日志：
 
 ::: code-group
 
@@ -87,9 +87,9 @@ docker compose logs -f
 
 :::
 
-该文件从宿主机挂载 `/sys`、`/etc/honk` 和 `/var/lib/honk`。配置目录的挂载会覆盖镜像内仅直连的默认配置；`/var/lib/honk` 保存运行时状态，例如原生 API 的管理员账户，重启或升级后仍然保留。
+该文件从宿主机挂载 `/sys`、`/etc/honk` 和 `/var/lib/honk`，并以只读方式挂载 `/etc/localtime`，让容器的日志时间戳和 geodata 更新时间跟随宿主机时区。宿主机没有 `/etc/localtime` 时，删除这项挂载，改在服务的 `environment` 里把 `TZ` 设为 `CST-8` 这类 POSIX 字符串。配置目录的挂载会覆盖镜像内仅直连的默认配置；`/var/lib/honk` 保存运行时状态，例如原生 API 的管理员账户，重启或升级后仍然保留。
 
-容器共享宿主机网络，因此网页界面监听宿主机的回环地址。
+容器共享宿主机的网络命名空间，因此网页界面监听宿主机的回环地址。
 
 在 honk 所在主机上打开 <http://127.0.0.1:9527/ui/>，首次访问时创建管理员账号。
 
@@ -133,9 +133,9 @@ services:
           create_host_path: false
 ```
 
-## 6. 重载和查看状态
+## 6. reload 和查看状态
 
-重载配置：
+reload 配置：
 
 ::: code-group
 
@@ -171,7 +171,7 @@ docker compose exec honk nft list ruleset
 
 ## 下一步
 
-- [首次登录](/zh-CN/doona/first-sign-in)：打开 <http://127.0.0.1:9527/ui/>，创建管理员账号。
+- [首次登录](/zh-CN/doona/first-sign-in)：连接 doona 与 honk，并创建管理员账号。
 - [管理节点、策略组和规则](/zh-CN/doona/routing)：添加节点或订阅和路由规则；在此之前所有流量直连。
 - [故障排除](/zh-CN/doona/troubleshooting)：无法正常使用时的排查步骤。
 

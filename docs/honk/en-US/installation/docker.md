@@ -4,13 +4,13 @@ Run honk from the `ghcr.io/daeuniverse/honk` image on [GitHub Container Registry
 
 Each release is tagged with its version without the `v`, for example `ghcr.io/daeuniverse/honk:0.1.0-beta.6`. `latest` follows formal releases only, never pre-releases. Images are published for linux/amd64 and linux/arm64, and pulling needs no login.
 
-Use the sudo tab if sudo is configured for your account. Use the root tab when already in a root shell.
+If sudo is configured for your account, use the sudo tab. If you are already in a root shell, use the root tab.
 
 ## 1. Check the host
 
-The container runs privileged in the host's network and PID namespaces, because honk loads and attaches eBPF programs, creates `dae0` and the `daens` namespace, changes sysctls and pins maps on the host's bpffs. It therefore changes the host exactly as a native installation does and provides no isolation.
+The container runs privileged in the host's network and PID namespaces. It needs that access because honk loads and attaches eBPF programs, creates `dae0` and the `daens` namespace, changes sysctls, and pins maps on the host's bpffs. It therefore changes the host exactly as a native installation does and provides no isolation.
 
-The host must meet the [kernel requirements](https://github.com/daeuniverse/honk/blob/main/doc/en/how-to-start.md#linux-kernel-requirements), including Linux 6.12+ and a mounted bpffs.
+The host must meet the [kernel requirements](../how-to-start.md#linux-kernel-requirements), including Linux 6.12+ and a mounted bpffs.
 
 The steps also need [Docker Engine](https://docs.docker.com/engine/install/) with the Compose plugin, and `curl`. Check Compose with the command below; it prints the Compose version when the plugin is installed.
 
@@ -28,7 +28,7 @@ docker compose version
 
 ## 2. Prepare the configuration
 
-Prepare `/etc/honk/config.dae` and `/var/lib/honk` as described in [Minimal configuration](https://github.com/daeuniverse/honk/blob/main/doc/en/how-to-start.md#minimal-configuration).
+Prepare `/etc/honk/config.dae` and `/var/lib/honk` as described in [Minimal configuration](../how-to-start.md#minimal-configuration).
 
 The image embeds doona. To enable it, add this block to your configuration, or merge it into an existing `experimental` block:
 
@@ -87,9 +87,9 @@ docker compose logs -f
 
 :::
 
-The compose file mounts `/sys`, `/etc/honk` and `/var/lib/honk` from the host. The configuration mount replaces the image's direct-only default, and `/var/lib/honk` keeps the runtime state, such as the native API administrator account, across restarts and upgrades.
+The compose file mounts `/sys`, `/etc/honk` and `/var/lib/honk` from the host, and `/etc/localtime` read-only, so log timestamps and the geodata update schedule use the host time zone. On a host without `/etc/localtime`, remove that mount and set `TZ` in the service's `environment` to a POSIX string such as `CST-8`. The configuration mount replaces the image's direct-only default, and `/var/lib/honk` keeps the runtime state, such as the native API administrator account, across restarts and upgrades.
 
-The container uses the host network, so the web UI listens on the host’s loopback address.
+The container uses the host network, so the web UI listens on the host's loopback address.
 
 On the honk host, open <http://127.0.0.1:9527/ui/> and create the administrator account on first access.
 
@@ -97,7 +97,7 @@ On the honk host, open <http://127.0.0.1:9527/ui/> and create the administrator 
 
 The lock-file bind shares the native instance's `/run/honk-core.lock`, preventing containers from taking over an active datapath. Leave this file in place after stopping; never delete, replace or truncate an active lock.
 
-It must exist before automatic container startup on every boot. On systemd hosts, arrange non-truncating boot-time creation:
+The lock file must exist before automatic container startup on every boot. On systemd hosts, arrange non-truncating boot-time creation:
 
 ::: code-group
 
@@ -193,7 +193,7 @@ docker compose up -d
 
 :::
 
-In a repository checkout, `docker compose build` (`sudo docker compose build` with sudo) builds the same image from the published release instead of pulling it.
+In a repository checkout, `sudo docker compose build` builds the same image from the published release instead of pulling it.
 
 ## 8. Uninstall
 
