@@ -1,14 +1,14 @@
 # honk <Badge type="warning" text="Experimental" />
 
-honk is a Linux transparent proxy engine written in Rust, combining a dae-style eBPF datapath with user-space proxy protocols and routing. It uses the same `dae0` interface and `daens` network namespace as dae and attaches to the same interfaces, so it cannot run at the same time as dae.
+honk is a Linux transparent proxy engine written in Rust. It combines a dae-style eBPF datapath with userspace proxy protocols and routing. It creates the same `dae0` interface and `daens` network namespace as dae and attaches to the same interfaces. honk and dae therefore cannot run at the same time.
 
 ::: warning Not yet stable
-honk is experimental. Its interfaces, configuration and features may change; it is not recommended for production.
+honk is an alpha release. Its interfaces, configuration and features may change; it is not recommended for production.
 :::
 
-This manual shows **v0.1.0-beta.6** and is fetched from the pinned upstream release under GPL-3.0-only.
+This manual follows honk `main` at commit `226830e`, which is newer than the packaged v0.1.0-beta.6; features documented here may reach the packages in the next release. It is fetched from upstream under GPL-3.0-only.
 
 - [Install honk](./installation/)
-- [Configuration](./configuration.md)
+- [Configuration guide](./configuration.md)
 - [CLI reference](./reference/cli.md)
 - [Configuration dialect reference](./reference/dialect.md)

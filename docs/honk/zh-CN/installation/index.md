@@ -11,4 +11,4 @@
 - [Docker](./docker.md)
 - [OpenWrt](/zh-CN/openwrt/)
 
-通过 APT/RPM 软件源安装软件包后，请继续阅读[首次运行](./first-run.md)，配置并启动 honk。
+通过 APT/RPM 软件源安装软件包后，继续阅读[首次运行](./first-run.md)，配置并启动 honk。

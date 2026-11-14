@@ -2,11 +2,13 @@
 
 Configure and start honk after installing the package on [Debian / Ubuntu](./debian.md), [Fedora / RHEL](./fedora.md) or [openSUSE](./opensuse.md).
 
-Use the sudo tab if sudo is configured for your account. Use the root tab when already in a root shell.
+If sudo is configured for your account, use the sudo tab. If you are already in a root shell, use the root tab.
 
 ## 1. Configure honk
 
-For a new installation, save the following direct-only configuration as `config.dae` in your current directory. Replace `br-lan` with the LAN interface receiving client traffic; remove `lan_interface` to intercept only traffic from this host. `wan_interface: auto` follows the IPv4 default route.
+For a new installation, save the following direct-only configuration as `config.dae` in the current directory. Use it to verify the datapath before you add nodes or routing rules.
+
+Replace `br-lan` with the LAN interface that receives client traffic. To intercept only local traffic, remove `lan_interface`. `wan_interface: auto` follows the lowest-metric IPv4 default route.
 
 ```dae
 global {
@@ -39,7 +41,7 @@ install -m 0600 ./config.dae /etc/honk/config.dae
 
 :::
 
-Edit `/etc/honk/config.dae` for your network before starting the service. See [How to start](../how-to-start.md) for kernel requirements and minimal configuration.
+Edit `/etc/honk/config.dae` for your network before starting the service. See [Quick Start](../how-to-start.md) for kernel requirements and minimal configuration.
 
 The package embeds doona. To enable it, add this block to your configuration, or merge it into an existing `experimental` block:
 
@@ -57,7 +59,7 @@ experimental {
 
 ## 2. Start the service
 
-If dae is installed, stop it and disable its startup at boot before starting honk:
+If dae is installed, stop it and disable it at boot before starting honk:
 
 ::: code-group
 

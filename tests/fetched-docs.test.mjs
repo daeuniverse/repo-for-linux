@@ -5,7 +5,7 @@ import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { gzipSync } from 'node:zlib'
 import { locales } from '../docs/.vitepress/locales.mjs'
-import { createHonkAnchorRewriter, fallbackNotice, rewriteMarkdown, rewriteUrl, validateSources, verifyArchiveCommit } from '../scripts/fetch-docs.mjs'
+import { createHonkAnchorRewriter, fallbackNotice, splitSudoFences, rewriteMarkdown, rewriteUrl, validateSources, verifyArchiveCommit } from '../scripts/fetch-docs.mjs'
 
 const root = fileURLToPath(new URL('../', import.meta.url))
 const sources = JSON.parse(await readFile(join(root, 'docs/.vitepress/sources.json'), 'utf8'))
@@ -13,17 +13,17 @@ const inventory = JSON.parse(await readFile(join(root, 'docs/.vitepress/generate
 const { honk } = sources
 const blob = `${honk.repository}/blob/${honk.commit}/`
 
-test('manual sources pin a release, revision, license and all site locales', () => {
+test('manual sources pin a release or main, revision, license and all site locales', () => {
   validateSources(sources)
   assert.deepEqual(Object.keys(sources), ['honk'])
-  assert.match(honk.ref, /^v\d+\.\d+\.\d+/)
+  assert.match(honk.ref, /^(?:v\d+\.\d+\.\d+.*|main)$/)
   assert.match(honk.commit, /^[a-f0-9]{40}$/)
   assert.equal(honk.repository, 'https://github.com/daeuniverse/honk')
   assert.equal(honk.license, 'GPL-3.0-only')
   assert.deepEqual(Object.keys(honk.locales).sort(), Object.values(locales).map(locale => locale.lang).sort())
   assert.equal(honk.locales['en-US'], 'doc/en')
   assert.equal(honk.locales['zh-CN'], 'doc/zh')
-  assert.equal(honk.locales['zh-TW'], honk.locales['zh-CN'])
+  assert.equal(honk.locales['zh-TW'], 'doc/zh-TW')
   assert.throws(() => validateSources({ honk: { ...honk, commit: 'main' } }))
   assert.throws(() => validateSources({ honk: { ...honk, ref: '' } }))
   for (const path of ['doc/../en', '../doc/en', '/doc/en', 'doc/en/../../escape']) {
@@ -92,7 +92,7 @@ test('every fetched topic is present, attributed and reachable in every locale',
       assert.ok(footer.includes(`${blob}${honk.locales[locale.lang]}/${entry.topic}`), path)
       assert.ok(footer.includes(`${blob}LICENSE`), path)
       assert.ok(footer.includes(honk.license), path)
-      assert.equal(entry.fallback, locale.lang === 'zh-TW')
+      assert.equal(entry.fallback, locale.lang === 'zh-TW' && honk.locales['zh-TW'] === honk.locales['zh-CN'])
       if (entry.fallback) {
         assert.ok(page.indexOf(fallbackNotice) < page.indexOf('<div'), path)
         assert.ok(page.includes('lang="zh-CN"'), path)
@@ -128,4 +128,12 @@ test('honk fragments resolve to rendered target headings without changing litera
   assert.equal(rewrite('[missing](#unknown)', 'reference/api.md'), '[missing](#unknown)')
   const ambiguous = await createHonkAnchorRewriter(new Map([['a.md', '# A\n\n## Foo-bar\n\n## Foobar']]))
   assert.throws(() => ambiguous('[ambiguous](#foo_bar)', 'a.md'), /Ambiguous honk heading/)
+})
+
+test('honk shell blocks that use sudo get sudo and root tabs', () => {
+  const input = ['Run:', '', '```sh', 'sudo mkdir -p /etc/honk', 'echo x | sudo tee /etc/honk/a', 'honk-core --version', '```', '',
+    '```sh', 'sudo -u nobody id', '```', '', '```text', 'sudo stays', '```'].join('\n')
+  assert.equal(splitSudoFences(input), ['Run:', '', '::: code-group', '', '```sh [sudo]', 'sudo mkdir -p /etc/honk',
+    'echo x | sudo tee /etc/honk/a', 'honk-core --version', '```', '', '```sh [root]', 'mkdir -p /etc/honk', 'echo x | tee /etc/honk/a',
+    'honk-core --version', '```', '', ':::', '', '```sh', 'sudo -u nobody id', '```', '', '```text', 'sudo stays', '```'].join('\n'))
 })
