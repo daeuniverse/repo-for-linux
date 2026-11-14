@@ -2,7 +2,7 @@
   "honk": {
     "repository": "https://github.com/daeuniverse/honk",
     "ref": "main",
-    "commit": "226830e4ecf069c209113ff9361da6685e79b2e4",
+    "commit": "6db2c39af4f4d3800e5ed403a6f30db977170b5b",
     "license": "GPL-3.0-only",
     "locales": {
       "en-US": "doc/en",
