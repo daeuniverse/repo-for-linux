@@ -128,7 +128,9 @@ supplies sidebar titles from the first heading, grouped by top-level pages, desi
 and reference. The honk import resolves link fragments against headings parsed by VitePress.
 Existing IDs are preserved; punctuation variants map only to a unique target heading. Relative links within each manual stay local; links outside it resolve to the
 pinned upstream tree. Each page carries a pinned source and license footer. Traditional Chinese
-currently uses the Simplified Chinese source with a notice on every page; it is not a translation.
+comes from upstream `doc/zh-TW`; the Simplified Chinese fallback and its notice apply only when a
+source names no Traditional Chinese directory. A shell block whose commands use sudo becomes a
+sudo and root code group, like the site's own pages; blocks with sudo options stay as written.
 
 The doona manual is committed source: `docs/doona/{en-US,zh-CN,zh-TW}/` holds its 29 pages per
 locale, and their routes are `/doona/`, `/zh-CN/doona/` and `/zh-TW/doona/`. It began as the

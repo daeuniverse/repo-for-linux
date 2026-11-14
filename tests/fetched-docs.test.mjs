@@ -5,7 +5,7 @@ import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { gzipSync } from 'node:zlib'
 import { locales } from '../docs/.vitepress/locales.mjs'
-import { createHonkAnchorRewriter, fallbackNotice, rewriteMarkdown, rewriteUrl, validateSources, verifyArchiveCommit } from '../scripts/fetch-docs.mjs'
+import { createHonkAnchorRewriter, fallbackNotice, splitSudoFences, rewriteMarkdown, rewriteUrl, validateSources, verifyArchiveCommit } from '../scripts/fetch-docs.mjs'
 
 const root = fileURLToPath(new URL('../', import.meta.url))
 const sources = JSON.parse(await readFile(join(root, 'docs/.vitepress/sources.json'), 'utf8'))
@@ -128,4 +128,12 @@ test('honk fragments resolve to rendered target headings without changing litera
   assert.equal(rewrite('[missing](#unknown)', 'reference/api.md'), '[missing](#unknown)')
   const ambiguous = await createHonkAnchorRewriter(new Map([['a.md', '# A\n\n## Foo-bar\n\n## Foobar']]))
   assert.throws(() => ambiguous('[ambiguous](#foo_bar)', 'a.md'), /Ambiguous honk heading/)
+})
+
+test('honk shell blocks that use sudo get sudo and root tabs', () => {
+  const input = ['Run:', '', '```sh', 'sudo mkdir -p /etc/honk', 'echo x | sudo tee /etc/honk/a', 'honk-core --version', '```', '',
+    '```sh', 'sudo -u nobody id', '```', '', '```text', 'sudo stays', '```'].join('\n')
+  assert.equal(splitSudoFences(input), ['Run:', '', '::: code-group', '', '```sh [sudo]', 'sudo mkdir -p /etc/honk',
+    'echo x | sudo tee /etc/honk/a', 'honk-core --version', '```', '', '```sh [root]', 'mkdir -p /etc/honk', 'echo x | tee /etc/honk/a',
+    'honk-core --version', '```', '', ':::', '', '```sh', 'sudo -u nobody id', '```', '', '```text', 'sudo stays', '```'].join('\n'))
 })

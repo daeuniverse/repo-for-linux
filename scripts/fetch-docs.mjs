@@ -63,6 +63,33 @@ function rewriteMarkdownLinks(markdown, rewrite) {
   }).join('\n')
 }
 
+// The site's own pages give sudo and root tabs for commands that need root; a fetched shell
+// block whose commands use sudo gets the same code group, with sudo dropped from the root tab.
+const sudoCommand = /(^|[|&;]\s*)sudo\s+(?=[^-\s])/g
+export function splitSudoFences(markdown) {
+  const lines = markdown.split('\n')
+  const out = []
+  for (let i = 0; i < lines.length; i++) {
+    const open = lines[i].match(/^(`{3,})(sh|shell|bash)\s*$/)
+    const end = open && lines.findIndex((line, j) => j > i && line === open[1])
+    if (!open || end < 0) {
+      out.push(lines[i])
+      continue
+    }
+    const body = lines.slice(i + 1, end)
+    const usesSudo = body.some(line => /(^|[|&;]\s*)sudo\s+[^-\s]/.test(line))
+    if (!usesSudo || body.some(line => /\bsudo\s+-/.test(line))) {
+      out.push(...lines.slice(i, end + 1))
+    } else {
+      const fence = open[1]
+      out.push('::: code-group', '', `${fence}${open[2]} [sudo]`, ...body, fence, '',
+        `${fence}${open[2]} [root]`, ...body.map(line => line.replace(sudoCommand, '$1')), fence, '', ':::')
+    }
+    i = end
+  }
+  return out.join('\n')
+}
+
 export async function createHonkAnchorRewriter(pages) {
   const md = await createMarkdownRenderer(join(root, 'docs'))
   const headings = new Map()
@@ -212,7 +239,8 @@ export async function fetchDocs() {
           const footer = footers[fallback ? 'zh-TW' : locale](project, `${blob}/${sourcePath}`, source.license, `${blob}/${'LICENSE'}`)
           // The feed site's guide pages now live in this site, so link the local copy.
           const openwrtPrefix = { 'en-US': '', 'zh-CN': '/zh-CN', 'zh-TW': '/zh-TW' }[locale]
-          const body = rewriteMarkdownLinks(rewriteMarkdown(fixAnchors(text, topic), sourcePath, sourceDirectory, source),
+          const prepared = project === 'honk' ? splitSudoFences(fixAnchors(text, topic)) : fixAnchors(text, topic)
+          const body = rewriteMarkdownLinks(rewriteMarkdown(prepared, sourcePath, sourceDirectory, source),
             link => link.replace(/^https:\/\/openwrt\.daeuniverse\.org\/(?:en|zh-cn|zh-tw)\/(?:index\.html)?((?:mirror|thanks)(?:\.html)?)?(#.*)?$/,
               (_, page, hash) => `${openwrtPrefix}/openwrt/${(page || '').replace(/\.html$/, '')}${hash || ''}`))
           await writeFile(output, `---\neditLink: false\nlastUpdated: false\n---\n\n${notice}<div v-pre lang="${fallback ? 'zh-CN' : locale}">\n\n${body.trim()}\n\n</div>\n\n---\n\n${footer}\n`)
