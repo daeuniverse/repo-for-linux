@@ -1,6 +1,6 @@
 # The Linux Repository of Dae Universe
 
-This repo contains dae, v2rayA, v2ray, xray, juicity and juicity-rs programs.
+This repo contains dae, honk, doona, v2rayA, v2ray, xray, juicity and juicity-rs programs.
 
 ## Usage
 
@@ -78,15 +78,16 @@ This table is generated after packaging completes.
 
 | Software | Version | Project | License |
 | --- | --- | --- | --- |
-| dae | N/A | [https://github.com/daeuniverse/dae](https://github.com/daeuniverse/dae) | [AGPL-3.0-only](https://github.com/daeuniverse/dae/blob/main/LICENSE) |
-| daed | N/A | [https://github.com/daeuniverse/daed](https://github.com/daeuniverse/daed) | [MIT](https://github.com/daeuniverse/daed/blob/main/LICENSE) + [AGPL-3.0-only](https://github.com/daeuniverse/dae-wing/blob/main/LICENSE) |
-| honk | N/A | [https://github.com/daeuniverse/honk](https://github.com/daeuniverse/honk) | [GPL-3.0-only](https://github.com/daeuniverse/honk/blob/main/LICENSE) |
-| Juicity | N/A | [https://github.com/juicity/juicity](https://github.com/juicity/juicity) | [AGPL-3.0-only](https://github.com/juicity/juicity/blob/main/LICENSE) |
-| Juicity-rs | N/A | [https://github.com/juicity/juicity-rs](https://github.com/juicity/juicity-rs) | [AGPL-3.0-only](https://github.com/juicity/juicity-rs/blob/main/LICENSE) |
-| v2ray | N/A | [https://github.com/v2fly/v2ray-core](https://github.com/v2fly/v2ray-core) | [MIT](https://github.com/v2fly/v2ray-core/blob/main/LICENSE) |
-| v2rayA | N/A | [https://github.com/v2rayA/v2rayA](https://github.com/v2rayA/v2rayA) | [AGPL-3.0-only + MPL 2.0](https://github.com/v2rayA/v2rayA/blob/main/LICENSE) |
-| Xray | N/A | [https://github.com/XTLS/Xray-core](https://github.com/XTLS/Xray-core) | [MPL-2.0](https://github.com/XTLS/Xray-core/blob/main/LICENSE) |
-| v2ray-rules-dat | N/A | [https://github.com/Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat) | [GPL-3.0-only](https://github.com/Loyalsoldier/v2ray-rules-dat/blob/main/LICENSE) |
+| dae | 2.1.2 | [https://github.com/daeuniverse/dae](https://github.com/daeuniverse/dae) | [AGPL-3.0-only](https://github.com/daeuniverse/dae/blob/main/LICENSE) |
+| daed | 2.1.1 | [https://github.com/daeuniverse/daed](https://github.com/daeuniverse/daed) | [MIT](https://github.com/daeuniverse/daed/blob/main/LICENSE) + [AGPL-3.0-only](https://github.com/daeuniverse/dae-wing/blob/main/LICENSE) |
+| doona | 0.1.0-rc.6 | [https://github.com/Zakkaus/doona](https://github.com/Zakkaus/doona) | [GPL-3.0-only](https://github.com/Zakkaus/doona/blob/main/LICENSE) |
+| honk | 0.1.0-beta.6 | [https://github.com/daeuniverse/honk](https://github.com/daeuniverse/honk) | [GPL-3.0-only](https://github.com/daeuniverse/honk/blob/main/LICENSE) |
+| Juicity | 0.5.0 | [https://github.com/juicity/juicity](https://github.com/juicity/juicity) | [AGPL-3.0-only](https://github.com/juicity/juicity/blob/main/LICENSE) |
+| Juicity-rs | 1.1.5 | [https://github.com/juicity/juicity-rs](https://github.com/juicity/juicity-rs) | [AGPL-3.0-only](https://github.com/juicity/juicity-rs/blob/main/LICENSE) |
+| v2ray | 5.53.0 | [https://github.com/v2fly/v2ray-core](https://github.com/v2fly/v2ray-core) | [MIT](https://github.com/v2fly/v2ray-core/blob/main/LICENSE) |
+| v2rayA | 2.5.15 | [https://github.com/v2rayA/v2rayA](https://github.com/v2rayA/v2rayA) | [AGPL-3.0-only + MPL 2.0](https://github.com/v2rayA/v2rayA/blob/main/LICENSE) |
+| Xray | 26.11.9 | [https://github.com/XTLS/Xray-core](https://github.com/XTLS/Xray-core) | [MPL-2.0](https://github.com/XTLS/Xray-core/blob/main/LICENSE) |
+| v2ray-rules-dat | 202611132203 | [https://github.com/Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat) | [GPL-3.0-only](https://github.com/Loyalsoldier/v2ray-rules-dat/blob/main/LICENSE) |
 
 <!-- END GENERATED PACKAGE TABLE -->
 
