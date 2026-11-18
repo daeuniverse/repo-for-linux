@@ -80,6 +80,24 @@ apt install doona-web-fonts
 
 If you already have a compatible honk, keep it. Otherwise, follow [Install honk](install.md#install), then return here.
 
+Debian builds the kernel support for NFQUEUE as modules and does not load them by itself. Without them honk logs `NFQUEUE is unavailable at startup` and runs with NFQUEUE staging off. Load the modules and have them load at every boot:
+
+::: code-group
+
+```sh [sudo]
+sudo modprobe -a nfnetlink_queue nft_queue
+printf 'nfnetlink_queue\nnft_queue\n' | sudo tee /etc/modules-load.d/honk-nfqueue.conf
+```
+
+```sh [root]
+modprobe -a nfnetlink_queue nft_queue
+printf 'nfnetlink_queue\nnft_queue\n' | tee /etc/modules-load.d/honk-nfqueue.conf
+```
+
+:::
+
+The [troubleshooting entry](troubleshooting.md#nfqueue-modules) covers the log message and the `nfqueue_enable: false` alternative.
+
 Apply the [separate UI configuration](install.md), [start honk](service-management.md), then follow [First sign-in](first-sign-in.md).
 
 </div>

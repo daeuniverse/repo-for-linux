@@ -52,6 +52,20 @@ Open **Configuration** → **Config files** and inspect the source's badge or di
 If the result is unknown, check the current source before repeating the write. For an accepted import or restore, reopen that action under **Backups and revisions**. If its dialog still reports an unknown result, select **Refresh** there to query the original operation. A lost response does not prove the write failed.
 
 
+## NFQUEUE netlink unavailable: No such file or directory {#nfqueue-modules}
+
+honk starts but logs `NFQUEUE is unavailable at startup; continuing with NFQUEUE staging disabled` with the reason `NFQUEUE netlink unavailable: No such file or directory (os error 2)`. The `nfnetlink_queue` kernel module is not loaded; Debian, for example, builds it as a module. honk keeps running and only held-first-packet UDP staging is off.
+
+Load the modules, make them load at boot, then [restart honk](service-management.md). In a root shell, omit `sudo`.
+
+```sh
+sudo modprobe -a nfnetlink_queue nft_queue
+printf 'nfnetlink_queue\nnft_queue\n' | sudo tee /etc/modules-load.d/honk-nfqueue.conf
+```
+
+If you do not want NFQUEUE staging, set `nfqueue_enable: false` in the `global` section instead. [Apply writes nothing](#nfqueue-restart) explains a related restart notice.
+
+
 ## Apply writes nothing and lists `global.nfqueue_enable` as needing a restart {#nfqueue-restart}
 
 On a kernel without NFQUEUE support, honk turns NFQUEUE off at startup and logs `NFQUEUE is unavailable at startup`. honk 0.1.0-beta.4 and earlier then compare every write with the default `nfqueue_enable: true`, so Apply reports **Nothing was written** and lists `global.nfqueue_enable` as a setting that needs a restart, also after a restart. Set the value in the `global` section, then [restart honk](service-management.md):

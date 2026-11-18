@@ -28,7 +28,7 @@ Check these kernel options using the commands in the linked honk guide:
 
 - The real backend needs `CONFIG_BPF=y`, `CONFIG_BPF_SYSCALL=y`, `CONFIG_BPF_JIT=y`, `CONFIG_CGROUP_BPF=y`, `CONFIG_NET_SCHED=y`, `CONFIG_NET_CLS_ACT=y`, `CONFIG_NET_XGRESS=y` and `CONFIG_NET_NS=y`.
 - `CONFIG_NET_CLS_ACT` selects `CONFIG_NET_XGRESS`. The TCX backend does not require the legacy `CONFIG_NET_CLS_BPF` or `CONFIG_NET_SCH_INGRESS` options.
-- The default held-first-packet UDP path also needs `CONFIG_NF_TABLES`, `CONFIG_NF_TABLES_INET`, `CONFIG_NFT_CT`, `CONFIG_NFT_QUEUE` and `CONFIG_NETFILTER_NETLINK_QUEUE`, each set to `y` or `m`.
+- The default held-first-packet UDP path also needs `CONFIG_NF_TABLES`, `CONFIG_NF_TABLES_INET`, `CONFIG_NFT_CT`, `CONFIG_NFT_QUEUE` and `CONFIG_NETFILTER_NETLINK_QUEUE`, each set to `y` or `m`. Options set to `m` are kernel modules (`nfnetlink_queue` and `nft_queue`) that must be loaded; see [NFQUEUE netlink unavailable](troubleshooting.md#nfqueue-modules).
 
 honk reads raw BTF from `HONK_VMLINUX_BTF` if set. Otherwise it tries `/sys/kernel/btf/vmlinux`, then `/usr/lib/debug/boot/vmlinux`; OpenWrt's `vmlinux-btf` package supplies the latter.
 

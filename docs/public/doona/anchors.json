@@ -20,6 +20,7 @@
   "widgets": "features",
   "troubleshooting": "troubleshooting",
   "unknown-setting": "troubleshooting",
+  "nfqueue-modules": "troubleshooting",
   "nfqueue-restart": "troubleshooting",
   "offline-dependency": "troubleshooting",
   "state-db": "troubleshooting",

@@ -80,6 +80,24 @@ apt install doona-web-fonts
 
 依照[安裝 honk](install.md#install)安裝後端後返回本頁。已有相容的 honk 時無需重複安裝。
 
+Debian 將 NFQUEUE 的核心支援建置為模組，且不會自行載入。缺少這些模組時，honk 會在日誌記錄 `NFQUEUE is unavailable at startup`，並在關閉 NFQUEUE 暫存的狀態下運作。載入模組，並讓它們在每次開機時載入：
+
+::: code-group
+
+```sh [sudo]
+sudo modprobe -a nfnetlink_queue nft_queue
+printf 'nfnetlink_queue\nnft_queue\n' | sudo tee /etc/modules-load.d/honk-nfqueue.conf
+```
+
+```sh [root]
+modprobe -a nfnetlink_queue nft_queue
+printf 'nfnetlink_queue\nnft_queue\n' | tee /etc/modules-load.d/honk-nfqueue.conf
+```
+
+:::
+
+日誌訊息與 `nfqueue_enable: false` 的替代做法見[疑難排解](troubleshooting.md#nfqueue-modules)。
+
 套用[獨立介面組態](install.md)，[啟動 honk](service-management.md)，再按[首次登入](first-sign-in.md)操作。
 
 </div>

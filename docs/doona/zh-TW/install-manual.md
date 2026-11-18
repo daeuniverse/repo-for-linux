@@ -109,6 +109,15 @@ apk add --allow-untrusted "./$FILE"
 
 依照[安裝 honk](install.md#install)安裝後端後返回本頁。已有相容的 honk 時無需重複安裝。
 
+核心將 NFQUEUE 支援建置為模組時（Debian 即如此），首次啟動前須先載入。在 root shell 中省略 `sudo`。
+
+```sh
+sudo modprobe -a nfnetlink_queue nft_queue
+printf 'nfnetlink_queue\nnft_queue\n' | sudo tee /etc/modules-load.d/honk-nfqueue.conf
+```
+
+日誌訊息與 `nfqueue_enable: false` 的替代做法見 [NFQUEUE netlink unavailable](troubleshooting.md#nfqueue-modules)。
+
 OpenRC 系統可使用[服務管理](service-management.md)中的前景命令完成首次連線；該頁不設定 OpenRC 服務。
 
 套用[獨立介面組態](install.md)，[啟動 honk](service-management.md)，再按[首次登入](first-sign-in.md)操作。

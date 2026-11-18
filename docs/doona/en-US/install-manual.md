@@ -109,6 +109,15 @@ For optional packages, use the same signed-key or direct installation method you
 
 If you already have a compatible honk, keep it. Otherwise, follow [Install honk](install.md#install), then return here.
 
+If your kernel builds NFQUEUE support as modules, as Debian does, load them before the first start. In a root shell, omit `sudo`.
+
+```sh
+sudo modprobe -a nfnetlink_queue nft_queue
+printf 'nfnetlink_queue\nnft_queue\n' | sudo tee /etc/modules-load.d/honk-nfqueue.conf
+```
+
+See [NFQUEUE netlink unavailable](troubleshooting.md#nfqueue-modules) for the log message and the `nfqueue_enable: false` alternative.
+
 For OpenRC systems, [Service management](service-management.md) gives a foreground command for the first connection; it does not configure an OpenRC service.
 
 Apply the [separate UI configuration](install.md), [start honk](service-management.md), then follow [First sign-in](first-sign-in.md).

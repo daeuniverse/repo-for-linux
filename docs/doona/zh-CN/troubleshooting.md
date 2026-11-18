@@ -52,6 +52,20 @@ lastUpdated: false
 结果未知时，先检查当前来源内容，再决定是否重新写入。已受理的导入或恢复操作，可在**备份与修订**中重新打开该操作。若对话框仍提示结果未知，点击其中的**刷新**查询原操作。未收到响应不代表写入失败。
 
 
+## NFQUEUE netlink unavailable: No such file or directory {#nfqueue-modules}
+
+honk 能启动，但日志记录 `NFQUEUE is unavailable at startup; continuing with NFQUEUE staging disabled`，原因为 `NFQUEUE netlink unavailable: No such file or directory (os error 2)`。这表示未加载 `nfnetlink_queue` 内核模块，例如 Debian 将它构建为模块。honk 会继续运行，只是 UDP 首包暂存关闭。
+
+加载模块并设为开机加载，然后[重启 honk](service-management.md)。在 root shell 中省略 `sudo`。
+
+```sh
+sudo modprobe -a nfnetlink_queue nft_queue
+printf 'nfnetlink_queue\nnft_queue\n' | sudo tee /etc/modules-load.d/honk-nfqueue.conf
+```
+
+不需要 NFQUEUE 暂存时，改为在 `global` 段设置 `nfqueue_enable: false`。相关的重启提示见[应用时显示未写入](#nfqueue-restart)。
+
+
 ## 应用时显示未写入，并列出 `global.nfqueue_enable` 需要重启 {#nfqueue-restart}
 
 内核不支持 NFQUEUE 时，honk 启动时会关闭 NFQUEUE，并在日志中记录 `NFQUEUE is unavailable at startup`。honk 0.1.0-beta.4 及更早版本随后会拿每次写入与默认值 `nfqueue_enable: true` 比较，因此应用时总是显示**未写入**，并把 `global.nfqueue_enable` 列为需要重启的设置，重启后也一样。在 `global` 段写入这个值，再[重启 honk](service-management.md)：

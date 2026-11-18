@@ -28,7 +28,7 @@ lastUpdated: false
 
 - 實際後端需要 `CONFIG_BPF=y`、`CONFIG_BPF_SYSCALL=y`、`CONFIG_BPF_JIT=y`、`CONFIG_CGROUP_BPF=y`、`CONFIG_NET_SCHED=y`、`CONFIG_NET_CLS_ACT=y`、`CONFIG_NET_XGRESS=y` 和 `CONFIG_NET_NS=y`。
 - `CONFIG_NET_CLS_ACT` 會選取 `CONFIG_NET_XGRESS`。TCX 後端不要求舊的 `CONFIG_NET_CLS_BPF` 或 `CONFIG_NET_SCH_INGRESS` 選項。
-- 預設的 UDP 首包暫存處理還需要 `CONFIG_NF_TABLES`、`CONFIG_NF_TABLES_INET`、`CONFIG_NFT_CT`、`CONFIG_NFT_QUEUE` 和 `CONFIG_NETFILTER_NETLINK_QUEUE`，各項須設為 `y` 或 `m`。
+- 預設的 UDP 首包暫存處理還需要 `CONFIG_NF_TABLES`、`CONFIG_NF_TABLES_INET`、`CONFIG_NFT_CT`、`CONFIG_NFT_QUEUE` 和 `CONFIG_NETFILTER_NETLINK_QUEUE`，各項須設為 `y` 或 `m`。設為 `m` 的選項是核心模組（`nfnetlink_queue` 與 `nft_queue`），必須先載入，見 [NFQUEUE netlink unavailable](troubleshooting.md#nfqueue-modules)。
 
 設定了 `HONK_VMLINUX_BTF` 時，honk 從該路徑讀取原始 BTF。否則依序嘗試 `/sys/kernel/btf/vmlinux` 和 `/usr/lib/debug/boot/vmlinux`；OpenWrt 的 `vmlinux-btf` 套件提供後者。
 
