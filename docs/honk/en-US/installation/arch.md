@@ -20,6 +20,4 @@ After installation, see [Quick Start](../how-to-start.md) for configuration and 
 
 ## Next steps
 
-- [First sign-in](/doona/first-sign-in): connect doona to honk and create the administrator account.
-- [Manage nodes, groups and rules](/doona/routing): add nodes or subscriptions and routing rules; until then all traffic goes direct.
-- [Troubleshooting](/doona/troubleshooting): what to check when something does not work.
+See doona's [Quick start](/doona/quick-start) to enable and open the embedded interface.

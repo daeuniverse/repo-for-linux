@@ -1,7 +1,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { access, readFile, readdir, stat } from 'node:fs/promises'
-import { dirname, join, resolve } from 'node:path'
+import { dirname, join, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createMarkdownRenderer } from 'vitepress'
 import { locales } from '../docs/.vitepress/locales.mjs'
@@ -74,6 +74,22 @@ for (const lang of langs) {
   }
 }
 const page = (lang, topic) => pages.get(`${lang}/${topic}`)
+
+// The doona pages link the fetched honk manual; docs:prepare writes it before this test runs.
+const honkManual = join(root, 'docs/honk')
+const honkRenderer = await createMarkdownRenderer(join(root, 'docs'))
+const honkPages = new Map()
+for (const lang of langs) {
+  const directory = join(honkManual, lang)
+  for (const path of await markdownFiles(directory)) {
+    const text = await readFile(path, 'utf8')
+    // Fetched honk headings carry no explicit ids, so take the ids the site build assigns them.
+    const headings = honkRenderer.parse(text, {}).filter(token => token.type === 'heading_open')
+      .map(token => token.attrGet('id')).filter(Boolean)
+    const { inline } = parse(text)
+    honkPages.set(`${lang}/${relative(directory, path)}`, new Set([...headings, ...inline.map(anchor => anchor.id)]))
+  }
+}
 
 test('every locale has the same pages, and the sidebar lists each once in order with its H1 as the title', async () => {
   assert.equal(topics.length, 29)
@@ -202,7 +218,14 @@ test('every local link and image resolves, and none leaves for the doona site', 
         else if (route.startsWith('/doona/screenshots/')) continue
         // honk's OpenWrt package embeds doona, so the router install is the feed guide.
         else if (route === '/openwrt/') await access(join(root, 'docs/openwrt', lang, 'index.md'))
-        else assert.ok(isPage(route), `${where}: ${url} is not a doona page or public file`)
+        else if (route.startsWith('/honk/')) {
+          const rest = route.slice('/honk/'.length)
+          const file = rest === '' || rest.endsWith('/') ? `${rest}index.md` : `${rest}.md`
+          const ids = honkPages.get(`${lang}/${file}`)
+          assert.ok(ids, `${where}: ${url} is not a honk page; run npm run docs:prepare`)
+          if (hash) assert.ok(ids.has(decodeURIComponent(hash)), `${where}: missing ${url}`)
+          links++
+        } else assert.ok(isPage(route), `${where}: ${url} is not a doona page or public file`)
       } else {
         assert.ok(/\.md$/.test(path), `${where}: relative link ${url} is not a page of this manual`)
         const destination = resolve(dirname(pagePath(lang, topic)), path)

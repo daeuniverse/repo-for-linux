@@ -11,4 +11,4 @@ The package installs `/usr/bin/honk-core` from the musl `full` build, with the e
 - [Docker](./docker.md)
 - [OpenWrt](/openwrt/)
 
-After installing a package from the APT/RPM repository, continue with [First run](./first-run.md) to configure and start honk.
+After installing a package from the APT/RPM repository, continue with [First run](./first-run.md) for the embedded UI and honk's configuration and service guide.

@@ -117,10 +117,10 @@ twice; a commit mismatch or a failed download stops the build.
 Committed honk installation pages share the repository snippets and cover APT/RPM packages, AUR and OpenWrt.
 Each APT/RPM distribution page keeps its prerequisites and the steps up to installing the package, then
 links to First run (`installation/first-run.md`) and ends with its own Upgrade and Uninstall sections.
-First run holds the shared flow once, with sudo and root tabs: the direct-only configuration, starting
-and checking the service, and a Next steps section linking doona's first sign-in, node and rule
-management, and troubleshooting pages. It follows the distribution pages in the sidebar and is linked
-from the installation index. The Arch and Docker pages keep their own Next steps.
+First run and Docker point to honk's fetched Quick Start for configuration, service startup and logs,
+and to doona's sign-in for the embedded UI; they do not repeat honk configuration. First run follows
+the distribution pages in the sidebar and is linked from the installation index. The Arch page keeps
+a one-line Next steps link.
 
 Generated pages live in `docs/honk/<locale>/` beside committed `index.md` landing pages.
 VitePress rewrites expose `/honk/`, `/zh-CN/honk/` and `/zh-TW/honk/`. The generated inventory
@@ -138,8 +138,9 @@ Zakkaus/doona-docs pages (CC BY 4.0) at commit 1ffab35. Every heading carries an
 `docs/public/doona/anchors.json` (served at `/doona/anchors.json`) and must stay identical in all
 three locales. Tabbed fences are VitePress code groups. Images are under `docs/public/doona/images/`
 and are linked by their site path. The sidebar takes titles
-from each page's first heading and its order from `doonaGroups` in `config.mjs`. Tests check
-locale parity, `anchors.json`, the anchors in doona's `docsAnchors.json`, local links, and links into doona's
+from each page's first heading and its order from `doonaGroups` in `config.mjs`. Honk-owned procedures
+are linked to `/honk/` pages and headings instead of repeated. Tests check locale parity, `anchors.json`,
+the anchors in doona's `docsAnchors.json`, local links and their honk targets, and links into doona's
 GitHub source.
 
 Screenshots are not committed. The documentation action checks out Zakkaus/doona at the release tag that
