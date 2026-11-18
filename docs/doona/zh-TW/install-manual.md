@@ -107,9 +107,7 @@ apk add --allow-untrusted "./$FILE"
 
 ## 安裝後端 {#安裝後端}
 
-依照[安裝 honk](install.md#install)安裝後端後返回本頁。已有相容的 honk 時無需重複安裝。
-
-OpenRC 系統可使用[服務管理](service-management.md)中的前景命令完成首次連線；該頁不設定 OpenRC 服務。
+已有相容的 honk 時無需重複安裝；否則依 honk 的[安裝指南](/zh-TW/honk/installation/)安裝 `full` 或 `native-api` 建置版本。OpenRC 系統可依 honk 的[最小設定](/zh-TW/honk/how-to-start#最小設定)中的前景命令完成首次連線；該命令不設定 OpenRC 服務。
 
 套用[獨立介面組態](install.md)，[啟動 honk](service-management.md)，再按[首次登入](first-sign-in.md)操作。
 

@@ -387,9 +387,8 @@ Error codes identify API failures. The sections distinguish them from read-only 
 
 **Details**
 
-- **Off** records nothing, **Always** records the supported scopes, **On flow demand** records while a client asks for flows, and a sampled mode records a subset.
-- **On flow demand** is the default. Recording starts when a client asks for flows and stops after the reported grace period, so flows from before you opened a page are not kept. Connections, Rules and Routing log ask for flows while they are open.
-- To record without a client, set **Flow recording** to **Always** in Settings → **Temporary runtime overrides**. The configuration cannot pin the mode: its `record_flows` only permits or prohibits recording, and a restart or an accepted configuration activation returns the mode to **On flow demand**.
+- Connections, Rules and Routing log ask for flows while they are open.
+- See honk's [shared sampling and optional history](/honk/reference/experimental#shared-sampling-and-optional-history) for the recording modes, demand behavior and activation reset.
 
 
 ## Routing rules, DNS rules, and templates {#req-rules}
@@ -587,7 +586,7 @@ Error codes identify API failures. The sections distinguish them from read-only 
 
 **Details**
 
-- Restart or an accepted configuration activation resets these overrides.
+- See honk's [native logs and runtime settings](/honk/reference/api#native-logs-and-runtime-settings) for field bounds and reset behavior.
 
 
 ## Geodata availability {#req-geodata}
@@ -636,19 +635,13 @@ Error codes identify API failures. The sections distinguish them from read-only 
 
 **Errors**
 
-- [Download stages](troubleshooting.md#geodata-update): [`download_timeout`](troubleshooting.md#geodata-update), [`checksum_unavailable`](troubleshooting.md#geodata-update), [`checksum_mismatch`](troubleshooting.md#geodata-update), [`http_status_rejected`](troubleshooting.md#geodata-update), [`http_not_found`](troubleshooting.md#geodata-update), [`connection_failed`](troubleshooting.md#geodata-update), [`tls_failed`](troubleshooting.md#geodata-update), [`group_unavailable`](troubleshooting.md#geodata-update), [`route_blocked`](troubleshooting.md#geodata-update), [`asset_too_large`](troubleshooting.md#geodata-update), [`invalid_source`](troubleshooting.md#geodata-update).
-- [Replacement stages](troubleshooting.md#geodata-update): [`replacement_failed`](troubleshooting.md#geodata-update) means replacement failed; [`directory_sync_failed`](troubleshooting.md#geodata-update) means honk could not confirm durability and may already have replaced a file.
+- See honk's [managed entries and geodata](/honk/reference/api#managed-entries-and-geodata) for the download, checksum and replacement stages.
 - Before retrying, select **Copy error** on the failure notice. The copied `details.assets` lists each asset's `written` and `durability_confirmed` values; the asset details in Settings do not show them. Check these values and the destination filesystem.
 
 **Details**
 
-- Manual updates do not need the state database if configuration supplies every loaded asset's URL. Without the database, honk cannot use its stored or built-in URL lists.
-- Each URL attempt uses the selected route. A failed group or routing decision does not fall back to direct.
-- Asset lookup checks `DAE_LOCATION_ASSET`, then `global.data_dir`, then legacy locations, the working directory, and share directories.
-- Packaged assets receive a replacement in the data directory, which takes precedence over the packaged copy. honk replaces assets already in the data directory or explicit asset directory in place.
-- Each file download attempt allows 30 seconds without progress and 10 minutes in total. The checksum request has a separate 10-second deadline and appends `.sha256sum` to the URL path.
-- A checksum 404 leaves the asset unverified. Other checksum fetch failures reject that attempt.
-- An operation can fail after changing some files.
+- Manual updates do not need the state database if configuration supplies every loaded asset's URL; without it, honk cannot use stored or built-in URL lists.
+- See honk's [managed entries and geodata](/honk/reference/api#managed-entries-and-geodata) for deadlines, checksum handling, asset lookup and replacement behavior.
 
 
 ## Geodata sources, route, checksum, schedule, and reset {#req-geodata-settings}
@@ -678,7 +671,7 @@ Error codes identify API failures. The sections distinguish them from read-only 
 **Details**
 
 - The settings request only stores values. Reset is also a database write, not an edit to your configuration file.
-- Overrides persist in the database, but startup re-seeds explicitly configured geodata URLs and the download route over stored overrides.
+- See honk's [geodata sources and automatic updates](/honk/reference/api#geodata-sources-and-automatic-updates) for stored-setting precedence and startup reseeding.
 
 
 ## Operations, reload, suspend, and resume {#req-reload-suspend}
@@ -706,6 +699,7 @@ Error codes identify API failures. The sections distinguish them from read-only 
 
 - An accepted request does not prove that the operation succeeded.
 - If the result is unknown, read it back before another write.
+- See honk's [accepted configuration and reload operations](/honk/reference/api#accepted-configuration-and-reload-operations) for capability and operation semantics.
 
 
 ## Process-name routing and UDP trace details {#req-process-routing}
@@ -728,10 +722,11 @@ Error codes identify API failures. The sections distinguish them from read-only 
 
 - Runtime degradation codes: [`pname_routing_reduced`](troubleshooting.md#troubleshooting), [`pname_routing_disabled`](troubleshooting.md#troubleshooting), [`udp_trace_unavailable`](troubleshooting.md#troubleshooting). See [kernel failures](troubleshooting.md#troubleshooting).
 - These report reduced support; they are not configuration-write errors.
+- See honk's [runtime degradations](/honk/reference/api#runtime-degradations) and [`pname`](/honk/reference/routing#pname).
 
 **Details**
 
-- Without kernel argument capture, honk falls back to the thread's `comm` name instead of the argument-derived name.
+- See honk's [`pname`](/honk/reference/routing#pname) for the name source when kernel argument capture is unavailable.
 
 
 ## Keeping selections and probe history {#req-persistence}
@@ -753,7 +748,7 @@ Error codes identify API failures. The sections distinguish them from read-only 
 
 **Errors**
 
-- Runtime degradation codes: [`state_cache_unavailable`](troubleshooting.md#state-db), which the UI recognizes, and [`persistence_unavailable`](troubleshooting.md#state-db), which honk reports with a reason when it continues without its database. See [state database failures](troubleshooting.md#state-db).
+- Runtime degradation codes: [`state_cache_unavailable`](troubleshooting.md#state-db), which the UI recognizes, and [`persistence_unavailable`](troubleshooting.md#state-db), which honk reports with a reason when it continues without its database. See [state database failures](troubleshooting.md#state-db) and honk's [persisted state](/honk/reference/experimental#persisted-state).
 
 
 ## Appearance and browser storage {#req-browser-settings}

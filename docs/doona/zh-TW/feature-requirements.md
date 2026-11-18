@@ -387,9 +387,8 @@ lastUpdated: false
 
 **詳細說明**
 
-- **關閉**不記錄；**常開**記錄支援的範圍；**依流程需求**在用戶端請求流程時記錄；抽樣模式只記錄一部分。
-- **依流程需求**是預設值。有用戶端請求流程時才開始記錄，寬限期過後停止，因此開啟頁面之前的流程不會保留。連線頁、規則頁和分流頁在開啟時會請求流程。
-- 要在沒有用戶端時也記錄，在設定 → **暫時執行期覆寫**把**流程記錄**設為**常開**。組態無法固定這個模式：其中的 `record_flows` 只決定是否允許記錄，而重新啟動或一次被接受的組態啟用會把模式恢復為**依流程需求**。
+- 連線頁、規則頁和分流頁在開啟時會請求流程。
+- 記錄模式、按需行為及啟用後的重設見 honk 的[共用取樣與可選歷史](/zh-TW/honk/reference/experimental#共用取樣與可選歷史)。
 
 
 ## 路由規則、DNS 規則與模板 {#req-rules}
@@ -587,7 +586,7 @@ lastUpdated: false
 
 **詳細說明**
 
-- 重新啟動或已接受的組態啟用會重置這些覆寫值。
+- 欄位範圍與重設行為見 honk 的[原生日誌與執行時設定](/zh-TW/honk/reference/api#原生日誌與執行時設定)。
 
 
 ## 地理資料可用性 {#req-geodata}
@@ -636,19 +635,13 @@ lastUpdated: false
 
 **錯誤**
 
-- [下載階段](troubleshooting.md#geodata-update)：[`download_timeout`](troubleshooting.md#geodata-update)、[`checksum_unavailable`](troubleshooting.md#geodata-update)、[`checksum_mismatch`](troubleshooting.md#geodata-update)、[`http_status_rejected`](troubleshooting.md#geodata-update)、[`http_not_found`](troubleshooting.md#geodata-update)、[`connection_failed`](troubleshooting.md#geodata-update)、[`tls_failed`](troubleshooting.md#geodata-update)、[`group_unavailable`](troubleshooting.md#geodata-update)、[`route_blocked`](troubleshooting.md#geodata-update)、[`asset_too_large`](troubleshooting.md#geodata-update)、[`invalid_source`](troubleshooting.md#geodata-update)。
-- [替換階段](troubleshooting.md#geodata-update)：[`replacement_failed`](troubleshooting.md#geodata-update) 表示替換失敗；[`directory_sync_failed`](troubleshooting.md#geodata-update) 表示尚未確認持久寫入，此時檔案可能已替換。
+- 下載、檢查碼與替換階段見 honk 的[主檔案項目與 geodata 管理](/zh-TW/honk/reference/api#主檔案項目與-geodata-管理)。
 - 重試前，在失敗通知中按**複製錯誤**。複製內容的 `details.assets` 列出每個資源的 `written` 和 `durability_confirmed` 值，設定中的資源詳情不顯示這兩個值。請檢查這些值及目標檔案系統。
 
 **詳細說明**
 
-- 組態為每個已載入資源提供 URL 時，手動更新不需要狀態資料庫。沒有資料庫時，honk 無法使用已儲存或內建的 URL 列表。
-- 每次 URL 嘗試都使用選定路由。群組或路由決策失敗時，不會回退到直連。
-- 資源查詢順序是 `DAE_LOCATION_ASSET`、`global.data_dir`、舊版位置、工作目錄和共享目錄。
-- 套件中的資源會在資料目錄中產生替代檔案，並優先於套件副本使用。已位於資料目錄或明確指定資源目錄中的檔案，則在原位置替換。
-- 每次檔案下載最多允許 30 秒無進度，總時限為 10 分鐘。檢查碼請求有獨立的 10 秒時限，並在 URL 路徑後附加 `.sha256sum`。
-- 檢查碼請求回傳 404 時，資源保持未驗證狀態。因其他原因無法取得檢查碼時，會拒絕本次嘗試。
-- 操作失敗不代表所有檔案都未改變。
+- 組態為每個已載入資源提供 URL 時，手動更新不需要狀態資料庫；沒有資料庫時，honk 無法使用已儲存或內建的 URL 列表。
+- 時限、檢查碼處理、資源查詢及替換行為見 honk 的[主檔案項目與 geodata 管理](/zh-TW/honk/reference/api#主檔案項目與-geodata-管理)。
 
 
 ## 地理資料來源、路由、校驗和、排程與重置 {#req-geodata-settings}
@@ -678,7 +671,7 @@ lastUpdated: false
 **詳細說明**
 
 - 設定請求只儲存值。重置同樣是資料庫寫入，不會編輯設定檔。
-- 覆寫值會保留在資料庫中，但啟動時，組態中明確指定的地理資料 URL 和下載路由會再次覆寫已儲存的值。
+- 已儲存設定的優先順序與啟動時重新植入見 honk 的 [geodata 來源與自動更新](/zh-TW/honk/reference/api#geodata-來源與自動更新)。
 
 
 ## 操作、重載、暫停與恢復 {#req-reload-suspend}
@@ -706,6 +699,7 @@ lastUpdated: false
 
 - 請求被接受，不代表操作成功。
 - 結果未知時，先重新讀取結果，再執行其他寫入。
+- 能力與操作語義見 honk 的[設定來源、驗證與操作](/zh-TW/honk/reference/api#設定來源、驗證與操作)。
 
 
 ## 程序名稱路由與 UDP 追蹤詳細資料 {#req-process-routing}
@@ -728,10 +722,11 @@ lastUpdated: false
 
 - 執行期降級碼：[`pname_routing_reduced`](troubleshooting.md#troubleshooting)、[`pname_routing_disabled`](troubleshooting.md#troubleshooting)、[`udp_trace_unavailable`](troubleshooting.md#troubleshooting)。見[核心失敗](troubleshooting.md#troubleshooting)。
 - 這些代碼表示支援受限，不是組態寫入錯誤。
+- 見 honk 的[執行時降級](/zh-TW/honk/reference/api#執行時降級)和 [`pname`](/zh-TW/honk/reference/routing#pname)。
 
 **詳細說明**
 
-- 核心無法擷取程序參數時，honk 會回退到執行緒的 `comm` 名稱，而不是使用從參數取得的名稱。
+- 核心無法擷取程序參數時的名稱來源見 honk 的 [`pname`](/zh-TW/honk/reference/routing#pname)。
 
 
 ## 保留選擇與探測歷史 {#req-persistence}
@@ -753,7 +748,7 @@ lastUpdated: false
 
 **錯誤**
 
-- 執行期降級碼：介面識別 [`state_cache_unavailable`](troubleshooting.md#state-db)；honk 在沒有資料庫而繼續運作時，報告 [`persistence_unavailable`](troubleshooting.md#state-db) 並附原因。見[狀態資料庫失敗](troubleshooting.md#state-db)。
+- 執行期降級碼：介面識別 [`state_cache_unavailable`](troubleshooting.md#state-db)；honk 在沒有資料庫而繼續運作時，報告 [`persistence_unavailable`](troubleshooting.md#state-db) 並附原因。見[狀態資料庫失敗](troubleshooting.md#state-db)和 honk 的[持久化的狀態](/zh-TW/honk/reference/experimental#持久化的狀態)。
 
 
 ## 外觀與瀏覽器儲存 {#req-browser-settings}

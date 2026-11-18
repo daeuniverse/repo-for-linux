@@ -47,23 +47,7 @@ Keep `fallback: direct`. If you cannot add a rule, see [routing rule requirement
 
 ## 4. Define a DNS upstream {#4-define-a-dns-upstream}
 
-Open **Configuration** → **Config files**, select `/etc/honk/config.dae` in **Config file**, and append the following block after the existing sections. Keep the subscription, group and routing rule you just created.
-
-```dae
-# Send selected DNS requests through the proxy group.
-dns {
-    # Use a numeric server address to avoid bootstrapping its hostname.
-    upstream {
-        remote_dns: 'https://1.1.1.1/dns-query' -> proxy
-    }
-    # Keep other requests at their original destination.
-    routing {
-        request {
-            fallback: asis
-        }
-    }
-}
-```
+Open **Configuration** → **Config files**, select `/etc/honk/config.dae` in **Config file**, and append a `dns` block that defines an upstream named `remote_dns` routed through `proxy`. honk's [DNS setup example](/honk/configuration#dns-setup) shows the syntax. Keep the subscription, group and routing rule you just created.
 
 Select **Apply**. Wait for the notice confirming the file write and configuration reload. Reopen the file and check that `remote_dns` is present. For a disabled editor or **Apply** button, see [configuration write requirements](feature-requirements.md#req-config-edit).
 

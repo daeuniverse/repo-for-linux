@@ -31,29 +31,20 @@ honk 启动时，启动配置中明确指定的地理数据 URL 和下载路由�
 
 ## 必须重启的设置 {#必须重启的设置}
 
-API 会在写入前拒绝以下实际生效值的更改。请使用外部编辑器修改，再按[服务管理](service-management.md)操作。编辑器可能显示需要重启的诊断或 `listener_settings_changed`；见[写入被拒绝](troubleshooting.md#read-only)。
+API 会在写入前拒绝以下实际生效值的更改。请使用外部编辑器修改，再[重启 honk](service-management.md)。编辑器可能显示需要重启的诊断或 `listener_settings_changed`；见[写入被拒绝](troubleshooting.md#read-only)。
 
-| 区块 | 只能通过重启生效的键 |
+| 区块 | 只能通过重启生效的设置 |
 | --- | --- |
-| <a name="restart-dns"></a><span id="restart-dns"></span>`dns` | `bind` |
-| <a name="restart-global"></a><span id="restart-global"></span>`global` | `check_interval`、`tcp_check_url`、`tcp_check_http_method`、`udp_check_dns`、`tls_implementation`、`tproxy_port`、`tproxy_port_protect`、`pprof_port`、`so_mark_from_dae`、`log_level`、`log_file`、`lan_interface`、`wan_interface`、`auto_config_kernel_parameter`、`data_dir`、`store_subscribe`、`nfqueue_enable` |
-| <a name="restart-native"></a><span id="restart-native"></span>`experimental.native_api` | 所有字段，包括认证、监听器、界面、记录和写入设置 |
-| <a name="restart-clash"></a><span id="restart-clash"></span>`experimental.clash_api` | `external_controller`、`external_ui`、`external_ui_download_url`、`external_ui_download_detour`、`secret`、`default_mode` |
-| <a name="restart-cache"></a><span id="restart-cache"></span>`experimental.cache_file` | `enabled`、`store_dns` |
-| <a name="restart-assets"></a><span id="restart-assets"></span>`assets` | `geodata.geosite`、`geodata.geoip`、`geodata.route`、`ui.url`、`ui.route`，以及继承的 `route`，条件是更改影响了解析后的原生 API 或 Clash API 设置 |
-
-健康检查比较的是实际生效的第一个 HTTP URL、请求方法，以及选定的 UDP DNS 目标。切换到 UTLS 模式或从该模式切出时，`tls_implementation` 需要重启。日志文件比较的是实际生效路径，包括命令行覆盖值。
-
-重载策略也会比较内部字段 `global.tproxy_mark`。DAE 配置不接受此键，请勿将它加入文件。数据库模式下，修改 `global.data_dir` 会被拒绝并返回 `listener_settings_changed`；文件模式下则返回需要重启的诊断。
+| <a name="restart-dns"></a><span id="restart-dns"></span>`dns` | [`bind`](/zh-CN/honk/reference/dns#独立-listener-bind) |
+| <a name="restart-global"></a><span id="restart-global"></span>`global` | [全局字段](/zh-CN/honk/reference/global#字段) |
+| <a name="restart-native"></a><span id="restart-native"></span>`experimental.native_api` | [`native_api`](/zh-CN/honk/reference/experimental#native-api) |
+| <a name="restart-clash"></a><span id="restart-clash"></span>`experimental.clash_api` | [`clash_api`](/zh-CN/honk/reference/experimental#clash-api) |
+| <a name="restart-cache"></a><span id="restart-cache"></span>`experimental.cache_file` | [`cache_file`](/zh-CN/honk/reference/experimental#cache-file) |
+| <a name="restart-assets"></a><span id="restart-assets"></span>`assets` | [重启与 reload](/zh-CN/honk/reference/assets#重启与-reload) |
 
 ## 配置源为何只读 {#配置源为何只读}
 
-查看**配置**页的配置源标记。以下情况会使配置源只读：
-
-- `config_write` 已禁用，或 `secret` 与 `password_auth` 均未提供凭据。
-- 配置源声明了原生 API 或 Clash API 监听器的密钥。
-- 文本中含有需要掩码处理的监听器密钥值。honk 会掩码处理与密钥匹配且长度至少为八字节的值。
-- 数据库模式下，记录活动修订失败，导致存储被阻止写入。
+查看**配置**页的配置源标记。已禁用 `config_write` 或缺少凭据、声明了原生 API 或 Clash API 监听器密钥、文本中含有已掩码的监听器密钥值，或数据库无法记录活动修订时，配置源会变为只读。完整的来源信任边界和拒绝代码见 honk 的[配置来源、校验与操作](/zh-CN/honk/reference/api#配置来源、校验与操作)。
 
 配置源集合或写入协调器不可用时，配置操作也不可用。doona 拒绝不完整的配置源内容。写入不能引入监听器密钥、改变包含凭据的配置源集合，或修改监听器设置。
 
@@ -69,12 +60,12 @@ API 会在写入前拒绝以下实际生效值的更改。请使用外部编辑�
 
 ## 已接受但没有预期即时效果的字段 {#已接受但没有预期即时效果的字段}
 
+部分兼容字段会被接受并保存，但不会改变流量。见 honk 的[全局字段](/zh-CN/honk/reference/global#字段)和[非 DAE 格式](/zh-CN/honk/reference/assets#非-dae-格式)。
+
 | 字段 | 实际行为 |
 | --- | --- |
 | <a name="startup-preconnect"></a><span id="startup-preconnect"></span>`global.preconnect_node_count` | 供启动预热使用。接受配置源编辑不会再次执行预热。重启 honk 后，启动预热才会使用新值。 |
-| `global.tls_fragment`、`global.tls_fragment_length`、`global.tls_fragment_interval` | 为兼容性而接受并保存；此 honk 修订没有使用这些字段执行运行时分片的实现。 |
-| `global.bandwidth_max_tx`、`global.bandwidth_max_rx` | 为兼容性而接受并保存；此 honk 修订没有使用这些字段执行运行时带宽限制的实现。 |
 
-编辑被接受只表示操作已开始。操作状态变为 `succeeded` 后更改才生效，请重新读取来源确认。即使如此，兼容性字段也不会改变流量行为。
+编辑被接受只表示操作已开始。操作状态变为 `succeeded` 后更改才生效，请重新读取来源确认。
 
 </div>

@@ -41,116 +41,21 @@ Use the package's directory containing `index.html`; Debian and Ubuntu use `/usr
 
 ## Install honk {#install}
 
-Check the [kernel and host requirements in honk’s guide](https://github.com/daeuniverse/honk/blob/main/doc/en/how-to-start.md#linux-kernel-requirements). Keep console access available for the first start. Install `curl`, CA certificates, `tar`, and `sha256sum` before downloading.
-
-### 1. Choose and download a backend build {#1-choose-and-download-a-backend-build}
-
-Open [honk releases](https://github.com/daeuniverse/honk/releases). Choose a `full` or `native-api` archive for your gateway and copy its download link. The `clash-api` variant cannot serve doona’s native API. Backend releases have their own versions; do not use the doona version to construct a honk download URL.
-
-```sh
-uname -m
-```
-
-| Selection | What to choose |
-| --- | --- |
-| CPU | Match `x86_64` or `aarch64` to `uname -m`. |
-| C library | Use `musl` for a static gateway build, including OpenWrt and Alpine. |
-| API variant | `full` includes the native API and embedded UI; `native-api` serves the UI files installed separately. |
-| Allocator | `-stock` uses the system allocator; builds without it use mimalloc. |
-
-In a new download directory on the gateway, run this block and paste the archive’s download link at the prompt:
-
-```sh
-printf 'honk archive URL: '
-read -r HONK_URL
-```
-
-Then download the archive and its release’s checksums in the same shell:
-
-```sh
-HONK_ARCHIVE=${HONK_URL##*/}
-curl -fL -O "$HONK_URL" -O "${HONK_URL%/*}/SHA256SUMS"
-```
-
-### 2. Verify and extract the archive {#2-verify-and-extract-the-archive}
-
-```sh
-awk -v file="$HONK_ARCHIVE" '$2 == file' SHA256SUMS | sha256sum -c -
-```
-
-Continue only when every selected file reports `OK`. If verification fails or finds no checksum line, check the filenames and download again before installing.
-
-```sh
-tar -xzf "$HONK_ARCHIVE"
-HONK_PACKAGE=${HONK_ARCHIVE%.tar.gz}
-```
-
-### 3. Install the binary {#3-install-the-binary}
-
-For a new installation, choose the tab for your shell. For an update, stop the existing service first using [Service management](service-management.md), then replace the binary.
-
-::: code-group
-
-```sh [sudo]
-sudo install -d /usr/local/bin
-sudo install -m 0755 "$HONK_PACKAGE/honk-core" /usr/local/bin/honk-core
-/usr/local/bin/honk-core --version
-```
-
-```sh [root]
-install -d /usr/local/bin
-install -m 0755 "$HONK_PACKAGE/honk-core" /usr/local/bin/honk-core
-/usr/local/bin/honk-core --version
-```
-
-```sh [OpenWrt]
-cp "$PWD/$HONK_PACKAGE/honk-core" /usr/bin/honk-core
-chmod 0755 /usr/bin/honk-core
-/usr/bin/honk-core --version
-```
-
-:::
-
-The version command must run successfully. Keep the downloaded release name with your installation records.
-
-For an update, keep the existing configuration and [restart the service](service-management.md). Check that its startup log reports the installed engine version.
-
-If you arrived from a distribution guide, return there to finish.
-
-### Build from source instead {#build-from-source-instead}
-
-Follow [honk’s source-build instructions](https://github.com/daeuniverse/honk/blob/main/doc/en/how-to-start.md#build-from-source) for the toolchains, eBPF build, and BTF check. From the honk repository root, replace its final honk-core build command with:
-
-```sh
-cargo build --release -p honk-core --features ebpf,native-api
-```
-
-`ebpf` supplies the real datapath; `native-api` supplies doona’s API. Install `target/release/honk-core` at the binary path above. Release binaries embed the eBPF object, so you need not install a separate object file.
+On Debian or Ubuntu, run `sudo apt install honk`; honk's [installation guide](/honk/installation/) covers other systems and build variants. Choose a `full` or `native-api` build, because the `clash-api` variant cannot serve doona's native API.
 
 ## Installation errors {#installation-errors}
 
 | Error | What to do |
 | --- | --- |
 | HTTP 404 when downloading | Check the release tag and exact asset filename. Copy the download link from that release instead of constructing an unverified filename. |
-| `GLIBC_* not found` when starting honk | The selected gnu binary requires a newer glibc. Choose the matching static musl build from honk’s release. |
 | BusyBox rejects `--ignore-missing` | BusyBox `sha256sum` does not support that option. Use the per-file `awk` and `sha256sum -c -` command shown in these installation guides. Require an `OK` result for the selected file. |
+
+For a `GLIBC_*` error, choose the musl build as described in honk's [installation guide](/honk/installation/). For a missing kernel feature or a startup failure, see [Requirements](requirements.md#gateway) and honk's [troubleshooting](/honk/how-to-start#troubleshooting).
 
 
 ## Install geodata when your rules need it {#directories-and-geodata}
 
-Check [geodata requirements](feature-requirements.md#req-geodata) before adding Geo rules.
-
-Use the data directory selected in your [configuration](configuration.md#config). For the `/var/lib/honk` layout used by the systemd guide, run:
-
-```sh
-sudo install -d -m 0700 /var/lib/honk
-sudo curl -fL --retry 3 -o /var/lib/honk/geosite.dat \
-  https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/release/geosite.dat
-sudo curl -fL --retry 3 -o /var/lib/honk/geoip.dat \
-  https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/release/geoip.dat
-```
-
-In a root shell, omit `sudo`. On OpenWrt, use [its geodata steps](install-openwrt.md#install-geodata). For later updates and their conditions, see [geodata updates](feature-requirements.md#req-geodata-update).
+Check [geodata requirements](feature-requirements.md#req-geodata) before adding Geo rules. Install the files in the directory selected by `global.data_dir`, as described in honk's [GeoIP and Geosite](/honk/how-to-start#geoip-and-geosite).
 
 
 ## Install the UI files {#doona}
@@ -194,16 +99,9 @@ Use the [native API settings](configuration.md#config) for listener, UI director
 
 ### Hostnames and static-file 403 errors {#hostnames-and-static-file-403-errors}
 
-For `http://owrt.lan:9527/ui/`, add these entries inside the existing `experimental.native_api` block, retaining its other settings and allowlist entries:
+When a hostname or another origin is refused, set `allowed_hosts` and `allow_origins` as described in honk's [Host and Origin checks](/honk/reference/experimental#host-and-origin-checks). After editing them, [restart honk](what-doona-can-change.md#restart-native) and reload the page.
 
-```dae
-allowed_hosts: 'owrt.lan:9527'
-allow_origins: 'http://owrt.lan:9527'
-```
-
-`allowed_hosts` takes a hostname and port without a scheme or path. `allow_origins` takes the scheme, hostname and port without a path or trailing slash. For multiple entries, quote each separately and separate them with commas, as in `allowed_hosts: 'owrt.lan:9527', 'router.lan:9527'`. Do not use JSON brackets or quote the whole list. Allowing a Host does not automatically allow its Origin.
-
-If HTML loads but JavaScript or CSS returns 403, inspect the failing requests in the browser’s Network panel. Compare Host and Origin, including their ports, with the allowlists. After editing them, [restart honk](what-doona-can-change.md#restart-native) and reload the page.
+If HTML loads but JavaScript or CSS returns 403, inspect the failing requests in the browser’s Network panel. Compare Host and Origin, including their ports, with the allowlists.
 
 ### Static servers and reverse proxies {#static-servers-and-reverse-proxies}
 
@@ -217,7 +115,7 @@ Forward both the exact `/api` discovery endpoint and the `/api/` subtree to honk
 
 ### Reload or restart {#reload-and-restart}
 
-Use [What doona can change](what-doona-can-change.md) to determine how an edit takes effect, then use the commands in [Service management](service-management.md).
+Use [What doona can change](what-doona-can-change.md) to determine how an edit takes effect, then follow honk's [Reload and stop](/honk/how-to-start#reload-and-stop).
 
 ### Update the UI {#update-the-ui}
 

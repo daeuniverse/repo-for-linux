@@ -78,7 +78,7 @@ apt install doona-web-fonts
 
 ## 5. 安装后端 {#5-安装后端}
 
-按[安装 honk](install.md#install)安装后端后返回本页。已有兼容的 honk 时无需重复安装。
+已有兼容的 honk 时无需重复安装；否则执行 `sudo apt install honk`，软件源设置、升级与卸载见 honk 的 [Debian 安装指南](/zh-CN/honk/installation/debian)。
 
 应用[独立界面配置](install.md)，[启动 honk](service-management.md)，再按[首次登录](first-sign-in.md)操作。
 

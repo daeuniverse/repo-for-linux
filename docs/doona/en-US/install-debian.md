@@ -78,7 +78,7 @@ apt install doona-web-fonts
 
 ## 5. Install the backend {#5-install-the-backend}
 
-If you already have a compatible honk, keep it. Otherwise, follow [Install honk](install.md#install), then return here.
+If you already have a compatible honk, keep it. Otherwise run `sudo apt install honk`; honk's [Debian installation guide](/honk/installation/debian) covers repository setup, upgrades and removal.
 
 Apply the [separate UI configuration](install.md), [start honk](service-management.md), then follow [First sign-in](first-sign-in.md).
 

@@ -47,23 +47,7 @@ domain(full: example.com) -> proxy
 
 ## 4. 定義 DNS 上游 {#4-定義-dns-上游}
 
-開啟**組態** → **設定檔**，在**設定檔**中選擇 `/etc/honk/config.dae`，將以下區塊附加到現有區塊之後。保留剛才建立的訂閱、群組和路由規則。
-
-```dae
-# 透過代理群組傳送指定的 DNS 請求。
-dns {
-    # 使用數字伺服器位址，避免依賴其網域的初始解析。
-    upstream {
-        remote_dns: 'https://1.1.1.1/dns-query' -> proxy
-    }
-    # 保留其他請求的原目的地。
-    routing {
-        request {
-            fallback: asis
-        }
-    }
-}
-```
+開啟**組態** → **設定檔**，在**設定檔**中選擇 `/etc/honk/config.dae`，附加一個 `dns` 區塊，定義經 `proxy` 傳送的上游 `remote_dns`。語法見 honk 的 [DNS 設定範例](/zh-TW/honk/configuration#dns-設定)。保留剛才建立的訂閱、群組和路由規則。
 
 選擇**套用**，等待檔案已寫入、組態已重載的通知。重新開啟檔案，檢查 `remote_dns` 是否存在。編輯器或**套用**無法使用時，見[組態寫入條件](feature-requirements.md#req-config-edit)。
 

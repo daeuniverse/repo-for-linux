@@ -65,7 +65,7 @@ lastUpdated: false
 
 選擇器包含主檔案及 include 檔案中的全域區段；沒有全域區段的主檔案可新增一個。**未設定** 使用引擎預設值。清空數值欄位會將其設為未設定；整數欄位不接受小數點，連接埠數字不分組，例如 `8080`。
 
-訂閱本文存入狀態資料庫的 `subscription_body` 表，資料庫位置見[設定參考](configuration.md#config)。獨立 `.sub` 檔案屬於舊儲存格式，啟動遷移說明見 [honk 訂閱參考](https://github.com/daeuniverse/honk/blob/main/doc/zh/reference/subscription.md#拉取持久化与恢复)。
+訂閱本文存入[設定參考](configuration.md#config)中所述的狀態資料庫。獨立 `.sub` 檔案屬於舊儲存格式，啟動遷移說明見 [honk 訂閱參考](/zh-TW/honk/reference/subscription#抓取、持久化與恢復)。
 
 ### 匯出或復原組態 {#匯出或復原組態}
 
@@ -114,7 +114,7 @@ lastUpdated: false
 
 可用欄位包括 **日誌等級**、**日誌保留筆數**、**DNS 記錄保留筆數**、**流程保留筆數** 和 **流程保留秒數**。**流程記錄** 提供 **依流程需求**，**日誌記錄** 提供 **依日誌需求**，**DNS 記錄** 提供 **依 DNS 日誌需求**；三者也都提供 **常開** 和 **關閉**。記錄器狀態顯示為 **記錄中**、**未記錄** 或 **組態禁止**。
 
-覆寫值的有效期見[執行期變更](what-doona-can-change.md#change-runtime)。需要永久儲存時，使用**在組態中編輯持久設定**，並查閱[組態參考](configuration.md#config)。
+覆寫值的有效期見[執行期變更](what-doona-can-change.md#change-runtime)；欄位範圍與重設行為見 honk 的[原生日誌與執行時設定](/zh-TW/honk/reference/api#原生日誌與執行時設定)。需要永久儲存時，使用**在組態中編輯持久設定**。
 
 
 ### 更新地理資料或修改來源 {#geodata}
@@ -127,7 +127,7 @@ lastUpdated: false
 4. 按需調整提供的**下載路由**、**SHA-256 驗證**或**自動更新**。選擇**指定群組**時，還須選擇群組才會儲存路由。這些控制項在修改後儲存，須檢查各次操作結果。
 5. 要移除覆寫值，點選**重設為預設值**，閱讀確認提示後再繼續。
 
-**來源** 提供 **Loyalsoldier**、**MetaCubeX 完整版**、**MetaCubeX 精簡版** 和 **自訂**。使用 honk 時，每個自訂 URL 清單最多接受四個位址，依序嘗試。點 **編輯** 可重新開啟自訂對話框。
+**來源** 提供 **Loyalsoldier**、**MetaCubeX 完整版**、**MetaCubeX 精簡版** 和 **自訂**。點 **編輯** 可重新開啟自訂對話框。URL 清單上限與已儲存設定的優先順序見 honk 的 [geodata 來源](/zh-TW/honk/reference/api#geodata-來源與自動更新)。
 
 **詳細資料** 顯示 **上次檢查**、**下次檢查**，以及各檔案的大小、下載主機和路由。檔案表格顯示各檔案的更新時間。
 

@@ -107,9 +107,7 @@ For optional packages, use the same signed-key or direct installation method you
 
 ## Install the backend {#install-the-backend}
 
-If you already have a compatible honk, keep it. Otherwise, follow [Install honk](install.md#install), then return here.
-
-For OpenRC systems, [Service management](service-management.md) gives a foreground command for the first connection; it does not configure an OpenRC service.
+If you already have a compatible honk, keep it. Otherwise install a `full` or `native-api` build from honk's [installation guide](/honk/installation/). On OpenRC, honk's [minimal configuration](/honk/how-to-start#minimal-configuration) gives a foreground command for the first connection; it does not configure an OpenRC service.
 
 Apply the [separate UI configuration](install.md), [start honk](service-management.md), then follow [First sign-in](first-sign-in.md).
 

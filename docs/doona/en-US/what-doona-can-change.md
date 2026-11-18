@@ -31,29 +31,20 @@ Explicit geodata URLs and download routes in the startup configuration replace t
 
 ## Settings that require a restart {#settings-that-require-a-restart}
 
-The API refuses these effective changes before writing. Use an external editor, then follow [Service management](service-management.md). The editor may show a restart-required diagnostic or `listener_settings_changed`; see [write refusals](troubleshooting.md#read-only).
+The API refuses these effective changes before writing. Use an external editor, then [restart honk](service-management.md). The editor may show a restart-required diagnostic or `listener_settings_changed`; see [write refusals](troubleshooting.md#read-only).
 
-| Section | Restart-only keys |
+| Section | Restart-only settings |
 | --- | --- |
-| <a name="restart-dns"></a><span id="restart-dns"></span>`dns` | `bind` |
-| <a name="restart-global"></a><span id="restart-global"></span>`global` | `check_interval`, `tcp_check_url`, `tcp_check_http_method`, `udp_check_dns`, `tls_implementation`, `tproxy_port`, `tproxy_port_protect`, `pprof_port`, `so_mark_from_dae`, `log_level`, `log_file`, `lan_interface`, `wan_interface`, `auto_config_kernel_parameter`, `data_dir`, `store_subscribe`, `nfqueue_enable` |
-| <a name="restart-native"></a><span id="restart-native"></span>`experimental.native_api` | Every field, including authentication, listener, UI, recording, and write settings |
-| <a name="restart-clash"></a><span id="restart-clash"></span>`experimental.clash_api` | `external_controller`, `external_ui`, `external_ui_download_url`, `external_ui_download_detour`, `secret`, `default_mode` |
-| <a name="restart-cache"></a><span id="restart-cache"></span>`experimental.cache_file` | `enabled`, `store_dns` |
-| <a name="restart-assets"></a><span id="restart-assets"></span>`assets` | `geodata.geosite`, `geodata.geoip`, `geodata.route`, `ui.url`, `ui.route`, and inherited `route` when they change the resolved native or Clash API settings |
-
-The health-check comparison uses the effective first HTTP URL and method, and the selected UDP DNS target. `tls_implementation` requires a restart when switching into or out of UTLS mode. The log-file comparison uses the effective path, including any command-line override.
-
-The reload policy also compares internal `global.tproxy_mark`. honk does not accept it as a DAE configuration key; do not add it to your file. honk rejects `global.data_dir` as `listener_settings_changed` in database mode and as a restart-required diagnostic in file mode.
+| <a name="restart-dns"></a><span id="restart-dns"></span>`dns` | [`bind`](/honk/reference/dns#standalone-listener-bind) |
+| <a name="restart-global"></a><span id="restart-global"></span>`global` | [Global fields](/honk/reference/global#fields) |
+| <a name="restart-native"></a><span id="restart-native"></span>`experimental.native_api` | [`native_api`](/honk/reference/experimental#native-api) |
+| <a name="restart-clash"></a><span id="restart-clash"></span>`experimental.clash_api` | [`clash_api`](/honk/reference/experimental#clash-api) |
+| <a name="restart-cache"></a><span id="restart-cache"></span>`experimental.cache_file` | [`cache_file`](/honk/reference/experimental#cache-file) |
+| <a name="restart-assets"></a><span id="restart-assets"></span>`assets` | [Restart and reload](/honk/reference/assets#restart-and-reload) |
 
 ## Why a source is read-only {#why-a-source-is-read-only}
 
-Check the source badge on **Configuration**. A source can be read-only because:
-
-- `config_write` is off, or neither `secret` nor `password_auth` provides credentials.
-- It declares a native API or Clash API listener secret.
-- Its text contains a listener-secret value subject to masking. honk masks matching values of at least eight bytes.
-- In database mode, failure to record the active revision blocks the store.
+Check the source badge on **Configuration**. A source can be read-only when writes are disabled or credentials are missing, when it declares a native API or Clash API listener secret, when its text contains a masked listener-secret value, or when the database cannot record the active revision. honk's [accepted configuration and reload operations](/honk/reference/api#accepted-configuration-and-reload-operations) states the full source trust boundary and refusal codes.
 
 Configuration actions also remain unavailable while the source set or write coordinator is unavailable. doona refuses incomplete source content. A write cannot introduce a listener secret, change the set of credential-bearing sources, or change listener settings.
 
@@ -69,12 +60,12 @@ Geodata updates have separate destination rules: packaged assets are normally re
 
 ## Accepted fields without the expected live effect {#accepted-fields-without-the-expected-live-effect}
 
+Some compatibility fields are accepted and stored without changing traffic. See honk's [global fields](/honk/reference/global#fields) and [non-dae formats](/honk/reference/assets#non-dae-formats).
+
 | Field | Actual behavior |
 | --- | --- |
 | <a name="startup-preconnect"></a><span id="startup-preconnect"></span>`global.preconnect_node_count` | Consumed by startup warm-up. An accepted source edit does not rerun that warm-up. Restart honk to use the new value for startup. |
-| `global.tls_fragment`, `global.tls_fragment_length`, `global.tls_fragment_interval` | Accepted and stored for compatibility; no runtime fragmentation consumer in this honk revision. |
-| `global.bandwidth_max_tx`, `global.bandwidth_max_rx` | Accepted and stored for compatibility; no runtime bandwidth-limiting consumer in this honk revision. |
 
-An accepted edit only starts an operation. The change is active when the operation reaches `succeeded`; read the source back to confirm it. Even then, a compatibility field does not change traffic behavior.
+An accepted edit only starts an operation. The change is active when the operation reaches `succeeded`; read the source back to confirm it.
 
 </div>

@@ -58,7 +58,7 @@ dnf install doona-fonts
 
 ## 3. Install the backend {#3-install-the-backend}
 
-If you already have a compatible honk, keep it. Otherwise, follow [Install honk](install.md#install), then return here.
+If you already have a compatible honk, keep it. Otherwise run `sudo dnf install honk`; honk's [Fedora installation guide](/honk/installation/fedora) covers repository setup, upgrades and removal.
 
 Apply the [separate UI configuration](install.md), [start honk](service-management.md), then follow [First sign-in](first-sign-in.md).
 

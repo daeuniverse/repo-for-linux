@@ -11,7 +11,7 @@ lastUpdated: false
 
 doona lite 用於設定節點、訂閱、策略群組、路由、DNS 與全域設定。需要任務專用表單、手動節點分享與組態草稿確認流程，且無需流量頁面時，可選擇 lite。
 
-honk 也提供 Clash 相容 API，供 zashboard 等 Clash 儀表板使用；doona 不使用此 API（見 honk 的[最小組態](https://github.com/daeuniverse/honk/blob/main/doc/zh/how-to-start.md#最小配置)）。
+honk 也提供 Clash 相容 API，供 zashboard 等 Clash 儀表板使用；doona 不使用此 API（見 honk 的 [Clash API 設定](/zh-TW/honk/configuration#啟用-clash-api、快取檔與首包保留-udp)）。
 
 
 ## 功能比較 {#editions-compare}
@@ -61,7 +61,7 @@ lite 重用標準版的 `src/api/client.ts`，以及基於產生的 `src/api/typ
 
 內嵌標準版請見[快速入門](quick-start.md)，切換至 lite 請見 [doona lite](lite.md#lite-install)，使用獨立目錄請見[單獨安裝介面檔案](install.md)。
 
-honk 的 `/ui/` 一次只提供一個版本。透過 `experimental.native_api.ui` 選擇內嵌介面或目錄，再[重新啟動 honk，僅重新載入不足以生效](what-doona-can-change.md#restart-native)。[手動安裝指南](install-manual.md)為兩個版本使用不同的壓縮檔與目錄，安裝其中一個不會覆寫另一個。
+honk 的 `/ui/` 一次只提供一個版本。依 honk 的 [`native_api.ui`](/zh-TW/honk/reference/experimental#native-api-ui)透過 `experimental.native_api.ui` 選擇內嵌介面或目錄，再[重新啟動 honk，僅重新載入不足以生效](what-doona-can-change.md#restart-native)。[手動安裝指南](install-manual.md)為兩個版本使用不同的壓縮檔與目錄，安裝其中一個不會覆寫另一個。
 
 若要同時使用兩個版本，讓 honk 提供其中一個，再用靜態伺服器提供另一個目錄。按[主機名稱與來源存取](install.md#other-origin)允許第二個來源。
 

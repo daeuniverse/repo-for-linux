@@ -94,9 +94,7 @@ The last command must list `index.html`. Use that directory in the [separate UI 
 
 ## 5. Install the backend {#5-install-the-backend}
 
-If you already have a compatible honk, keep it. Otherwise, follow [Install honk](install.md#install), then return here.
-
-Use the systemd procedure in [Service management](service-management.md) on a systemd host. On OpenRC, that page provides a foreground command for the first connection.
+If you already have a compatible honk, keep it. Otherwise install a prebuilt build from honk's [installation guide](/honk/installation/). Use [Run with systemd](/honk/how-to-start#run-with-systemd) on a systemd host; on OpenRC, honk's [minimal configuration](/honk/how-to-start#minimal-configuration) gives a foreground command for the first connection.
 
 Apply the [separate UI configuration](install.md), [start honk](service-management.md), then follow [First sign-in](first-sign-in.md).
 
