@@ -11,7 +11,7 @@ The standard edition manages configuration and observes traffic. Choose it for t
 
 doona lite focuses on configuration: nodes, subscriptions, groups, routing, DNS and global settings. Choose it for task-specific forms, sharing manual nodes and reviewing configuration drafts without traffic pages.
 
-honk also has a Clash-compatible API for Clash dashboards such as zashboard; doona does not use it (see honk's [minimal configuration](https://github.com/daeuniverse/honk/blob/main/doc/en/how-to-start.md#minimal-configuration)).
+honk also has a Clash-compatible API for Clash dashboards such as zashboard; doona does not use it (see honk's [Clash API setup](/honk/configuration#enabling-the-clash-api-cache-file-and-held-first-packet-udp)).
 
 
 ## Compare features {#editions-compare}
@@ -61,7 +61,7 @@ lite reuses the standard edition’s `src/api/client.ts` and models backed by th
 
 Use [Quick start](quick-start.md) for the embedded standard edition, [doona lite](lite.md#lite-install) to switch to lite, or [install UI files separately](install.md) to serve a directory.
 
-honk serves one edition at `/ui/` at a time. Select its embedded UI or directory with `experimental.native_api.ui`, then [restart honk, not just reload](what-doona-can-change.md#restart-native). The [manual installation guide](install-manual.md) gives each edition a separate archive and directory, so installing one does not overwrite the other.
+honk serves one edition at `/ui/` at a time. Select its embedded UI or directory with `experimental.native_api.ui`, as described in honk's [`native_api.ui`](/honk/reference/experimental#native-api-ui), then [restart honk, not just reload](what-doona-can-change.md#restart-native). The [manual installation guide](install-manual.md) gives each edition a separate archive and directory, so installing one does not overwrite the other.
 
 To use both at once, let honk serve one edition and use a static server for the other directory. Allow the second origin as described in [hostname and origin access](install.md#other-origin).
 

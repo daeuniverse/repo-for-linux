@@ -11,38 +11,33 @@ Install doona v0.1.0-rc.6 and honk on an OpenWrt router. Run every command in a 
 
 ## Quick install from the daeuniverse feed {#quick-install-from-the-daeuniverse-feed}
 
-On supported 64-bit OpenWrt or ImmortalWrt 25.12 routers, install honk from the [daeuniverse feed](/openwrt/), then follow [Quick start](quick-start.md) to configure its embedded doona. The steps below are the manual archive route, an alternative for routers the feed does not support. The feed package and the manual route use different service names and data directories; choose one route.
+On supported 64-bit OpenWrt or ImmortalWrt 25.12 routers, install honk from the [daeuniverse feed](/openwrt/); honk's [OpenWrt installation](/honk/how-to-start#openwrt) describes the feed's package and service. Then follow [Quick start](quick-start.md) to configure its embedded doona. The steps below are the manual archive route for routers the feed does not support; choose one route.
 
 ## 1. Check the router and prepare tools {#1-check-the-router-and-prepare-tools}
 
-Check the [backend prerequisites](install.md#install), including the kernel, BTF, cgroup, and CPU requirements, before downloading. A matching doona package does not establish that the router can run honk. Check storage for installed files and the download directory:
+Check storage for installed files and the download directory:
 
 ```sh
-uname -r
-uname -m
 df -h / /tmp
 ```
 
-OpenWrt 25.12 uses apk-tools 3; OpenWrt 24.10 and earlier use opkg and ipk packages. Stock OpenWrt 24.10 uses [Linux 6.6](https://github.com/openwrt/openwrt/blob/openwrt-24.10/target/linux/x86/Makefile), below honk’s minimum kernel requirement linked above. Installing a matching UI package does not resolve that incompatibility.
-
-Choose the commands for the router’s package manager. OpenWrt provides the [veth module](https://github.com/openwrt/openwrt/blob/openwrt-25.12/package/kernel/linux/modules/netsupport.mk) and [NFQUEUE modules](https://github.com/openwrt/openwrt/blob/openwrt-25.12/package/kernel/linux/modules/netfilter.mk) as packages:
+OpenWrt 25.12 uses apk-tools 3; OpenWrt 24.10 and earlier use opkg and ipk packages. Install the download tools for the router’s package manager:
 
 ::: code-group
 
 ```sh [apk]
 apk update
-apk add curl ca-bundle kmod-veth kmod-nft-queue
+apk add curl ca-bundle
 ```
 
 ```sh [opkg]
 opkg update
-opkg install curl ca-bundle kmod-veth kmod-nft-queue
+opkg install curl ca-bundle
 ```
 
 :::
 
-If NFQUEUE lacks prerequisites despite its enabled setting, honk can continue running without NFQUEUE staging and issue a startup warning. Check the [service log](service-management.md); successful service startup does not confirm active NFQUEUE staging.
-
+For kernel, BTF, cgroup and kernel-module requirements, use honk's [Linux kernel requirements](/honk/how-to-start#linux-kernel-requirements) and [OpenWrt installation](/honk/how-to-start#openwrt). A matching doona package does not establish that the router can run honk.
 
 ## 2. Download and verify doona {#openwrt-packages}
 
@@ -126,68 +121,20 @@ For apk, repeat the install command with the chosen package name instead of `doo
 
 ## 4. Install honk {#4-install-honk}
 
-Follow [Install honk](install.md#install) in a separate download directory so its `SHA256SUMS` does not replace doona’s. Choose a musl build and the OpenWrt installation tab, which installs `/usr/bin/honk-core`. Then return here.
+For the manual route, install a musl release at `/usr/bin/honk-core` as described in honk's [OpenWrt installation](/honk/how-to-start#openwrt), then return here. Follow honk's instructions for `apk add honk@daeuniverse` if you use the feed instead.
 
 After verifying the installed binary, remove its downloaded archive and extracted directory using their absolute paths. Once you have installed all chosen optional UI packages, remove the downloaded doona packages, index, key copy, and checksums from `/tmp/doona` using their absolute paths. Keep any downloads still needed for installation.
 
-
 ## 5. Prepare the data directory {#install-geodata}
 
-For this manual route, set `global.data_dir` to `/etc/honk/data` in the [honk configuration](configuration.md#config), then prepare the persistent directory:
-
-```sh
-mkdir -p /etc/honk/config.d /etc/honk/data
-chmod 0700 /etc/honk /etc/honk/config.d /etc/honk/data
-```
-
-Only download geodata when your rules need it; see [geodata requirements](feature-requirements.md#req-geodata). For this layout:
-
-```sh
-curl -fL --retry 3 -o /etc/honk/data/geosite.dat \
-  https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/release/geosite.dat
-curl -fL --retry 3 -o /etc/honk/data/geoip.dat \
-  https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/release/geoip.dat
-```
-
-Alternatively, install the distribution’s [v2ray geodata packages](https://github.com/openwrt/packages/blob/openwrt-25.12/net/v2ray-geodata/Makefile) instead of downloading the files above:
-
-::: code-group
-
-```sh [apk]
-apk add v2ray-geosite v2ray-geoip
-```
-
-```sh [opkg]
-opkg install v2ray-geosite v2ray-geoip
-```
-
-:::
-
-honk searches `/usr/share/dae`, but not `/usr/share/v2ray` directly. Check for existing files or links under `/usr/share/dae`; create any missing links as follows:
-
-```sh
-mkdir -p /usr/share/dae
-ln -s ../v2ray/geosite.dat /usr/share/dae/geosite.dat
-ln -s ../v2ray/geoip.dat /usr/share/dae/geoip.dat
-```
-
-Files already present in the configured data directory take precedence over these packaged files.
-
-Use the OpenWrt service in [Service management](service-management.md), not the feed service.
+Set `global.data_dir` to `/etc/honk/data` and install geodata as described in honk's [GeoIP and Geosite](/honk/how-to-start#geoip-and-geosite). Only download geodata when your rules need it; see [geodata requirements](feature-requirements.md#req-geodata).
 
 ## Preserve configuration across sysupgrade {#preserve-configuration-across-sysupgrade}
 
-Before a normal sysupgrade that preserves configuration, add these paths to `/etc/sysupgrade.conf` if they are not already listed, then check the [backup list](https://github.com/openwrt/openwrt/blob/openwrt-25.12/package/base-files/files/sbin/sysupgrade):
+Follow honk's [OpenWrt procd](/honk/how-to-start#run-with-openwrt-procd) section to add `/etc/honk/` and the init script to the sysupgrade backup list.
 
-```sh
-printf '%s\n' '/etc/honk/' '/etc/init.d/honk-core' >> /etc/sysupgrade.conf
-sysupgrade -l
-```
+After upgrading, repeat steps 1–3 to reinstall the download tools and UI packages, and reinstall honk using step 4. Keep the restored configuration and data, then [enable and start the service](service-management.md).
 
-Confirm that the list includes your honk configuration, data files, and init script. This configuration backup does not restore installed kernel modules, `/usr/bin/honk-core`, or `/usr/share/doona`.
-
-After upgrading, repeat steps 1–4 to reinstall the tools, kernel modules, UI packages, and honk binary. If you chose packaged geodata, reinstall it and recreate its links using step 5. Keep the restored configuration and data, then [enable and start the service](service-management.md).
-
-Check the [service log](service-management.md), then follow [First sign-in](first-sign-in.md).
+Check the [service log](/honk/how-to-start#service-logs), then follow [First sign-in](first-sign-in.md).
 
 </div>

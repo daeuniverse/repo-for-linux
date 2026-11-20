@@ -428,31 +428,28 @@ test('doona release fallback includes prereleases, authenticates, and defers to 
   }
 })
 
-test('honk native installation starts with the pinned direct config and preserves lifecycle commands', async () => {
-  const upstream = await readFile(join(root, 'docs/honk/en-US/how-to-start.md'), 'utf8')
-  const minimal = upstream.match(/```dae\n(global \{[\s\S]*?fallback: direct\n\})\n```/)[1]
+test('committed honk package pages link the upstream flow and keep repository lifecycle commands', async () => {
   for (const locale of Object.values(locales)) {
     const directory = join(root, 'docs/honk', locale.lang, 'installation')
-    const docker = await readFile(join(directory, 'docker.md'), 'utf8')
-    // The configure and start steps are written once, on the first-run page.
     const firstRun = await readFile(join(directory, 'first-run.md'), 'utf8')
-    assert.ok(firstRun.includes(minimal), `${locale.lang}/first-run: pinned minimal config`)
-    assert.doesNotMatch(firstRun, /cp \/etc\/honk\/example\.dae/)
-    assertPrivilegeTabs(firstRun, `${locale.lang}/first-run`)
-    const api = firstRun.match(/```dae\n(experimental \{[\s\S]*?)\n```/)[1]
-    assert.ok(docker.includes(api))
+    // Configuration and service startup belong to honk's manual; this repository keeps only package setup.
+    assert.ok(firstRun.includes('(../how-to-start.md)'), `${locale.lang}/first-run: link to Quick Start`)
+    assert.ok(firstRun.includes('(../how-to-start.md#'), `${locale.lang}/first-run: link to a Quick Start heading`)
+    assert.ok(firstRun.includes('`native_api`'), `${locale.lang}/first-run: names the native API block`)
+    assert.match(firstRun, /\/doona\/first-sign-in\)/, `${locale.lang}/first-run: link to doona sign-in`)
+    assert.doesNotMatch(firstRun, /```dae/, `${locale.lang}/first-run: honk configuration is not repeated`)
+    const docker = await readFile(join(directory, 'docker.md'), 'utf8')
+    assert.ok(docker.includes('(../how-to-start.md#'), `${locale.lang}/docker: link to the Docker guide`)
+    assert.doesNotMatch(docker, /```dae/, `${locale.lang}/docker: honk configuration is not repeated`)
+    assert.ok(docker.includes('docker compose down'))
     for (const [page, manager, upgrade] of [['debian', 'apt', 'apt update && apt install --only-upgrade honk'], ['fedora', 'dnf', 'dnf upgrade honk'], ['opensuse', 'zypper', 'zypper update honk']]) {
       const text = await readFile(join(directory, `${page}.md`), 'utf8')
       assert.ok(text.includes('(./first-run.md)'), `${locale.lang}/${page}: link to first run`)
-      assert.ok(!text.includes(minimal), `${locale.lang}/${page}: configuration lives on the first-run page`)
+      assert.doesNotMatch(text, /```dae/, `${locale.lang}/${page}: honk configuration is not repeated`)
       assertPrivilegeTabs(text, `${locale.lang}/${page}`)
       assert.ok(text.includes(`${upgrade}\nsystemctl restart honk.service\nsystemctl status honk.service --no-pager`))
       assert.ok(text.includes(`systemctl disable --now honk.service\n${manager} remove honk`))
     }
-    assert.ok(docker.indexOf('systemctl disable --now honk.service') < docker.indexOf('docker compose up -d'))
-    assert.ok(docker.includes('systemctl disable --now dae.service'))
-    assert.ok(docker.includes('docker compose down'))
-    assert.ok(docker.includes('http://127.0.0.1:9527/ui/'))
   }
 })
 

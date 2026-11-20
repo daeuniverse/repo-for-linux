@@ -41,116 +41,21 @@ experimental {
 
 ## 安装 honk {#install}
 
-先检查 [honk 指南中的内核与主机要求](https://github.com/daeuniverse/honk/blob/main/doc/zh/how-to-start.md#linux-内核要求)。首次启动时保留控制台访问方式。下载前准备好 `curl`、CA 证书、`tar` 和 `sha256sum`。
-
-### 1. 选择并下载后端构建 {#1-选择并下载后端构建}
-
-打开 [honk 发布页](https://github.com/daeuniverse/honk/releases)，选择适合网关的 `full` 或 `native-api` 压缩包，并复制下载链接。`clash-api` 版本无法提供 doona 所需的原生 API。后端有独立的版本号，不要用 doona 的版本号拼接 honk 下载地址。
-
-```sh
-uname -m
-```
-
-| 选项 | 选择方法 |
-| --- | --- |
-| CPU | 按 `uname -m` 的结果选择 `x86_64` 或 `aarch64`。 |
-| C 库 | 网关使用静态链接的 `musl` 构建，包括 OpenWrt 和 Alpine。 |
-| API 版本 | `full` 包含原生 API 和嵌入式 UI；`native-api` 可提供单独安装的 UI 文件。 |
-| 内存分配器 | `-stock` 使用系统分配器；不带此后缀的构建使用 mimalloc。 |
-
-在网关上的新下载目录中执行以下命令，并在提示后粘贴压缩包的下载链接：
-
-```sh
-printf 'honk archive URL: '
-read -r HONK_URL
-```
-
-在同一 shell 中下载压缩包与该次发布的校验和文件：
-
-```sh
-HONK_ARCHIVE=${HONK_URL##*/}
-curl -fL -O "$HONK_URL" -O "${HONK_URL%/*}/SHA256SUMS"
-```
-
-### 2. 校验并解压 {#2-校验并解压}
-
-```sh
-awk -v file="$HONK_ARCHIVE" '$2 == file' SHA256SUMS | sha256sum -c -
-```
-
-所有选定文件都显示 `OK` 后才能继续。如果校验失败或找不到校验和条目，先核对文件名并重新下载，再安装。
-
-```sh
-tar -xzf "$HONK_ARCHIVE"
-HONK_PACKAGE=${HONK_ARCHIVE%.tar.gz}
-```
-
-### 3. 安装可执行文件 {#3-安装可执行文件}
-
-首次安装时选择适合当前 shell 的标签页。更新现有安装时，先按[服务管理](service-management.md)停止服务，再替换可执行文件。
-
-::: code-group
-
-```sh [sudo]
-sudo install -d /usr/local/bin
-sudo install -m 0755 "$HONK_PACKAGE/honk-core" /usr/local/bin/honk-core
-/usr/local/bin/honk-core --version
-```
-
-```sh [root]
-install -d /usr/local/bin
-install -m 0755 "$HONK_PACKAGE/honk-core" /usr/local/bin/honk-core
-/usr/local/bin/honk-core --version
-```
-
-```sh [OpenWrt]
-cp "$PWD/$HONK_PACKAGE/honk-core" /usr/bin/honk-core
-chmod 0755 /usr/bin/honk-core
-/usr/bin/honk-core --version
-```
-
-:::
-
-确认版本命令成功执行。保留下载的发布版本名称，供日后核对。
-
-更新时保留现有配置，并[重启服务](service-management.md)。确认启动日志显示已安装的引擎版本。
-
-从发行版指南进入本节的读者，请返回原页继续。
-
-### 改用源码构建 {#改用源码构建}
-
-先按 [honk 源码构建指南](https://github.com/daeuniverse/honk/blob/main/doc/zh/how-to-start.md#从源码构建)准备工具链、构建 eBPF 并检查 BTF。在 honk 仓库根目录，将最后的 honk-core 构建命令替换为：
-
-```sh
-cargo build --release -p honk-core --features ebpf,native-api
-```
-
-`ebpf` 提供实际数据路径，`native-api` 提供 doona 所需的 API。将 `target/release/honk-core` 安装到上文的可执行文件路径。发布的可执行文件已嵌入 eBPF 对象，无需单独安装对象文件。
+Debian 或 Ubuntu 上执行 `sudo apt install honk`；其他系统和构建版本见 honk 的[安装指南](/zh-CN/honk/installation/)。请选择 `full` 或 `native-api` 构建，`clash-api` 版本无法提供 doona 所需的原生 API。
 
 ## 安装故障 {#安装故障}
 
 | 错误 | 处理方法 |
 | --- | --- |
 | 下载时返回 HTTP 404 | 核对发布标签和完整文件名。从对应发布页复制下载链接，不要自行拼接未经核实的文件名。 |
-| 启动 honk 时出现 `GLIBC_* not found` | 所选 gnu 构建需要更新的 glibc。改用 honk 发布页中对应的静态 musl 构建。 |
 | BusyBox 拒绝 `--ignore-missing` | BusyBox `sha256sum` 不支持该选项。使用这些安装指南中的逐文件 `awk` 和 `sha256sum -c -` 命令，确认选定文件显示 `OK`。 |
+
+`GLIBC_*` 错误请按 honk 的[安装指南](/zh-CN/honk/installation/)改用 musl 构建。内核功能缺失或启动失败见[运行要求](requirements.md#网关)和 honk 的[常见问题](/zh-CN/honk/how-to-start#常见问题)。
 
 
 ## 按规则需要安装 geodata {#directories-and-geodata}
 
-添加 Geo 规则前，先检查 [geodata 要求](feature-requirements.md#req-geodata)。
-
-使用[配置](configuration.md#config)中指定的数据目录。采用 systemd 指南中的 `/var/lib/honk` 布局时，执行：
-
-```sh
-sudo install -d -m 0700 /var/lib/honk
-sudo curl -fL --retry 3 -o /var/lib/honk/geosite.dat \
-  https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/release/geosite.dat
-sudo curl -fL --retry 3 -o /var/lib/honk/geoip.dat \
-  https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/release/geoip.dat
-```
-
-使用 root shell 时省略 `sudo`。OpenWrt 请使用[对应的 geodata 步骤](install-openwrt.md#install-geodata)。后续更新及其条件见 [geodata 更新](feature-requirements.md#req-geodata-update)。
+添加 Geo 规则前，先检查 [geodata 要求](feature-requirements.md#req-geodata)。按 honk 的 [GeoIP 和 Geosite](/zh-CN/honk/how-to-start#geoip-和-geosite)将文件安装到 `global.data_dir` 指定的目录。
 
 
 ## 安装 UI 文件 {#doona}
@@ -194,16 +99,9 @@ UI 文件会安装到暂存目录下的 `usr/share/doona`。
 
 ### 主机名与静态资源 403 错误 {#主机名与静态资源-403-错误}
 
-使用 `http://owrt.lan:9527/ui/` 时，在现有 `experimental.native_api` 块内添加以下条目，保留其他设置与允许列表条目：
+主机名或其他来源被拒绝时，按 honk 的 [Host 与 Origin 检查](/zh-CN/honk/reference/experimental#host-与-origin-检查)设置 `allowed_hosts` 和 `allow_origins`。修改后[重启 honk](what-doona-can-change.md#restart-native)，再重新加载页面。
 
-```dae
-allowed_hosts: 'owrt.lan:9527'
-allow_origins: 'http://owrt.lan:9527'
-```
-
-`allowed_hosts` 填主机名和端口，不带协议或路径。`allow_origins` 填协议、主机名和端口，不带路径或末尾斜杠。多个条目分别加引号，再用逗号分隔，例如 `allowed_hosts: 'owrt.lan:9527', 'router.lan:9527'`。不要使用 JSON 方括号，也不要用一对引号包住整个列表。允许 Host 不会自动允许其 Origin。
-
-如果 HTML 能打开，但 JavaScript 或 CSS 返回 403，在浏览器开发者工具的网络面板中检查失败的请求。将 Host、Origin 及其端口与允许列表逐项比较。修改后[重启 honk](what-doona-can-change.md#restart-native)，再重新加载页面。
+如果 HTML 能打开，但 JavaScript 或 CSS 返回 403，在浏览器开发者工具的网络面板中检查失败的请求。将 Host、Origin 及其端口与允许列表逐项比较。
 
 ### 静态服务器与反向代理 {#静态服务器与反向代理}
 
@@ -219,7 +117,7 @@ allow_origins: 'http://owrt.lan:9527'
 
 ### 重新加载或重启 {#reload-and-restart}
 
-先查[doona 可以更改什么](what-doona-can-change.md)，确定修改如何生效，再执行[服务管理](service-management.md)中的命令。
+先查 [doona 可以更改什么](what-doona-can-change.md)，确定修改如何生效，再按 honk 的[热 reload 和停止](/zh-CN/honk/how-to-start#热-reload-和停止)操作。
 
 ### 更新 UI {#更新-ui}
 

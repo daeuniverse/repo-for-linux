@@ -67,7 +67,7 @@ awk -v file="$FILE" '$2 == file' SHA256SUMS | sha256sum -c - &&
 
 ## 4. Install the backend {#4-install-the-backend}
 
-If you already have a compatible honk, keep it. Otherwise, follow [Install honk](install.md#install), then return here.
+If you already have a compatible honk, keep it. Otherwise install the community-maintained AUR package with `yay -S honk-core-bin` or `paru -S honk-core-bin`; honk's [Arch guide](/honk/installation/arch) has the details.
 
 Apply the [separate UI configuration](install.md), [start honk](service-management.md), then follow [First sign-in](first-sign-in.md).
 

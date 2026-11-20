@@ -20,6 +20,4 @@ paru -S honk-core-bin
 
 ## 下一步
 
-- [首次登录](/zh-CN/doona/first-sign-in)：连接 doona 与 honk，并创建管理员账号。
-- [管理节点、策略组和规则](/zh-CN/doona/routing)：添加节点或订阅和路由规则；在此之前所有流量直连。
-- [故障排除](/zh-CN/doona/troubleshooting)：无法正常使用时的排查步骤。
+启用并打开内嵌界面请见 doona 的[快速入门](/zh-CN/doona/quick-start)。

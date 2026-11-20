@@ -63,7 +63,7 @@ If writing succeeds but doona cannot read back the new configuration, it keeps t
 
 The picker includes global sections in main and include files; a main file without one can receive a new section. **Not set** uses the engine default. Clearing a numeric field leaves it unset; integer fields reject decimal points, and ports display ungrouped numbers such as `8080`.
 
-Stored subscription bodies use the `subscription_body` table in the state database described in the [configuration reference](configuration.md#config). Separate `.sub` files are legacy storage; see [honk’s subscription reference](https://github.com/daeuniverse/honk/blob/main/doc/en/reference/subscription.md#fetch-persistence-and-recovery) for startup migration.
+Stored subscription bodies use the state database described in the [configuration reference](configuration.md#config). Separate `.sub` files are legacy storage; see [honk’s subscription reference](/honk/reference/subscription#fetch-persistence-and-recovery) for startup migration.
 
 ### Export or restore configuration {#export-or-restore-configuration}
 
@@ -112,7 +112,7 @@ If runtime options change on the backend while you edit, doona keeps your draft 
 
 The offered fields include **Log level**, **Log records kept**, **DNS log records kept**, **Flows kept** and **Flow retention (seconds)**. **Flow recording** offers **On flow demand**; **Log recording** offers **On log demand**; **DNS log** offers **On DNS log demand**. Each also offers **Always** and **Off**. Recorder status reads **Recording**, **Idle** or **Disabled in configuration**.
 
-For how long overrides last, see [runtime changes](what-doona-can-change.md#change-runtime). For persistent values, use **Edit persistent settings in Configuration** and the [configuration reference](configuration.md#config).
+For how long overrides last, see [runtime changes](what-doona-can-change.md#change-runtime); honk's [native logs and runtime settings](/honk/reference/api#native-logs-and-runtime-settings) lists the field bounds and reset behavior. For persistent values, use **Edit persistent settings in Configuration**.
 
 
 ### Update geodata or change its sources {#geodata}
@@ -125,7 +125,7 @@ Check [file availability](feature-requirements.md#req-geodata), [update requirem
 4. Adjust **Download route**, **Verify checksum** or **Automatic updates** when offered. For **Specific group**, select the group to save the route. These controls save on change; check each result.
 5. To remove overrides, choose **Reset to defaults** and review the confirmation before proceeding.
 
-**Source** offers **Loyalsoldier**, **MetaCubeX full**, **MetaCubeX lite** and **Custom**. With honk, each custom URL list accepts up to four URLs, tried in order. **Edit** reopens the custom dialog.
+**Source** offers **Loyalsoldier**, **MetaCubeX full**, **MetaCubeX lite** and **Custom**. **Edit** reopens the custom dialog. See honk's [geodata sources](/honk/reference/api#geodata-sources-and-automatic-updates) for the URL list limit and stored-setting precedence.
 
 **Details** shows **Last checked** and **Next check**, followed by each file’s size, download host and route. The file table shows each file’s update time.
 

@@ -9,33 +9,17 @@ lastUpdated: false
 
 Use the doona interface embedded in honk without downloading separate UI files.
 
-Check the [gateway requirements](requirements.md) first. Keep your existing honk configuration; for a new backend, prepare honk's [minimal configuration](https://github.com/daeuniverse/honk/blob/main/doc/en/how-to-start.md#minimal-configuration) before adding the API block below.
+Check the [gateway requirements](requirements.md) first. For a new backend, prepare honk's [minimal configuration](/honk/how-to-start#minimal-configuration) before enabling the API.
 
 ## 1. Get honk {#1-get-honk}
 
-On 64-bit OpenWrt or ImmortalWrt 25.12, install honk from the [daeuniverse feed](/openwrt/).
-
-On other Linux systems, follow [Install honk](install.md#install) and choose an archive whose name contains `full` from [honk releases](https://github.com/daeuniverse/honk/releases).
+Install honk using the [honk installation guide](/honk/installation/); on OpenWrt, the [daeuniverse feed](/openwrt/) already ships it. The embedded doona needs the `full` build.
 
 ## 2. Configure honk {#2-configure-honk}
 
-The daeuniverse OpenWrt feed already ships this block, listening on the LAN instead of `127.0.0.1`; skip to step 3. Elsewhere, add this block to the honk configuration, replacing any existing `native_api` block:
+Add a `native_api` block with `enabled: true`, a `listen` address, `password_auth: true` and `config_write: true` to the honk configuration. honk's [Web UI and APIs](/honk/how-to-start#web-ui-and-apis) section shows the complete block, including `ui: 'embedded'`; for doona lite, set `ui: 'embedded-lite'` as described in [doona lite](lite.md).
 
-```dae
-experimental {
-    native_api {
-        enabled: true
-        listen: '127.0.0.1:9527'
-        password_auth: true
-        config_write: true
-        ui: 'embedded'
-    }
-}
-```
-
-To run doona lite instead, set `ui: 'embedded-lite'` (available from honk v0.1.0-beta.4); see [doona lite](lite.md).
-
-For other options, see [Configuration](configuration.md). [Start or restart honk](service-management.md) to apply the change.
+[Start or restart honk](service-management.md) to apply the change.
 
 ## 3. Open doona {#3-open-doona}
 

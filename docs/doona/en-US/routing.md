@@ -48,7 +48,7 @@ Subscription URLs must use HTTP or HTTPS. doona adds `https://` to a URL without
 2. For one link, enter **Name** and **Node link**. For several links, paste one per line and review the parsed names and errors.
 3. Confirm the addition and check the result. If some links fail, the dialog keeps them for correction.
 
-honk supports XHTTP over H2 for Trojan, VMess and VLESS links. `xhttp` and `splithttp` select this transport; supported modes are `auto`, `packet-up`, `stream-up` and `stream-one`. See [honk’s XHTTP reference](https://github.com/daeuniverse/honk/blob/main/doc/en/reference/nodes.md#xhttp-over-h2) for supported options and limits.
+honk supports XHTTP over H2 for Trojan, VMess and VLESS links. `xhttp` and `splithttp` select this transport; see [honk’s XHTTP reference](/honk/reference/nodes#xhttp-over-h2) for supported modes, options and limits.
 
 ### Refresh or edit a subscription {#refresh-or-edit-a-subscription}
 
@@ -103,7 +103,7 @@ For selections across restarts, see [persistence requirements](feature-requireme
 5. Review **Default member**, **Final outbound** and the connection-interruption switch when offered. The default is the initial member for manual selection. The group uses the final outbound when no member is available.
 6. Choose **Create** for a new group or **Apply** for an edit, then check the result. **Cancel** abandons the draft after any discard confirmation.
 
-**Selection policy** recommends **Score**, the policy honk’s own shipped configuration uses; new groups and the routing templates start with it. **Load balance** rotates nodes per connection, so sign-ins and Cloudflare checks may break.
+**Selection policy** recommends **Score**; new groups and the routing templates start with it. See honk's [group policies](/honk/reference/groups#policies) for Score, Load balance, `final` and nested-group semantics.
 
 Removing an explicit member does not exclude it if another filter still matches it. Change that filter too. For read-only fields, see [group editing requirements](feature-requirements.md#req-group-edit).
 
@@ -171,7 +171,7 @@ The target is the file containing top-level `routing`, or the main file when non
 
 The dialog disables a service when a routing rule or held rule already uses its category (**A rule already exists**), or when the loaded geodata lacks it (**Not included in the current geodata**).
 
-The rules go into the file that holds the fallback, just before the fallback. The first matching rule decides, so a game service other than **All games** goes above an existing `geosite:category-games` rule in that file. Otherwise that rule would take the game's traffic.
+The rules go into the file that holds the fallback, just before the fallback. honk evaluates rules in order and the first match decides ([rule grammar](/honk/reference/routing#rule-grammar)), so a game service other than **All games** goes above an existing `geosite:category-games` rule in that file.
 
 Two services add more than one rule:
 
@@ -188,9 +188,9 @@ If doona cannot write the fallback's file, the dialog reports that rules cannot 
 3. Choose **Outbound** and **Insert**. Review earlier rules when choosing a position: the first matching rule determines the result.
 4. Choose **Add rule** and check the result in the list.
 
-Switching from **Expression** to **Select** converts representable expressions into condition rows; other expressions stay in **Expression** with a hint. **Domain keyword** matches a substring: `tracker, ads` matches either keyword. **Device MAC address** matches the source device by its hardware address, beside the geosite and IP conditions.
+Switching from **Expression** to **Select** converts representable expressions into condition rows; other expressions stay in **Expression** with a hint. **Domain keyword** and **Device MAC address** match by substring and by source hardware address; honk's [condition functions](/honk/reference/routing#condition-functions) define each matcher.
 
-**Outbound** offers `direct`, `block` and groups, but not individual nodes. Turn on **Lock this outbound** to add `must`. **Insert** offers **Last, before the fallback** or a position before a listed rule, starting at the first offered position. Both pickers support search.
+**Outbound** offers `direct`, `block` and groups, but not individual nodes. Turn on **Lock this outbound** to add `must`; see [outbound targets and `must`](/honk/reference/routing#outbound-targets-and-must). **Insert** offers **Last, before the fallback** or a position before a listed rule, starting at the first offered position. Both pickers support search.
 
 Use a row's **Edit rule** to change its condition or target, then **Save**. Use **Remove rule** and confirm to delete it. The fallback row supplies the target when no preceding rule matches.
 
@@ -224,7 +224,7 @@ Open **Rules** → **DNS rules**. Request rules choose how to resolve a query; r
 
 Existing DNS rules use the same edit, save and removal controls as routing rules. See [DNS rule requirements](feature-requirements.md#req-rules) if the list or an action is unavailable.
 
-honk checks each DNS list in order. Response rules accept an answer, reject it or query another upstream. DNS rule dialogs use **Action** instead of **Outbound** and do not offer **Lock this outbound**. **Resolution log** opens DNS; **Open DNS configuration** opens the `dns` section.
+honk's [DNS routing](/honk/reference/dns#dns-routing) defines rule order and the request and response actions. DNS rule dialogs use **Action** instead of **Outbound** and do not offer **Lock this outbound**. **Resolution log** opens DNS; **Open DNS configuration** opens the `dns` section.
 
 
 ## Apply held rules {#held-rules}

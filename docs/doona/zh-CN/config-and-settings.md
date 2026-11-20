@@ -65,7 +65,7 @@ lastUpdated: false
 
 选择器包含主文件及 include 文件中的全局区段；没有全局区段的主文件可新增一个。**未设置** 使用引擎默认值。清空数值字段会将其设为未设置；整数字段不接受小数点，端口数字不分组，例如 `8080`。
 
-订阅正文存入状态数据库的 `subscription_body` 表，数据库位置见[配置参考](configuration.md#config)。独立 `.sub` 文件属于旧存储格式，启动迁移说明见 [honk 订阅参考](https://github.com/daeuniverse/honk/blob/main/doc/zh/reference/subscription.md#拉取持久化与恢复)。
+订阅正文存入[配置参考](configuration.md#config)中所述的状态数据库。独立 `.sub` 文件属于旧存储格式，启动迁移说明见 [honk 订阅参考](/zh-CN/honk/reference/subscription#拉取、持久化与恢复)。
 
 ### 导出或恢复配置 {#导出或恢复配置}
 
@@ -114,7 +114,7 @@ lastUpdated: false
 
 可用字段包括 **日志级别**、**日志保留条数**、**DNS 记录保留条数**、**流程保留条数** 和 **流程保留秒数**。**流程记录** 提供 **按流程需求**，**日志记录** 提供 **按日志需求**，**DNS 记录** 提供 **按 DNS 日志需求**；三者也都提供 **常开** 和 **关闭**。记录器状态显示为 **记录中**、**未记录** 或 **配置禁止**。
 
-覆盖值的有效期见[运行时更改](what-doona-can-change.md#change-runtime)。需要持久保存时，使用**在配置中编辑持久设置**，并查阅[配置参考](configuration.md#config)。
+覆盖值的有效期见[运行时更改](what-doona-can-change.md#change-runtime)；字段范围与重置行为见 honk 的[原生日志与运行时设置](/zh-CN/honk/reference/api#原生日志与运行时设置)。需要持久保存时，使用**在配置中编辑持久设置**。
 
 
 ### 更新地理数据或修改来源 {#geodata}
@@ -127,7 +127,7 @@ lastUpdated: false
 4. 按需调整提供的**下载路由**、**SHA-256 校验**或**自动更新**。选择**指定组**时，还须选择组才会保存路由。这些控件在修改后保存，须检查各次操作结果。
 5. 要移除覆盖值，点击**重置为默认值**，阅读确认提示后再继续。
 
-**来源** 提供 **Loyalsoldier**、**MetaCubeX 完整版**、**MetaCubeX 精简版** 和 **自定义**。使用 honk 时，每个自定义 URL 列表最多接受四个地址，按顺序尝试。点 **编辑** 可重新打开自定义对话框。
+**来源** 提供 **Loyalsoldier**、**MetaCubeX 完整版**、**MetaCubeX 精简版** 和 **自定义**。点 **编辑** 可重新打开自定义对话框。URL 列表上限与已存储设置的优先级见 honk 的 [geodata 来源](/zh-CN/honk/reference/api#geodata-来源与自动更新)。
 
 **详细信息** 显示 **上次检查**、**下次检查**，以及各文件的大小、下载主机和路由。文件表格显示各文件的更新时间。
 

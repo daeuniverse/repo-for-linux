@@ -94,9 +94,7 @@ ls -l /usr/share/doona/index.html
 
 ## 5. 安裝後端 {#5-安裝後端}
 
-依照[安裝 honk](install.md#install)安裝後端後返回本頁。已有相容的 honk 時無需重複安裝。
-
-systemd 主機使用[服務管理](service-management.md)中的 systemd 步驟。OpenRC 主機可使用該頁的前景命令完成首次連線。
+已有相容的 honk 時無需重複安裝；否則依 honk 的[安裝指南](/zh-TW/honk/installation/)安裝預建置版本。systemd 主機使用 honk 的[使用 systemd 執行](/zh-TW/honk/how-to-start#使用-systemd-執行)；OpenRC 主機可依 honk 的[最小設定](/zh-TW/honk/how-to-start#最小設定)中的前景命令完成首次連線。
 
 套用[獨立介面組態](install.md)，[啟動 honk](service-management.md)，再按[首次登入](first-sign-in.md)操作。
 

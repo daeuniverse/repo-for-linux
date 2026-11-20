@@ -67,7 +67,7 @@ awk -v file="$FILE" '$2 == file' SHA256SUMS | sha256sum -c - &&
 
 ## 4. 安装后端 {#4-安装后端}
 
-按[安装 honk](install.md#install)安装后端后返回本页。已有兼容的 honk 时无需重复安装。
+已有兼容的 honk 时无需重复安装；否则用 `yay -S honk-core-bin` 或 `paru -S honk-core-bin` 安装社区维护的 AUR 软件包，详见 honk 的 [Arch 指南](/zh-CN/honk/installation/arch)。
 
 应用[独立界面配置](install.md)，[启动 honk](service-management.md)，再按[首次登录](first-sign-in.md)操作。
 

@@ -35,50 +35,21 @@ Open **System status** and read **Features that are off**. doona uses the backen
 
 ## A file is read-only, or a write is refused {#read-only}
 
-Open **Configuration** → **Config files** and inspect the source's badge or diagnostic. For the complete permission and filesystem rules, see [what doona can change](what-doona-can-change.md) and [configuration requirements](feature-requirements.md#req-config-edit).
-
-| Reported reason | Fix |
-| --- | --- |
-| `writes_disabled` | Follow the configuration requirements above to enable authenticated writes. |
-| `configuration_unavailable` | Check honk's startup log and wait for its configuration to load before editing. |
-| `listener_secret_source` | Edit this secret-bearing file on disk. Keep listener secrets in their own include so other files remain editable. |
-| `listener_secret_in_content` | Check for a listener-secret value in the content or path. Replace an overlapping secret outside doona and sign in again after applying the change. |
-| `listener_settings_changed` or a restart-required diagnostic | Edit the setting outside doona and follow the [restart rules](what-doona-can-change.md). |
-| `credential_sources_changed` | Reload honk after the external credential-file change, then reopen the source before editing. |
-| `unsafe_path` | Use a regular file in an allowed configuration directory; check the [filesystem requirements](what-doona-can-change.md). |
-| `stale_revision` or `state_conflict` after another edit | Resolve the [changed file](common-tasks.md#changed-on-disk) before applying again. |
-| `import_entry_changed` | Start honk with `-c` pointing to the active configuration entry before importing server files. |
+Open **Configuration** → **Config files** and inspect the source's badge or diagnostic. For the complete permission and filesystem rules, see [what doona can change](what-doona-can-change.md) and [configuration requirements](feature-requirements.md#req-config-edit). honk's [accepted configuration and reload operations](/honk/reference/api#accepted-configuration-and-reload-operations) defines the refusal codes and what each one protects.
 
 If the result is unknown, check the current source before repeating the write. For an accepted import or restore, reopen that action under **Backups and revisions**. If its dialog still reports an unknown result, select **Refresh** there to query the original operation. A lost response does not prove the write failed.
 
 
 ## Apply writes nothing and lists `global.nfqueue_enable` as needing a restart {#nfqueue-restart}
 
-On a kernel without NFQUEUE support, honk turns NFQUEUE off at startup and logs `NFQUEUE is unavailable at startup`. honk 0.1.0-beta.4 and earlier then compare every write with the default `nfqueue_enable: true`, so Apply reports **Nothing was written** and lists `global.nfqueue_enable` as a setting that needs a restart, also after a restart. Set the value in the `global` section, then [restart honk](service-management.md):
-
-```dae
-global {
-    nfqueue_enable: false
-}
-```
-
-Apply then writes normally.
-
-doona 0.1.0-rc.6 and later word this refusal differently when no loaded file states the settings honk refuses the write over: the notice says that they are not in the configuration and asks you to state them there and restart honk once. That wording covers any restart-only setting, not only `nfqueue_enable`.
+When no loaded file states the settings honk refuses the write over, doona 0.1.0-rc.6 and later say that they are not in the configuration, ask you to state them there, and require one restart. That wording covers any restart-only setting, not only `nfqueue_enable`. See honk's [`nfqueue_enable`](/honk/reference/global#nfqueue-enable) for the startup downgrade and the behaviour of earlier releases.
 
 
 ## Apply says a required file is unavailable {#offline-dependency}
 
-honk validates local dependencies before writing. Inspect the diagnostic and the files referenced by the configuration.
-
 The diagnostic does not name the dependency file. For subscription or node errors, check cached subscription content and each node's `ech_config_path`. For DNS errors, check the files named by `use_host`. Restore missing files or refresh malformed subscription content, then apply again.
 
-| Code | Cause and fix |
-| --- | --- |
-| `missing-offline-dependency` | Restore the missing dependency. For geodata, use [installation instructions](install.md#directories-and-geodata), or [OpenWrt geodata installation](install-openwrt.md#install-geodata). |
-| `offline-dependency-denied` | Put the dependency in an allowed configuration or data directory and grant the service user read access. |
-| `invalid-offline-dependency` | Replace malformed content, or refresh the affected subscription. |
-| `unreadable-offline-dependency` | Check the service log for the underlying file or storage error. |
+honk's [configuration management trust boundary](/honk/reference/experimental#configuration-management-trust-boundary) defines the `missing-offline-dependency`, `offline-dependency-denied`, `invalid-offline-dependency` and `unreadable-offline-dependency` codes.
 
 **Update now** updates loaded assets; it cannot install a missing initial asset. Check [geodata requirements](feature-requirements.md#req-geodata) before applying again.
 
@@ -112,14 +83,10 @@ The command deletes the administrator record and reports whether one existed. St
 
 ## The native API or UI cannot be reached {#no-native-api}
 
-Use the startup log from the current service run to identify the running build and listener. Check [compatible builds](requirements.md#honk-version) and [API configuration](configuration.md#config).
+Check [compatible builds](requirements.md#honk-version) and [API configuration](configuration.md#config). For listener and startup-log diagnostics, see honk's [`native_api`](/honk/reference/experimental#native-api) and [check runtime status](/honk/how-to-start#check-runtime-status).
 
 | Symptom | Cause and fix |
 | --- | --- |
-| Connection to the listener fails | Check that honk is running and the enabled API listens at the address you opened. Use [service checks](service-management.md). |
-| `native API listener bind failed` | Confirm that `listen` names an address on this gateway and that another process is not using the port. |
-| `Subscription HTTP client creation failed`, followed by `subscription network startup failed` | Read the underlying TLS error and check the system CA certificate store. Install your distribution's certificate package, such as `ca-certificates` or OpenWrt's `ca-bundle`. |
-| `command not found` or a missing executable | Compare the honk-core path with your platform's [installation instructions](install.md). |
 | `/api` returns 404 or sign-in shows **This honk build has no native API** | Confirm the address points to honk, then install a build that provides the native API. |
 | Only `/ui/` returns 404 | Check the configured UI path and the files installed there. Follow [UI installation](install.md#doona). |
 | Startup reports `failed to inspect native UI directory`, `failed to inspect native UI index.html` or `native UI index.html must be a regular file` | Correct the UI directory or extract the UI files so its `index.html` is a readable regular file. |
@@ -128,87 +95,49 @@ Use the startup log from the current service run to identify the running build a
 
 ## honk rejects a native API setting at startup {#unknown-setting}
 
-`native API setting belongs inside native_api { }` means the field sits directly under `experimental`. Compare your file with the [native API configuration](configuration.md#config) and move the field into the nested block.
-
-`enabled` and `secret` belong to several experimental blocks. Placing either directly under `experimental` produces `unknown experimental setting` without naming a single destination block. Move native API fields into `native_api { }`.
-
-`unknown experimental setting` can also mean the running build does not support the setting. `native-api feature is required` means the build lacks the enabled native API feature. Check the running build against [honk requirements](requirements.md#honk-version).
-
-For authentication combinations rejected at startup, use the exact startup error with [sign-in requirements](feature-requirements.md#req-sign-in) and the [configuration reference](configuration.md#config).
+See honk's [`native_api`](/honk/reference/experimental#native-api) for the startup diagnostics, including `native API setting belongs inside native_api { }`, `unknown experimental setting` and `native-api feature is required`, and for the authentication combinations it rejects.
 
 
 ## A geodata update fails {#geodata-update}
 
-Open **Settings** → **Geodata** and read the failed operation's stage. If **Update now** is missing or disabled, start with [update requirements](feature-requirements.md#req-geodata-update).
-
-| Stage | What to check or change |
-| --- | --- |
-| `checksum_unavailable` | The checksum request failed. Check the mirror's checksum URL or choose another source. |
-| `checksum_mismatch` | The downloaded content and checksum differ. Obtain a matching file and checksum from the source. |
-| `download_timeout` | Check the download route and source; see the [download deadlines](feature-requirements.md#req-geodata-update). |
-| `http_status_rejected` | Check the server's status and use a final URL rather than a redirect. |
-| `http_not_found` | Correct the file URL. |
-| `connection_failed` | Check the chosen route and node; for a direct hostname download, check the resolver described in [update requirements](feature-requirements.md#req-geodata-update). |
-| `tls_failed` | Check the gateway clock and the server certificate and hostname. |
-| `group_unavailable` | Check the selected group's usable nodes on **Policies**. |
-| `route_blocked` | Correct the routing rule that sends this download to `block`. |
-| `asset_too_large` | Check that the URL supplies the intended geodata file. |
-| `invalid_source` | Correct the source URL. |
-| `replacement_failed` or `directory_sync_failed` | Inspect the per-asset result and destination filesystem before retrying; follow [replacement requirements](feature-requirements.md#req-geodata-update). |
-
-See [update requirements](feature-requirements.md#req-geodata-update) for checksum 404 handling, verification and partial-write behavior.
+Read the failed operation's stage on **Settings → Geodata**. honk's [managed entries and geodata](/honk/reference/api#managed-entries-and-geodata) lists every stage and its fix. See [update requirements](feature-requirements.md#req-geodata-update) for when **Update now** is available and how to read the copied error details.
 
 
 ## Geodata sources or the update schedule cannot be edited {#geodata-sources}
 
-Check **System status** → **Datapath** for a persistence warning. A `persistence_unavailable` degradation means the state database is unavailable; use its `reason` with [the database checks](#state-db).
+Check **System status** → **Datapath** for a persistence warning. A `persistence_unavailable` degradation means the state database is unavailable; use its `reason` with [the database checks](#state-db). See honk's [persisted state](/honk/reference/experimental#persisted-state) for stored-settings behaviour.
 
 Restore [geodata settings requirements](feature-requirements.md#req-geodata-settings), then reopen the Geodata card. Manual downloads have [separate requirements](feature-requirements.md#req-geodata-update); their availability does not prove that honk can save settings.
 
 
 ## honk reports a state database failure {#state-db}
 
-Read the latest startup error in the [service log](service-management.md). Password authentication requires the database. If honk cannot open it, startup stops. In file-based token mode, some failures leave honk running without persistence; see [persistence requirements](feature-requirements.md#req-persistence).
-
-| Message or reason | Next action |
-| --- | --- |
-| `unavailable` | Check that the service user can create and access the configured data directory and its state directory. |
-| `unsafe` | Follow [unsafe path checks](#state-unsafe). |
-| Locked by `honk-core admin reset` | Wait for that command to finish before starting honk. |
-| Another honk-core has the database open | Stop the conflicting instance before starting this one. |
-| Foreign application ID or newer schema | Use the honk build that owns this database; do not overwrite it with an older build. |
-| `corrupt` | In file-based token mode, honk moves a corrupt database to `state/honk.db.corrupt` under the data directory and creates a new database. It never overwrites an earlier corrupt copy, including `state/honk.db.corrupt-wal`. Preserve any blocking copies elsewhere before restarting. |
-
-After repairing access, [restart the service](service-management.md) and check whether the persistence warning is gone.
+Read the latest startup error in the [service log](service-management.md). honk's [persisted state](/honk/reference/experimental#persisted-state) describes the database, its failure reasons and the corrupt-file handling.
 
 
 ## The persistence warning has reason `unsafe` {#state-unsafe}
 
-The service log names the refused path, rule and suggested fix. Check that exact path with the [data-directory configuration](configuration.md#config); do not assume every installation uses the same directory.
-
-In file mode, `global.data_dir` selects the runtime data directory; `--data-dir` does not override it. Pass that same directory to `--data-dir` for `admin reset`. On OpenWrt, [`/var` is volatile](https://openwrt.org/docs/techref/filesystems); use the [manual installation’s persistent directory](install-openwrt.md#install-geodata).
-
-The state directory and database must belong to honk's service user and exclude group and other permissions. honk also refuses a symlink or the wrong file type. Correct only the named path's ownership, permissions or type, then restart honk. Do not apply recursive permission changes to the configuration directory.
+The service log names the refused path, rule and suggested fix. See honk's [persisted state](/honk/reference/experimental#persisted-state) for the required ownership, permissions and file type, and [data directory and asset paths](/honk/reference/global#data-directory-and-asset-paths) for `global.data_dir`. On OpenWrt, `/var` is volatile; use the persistent directory from honk's [OpenWrt installation](/honk/how-to-start#openwrt).
 
 ## Traffic fails after stopping OpenWrt's firewall {#traffic-fails-after-stopping-openwrts-firewall}
 
-If stopping the firewall removes honk's nftables table, start the firewall again, then run `/etc/init.d/honk-core restart` on the gateway. The firewall manager must leave `inet honk_nfqueue` and its `udp_decision` chain intact while honk runs.
+See [Traffic fails after stopping OpenWrt's firewall](/honk/how-to-start#troubleshooting) in honk's troubleshooting table. The firewall manager must leave `inet honk_nfqueue` and its `udp_decision` chain intact while honk runs.
 
 ## apk reports `breaks: world[…]` when installing other packages {#apk-reports-breaks-world-when-installing-other-packages}
 
-apk pins a package installed from a file, such as doona or honk downloaded as an `.apk`, to that file in `/etc/apk/world`. Once a repository carries another version, every `apk add` fails, even for unrelated tools, with an error such as `honk-0.1.0_beta2-r1: breaks: world[honk><Q1…]`. To follow the [daeuniverse feed](/openwrt/), run `apk add honk@daeuniverse`, listing any other packages in the same command. To keep the local build, name its file again in the same `apk add` command.
+apk pins a package installed from a file in `/etc/apk/world`. Once a repository carries another version, every `apk add` fails, even for unrelated tools. To keep the local doona build, name its file again in the same `apk add` command. For the honk package, follow honk's [OpenWrt installation](/honk/how-to-start#openwrt).
 
 ## Pinning a map fails with Invalid argument {#pinning-a-map-fails-with-invalid-argument}
 
-Check the bpffs mount at `/sys/fs/bpf`; follow [kernel and filesystem requirements](requirements.md#requirements).
+See honk's [troubleshooting](/honk/how-to-start#troubleshooting); the cause is a `/sys/fs/bpf` mount that is not bpffs.
 
 ## honk rejects the kernel or compiled routing {#honk-rejects-the-kernel-or-compiled-routing}
 
-Check the minimum kernel version and BPF/BTF support in [Requirements](requirements.md#requirements). Keep the full verifier log when reporting a verifier failure.
+Check honk's [Linux kernel requirements](/honk/how-to-start#linux-kernel-requirements) and [troubleshooting](/honk/how-to-start#troubleshooting). Keep the full verifier log when reporting a verifier failure.
 
 ## LAN traffic is not routed as expected {#lan-traffic-is-not-routed-as-expected}
 
-Check the [LAN interface instructions](configuration.md#interfaces-and-kernel), including the bridge name and the client gateway and DNS settings for a side router.
+See honk's [troubleshooting](/honk/how-to-start#troubleshooting) and [choosing interfaces](/honk/configuration#choosing-interfaces), including the side-router client gateway and DNS settings.
 
 ## Connections or Rules stay empty {#connections-or-rules-stay-empty}
 

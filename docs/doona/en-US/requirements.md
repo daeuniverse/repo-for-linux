@@ -11,29 +11,7 @@ Check the gateway and browser before installing doona and honk. For an individua
 
 ## Gateway {#gateway}
 
-Follow honk’s [Linux kernel requirements](https://github.com/daeuniverse/honk/blob/main/doc/en/how-to-start.md#linux-kernel-requirements) and [bpffs setup](https://github.com/daeuniverse/honk/blob/main/doc/en/how-to-start.md#bpffs) before starting the backend.
-
-| Component | Requirement |
-| --- | --- |
-| Operating system | Linux; run the real transparent-proxy backend as root. |
-| Kernel | Linux 6.12 or later; the real eBPF backend rejects older kernels. |
-| cgroup | cgroup v2 with BPF support; the required socket hooks must attach. |
-| Kernel type information | Raw BTF matching the running kernel, not an ELF debug image. |
-| BPF filesystem | bpffs mounted at `/sys/fs/bpf` for the default pin directory. |
-| HTTPS downloads | A system CA certificate store from your distribution. |
-
-Keep console access or another way into the gateway for the first real start: honk changes its networking.
-
-Check these kernel options using the commands in the linked honk guide:
-
-- The real backend needs `CONFIG_BPF=y`, `CONFIG_BPF_SYSCALL=y`, `CONFIG_BPF_JIT=y`, `CONFIG_CGROUP_BPF=y`, `CONFIG_NET_SCHED=y`, `CONFIG_NET_CLS_ACT=y`, `CONFIG_NET_XGRESS=y` and `CONFIG_NET_NS=y`.
-- `CONFIG_NET_CLS_ACT` selects `CONFIG_NET_XGRESS`. The TCX backend does not require the legacy `CONFIG_NET_CLS_BPF` or `CONFIG_NET_SCH_INGRESS` options.
-- The default held-first-packet UDP path also needs `CONFIG_NF_TABLES`, `CONFIG_NF_TABLES_INET`, `CONFIG_NFT_CT`, `CONFIG_NFT_QUEUE` and `CONFIG_NETFILTER_NETLINK_QUEUE`, each set to `y` or `m`.
-
-honk reads raw BTF from `HONK_VMLINUX_BTF` if set. Otherwise it tries `/sys/kernel/btf/vmlinux`, then `/usr/lib/debug/boot/vmlinux`; OpenWrt's `vmlinux-btf` package supplies the latter.
-
-Confirm that `/sys/fs/bpf` is a bpffs mountpoint, not just a directory. If the system does not mount it automatically, use the `/etc/fstab` entry in honk's bpffs instructions above.
-
+Follow honk's [Linux kernel requirements](/honk/how-to-start#linux-kernel-requirements) and [bpffs setup](/honk/how-to-start#bpffs) before starting the backend. Keep console access or another way into the gateway for the first real start: honk changes its networking.
 
 ## honk version {#honk-version}
 

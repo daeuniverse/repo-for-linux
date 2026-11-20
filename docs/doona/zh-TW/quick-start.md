@@ -9,33 +9,17 @@ lastUpdated: false
 
 使用 honk 內嵌的 doona，無需另行下載介面檔案。
 
-先檢查[閘道器需求](requirements.md)。已有 honk 組態時請保留；全新後端須先準備 honk 的[最小組態](https://github.com/daeuniverse/honk/blob/main/doc/zh/how-to-start.md#最小配置)，再加入下方 API 區塊。
+先檢查[閘道器需求](requirements.md)。全新後端須先按 honk 的[最小組態](/zh-TW/honk/how-to-start#最小設定)準備組態，再啟用 API。
 
 ## 1. 安裝 honk {#1-安裝-honk}
 
-在 64 位元 OpenWrt 或 ImmortalWrt 25.12 上，從 [daeuniverse 軟體源](/zh-TW/openwrt/)安裝 honk。
-
-其他 Linux 系統請按[安裝 honk](install.md#install)操作，從 [honk 發行頁](https://github.com/daeuniverse/honk/releases)選擇名稱含 `full` 的壓縮檔。
+按 [honk 安裝指南](/zh-TW/honk/installation/)安裝 honk；在 OpenWrt 上可直接使用 [daeuniverse 軟體源](/zh-TW/openwrt/)。內嵌 doona 需要 `full` 建置。
 
 ## 2. 設定 honk {#2-設定-honk}
 
-daeuniverse OpenWrt 軟體源的預設組態已包含此區塊，且監聽區域網路而非 `127.0.0.1`，可直接跳到第 3 步。其他情況請將以下區塊寫入 honk 組態，取代原有的 `native_api` 區塊：
+在 honk 組態加入 `native_api` 區塊，設定 `enabled: true`、`listen` 位址、`password_auth: true` 和 `config_write: true`。完整區塊（含 `ui: 'embedded'`）見 honk 的[網頁介面與 API](/zh-TW/honk/how-to-start#網頁介面與-api)；改用 doona lite 時，按 [doona lite](lite.md) 設定 `ui: 'embedded-lite'`。
 
-```dae
-experimental {
-    native_api {
-        enabled: true
-        listen: '127.0.0.1:9527'
-        password_auth: true
-        config_write: true
-        ui: 'embedded'
-    }
-}
-```
-
-若要改用 doona lite，設定 `ui: 'embedded-lite'`（自 honk v0.1.0-beta.4 起提供），詳見 [doona lite](lite.md)。
-
-其他選項見[組態參考](configuration.md)。[啟動或重新啟動 honk](service-management.md)後，變更才會生效。
+[啟動或重新啟動 honk](service-management.md) 後生效。
 
 ## 3. 開啟 doona {#3-開啟-doona}
 

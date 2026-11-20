@@ -58,7 +58,7 @@ dnf install doona-fonts
 
 ## 3. 安裝後端 {#3-安裝後端}
 
-依照[安裝 honk](install.md#install)安裝後端後返回本頁。已有相容的 honk 時無需重複安裝。
+已有相容的 honk 時無需重複安裝；否則執行 `sudo dnf install honk`，軟體源設定、升級與移除見 honk 的 [Fedora 安裝指南](/zh-TW/honk/installation/fedora)。
 
 套用[獨立介面組態](install.md)，[啟動 honk](service-management.md)，再按[首次登入](first-sign-in.md)操作。
 
