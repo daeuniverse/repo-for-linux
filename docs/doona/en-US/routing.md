@@ -13,8 +13,10 @@ Use the Routing hub to add node sources, choose how groups select nodes and deci
 | --- | --- | --- |
 | Add or edit a subscription or node | [Nodes](#nodes) | [Node management](feature-requirements.md#req-nodes) |
 | Refresh a subscription | [Nodes](#nodes) | [Subscription refresh](feature-requirements.md#req-subscription-refresh) |
+| Build a proxy chain | [Proxy chain](#proxy-chain) | [Node management](feature-requirements.md#req-nodes) |
 | Choose a member or pin an automatic group | [Policies](#policies) | [Group selection](feature-requirements.md#req-group-selection) |
 | Change membership or group settings | [Policies](#policies) | [Group editing](feature-requirements.md#req-group-edit) |
+| Set a group exit node | [Exit node](#group-exit) | [Group editing](feature-requirements.md#req-group-edit) |
 | Test a node or group | [Nodes or Policies](#policies) | [Latency probes](feature-requirements.md#req-probes) |
 | Apply a template or edit rules | [Rules](#rules) | [Rules and templates](feature-requirements.md#req-rules) |
 | Add rules for common services | [Service rules](#service-rules) | [Rules and templates](feature-requirements.md#req-rules) |
@@ -50,6 +52,18 @@ Subscription URLs must use HTTP or HTTPS. doona adds `https://` to a URL without
 
 honk supports XHTTP over H2 for Trojan, VMess and VLESS links. `xhttp` and `splithttp` select this transport; see [honk’s XHTTP reference](/honk/reference/nodes#xhttp-over-h2) for supported modes, options and limits.
 
+### Build a proxy chain {#proxy-chain}
+
+A proxy chain passes through 2 to 4 existing nodes in turn, and its exit node connects to the destination. Check [node management requirements](feature-requirements.md#req-nodes) first.
+
+1. Choose **Add node**, then the **Proxy chain** tab.
+2. Enter **Name**. Under **Hops, entry to exit**, choose a node for each hop. Use **Add hop** and each hop's move and remove buttons to change the hops and their order.
+3. Choose **Add** and check the new row. Its protocol reads **Proxy chain**.
+
+Before writing, doona checks the hop count and that no hop is the chain itself, `direct`, `block` or another chain. Hysteria2, TUIC, Juicity and AnyTLS can only be the entry; later hops must be SOCKS5, Shadowsocks, Trojan, or VMess or VLESS without XHTTP. A node whose name contains an apostrophe cannot be a hop. honk reports any other error when you apply the change.
+
+A chain's details list its hops from entry to exit with each hop's protocol and latency. They mark a hop that matches no node or several nodes. **UDP** reads **No** with the reason when the hop protocols rule it out, and **Depends on node settings** otherwise. To change a chain, use its row's edit action. Its remove action deletes the chain from the main configuration file, because honk's node API cannot delete a chain. For the `a -> b` syntax and the UDP requirements, see honk's [proxy chains](/honk/reference/nodes#proxy-chains).
+
 ### Refresh or edit a subscription {#refresh-or-edit-a-subscription}
 
 1. Use the update action on its source card to fetch it now. The page's subscription update button refreshes all subscriptions.
@@ -73,7 +87,7 @@ For a node declared in configuration, use the row's edit or remove action when o
 
 Select rows with their checkboxes to work on several nodes at once. Every row can be selected, including subscription and include-file nodes. With a selection, **Test all** becomes **Test selected (N)** and tests only those nodes. **Remove selected (N)** counts only the manual nodes in the main configuration that you can remove; subscription and include-file nodes are never removed. One confirmation removes them one at a time and shows progress. Closing the dialog stops the remaining removals, and nodes that fail stay selected. `Ctrl A` or `⌘A` selects every listed row, `Shift` with `↑` or `↓` extends the selection, and `Esc` clears it. Changing the source, search or filters clears the selection.
 
-Renaming an inline node updates exact node filters, default and final members, and DNS upstream detours in its declaring source. References from another source prevent renaming.
+Renaming an inline node updates exact node filters, default and final members, group exits, proxy chain hops and DNS upstream detours in its declaring source. References from another source prevent renaming. doona does not remove a node that a group, proxy chain or DNS setting still uses; the refusal names them.
 
 **Add to group** opens the group editor with the node staged; **Apply** confirms. It lists groups in writable main or include files and supports search. Group editing can use readable configuration even when the runtime groups API is unavailable.
 
@@ -114,6 +128,16 @@ Removing an explicit member does not exclude it if another filter still matches 
 After a configuration conflict, retrying preserves fields you did not edit. Reopen the editor if edits conflict or the group has a new name. If someone removed the group elsewhere, the editor stays open and reports that it did not save the changes.
 
 Expand **Regions** to choose regions; selected tags stay visible. The picker lists only the regions that have nodes, plus the ones already selected. A node named only by a flag emoji, such as `🇭🇰-家宽`, counts toward that flag’s region. **Add filter** supports name and `subtag` matches, and custom expressions remain editable as text. In the **Groups** and **Nodes** pickers, search stays fixed while the options scroll.
+
+### Set a group exit node {#group-exit}
+
+With **Exit node (Experimental)**, the group's connections reach the exit node through the selected member, and the exit node connects to the destination. The field appears only with honk.
+
+1. Open the group editor as in [Create or edit a group](#create-or-edit-a-group).
+2. In **Exit node (Experimental)**, choose a node, or **None** to remove the exit. The list offers only nodes that can be a later chain hop: SOCKS5, Shadowsocks, Trojan, or VMess or VLESS without XHTTP. A name shared by several nodes or containing an apostrophe cannot be chosen.
+3. Choose **Create** for a new group or **Apply** for an edit. doona writes the node as `exit:` in the group.
+
+Probes and the latency shown for the group measure the selected member alone. For nested groups, UDP and the four-hop limit, see honk's [group exit](/honk/reference/groups#exit).
 
 ### Test members or change background checks {#test-members-or-change-background-checks}
 

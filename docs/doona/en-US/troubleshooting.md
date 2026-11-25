@@ -17,6 +17,7 @@ Find your symptom, then follow its checks and fix. This page covers connection, 
 | There is no native API, or `/ui/` returns 404 | [API and UI access](#no-native-api) |
 | Geodata update fails | [Update errors](#geodata-update) |
 | Geodata source or schedule controls are missing | [Geodata settings](#geodata-sources) |
+| A subscription update is rejected because of a proxy chain or group exit | [Rejected updates](#refresh-rejected) |
 | A monitoring page is empty | [Recording and visibility](#connections-or-rules-stay-empty) |
 
 ## A control is missing or disabled {#a-control-is-missing-or-disabled}
@@ -52,6 +53,13 @@ The diagnostic does not name the dependency file. For subscription or node error
 honk's [configuration management trust boundary](/honk/reference/experimental#configuration-management-trust-boundary) defines the `missing-offline-dependency`, `offline-dependency-denied`, `invalid-offline-dependency` and `unreadable-offline-dependency` codes.
 
 **Update now** updates loaded assets; it cannot install a missing initial asset. Check [geodata requirements](feature-requirements.md#req-geodata) before applying again.
+
+
+## A subscription update is rejected because of a proxy chain or group exit {#refresh-rejected}
+
+The help beside the subscription card's status says that a proxy chain or group exit refers to a node this subscription removed or duplicated. honk rejected the update and keeps the previous nodes in use.
+
+Change the [chain's hops](routing.md#proxy-chain) or the [group's exit node](routing.md#group-exit) to a node with a unique name, or remove the reference, then update the subscription again. honk's [proxy chains](/honk/reference/nodes#proxy-chains) describes the check.
 
 
 ## Sign-in fails {#sign-in}

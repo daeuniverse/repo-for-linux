@@ -211,6 +211,7 @@ lastUpdated: false
 - 列表：`nodes.available` 和 `providers.available`。受管创建与删除：对应的 `can_manage` 及可写的主配置源。
 - 订阅编辑：唯一的声明、honk 配置语法，以及完整且可写的所属配置源。
 - 更新间隔、User-Agent 和缓存等创建选项必须出现在 `providers.create_options` 中。
+- 代理链：honk 及可写的主配置源。honk 的节点 API 只接受分享链接，因此 doona 直接编辑配置文本中的代理链。
 
 **在 doona 中检查**
 
@@ -289,6 +290,7 @@ lastUpdated: false
 - 创建：完整且可写的主配置源。编辑：配置已加载，且完整、可写的配置源中只有一处对应声明。
 - 声明缺失、重复或不完整时，即使已启用配置写入，编辑仍会禁用。
 - 组检查设置：`groups.config_patch`，且 `mutable_config` 中包含所需字段。字段列表见 [doona 可以修改什么](what-doona-can-change.md)。
+- 出口节点：honk。其他后端不显示此字段。
 
 **在 doona 中检查**
 

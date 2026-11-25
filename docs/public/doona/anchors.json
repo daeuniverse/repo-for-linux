@@ -128,5 +128,8 @@
   "restart-clash": "what-doona-can-change",
   "restart-cache": "what-doona-can-change",
   "restart-assets": "what-doona-can-change",
-  "startup-preconnect": "what-doona-can-change"
+  "startup-preconnect": "what-doona-can-change",
+  "proxy-chain": "routing",
+  "group-exit": "routing",
+  "refresh-rejected": "troubleshooting"
 }
