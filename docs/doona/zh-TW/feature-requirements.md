@@ -211,6 +211,7 @@ lastUpdated: false
 - 列表：`nodes.available` 和 `providers.available`。受管建立與刪除：對應的 `can_manage` 及可寫的主組態來源。
 - 訂閱編輯：唯一的宣告、honk 組態語法，以及完整且可寫的所屬組態來源。
 - 更新間隔、User-Agent 和快取等建立選項必須出現在 `providers.create_options` 中。
+- 代理鏈：honk 及可寫的主組態來源。honk 的節點 API 只接受分享連結，因此 doona 直接編輯組態文字中的代理鏈。
 
 **在 doona 中檢查**
 
@@ -289,6 +290,7 @@ lastUpdated: false
 - 建立：完整且可寫的主組態來源。編輯：組態已載入，且完整、可寫的組態來源中只有一處對應宣告。
 - 宣告缺失、重複或不完整時，即使已啟用組態寫入，編輯仍會停用。
 - 群組檢查設定：`groups.config_patch`，且 `mutable_config` 中包含所需欄位。欄位列表見 [doona 可以修改什麼](what-doona-can-change.md)。
+- 出口節點：honk。其他後端不顯示此欄位。
 
 **在 doona 中檢查**
 

@@ -17,6 +17,7 @@ lastUpdated: false
 | 沒有原生 API，或 `/ui/` 回傳 404 | [API 與介面存取](#no-native-api) |
 | 地理資料更新失敗 | [更新錯誤](#geodata-update) |
 | 缺少地理資料來源或排程控制項 | [地理資料設定](#geodata-sources) |
+| 訂閱更新因代理鏈或群組出口遭拒 | [遭拒的更新](#refresh-rejected) |
 | 監控頁面為空 | [記錄與可見範圍](#連線或規則頁保持空白) |
 
 ## 控制項消失或無法操作 {#控制項消失或無法操作}
@@ -56,6 +57,13 @@ honk 寫入前會驗證本機相依項目。檢查診斷和組態參照的檔案
 honk 的[設定管理的信任邊界](/zh-TW/honk/reference/experimental#設定管理的信任邊界)定義了 `missing-offline-dependency`、`offline-dependency-denied`、`invalid-offline-dependency` 和 `unreadable-offline-dependency`。
 
 **立即更新**用於更新已載入的資料，不能安裝缺少的初始檔案。再次套用前，先檢查[地理資料條件](feature-requirements.md#req-geodata)。
+
+
+## 訂閱更新因代理鏈或群組出口遭拒 {#refresh-rejected}
+
+訂閱卡片狀態旁的說明指出，代理鏈或群組出口引用的節點在此訂閱中已移除或重名。honk 已拒絕此次更新，仍沿用先前的節點。
+
+將[代理鏈的跳點](routing.md#proxy-chain)或[群組的出口節點](routing.md#group-exit)改為名稱唯一的節點，或移除該引用，再重新更新訂閱。檢查規則見 honk 的[鏈式節點](/zh-TW/honk/reference/nodes#鏈式節點)。
 
 
 ## 登入失敗 {#sign-in}

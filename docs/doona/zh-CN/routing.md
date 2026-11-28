@@ -13,8 +13,10 @@ lastUpdated: false
 | --- | --- | --- |
 | 添加或编辑订阅、节点 | [节点](#nodes) | [节点管理](feature-requirements.md#req-nodes) |
 | 更新订阅 | [节点](#nodes) | [订阅更新](feature-requirements.md#req-subscription-refresh) |
+| 创建代理链 | [代理链](#proxy-chain) | [节点管理](feature-requirements.md#req-nodes) |
 | 选择成员或固定自动组的成员 | [策略](#policies) | [成员选择](feature-requirements.md#req-group-selection) |
 | 修改成员范围或组设置 | [策略](#policies) | [编辑组](feature-requirements.md#req-group-edit) |
+| 设置组出口节点 | [出口节点](#group-exit) | [编辑组](feature-requirements.md#req-group-edit) |
 | 测试节点或组 | [节点或策略](#policies) | [延迟探测](feature-requirements.md#req-probes) |
 | 应用模板或编辑规则 | [规则](#rules) | [规则与模板](feature-requirements.md#req-rules) |
 | 为常用服务添加规则 | [服务规则](#service-rules) | [规则与模板](feature-requirements.md#req-rules) |
@@ -50,6 +52,18 @@ lastUpdated: false
 
 honk 支持 Trojan、VMess 和 VLESS 链接使用 XHTTP over H2。`xhttp` 和 `splithttp` 均选择此传输方式；支持的模式、选项与限制见 [honk XHTTP 参考](/zh-CN/honk/reference/nodes#h2-上的-xhttp)。
 
+### 创建代理链 {#proxy-chain}
+
+代理链依次经过 2 至 4 个现有节点，由出口节点连至目的地。开始前检查[节点管理条件](feature-requirements.md#req-nodes)。
+
+1. 点击**添加节点**，再选择**代理链**标签页。
+2. 填写**名称**。在**跃点（入口至出口）**中为每个跃点选择节点。使用**添加跃点**及各跃点的上移、下移和移除按钮调整跃点与顺序。
+3. 点击**添加**，再检查新增的节点行。其协议显示为**代理链**。
+
+写入前，doona 会检查跃点数量，并确认没有跃点是代理链本身、`direct`、`block` 或其他代理链。Hysteria2、TUIC、Juicity 和 AnyTLS 仅能作为入口；其后的跃点须为 SOCKS5、Shadowsocks、Trojan，或未使用 XHTTP 的 VMess、VLESS。名称含单引号的节点不能作为跃点。其他错误由 honk 在应用时报告。
+
+代理链的详细信息按入口至出口列出各跃点的协议与延迟，并标出找不到对应节点或有多个同名节点的跃点。跃点协议无法承载 UDP 时，**UDP** 显示**否**并附上原因；否则显示**取决于节点设置**。修改代理链时，使用该行的编辑操作。移除操作会从主配置文件删除代理链，因为 honk 的节点 API 无法删除代理链。`a -> b` 语法与 UDP 条件见 honk 的[链式节点](/zh-CN/honk/reference/nodes#链式节点)。
+
 ### 更新或编辑订阅 {#更新或编辑订阅}
 
 1. 使用来源卡片的更新操作立即获取订阅。页面上的订阅更新按钮会更新全部订阅。
@@ -75,7 +89,7 @@ honk 支持 Trojan、VMess 和 VLESS 链接使用 XHTTP over H2。`xhttp` 和 `s
 
 勾选节点行的复选框，可一次处理多个节点。每一行都能勾选，包括订阅与 include 文件中的节点。有选中项时，**测试全部**会变成**测试所选（N）**，只测试选中的节点。**移除所选（N）**只计入主配置中可移除的手动节点，订阅与 include 文件中的节点不会被移除。确认一次后逐个移除并显示进度；关闭对话框会停止其余移除，移除失败的节点保持选中。`Ctrl A` 或 `⌘A` 全选列出的节点，`Shift` 加 `↑` 或 `↓` 扩展选择，`Esc` 清除选择。切换来源、搜索或筛选条件时，选择会清除。
 
-重命名配置内的节点时，会同步更新同一来源中精确匹配节点名的过滤条件、默认成员、最终出站及 DNS 上游的绕行目标。其他来源中的引用会阻止重命名。
+重命名配置内的节点时，会同步更新同一来源中精确匹配节点名的过滤条件、默认成员、最终出站、组出口、代理链跃点及 DNS 上游的绕行目标。其他来源中的引用会阻止重命名。组、代理链或 DNS 设置仍引用某节点时，doona 不会移除该节点，并列出引用它的项目。
 
 **加入组**会打开组编辑器，并将节点加入草稿；点击**应用**才会保存。选择器列出可写主文件及 include 文件中的组，并支持搜索。即使运行时组 API 不可用，只要配置可读，仍可编辑组。
 
@@ -116,6 +130,16 @@ honk 支持 Trojan、VMess 和 VLESS 链接使用 XHTTP over H2。`xhttp` 和 `s
 配置冲突后重试会保留未编辑字段的新值。双方修改同一字段或组被重命名时，需重新打开编辑器。若组已在别处删除，编辑器会保持打开并提示更改未保存。
 
 展开 **地区** 可选择地区，已选标签会保持显示。选择器只列出有节点的地区，以及已选中的地区。只以旗帜表情命名的节点，例如 `🇭🇰-家宽`，计入该旗帜对应的地区。**添加筛选** 支持名称和 `subtag` 匹配，自定义表达式仍可作为文本编辑。**子组** 和 **节点** 选择器滚动选项时，搜索框保持固定。
+
+### 设置组出口节点 {#group-exit}
+
+设置**出口节点（实验性）**后，组的连接先经所选成员到达出口节点，再由出口节点连至目的地。此字段仅在使用 honk 时显示。
+
+1. 按[创建或编辑组](#创建或编辑组)打开组编辑器。
+2. 在**出口节点（实验性）**中选择节点；选择**无**则移除出口。列表只列出可作为代理链后续跃点的节点：SOCKS5、Shadowsocks、Trojan，或未使用 XHTTP 的 VMess、VLESS。多个节点共用的名称或含单引号的名称无法选择。
+3. 新建组点击**创建**，编辑组点击**应用**。doona 会将所选节点写入组的 `exit:`。
+
+探测与组显示的延迟只测量所选成员。嵌套组、UDP 与四个跃点的上限见 honk 的[出口](/zh-CN/honk/reference/groups#出口)。
 
 ### 测试成员或修改后台检查 {#测试成员或修改后台检查}
 

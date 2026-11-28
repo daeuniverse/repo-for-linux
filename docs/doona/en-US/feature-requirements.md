@@ -211,6 +211,7 @@ Error codes identify API failures. The sections distinguish them from read-only 
 - Lists: `nodes.available` and `providers.available`. Managed creation and deletion: the corresponding `can_manage` and a writable main source.
 - Subscription editing: a unique declaration, honk source syntax, and a complete, writable owning source.
 - Creation options such as update interval, User-Agent, and cache must appear in `providers.create_options`.
+- Proxy chains: honk and a writable main source. honk's node API accepts only share links, so doona edits chains in the configuration text.
 
 **Check in doona**
 
@@ -289,6 +290,7 @@ Error codes identify API failures. The sections distinguish them from read-only 
 - Creation: a complete, writable main source. Editing: loaded configuration and exactly one declaration in a complete, writable source.
 - Missing, duplicate, or incomplete declarations disable Edit even with configuration-write permission.
 - Group check settings: `groups.config_patch` and the requested field in `mutable_config`. See the field list in [What doona can change](what-doona-can-change.md).
+- Exit node: honk. Other backends do not show the field.
 
 **Check in doona**
 
